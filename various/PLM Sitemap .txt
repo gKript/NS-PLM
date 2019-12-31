@@ -1,0 +1,108 @@
+
+Code	+
+	Details
+		Synopsis	+
+			Structure	+
+				Typology
+				Generic category
+				Specific category
+			Identifier
+			Revision
+	
+		Attributes	+ 
+		1	B.O.M. allowed
+		2	Provider	+
+				External Code
+				Availability
+				Price	+
+					Last
+					Average
+				
+		3	Origins
+		4	Critical
+		5	Important
+		6	Testing
+		7	Expiration
+		8	Expiration Time
+		9	RoHS Compliance
+		10	Dangerous Substance
+		11	Regulatory Validation
+		12	Warranty
+		13	Compliance
+		14	Tracebility
+			Phisical	+
+		15		Length
+		16		Width
+		17		Height
+		18		Weight
+		
+		State		+
+			Draft
+			Modified
+			Uder Review
+			Prototype
+			Approved
+			Released
+			End of life
+			Obsolete
+			
+		Price	+
+			Last
+			Average
+			
+			
+	Structure	+
+		B.O.M.	+
+			Code
+			Description
+			Quantity
+			Unit
+		
+		Where Used	+
+			Code
+			Description
+			
+		Documentation	+
+			Required
+			Available	+
+				State	+
+					Draft
+					Modified
+					Uder Review
+					Prototype
+					Approved
+					Released
+					End of life
+					Obsolete				
+
+	Where Used	+
+		Code
+		Description
+
+	Related	+
+		Attachment
+		Link
+
+	Changes	+
+		Request
+		Issues
+		Affected by
+		Variances
+		History
+		Close
+		
+	Report	+
+		Code
+		B.O.M.
+		Provider
+		Charts
+		Statistics
+	
+	Tracebility
+		Serial Number
+
+	Packages
+		Shipment
+		
+	New
+

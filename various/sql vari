@@ -1,0 +1,8 @@
+
+Inserimento attributes ( da rivedere, attributi aumentati )
+$sql = "INSERT INTO `codattributes` (`Codice`, `bom`, `Provider`, `Origins`, `Critical`, `Important`, `Testing`, `Expiration`, `Expiration_time`, `RoHS`, `Dangerous`, `Regulatory`, `Warranty`, `Compliance`, `Tracebility`, `Length`, `Width`, `Height`, `Weight`) VALUES (\'54B0000101 \', \'1\', \'0\', \'0\', \'0\', \'1\', \'1\', \'0\', \'NULL\', \'0\', \'0\', \'0\', \'0\', \'GPL V3\', \'0\', \'0\', \'0\', \'0\', \'0\')";
+
+New code
+$sql = "INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazione`, `descrizione`, `dbCodici`, `createTS`, `modifyTS`) VALUES (NULL, \'43B0000100\', \'4\', \'3\', \'B\', \'Gim\', \'Generic Information manager PROTO\', \'0\', current_timestamp(), current_timestamp())";
+
+

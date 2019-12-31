@@ -1,0 +1,247 @@
+/*******************************************************
+TITLE: Fluid Box Layout  V1.0
+DATE: 20060810
+AUTHOR: The CSS Tinderbox - http://www.csstinderbox.com
+*******************************************************/
+
+body {
+margin:0;
+padding:0;
+background-color:#e8e8e8;
+color:#000000;  
+text-align:center;
+font-family:Arial, Helvetica, sans-serif;
+font-size:1em;
+}
+
+
+.code {
+	margin:1em;
+	padding:.5em;
+	background-color: #eef;
+	border:1px solid #99f;
+}
+
+.code_update {
+	margin:1em;
+	padding:.5em;
+	background-color: #efe;
+	border:4px solid #98b898;
+}
+
+
+.insidecodelite {
+	margin:1em;
+	background-color: #ddd;
+	border:1px solid #999;
+}
+
+.codelite {
+	margin:1em;
+	padding:.5em;
+	background-color: #eee;
+	border:1px solid #be0000;
+	overflow: auto; 
+}
+
+.codelite_img {
+	padding:.5em;
+	height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.box {
+  float: left;
+  width: 32.6%;
+  padding-left: 5px;
+	border:1px solid #ccc;
+	background-color: #dfdfdf	;
+	height:140px; 
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.box25 {
+  float: left;
+  width: 24%;
+  padding-left: 5px;
+	border:1px solid #ccc;
+	background-color: #dfdfdf	;
+	height:120px; 
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.box50 {
+  float: left;
+  width: 49%;
+  padding-left: 5px;
+	border:1px solid #ccc;
+	background-color: #dfdfdf	;
+	height:120px; 
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+blockquote {
+margin:1em;
+padding:.5em;
+background-color:#f0f0f0;
+
+}
+
+blockquote p {
+margin:.2em;
+}
+
+#centerColumn {
+margin-top:2em;
+margin-left: 6em;
+margin-right:6em;
+/*
+voice-family: "\"}\"";
+voice-family: inherit;
+*/
+margin-left:6em;
+margin-right:6em;
+padding:1em .5em 2em .5em;
+background:#f5f5f5;
+text-align:left;
+border:1px solid #999999;
+}
+
+html>body #centerColumn {
+margin-left:6em;
+margin-right:6em;
+}
+
+#centerColumn h2 {
+margin:0 0 -.5em 0;
+padding:.75em 0 0 0;
+font-size:1em;
+letter-spacing:.1em;
+}
+
+#header {
+margin:-1em -.5em 0 -.5em !important;
+margin:-2em -1em 0 -1em;
+padding:0 0 10px 0;
+height:6.7em;
+background-color:#f5f5f5;
+/*border-bottom:1px solid #be0000;*/
+}
+
+#header h1 {
+margin:0 0 -.6em 0;
+padding:.5em 0 0 1em;
+font-size:1.5em;
+letter-spacing:.1em;
+}
+
+#header h2 {
+margin:0 0 0 0;
+padding:1em 0 0 1.75em;
+font-size:.9em;
+font-weight:300;
+letter-spacing:.1em;
+}
+
+#nav {
+margin:0 0 1em 0;
+padding:.4em 0 0 0;
+background:#eeeeee;
+}
+
+#nav ul {
+margin:0;
+padding:0;
+list-style:none;
+}
+
+#nav li {
+margin:0;
+padding:.25em;
+display:inline;
+}
+
+#footer {
+position:relative;
+bottom:0;
+margin:0 0 2em 0;
+padding:0;
+line-height:1em;
+text-align:center;
+font-size:.7em;
+background:#eee;
+border-top:1px solid #999999;
+border-bottom:1px solid #999999;
+
+}
+
+br.clear {
+  clear: both;
+}
+
+div.clear {
+  clear: both;
+}
+
+
+.blink_text {
+animation:1s blinker linear infinite;
+-webkit-animation:1s blinker linear infinite;
+-moz-animation:1s blinker linear infinite;
+
+ color: black;
+}
+
+a.blink_text {
+ text-decoration: none;
+}
+
+@-moz-keyframes blinker {  
+ 0% { opacity: 1.0; }
+ 50% { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+ }
+
+@-webkit-keyframes blinker {  
+ 0% { opacity: 1.0; }
+ 50% { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+ }
+
+@keyframes blinker {  
+ 0% { opacity: 1.0; }
+ 50% { opacity: 0.0; }
+ 100% { opacity: 1.0; }
+}
+
+
+
+
+
+
+
+
+
+

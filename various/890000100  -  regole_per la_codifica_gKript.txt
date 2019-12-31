@@ -1,0 +1,127 @@
+﻿Next Step ID 
+
+89D000102 - Regole per la codifica
+
+a b c defg hi
+| | | |    |
+| | | |     ------REVISIONE < ESADECIMALE >
+| | | |						xx Progressivo di revisione univoco
+| | | |
+| | |  -----------IDENTIFICATIVO < ESADECIMALE >
+| | | 						xxxx Progressivo di identificativo univoco
+| | |
+| |  -------------CATEGORIA SPECIFICA < ESADECIMALE >
+| |								0 Generica
+| | 							1 Meccanica - Parti meccaniche di acquisto 						( staffe, viti, bulloni, rondelle, grani ... )
+| | 							2 Meccanica - Parti meccanica a progetto 							( supporti particolari, case progettati )
+| | 							3 Elettronica - Componenti elettronici 								( chip, resistenze, diodi, condensatori, led ... )
+| | 							4 Elettronica - Schede di acquisto 										( ricetrasmettitori, converitori ... )
+| | 							5 Elettronica - Schede a progetto 										( Sblcd ... )
+| | 							6 Software																						( Gim, PicGim, gKnoisePWL  ... )
+| | 							7 Apparato																						(	Meccanico + pcb + Software )
+| | 							8 Firmware																						( Firmware per scheda )
+| | 							9 Simulazione																					( Simulazione di progetti con programmi tipo LTSpice, Cedar o Excel )
+| |								A Sitema																							( Più apparati con anche metodi )
+| |								B Libreria 																						( SW - Eagle )
+|	|								C Elettronica - Varia																	( schede e parti assemblate di vario tipo )
+|	|								D Organizzazione																			(	Regole e procedure )
+| |
+|  ---------------CATEGORIA GENERICA < ESADECIMALE >
+| 								0 Generica																						Non attribuibile a categoria
+| 								1 Meccanica																						Parte meccanica
+| 								2 Elettronica																					Componete o scheda
+| 								3 Software																						Compilato o interpretato, basato su OS
+| 								4 Firmware																						SW per scheda specifica NON basato su OS
+|									5	Software + Firmware																	Elemento Sw/Fw per Apparato o Sistema
+| 								6 Apparato																						Meccanica + Elettonica + Sw/Fw
+|									7 Sistema																							Più apparati anche con metodi
+| 								8 Simulazione																					Simulazione di progetti, calcoli, circuiti analogi...
+| 								9 Organizzazione																			Regole e procedure
+|									A Marketing																						Brochure, presentazioni, richieste
+|									B	Metodo																							Logica di utilizzo di un Progetto
+|									C Prodotto																						Codice padre per distinta di vendita
+|	
+------------------TIPOLOGIA < DECIMALE >
+									0 Codice singolo 																			Non ha distinta
+									1	Codice di assieme 																	Ha una distinta
+									2	Codice di acquisto																	Non ha distinta
+									3	Software																						Non ha distinta
+									4 Prototipo																						Ha una distinta
+									5 Progetto Sviluppo																		Ha una distinta
+									6 Progetto Release																		Ha una distinta e una lista di composizione (a matricola)
+									8 Documentazione 																			Non ha distinta
+									9 Temporaneo 																					Ricerca e valutazione
+
+Esempio:
+
+Codice									Dascrizione																			Quantità
+
+57C000100								Onesto - Business method
+	8C0000100								Onesto - Product Concept											x
+	58A000100								Onesto - Modelo matematico del metodo					x
+	467000100 							Tag Walking Device Master (Proto 00)					1
+		16C000100								Sensors Wide																	1
+			024000100								Arduino Due																		1
+			344000100								Sensors - FW Arduino													x
+	467000200 							Tag Walking Device Slave (Proto 00)						2
+		16C000200								Sensors	Small																	1
+			024000100								Arduino Due																		1
+			344000100								Sensors - FW Arduino													x
+
+
+
+
+
+
+
+
+TIPOLOGIA < DECIMALE >
+		0 Codice singolo 																			Non ha distinta
+		1	Codice di assieme 																	Ha una distinta
+		2	Codice di acquisto																	Non ha distinta
+		3	Software																						Non ha distinta
+		4 Prototipo																						Ha una distinta
+		5 Progetto Sviluppo																		Ha una distinta
+		6 Progetto Release																		Ha una distinta e una lista di composizione (a matricola)
+		8 Documentazione 																			Non ha distinta
+		9 Temporaneo 																					Ricerca e valutazione
+
+CATEGORIA GENERICA < ESADECIMALE >
+		0 Generica																						Non attribuibile a categoria
+		1 Meccanica																						Parte meccanica
+		2 Elettronica																					Componete o scheda
+		3 Software																						Compilato o interpretato, basato su OS
+		4 Firmware																						SW per scheda specifica NON basato su OS
+		5	Software + Firmware																	Elemento Sw/Fw per Apparato o Sistema
+		6 Apparato																						Meccanica + Elettonica + Sw/Fw
+		7 Sistema																							Più apparati anche con metodi
+		8 Simulazione																					Simulazione di progetti, calcoli, circuiti analogi...
+		9 Organizzazione																			Regole e procedure
+		A Marketing																						Brochure, presentazioni, richieste
+		B	Metodo																							Logica di utilizzo di un Progetto
+		C Prodotto																						Codice padre per distinta di vendita
+
+CATEGORIA SPECIFICA < ESADECIMALE >
+		0 Generica
+		1 Meccanica - Parti meccaniche di acquisto 						( staffe, viti, bulloni, rondelle, grani ... )
+		2 Meccanica - Parti meccanica a progetto 							( supporti particolari, case progettati )
+		3 Elettronica - Componenti elettronici 								( chip, resistenze, diodi, condensatori, led ... )
+		4 Elettronica - Schede di acquisto 										( ricetrasmettitori, converitori ... )
+		5 Elettronica - Schede a progetto 										( Sblcd ... )
+		6 Software																						( Gim, PicGim, gKnoisePWL  ... )
+		7 Apparato																						(	Meccanico + pcb + Software )
+		8 Firmware																						( Firmware per scheda )
+		9 Simulazione																					( Simulazione di progetti con programmi tipo LTSpice, Cedar o Excel )
+		A Sitema																							( Più apparati con anche metodi )
+		B Libreria 																						( SW - Eagle )
+		C Elettronica - Varia																	( schede e parti assemblate di vario tipo )
+		D Organizzazione																			(	Regole e procedure )
+
+IDENTIFICATIVO < ESADECIMALE >
+		xxxx Progressivo di identificativo univoco
+
+REVISIONE < ESADECIMALE >
+		xx Progressivo di revisione univoco
+
+
+
