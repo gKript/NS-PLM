@@ -15,13 +15,13 @@
 		?> 
 	<div id="centerColumn">
 		<div id="header">
-			<table border="0" width="100%">
+			<table border="0" width="100%" >
 				<tr>
 					<td width="20%"><a href="index.php" ><img src="src/img/logo/ns-plm.png" border="0" width="310" alt="nsplm logo" /></a></td>
 					<td valign="middle" ><h1>Next Step PLM</h1><h2><b>Product Lifecycle Management</b> by gKript.org</h2></td>
+					<td width="20%"><img src="src/img/logo/gkbw.png" border="0" width="80px" style="float: right; vertical-align: middle;" alt="gk logo" /></td>
 				</tr>
 			</table>
-			<br class="clear" />
 		</div>
 		<div style="border:1px solid #ddd;" >
 			<Form Name ="menu_srch" Method ="GET" ACTION = "index.php">

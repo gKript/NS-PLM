@@ -43,9 +43,9 @@
 			<br/><br/>
 			<center><img src="src/img/logo/ns-plm.png" border="0" alt="nsplm logo" style="max-width:60%; " /></center>
 			<h1 style="text-align: center;" >Next Step PLM</h1>
-			<h4 style="text-align: center;" >by Next Step ID [dz]</h4>
-			<h4 style="text-align: center;" >Version 00.005</h4>
-			<h5 style="text-align: center;" >Code: <a href="code.php?code=53E0000100">53E0000100</a></h5>
+			<h4 style="text-align: center;" >by gKript.org [asy]</h4>
+			<h4 style="text-align: center;" >Version 01.013</h4>
+			<h5 style="text-align: center;" >NSID Code: <a href="code.php?code=53E0000100">53E0000100</a></h5>
 			<br/>
 			<hr/>
 			
