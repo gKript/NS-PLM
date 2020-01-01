@@ -94,22 +94,30 @@ class classTabella {
       $numeroRiga = $this->recuperaRiga();
 
       $this->_tabella[$numeroRiga][0]["attributiRiga"] = "";
-
-      foreach ($attRiga As $chiaveRiga => $valoreRiga)
-         $this->_tabella[$numeroRiga][0]["attributiRiga"] = "$chiaveRiga=\"$valoreRiga\"";
+			
+			if ( $attRiga ) {
+				foreach ($attRiga As $chiaveRiga => $valoreRiga)
+					 $this->_tabella[$numeroRiga][0]["attributiRiga"] = "$chiaveRiga=\"$valoreRiga\"";
+			}
+			else
+				$attRiga = "";
 
       // Aggiungo le varie colonne alla riga
       $this->_tabella[$numeroRiga][0]["numeroColonne"] = $numColonne;
 
       // Per ogni colonna aggiungo i vari stili
-      $numeroAttributiColonne = count($attColonne);
-      for ($n = 0; $n < $numeroAttributiColonne ; $n++)
-      {
-         $this->_tabella[$numeroRiga][$n]["attributiColonna"] = "";
-         foreach ($attColonne[$n] As $chiaveColonna => $valoreColonna)
-             $this->_tabella[$numeroRiga][$n]["attributiColonna"] .= "$chiaveColonna=\"$valoreColonna\"";
-       
-      }
+			if ( $attColonne ) {
+				$numeroAttributiColonne = count($attColonne);
+				for ($n = 0; $n < $numeroAttributiColonne ; $n++)
+				{
+					 $this->_tabella[$numeroRiga][$n]["attributiColonna"] = "";
+					 foreach ($attColonne[$n] As $chiaveColonna => $valoreColonna)
+							 $this->_tabella[$numeroRiga][$n]["attributiColonna"] .= "$chiaveColonna=\"$valoreColonna\"";
+				 
+				}
+			}
+			else
+				$attColonne = "";
 
       $this->_numRiga = $numeroRiga + 1;
    }

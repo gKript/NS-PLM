@@ -5,9 +5,14 @@
 		echo $text . "\n";
 	}
 	
-	function link_css( $name , $path ) {
-		$fname = $path . $name;
-		println( "<link rel=\"stylesheet\" href=\"$fname\" type=\"text/css\" />" );
+	function link_css( $name , $path , $src = "local"  ) {
+		if ( $src == "local" ) {
+			$fname = $path . $name;
+			println( "<link rel=\"stylesheet\" href=\"$fname\" type=\"text/css\" />" );
+		}
+		else if ( $src == "online" ) {
+			println( "<link rel=\"stylesheet\" href=\"$path\" type=\"text/css\" />" );
+		}
 	}
 	
 	function link_js( $name , $path ) {
@@ -79,6 +84,15 @@
 
 	function marker_generator( $marker ) {
 		echo "\n"."<a name=\"$marker\"></a>"."\n";
+	}
+
+	function return_link( $addr , $text , $target = null ) {
+		$ret = "<a href=\"$addr\" >$text</a>";
+		return $ret;
+	}
+
+	function insert_link( $addr , $text , $target = null ) {
+		echo "<a href=\"$addr\" ". $target?"target=\"$target\"":"" . " >'$text</a>";
 	}
 
 	function code_link( $code , $link = "code.php?code" ) {

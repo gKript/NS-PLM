@@ -369,6 +369,9 @@
 
 			$rest = stat_top_n_context();
 			
+			create_top_n_table( $rest );
+			
+			
 			?>
 
 				<div class="codelite">

@@ -18,7 +18,7 @@
 			<table border="0" width="100%">
 				<tr>
 					<td width="20%"><a href="index.php" ><img src="src/img/logo/ns-plm.png" border="0" width="310" alt="nsplm logo" /></a></td>
-					<td valign="middle" ><h1>Next Step PLM</h1><h2>Product Lifecycle Management by NSID</h2></td>
+					<td valign="middle" ><h1>Next Step PLM</h1><h2><b>Product Lifecycle Management</b> by gKript.org</h2></td>
 				</tr>
 			</table>
 			<br class="clear" />

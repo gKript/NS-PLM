@@ -43,10 +43,17 @@
 <?php
 		println( "<title>" . NSID_PLM_TITLE . "</title>" );
 		println( "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" );
+		
+		//CSS Locali
 		link_css( "menu.css"     , NSID_PLM_SRC_CSS );
 		link_css( "h.css"        , NSID_PLM_SRC_CSS );
 		link_css( "body.css"     , NSID_PLM_SRC_CSS );
 		link_css( "view.css"     , NSID_PLM_SRC_CSS );
+		
+		//CSS online
+//		link_css( "https://www.w3schools.com/w3css/4/w3.css"     , NSID_PLM_SRC_CSS );
+
+		//CSS locali	
 		link_js ( "view.js"      , NSID_PLM_SRC_JS  );
 		link_js ( "calendar.js"  , NSID_PLM_SRC_JS  );
 ?>		

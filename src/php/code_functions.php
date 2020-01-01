@@ -52,6 +52,26 @@
 		println ( "</div>" );
 	}
 
+
+function create_top_n_table( $top ) {
+	println( "<div class=\"codelite\">" );
+	println( "<h2>Top ten context advisor</h2><br/><br/>" );
+	$myTabella = new classTabella;
+	$myTabella->setTabella();
+	$myTabella->stdAttributiTabella(array("class"=>"codellite_img" , "width"=>"95%" , "align"=>"center"));
+	$myTabella->addValoreRiga(array("Contexts" , "Occurrences" , "Percentages" , "Charts" ));
+	$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ),4,array(array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"100px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px") , array("style"=>"border:1px solid #999; ") ));
+	$items = count( $top );
+	for( $r = 0 ; $r < $items ; $r++ ) {
+		$link = return_link( "index.php?text=" . $top[ $r ][ "context" ] . "&src=Go" , $top[ $r ][ "context" ] );
+		$myTabella->addValoreRiga(array( $link , $top[ $r ][ "value" ] , $top[ $r ][ "perc" ]."%" , "<div style=\"background:#eee; \"><div style=\"height:14px;width:" . $top[ $r ][ "perc" ] . "%; background:#aaa; \"></div></div>" ));	
+		$myTabella->aggiungiRiga(null,4,array(array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"100px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px") , array("style"=>"border:1px solid #999; ") ));
+	}	
+	$myTabella->stampaTabella();
+	println( "<br/></div>" );
+}
+
+
 ?>
 
 
