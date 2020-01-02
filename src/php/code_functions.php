@@ -172,6 +172,17 @@
 		return $array;
 	}
 
+
+	function new_code_step2_link_from_context( $context ) {
+		$T = substr( $context , 0 , 1 );
+		$G = substr( $context , 1 , 1 );
+		$S = substr( $context , 2 , 1 );
+		$link = "<a href=\"code.php?T=$T&G=$G&S=$S&action=Create\">$context</a>";
+		return $link;		
+	}
+
+
+
 ?>
 
 

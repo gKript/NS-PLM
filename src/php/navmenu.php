@@ -19,7 +19,7 @@
 				<tr>
 					<td width="20%"><a href="index.php" ><img src="src/img/logo/ns-plm.png" border="0" width="310" alt="nsplm logo" /></a></td>
 					<td valign="middle" ><h1>Next Step PLM</h1><h2><b>Product Lifecycle Management</b> by gKript.org</h2></td>
-					<td width="20%"><img src="src/img/logo/gkbw.png" border="0" width="80px" style="float: right; vertical-align: middle;" alt="gk logo" /></td>
+					<td width="20%"><img src="src/img/logo/gk.png" border="0" width="90px" style="float: right; vertical-align: middle; padding-right:20px;" alt="gk logo" /></td>
 				</tr>
 			</table>
 		</div>

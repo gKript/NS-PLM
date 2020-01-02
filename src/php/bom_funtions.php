@@ -48,6 +48,12 @@
 		
 		add_hidden( "code" , $code );
 		
+		println( "<br/>" );
+		echo "<span style=\"padding-left: 33px;\">";
+		insert_link( "bom.php?code=$code&level=16" , "Expand all" );
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+		insert_link( "bom.php?code=$code&level=1" , "Collaps all" );
+		echo "</span>";
 		println( "<br/></div>" );
 	}
 

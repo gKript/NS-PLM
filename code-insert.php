@@ -19,7 +19,8 @@
 	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
 	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
-	require NSID_PLM_SRC_PHP.'includes.php';
+	require NSID_PLM_SRC_PHP . 'includes.php';
+	require NSID_PLM_SRC_PHP . 'code_functions.php';
 
 	$db = new config_database();
 	

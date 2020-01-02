@@ -91,7 +91,10 @@
 	}
 
 	function insert_link( $addr , $text , $target = null ) {
-		echo "<a href=\"$addr\" ". $target?"target=\"$target\"":"" . " >'$text</a>";
+		if ( ! $target ) 
+			echo "<a href=\"$addr\">$text</a>";
+		else
+			echo "<a href=\"$addr\" ". $target?"target=\"$target\"":"" . " >$text</a>";
 	}
 
 	function TGS_link( $code , $pos , $link = "code.php?code" ) {
@@ -103,14 +106,6 @@
 			return "<a href=\"$link=__$code%\">$code</a>";
 	}
 
-
-	function new_code_step2_link_from_context( $context ) {
-		$T = substr( $context , 0 , 1 );
-		$G = substr( $context , 1 , 1 );
-		$S = substr( $context , 2 , 1 );
-		$link = "<a href=\"code.php?T=$T&G=$G&S=$S&action=Create\">$context</a>";
-		return $link;		
-	}
 
 
 	function get_check( $var , $notset = "" ) {

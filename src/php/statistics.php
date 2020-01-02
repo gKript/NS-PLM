@@ -105,6 +105,14 @@
 			return $value;
 	}
 		
+	function stat_bom_total_from_stats( $sentence = 1 ) {
+		$sql = "SELECT * FROM `statistics` WHERE `name` = 'BomCountDaily' ORDER BY `statistics`.`timest` DESC LIMIT 0,1";
+		$value = query_get_a_field( $sql , "value" );
+		if ( $sentence )
+			return "We are managing $value B.O.M.!";
+		else
+			return $value;
+	}
 		
 		
 	function stat_top_n_context( $n = 10 ) {

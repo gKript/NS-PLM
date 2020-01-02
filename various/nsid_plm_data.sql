@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 02, 2020 alle 01:10
+-- Creato il: Gen 02, 2020 alle 01:42
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.2.18
 
@@ -346,11 +346,11 @@ INSERT INTO `tipologia` (`ind`, `idTip`, `Tip`, `dbTip`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `unità_di_misure`
+-- Struttura della tabella `units`
 --
 
-DROP TABLE IF EXISTS `unità_di_misure`;
-CREATE TABLE IF NOT EXISTS `unità_di_misure` (
+DROP TABLE IF EXISTS `units`;
+CREATE TABLE IF NOT EXISTS `units` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(16) NOT NULL,
   `descrizione` varchar(256) NOT NULL,
@@ -359,10 +359,10 @@ CREATE TABLE IF NOT EXISTS `unità_di_misure` (
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `unità_di_misure`
+-- Dump dei dati per la tabella `units`
 --
 
-INSERT INTO `unità_di_misure` (`id`, `nome`, `descrizione`) VALUES
+INSERT INTO `units` (`id`, `nome`, `descrizione`) VALUES
 (1, 'N', 'Numero'),
 (2, 'CM', 'Centimetri'),
 (3, 'M', 'Metri'),

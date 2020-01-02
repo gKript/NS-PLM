@@ -19,7 +19,8 @@
 	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
 	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
-	require NSID_PLM_SRC_PHP.'includes.php';
+	require NSID_PLM_SRC_PHP . 'includes.php';
+	require NSID_PLM_SRC_PHP . 'code_functions.php';
 
 	$db = new config_database();
 	
@@ -54,6 +55,7 @@
 	$element_2_1	= get_check( 'element_2_1'	, "" 	);		//giorno
 	$element_2_2	= get_check( 'element_2_2'	, "" 	);		//mese
 	$element_2_3	= get_check( 'element_2_3'	, "" 	);		//anno
+	$unit					= get_check( 'unit'					, "" 	);
 	$compliance		= get_check( 'compliance'		, "" 	);
 	$length				= get_check( 'length'				, "" 	);
 	$width				= get_check( 'width'				, "" 	);
@@ -175,8 +177,10 @@
 					</script>
 
 					<br/><br/><br/><br/>
-					
 					<?php
+					
+					select_composer_from_sql( "unit" , "unit" , 1 , "SELECT * FROM `units`" , 1 , "element text" , "" , 1 , "Unit:&nbsp;" , "SX" );
+					echo "<br/><br/>";
 					text_input_composer( "compliance" , $compliance , "element text medium" , "text" , "" , "255" , 1 , "description" , "Compliance"	, "before" );
 					text_input_composer( "length" 		, $length 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Length" 			, "before" );
 					text_input_composer( "width"			, $width			, "element text medium" , "text" , "" , "255" , 1 , "description" , "Width"				, "before" );
@@ -207,8 +211,8 @@
 		//-------------------------------------------------------CREATE FINE---------------------------------------------------------------
 		//-------------------------------------------------------INSERT START--------------------------------------------------------------
 		if ( $action == "Insert" ) {	
-			new_attrib_insert( $code , $sdescr , $ldescr );
-			insert_blockquote( "The code creation has been succesfully completed!" , "Success" );
+		//	new_attrib_insert( $code , $sdescr , $ldescr );
+			insert_blockquote( "The attributes tab creation has been succesfully completed!" , "Success" );
 
 
 ?>	
@@ -271,9 +275,10 @@
 					?>
 					</span>
 
-					<br/><br/><br/><br/>
+					<br/><br/><br/>
 					
 					<?php
+					text_input_composer( "unit" 			, $unit 			, "element text medium" , "text" , "" , "255" , 1 , "description" , "Unit"				, "before" , 1 );
 					text_input_composer( "compliance" , $compliance , "element text medium" , "text" , "" , "255" , 1 , "description" , "Compliance"	, "before" , 1 );
 					text_input_composer( "length" 		, $length 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Length" 			, "before" , 1 );
 					text_input_composer( "width"			, $width			, "element text medium" , "text" , "" , "255" , 1 , "description" , "Width"				, "before" , 1 );
