@@ -17,6 +17,7 @@
 	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
 	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
 	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
+	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
 	require NSID_PLM_SRC_PHP.'includes.php';
 

@@ -17,9 +17,11 @@
 	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
 	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
 	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
+	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
-	require NSID_PLM_SRC_PHP.'includes.php';
-	require NSID_PLM_SRC_PHP.'index_funtions.php';
+	require NSID_PLM_SRC_PHP . 'includes.php';
+	require NSID_PLM_SRC_PHP . 'code_functions.php';
+	require NSID_PLM_SRC_PHP . 'index_funtions.php';
 	
 	
 
@@ -43,10 +45,10 @@
 	$G			= get_check( 'G' 			, "_" );
 	$S 			= get_check( 'S' 			, "_" );
 	$text 	= get_check( 'text'					);
-	$order 	= get_check( 'order'				);
+	$order 	= get_check( 'order'	, "mod_desc"	);
 	$src		= get_check( 'src'					);
 	$action = get_check( 'action' 			);
-	$limit	=	get_check( 'limit' 	, 50	);
+	$limit	=	get_check( 'limit' 	, 20	);
 
 	$sql = "";
 	$test = 0;
@@ -123,9 +125,6 @@
 ?>
 		<div class="codelite">
 		<h3>Welcome to NS-PLM</h3>
-<?php 
-//			insert_blockquote( "This page is designed to start the activities.<br/>You can click on a code here below." , "Blockquote" ); 
-?>
 		<p>This page is designed to start the activities. You can click on a code here below.</p>
 		</div>
 <?php

@@ -54,19 +54,19 @@ a b c defg hi
 
 Esempio:
 
-Codice									Dascrizione																			Quantità
+Codice									Dascrizione																		Quantità		Unità
 
-57C000100								Onesto - Business method
-	8C0000100								Onesto - Product Concept											x
-	58A000100								Onesto - Modelo matematico del metodo					x
-	467000100 							Tag Walking Device Master (Proto 00)					1
-		16C000100								Sensors Wide																	1
-			024000100								Arduino Due																		1
-			344000100								Sensors - FW Arduino													x
-	467000200 							Tag Walking Device Slave (Proto 00)						2
-		16C000200								Sensors	Small																	1
-			024000100								Arduino Due																		1
-			344000100								Sensors - FW Arduino													x
+57C0000100							Onesto - Business method
+	8C00000100						Onesto - Product Concept											
+	58A0000100						Onesto - Modelo matematico del metodo					
+	4670000100 						Tag Walking Device Master (Proto 00)					1						#
+		16C0000100					Sensors Wide																	1						#
+			2240000100				Arduino Due																		1						#
+			3440000100				Sensors - FW Arduino													
+	4670000200 						Tag Walking Device Slave (Proto 00)						2						#
+		16C0000200					Sensors	Small																	1						#
+			0240000100				Arduino Due																		1						#
+			3440000100				Sensors - FW Arduino													1						#
 
 
 

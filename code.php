@@ -60,15 +60,19 @@
 		get_codetype_from_tgs( $T ,$G , $S );
 		$ncode = get_new_code( $T ,$G , $S );
 		//echo $ncode;
-		echo "<div class=\"insidecodelite\">\n<h2 style=\"padding-left: 12px;\">Code Creation</h2><br/>\n";
+		echo "<div class=\"insidecodelite\">\n<h2 style=\"padding-left: 12px;\">Code Creation - step 2</h2><br/>\n";
 		insert_blockquote( "This page is going to access to Database in write modality.<br/>Please proceed only if you are sure about what you are doing, but always after a double check." , "Warning" );
 //		echo "<hr/>\n";
 		?>
 
 			
+			<?php	emphasis_code( $ncode , 2 );	?>
+			
+			<?php	stat_presence_of_context();		?>
+			
 			
 			<div class="codelite">
-				<h2>Step two</h2><br/>
+				<h2>Context information</h2><br/>
 				Please, insert all the others information for the new code:<br/>	
 
 				<table style="margin:1em;" width="90%">
@@ -96,13 +100,9 @@
 ?>
 				</table>
 			</div>
-			<?php	emphasis_code( $ncode , 2 );	?>
-			
-			<?php	stat_presence_of_context();		?>
-			
 			<div class="codelite">
 				<form id="form_att" class="appnitro"  method="get" action="code-insert.php">
-					<h3>Attributes</h3>
+					<h3>Code descriptions</h3>
 					<ul>
 						<li id="li_1" >
 							<label class="description" for="sdescr">Short desrciption</label>
@@ -206,12 +206,17 @@
 				println( "<tr>" );
 				println( "  <td style='text-align: right;' >B.O.M. Allowed</td>" );
 				$dbtip = query_get_a_field( "SELECT *  FROM `tipologia` WHERE `idTip` = " . $codetype["T"] , "dbTip" );
-				if( $dbtip == 1 )
-					$bom = "YES";
-				else
-					$bom = "NO";
-				println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >"  . $bom      . "</td>" );
-				println( "  <td></td>" );
+				if( $dbtip == 1 ) {
+					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >YES</td>" );
+					if ( check_bom_presence( $code ) )
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Go to the B.O.M.</b></span></td>" );
+					else
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Create</b></span></td>" );
+				}
+				else {
+					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >NO</td>" );
+					println( "  <td></td>" );
+				}
 				println( "  <td></td>" );
 				println( "</tr>" );
 			?>
@@ -298,10 +303,10 @@
 						$dbc = "NO";
 					println( "  <td style='text-align: center; border:1px solid #999;' >"  . $dbc  . "</td>" );
 					if ( $dbc == "NO" )
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=create\"><span class=\"blink_text\"><b>Create</b></span></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=create\"><span class=\"blink_text\"><b>Create</b></span></a></td>" );
 					else {
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code\"><b>Show</b></td>" );
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=modify\"><b>Modify</b></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code\"><b>Show</b></a></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=modify\"><b>Modify</b></a></td>" );
 					}
 					println( "</tr>" );
 				?>
@@ -363,8 +368,8 @@
 		echo "<div class=\"insidecodelite\">\n";
 		if ( $code == '0' ) {
 			if ( $new ) {
-			echo "<h2 style=\"padding-left: 12px;\">Code Creation</h2><br/>\n";
-			insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ul><li>Choose the context</li><li>Enter all the others information</li></ul>" , "Blockquote" );
+			echo "<h2 style=\"padding-left: 12px;\">Code Creation - spep 1</h2><br/>\n";
+			insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li><b>Choose the context</b></li><li>Enter all the others information</li></o	l>" , "Blockquote" );
 			echo "<hr/>\n";
 
 			$rest = stat_top_n_context();
@@ -400,7 +405,7 @@
 			
 			if ( ( ! $new ) && ( ! $action ) ) {
 				echo "<h2 style=\"padding-left: 12px;\">Code Creation</h2><br/>\n";
-				insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ul><li>Choose the context</li><li>Enter all the others information</li></ul>" , "Blockquote" );
+				insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li>Choose the context</li><li>Enter all the others information</li></o	l>" , "Blockquote" );
 				open_form( "GET" , "code.php" );
 				select_composer_from_sql( "Typology" , "T" , 1 , "SELECT * FROM `tipologia`"    , 1 , "codelite" , "" , 1 , "Typology"					, "DX" );
 				select_composer_from_sql( "Generic"  , "G" , 1 , "SELECT * FROM `catgenerica`"  , 1 , "codelite" , "" , 1 , "Generic category"	, "DX" );

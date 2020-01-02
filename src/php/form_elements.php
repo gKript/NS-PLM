@@ -1,6 +1,14 @@
 <?php
 
 	
+	$A_options = [	
+		'option0' => [
+			'value' => 'x',
+			'name' 	=> 'Undefined'
+		],
+	];
+	
+	
 	function open_form( $method , $action , $class = "" , $id = ""	) {
 		if ( $class == "" )
 			println( "<form method=\"get\" action=\"$action\" id=\"$id\" >" );
@@ -142,7 +150,7 @@
 	
 
 
-	function add_hidden( $name , $value , $null ) {
+	function add_hidden( $name , $value , $null = null ) {
 		if ( $value != $null )
 			println( "<input type=\"hidden\" name=\"$name\" value=\"$value\" />" );
 	}

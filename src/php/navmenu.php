@@ -23,7 +23,7 @@
 				</tr>
 			</table>
 		</div>
-		<div style="border:1px solid #ddd;" >
+		<div style="border:1px solid #ddd; margin-left: 15px; margin-right: 15px;" >
 			<Form Name ="menu_srch" Method ="GET" ACTION = "index.php">
 				<ul id="navmenu">
 					<li><a href="index.php">Start</a></li>
@@ -79,10 +79,13 @@
 		
 		$c =  stat_CodeCountDaily();
 		$c += stat_AttribCountDaily();
+		$c += stat_BomCountDaily();
+		
 		if ( $c )
 			insert_blockquote( "Daily statistics updated!" , "Blockquote");
+		
 		if ( $reload )
-			insert_blockquote( "Pay attention, this page is reloaded." , "Blockquote");
+			emphasis( "" , "Pay attention, this page is reloaded." );
 			
 		?>
 		

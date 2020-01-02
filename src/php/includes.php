@@ -17,23 +17,13 @@
 	require_once( NSID_PLM_SRC_PHP."utils.php" );
 	require_once( NSID_PLM_SRC_PHP."form_elements.php" );
 	require_once( NSID_PLM_SRC_PHP."table.php" );
+	require_once( NSID_PLM_SRC_PHP."qrcode.php" );
 
 	
 //	--- CLASSES
 	
 	require_once( NSID_PLM_SRC_PHP."class/upload/class.upload.php" );
 	
-	
-	$A_options = [	
-		'option0' => [
-			'value' => 'x',
-			'name' 	=> 'Undefined'
-		],
-	];
-	
-	
-
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

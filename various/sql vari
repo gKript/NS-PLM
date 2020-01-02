@@ -5,4 +5,16 @@ $sql = "INSERT INTO `codattributes` (`Codice`, `bom`, `Provider`, `Origins`, `Cr
 New code
 $sql = "INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazione`, `descrizione`, `dbCodici`, `createTS`, `modifyTS`) VALUES (NULL, \'43B0000100\', \'4\', \'3\', \'B\', \'Gim\', \'Generic Information manager PROTO\', \'0\', current_timestamp(), current_timestamp())";
 
+grafico CodeCount
+$sql = "SELECT * FROM `statistics` WHERE `name` = 'CodeCountDaily' ORDER BY `statistics`.`value`  DESC";
 
+
+bom check
+$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '57C0000100' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
+
+
+Check se presnte già in una bom
+$sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE \'57C0000100\' AND `son` LIKE \'4670000100\' AND `revision` = 1";
+
+Add in a bom
+$sql = "INSERT INTO `lista_composizione` (`id`, `father`, `son`, `quantity`, `revision`, `creation`, `modify`) VALUES (NULL, \'222\', \'111\', \'1\', \'1\', current_timestamp(), current_timestamp())";

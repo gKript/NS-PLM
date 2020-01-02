@@ -66,12 +66,11 @@
 
 	
 	function emphasis( $title , $text  ) {
-?>
-		<blockquote class="code">
-			<h2><?php echo $title; ?></h2><br />
-			<?php echo $text; ?>
-		</blockquote>
-<?php
+		println( "<blockquote class=\"code\">" );
+		if ( $title ) 
+			println( "	<h2>$title</h2><br/>" );
+		println( "	" . $text );
+		println( "</blockquote>" );
 	}
 
 	function text_trunc( $text , $trunc ) {
@@ -95,10 +94,6 @@
 		echo "<a href=\"$addr\" ". $target?"target=\"$target\"":"" . " >'$text</a>";
 	}
 
-	function code_link( $code , $link = "code.php?code" ) {
-		echo '<a href="' . $link . "=" . $code . '">' . $code . "</a>";
-	}
-
 	function TGS_link( $code , $pos , $link = "code.php?code" ) {
 		if ( $pos == "T" )
 			return "<a href=\"$link=$code%\">$code</a>";
@@ -107,6 +102,16 @@
 		if ( $pos == "S" )
 			return "<a href=\"$link=__$code%\">$code</a>";
 	}
+
+
+	function new_code_step2_link_from_context( $context ) {
+		$T = substr( $context , 0 , 1 );
+		$G = substr( $context , 1 , 1 );
+		$S = substr( $context , 2 , 1 );
+		$link = "<a href=\"code.php?T=$T&G=$G&S=$S&action=Create\">$context</a>";
+		return $link;		
+	}
+
 
 	function get_check( $var , $notset = "" ) {
 		$res = isset($_GET[ "$var" ]) ? $_GET[ "$var" ] : NULL;

@@ -30,7 +30,32 @@
 		}
 		return $ins;
 	}
-	
+
+
+	function stat_BomCountDaily() {
+		$ins = 0;
+		$name = "BomCountDaily";
+		$today = today_mysql();
+		$sql = "SELECT * FROM `statistics` WHERE `name` = '$name' AND `timest` like '$today%'";
+		$res = query_get_num_rows( $sql );
+		if ( ! $res ) {
+			$bom = 0;
+			$result = query_get_result( "SELECT * FROM `elenco_codici`" );
+			$items = $result->num_rows;
+			for( $r = 0 ; $r < $items ; $r++ ) {
+				$row = $result->fetch_array();
+				$code = $row["codice"];
+				$sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";	
+				$bom += query_get_num_rows( $sql );
+			}
+			$sql = "INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES (NULL, '$name', '$bom', current_timestamp())";
+			query_insert_single_line( $sql );
+			$ins = 1;
+		}
+		return $ins;
+	}
+
+
 
 	function stat_presence_of_context( $th = 10 ) {
 		
@@ -43,7 +68,7 @@
 		$perc = (int)( ( (float)$totcontext / (float)$totcodnum ) * 100 );
 		if ( $totcontext ) {
 			if ( $perc <= $th ) {
-				insert_blockquote( "This code is present in the databse for the <b>$perc%</b>.<br/>Please, double check it before to proceed!" , "Unusual context!");
+				insert_blockquote( "Context occurrences in the database: <b>$perc%</b>.<br/><br/>Please, double check it before to proceed!" , "Unusual context!");
 			}
 		}
 		else 
