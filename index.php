@@ -124,8 +124,13 @@
 	
 ?>
 		<div class="codelite">
-		<h3>Welcome to NS-PLM</h3>
-		<p>This page is designed to start the activities. You can click on a code here below.</p>
+			<h3>Welcome to NS-PLM</h3>
+			<p>
+				This page is designed to start the activities.<br/>
+				You can start clicking a code from the table below or searching something.<br/>
+				The menu above is the best tool to use NS-PLM.<br/><br/>
+				Good work.
+			</p>
 		</div>
 <?php
 	}

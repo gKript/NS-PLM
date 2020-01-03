@@ -187,15 +187,15 @@
 					
 					<label class="description" for="element_2">Expiration date </label>
 					<span>
-					<input id="element_2_1" name="element_2_1" class="element text" size="2" maxlength="2" value="<?php $element_2_1 ?>" type="text"> /
+					<input id="element_2_1" name="element_2_1" class="element text" size="2" maxlength="2" value="<?php echo $element_2_1; ?>" type="text"> /
 					<label for="element_2_1">DD</label>
 					</span>
 					<span>
-					<input id="element_2_2" name="element_2_2" class="element text" size="2" maxlength="2" value="<?php $element_2_2 ?>" type="text"> /
+					<input id="element_2_2" name="element_2_2" class="element text" size="2" maxlength="2" value="<?php echo $element_2_2; ?>" type="text"> /
 					<label for="element_2_2">MM</label>
 					</span>
 					<span>
-					<input id="element_2_3" name="element_2_3" class="element text" size="4" maxlength="4" value="<?php $element_2_3 ?>" type="text">
+					<input id="element_2_3" name="element_2_3" class="element text" size="4" maxlength="4" value="<?php echo $element_2_3; ?>" type="text">
 					<label for="element_2_3">YYYY</label>
 					</span>
 
@@ -216,7 +216,7 @@
 					<br/><br/><br/><br/>
 					<?php
 					
-					select_composer_from_sql( "unit" , "unit" , 1 , "SELECT * FROM `units`" , 1 , "element text" , "" , 1 , "Unit:&nbsp;" , "SX" );
+					select_composer_from_sql( "unit" , "unit" , 1 , "SELECT * FROM `units`" , 1 , "element text" , "" , $unit , 1 , "Unit:&nbsp;" , "SX" );
 					echo "<br/><br/>";
 					text_input_composer( "compliance" , $compliance , "element text medium" , "text" , "" , "255" , 1 , "description" , "Compliance"	, "before" );
 					text_input_composer( "length" 		, $length 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Length" 			, "before" );

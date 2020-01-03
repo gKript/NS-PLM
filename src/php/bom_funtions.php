@@ -21,13 +21,15 @@
 		$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ) , 7 , array(array(  "align"=>"center" , "width"=>"2%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "width"=>"30px", "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "width"=>"50px", "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%"  )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"80px" ) ) );
 		$link = return_code_link( $code );
 		$atttext = "<a href=\"attributes.php?code=$code&action=create\"><b>Create</b></a>";
+		$chstyle = "border:1px solid #999;  background-color:#e99;";
 		$uexist = "-";
 		if ( check_attributes_presence( $code ) ) {
 			$atttext = "<a href=\"attributes.php?code=$code\"><b>Show</b></a>";
+			$chstyle = "border:1px solid #999;  background-color:#9e9;";
 			$uexist = "+";
 		}
 		$myTabella->addValoreRiga( array( "F" , $link , $code_detail["abbreviazione"] , $code_detail["descrizione"] , "-" , "-" , $atttext ));
-		$myTabella->aggiungiRiga( array("style"=>"background-color:#fff;") , 7 , array(array(  "style"=>"background-color:#eee;" , "align"=>"center") , array(  "style"=>"border:1px solid #999; font-weight:bold; " , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;  background-color:#faa;" , "align"=>"center") ) );
+		$myTabella->aggiungiRiga( array("style"=>"background-color:#fff;") , 7 , array(array(  "style"=>"background-color:#eee;" , "align"=>"center") , array(  "style"=>"border:1px solid #999; font-weight:bold; " , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>$chstyle , "align"=>"center") ) );
 		$level = 1;
 		if ( $items )
 			get_next_level_bom( $origin , $code , $level , $myTabella , $maxlevel );
@@ -83,14 +85,16 @@
 					$level_link = "";
 					$down = 0;
 				}
-				$atttext = "<a href=\"attributes.php?code=$origin&action=create\"><b>Create</b></a>";
+				$atttext = "<a href=\"attributes.php?code=$son&action=Create\"><b>Create</b></a>";
+				$chstyle = "border:1px solid #999;  background-color:#e99;";
 				$uexist = "-";
 				if ( check_attributes_presence( $son ) ) {
-					$atttext = "<a href=\"attributes.php?code=$origin\"><b>Show</b></a>";
+					$atttext = "<a href=\"attributes.php?code=$son&action=Show\"><b>Show</b></a>";
+					$chstyle = "border:1px solid #999;  background-color:#9e9;";
 					$uexist = "+";
 				}
 			$table->addValoreRiga( array( $level_link , $link , $code_detail["abbreviazione"] , $code_detail["descrizione"] , $row["quantity"] , $uexist , $atttext ));
-			$table->aggiungiRiga( array("style"=>"$bglevel $fglevel") , 7 , array( array(  "style"=>"background-color:#eee;" , "align"=>"center" , "width"=>"1%") , array(  "style"=>"border:1px solid #999; font-weight:bold; background-color:#ddd;" , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;  background-color:#faa;" , "align"=>"center") ) );
+			$table->aggiungiRiga( array("style"=>"$bglevel $fglevel") , 7 , array( array(  "style"=>"background-color:#eee;" , "align"=>"center" , "width"=>"1%") , array(  "style"=>"border:1px solid #999; font-weight:bold; background-color:#ddd;" , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>$chstyle , "align"=>"center") ) );
 			if ( $down )
 				get_next_level_bom( $origin , $son , $nlevel , $table , $maxlevel );
 			}

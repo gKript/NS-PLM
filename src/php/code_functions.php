@@ -127,28 +127,34 @@
 		$ret = $srch . $ncode_id . "00";
 		return $ret;
 	}
-	
-	
+		
 
 	function get_new_revision( $code ) {
+		$ncode  = get_latest_revision( $code );
+		$oldrev = (int)substr( $ncode, 8 , 2);
+		$newrev = sprintf( "%02s" , $oldrev + 1 );
+		$root   = substr( $ncode , 0 , 8);
+		return $root . $newrev;
+	}
+
+
+	function get_next_revision( $code ) {
 		$oldrev = (int)substr($code, 8, 2);
 		$newrev = sprintf( "%02s" , $oldrev + 1 );
 		$root   = substr($code, 0, 8);
 		return $root . $newrev;
 	}
-	
-	
+		
 
 	function get_latest_revision( $code ) {
 		do {
 			$last_rev = $code;
-			$code = get_new_revision( $code );
+			$code = get_next_revision( $code );
 			$sql = "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '$code'";
 		}
 		while( query_get_num_rows( $sql ) != 0 );
 		return $last_rev;
 	}
-
 
 
 	function query_code_category( $cat , $id , $echo = 0 ) {

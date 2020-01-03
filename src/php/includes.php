@@ -22,7 +22,7 @@
 	
 //	--- CLASSES
 	
-	require_once( NSID_PLM_SRC_PHP."class/upload/class.upload.php" );
+//	require_once( NSID_PLM_SRC_PHP."class/upload/class.upload.php" );
 	
 ?>
 

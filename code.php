@@ -148,11 +148,11 @@
 					emphasis_code( $ncode , 1 );
 				}
 				else {
-					$nrev = get_new_revision( $code );
+					$nrev = get_next_revision( $code );
 					$nrev_exist = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$nrev'" );
 					$latest_rev = get_latest_revision( $code );
 					if ( $nrev_exist ) {
-						insert_blockquote( "Pay attention! This is not the latest revision of the code $code. Please, proceed with caution.<br/><a href=\"code.php?code=$latest_rev\"><span class=\"blink_text\"><b>Go to latest</b></span></a>" , "Caution" );
+						insert_blockquote( "Pay attention! This is not the latest revision of the code $code. Please, proceed with caution." , "Caution" );
 					}
 					emphasis_code( $code );
 				}
@@ -250,7 +250,7 @@
 			
 			<div class="codelite" style="height:200;">
 				<div class="clearfix">
-					<div class="box50" style="background-color:#ddd; height:160px;" >
+					<div class="box25" style="background-color:#ddd; height:160px;" >
 
 						<h2>Code details</h2><br/>
 						<table style="margin:1em;" width="80%">
@@ -263,15 +263,18 @@
 					println( "<tr>" );
 					println( "  <td style='text-align: right;' width='15%' >Revision</td>" );
 					println( "  <td style='text-align: center; border:1px solid #999;' >"  . substr($code, 8, 2)  . "</td>" );
-					$nrev = get_new_revision( $code );
+					$nrev = get_next_revision( $code );
 					$nrev_exist = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$nrev'" );
 					//echo $nrev_exist;
 					if ( ! $nrev_exist ) 
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New rev</b></span></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New</b></span></td>" );
 					else {
 						$latest_rev = get_latest_revision( $code );
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' width=\"20%\" ><a href=\"code.php?code=$latest_rev\"><span class=\"blink_text\"><b>Go to latest</b></span></a></td>" );
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New rev</b></span></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New</b></span></td>" );
+						println( "</tr>" );
+						println( "<tr>" );
+						println( "  <td></td>" );
+						println( "  <td colspan=\"2\" style='text-align: center; border:1px solid #999; background-color:#ffd;' width=\"20%\" ><a href=\"code.php?code=$latest_rev\"><span class=\"blink_text\"><b>Latest</b></span></a></td>" );
 					}
 					println( "</tr>" );
 				?>
@@ -305,7 +308,7 @@
 					if ( $dbc == "NO" )
 						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=Create\"><span class=\"blink_text\"><b>Create</b></span></a></td>" );
 					else {
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code\"><b>Show</b></a></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code&action=Show\"><b>Show</b></a></td>" );
 						println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=Edit\"><b>Edit</b></a></td>" );
 					}
 					println( "</tr>" );
@@ -391,9 +394,9 @@
 				echo "<h2 style=\"padding-left: 12px;\">Code Filtering</h2><br/>\n";
 				open_form( "GET" , "index.php" );
 			}
-			select_composer_from_sql( "Typology" , "T" , 1 , "SELECT * FROM `tipologia`"    , 1 , "codelite" , "" , 1 , "Typology"					, "DX" );
-			select_composer_from_sql( "Generic"  , "G" , 1 , "SELECT * FROM `catgenerica`"  , 1 , "codelite" , "" , 1 , "Generic category"	, "DX" );
-			select_composer_from_sql( "Specific" , "S" , 2 , "SELECT * FROM `catspecifica`" , 1 , "codelite" , "" , 1 , "Specific category"	, "DX" );	
+			select_composer_from_sql( "Typology" , "T" , 1 , "SELECT * FROM `tipologia`"    , 1 , "codelite" , "" , "" , 1 , "Typology"					, "DX" );
+			select_composer_from_sql( "Generic"  , "G" , 1 , "SELECT * FROM `catgenerica`"  , 1 , "codelite" , "" , "" , 1 , "Generic category"	, "DX" );
+			select_composer_from_sql( "Specific" , "S" , 2 , "SELECT * FROM `catspecifica`" , 1 , "codelite" , "" , "" , 1 , "Specific category"	, "DX" );	
 			if ( $new == 1 )
 				button( "submit" , "action" , "Create" , 0 , "codelite" );
 			else
@@ -407,9 +410,9 @@
 				echo "<h2 style=\"padding-left: 12px;\">Code Creation</h2><br/>\n";
 				insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li>Choose the context</li><li>Enter all the others information</li></o	l>" , "Blockquote" );
 				open_form( "GET" , "code.php" );
-				select_composer_from_sql( "Typology" , "T" , 1 , "SELECT * FROM `tipologia`"    , 1 , "codelite" , "" , 1 , "Typology"					, "DX" );
-				select_composer_from_sql( "Generic"  , "G" , 1 , "SELECT * FROM `catgenerica`"  , 1 , "codelite" , "" , 1 , "Generic category"	, "DX" );
-				select_composer_from_sql( "Specific" , "S" , 2 , "SELECT * FROM `catspecifica`" , 1 , "codelite" , "" , 1 , "Specific category"	, "DX" );
+				select_composer_from_sql( "Typology" , "T" , 1 , "SELECT * FROM `tipologia`"    , 1 , "codelite" , "" , "" , 1 , "Typology"					, "DX" );
+				select_composer_from_sql( "Generic"  , "G" , 1 , "SELECT * FROM `catgenerica`"  , 1 , "codelite" , "" , "" , 1 , "Generic category"	, "DX" );
+				select_composer_from_sql( "Specific" , "S" , 2 , "SELECT * FROM `catspecifica`" , 1 , "codelite" , "" , "" , 1 , "Specific category"	, "DX" );
 				button( "submit" , "action" , "Create" , 0 , "codelite" );
 				close_form();
 			}

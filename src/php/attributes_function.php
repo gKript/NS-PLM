@@ -4,11 +4,18 @@ function new_attrib_insert( $attr , $action , $en = 1 ) {
 	global $attrib;
 	if ( $action == "Insert" ) {
 		extract( $attr );
-		$expdate = NULL;
 		if ( ( $yyyy != "" ) && ( $mm != "" ) && ( $dd != "" ) ) {
-			$expdate = $yyyy . $mm . $dd;
+			$ds = sprintf( "%02d" , $dd );
+			$ms = sprintf( "%02d" , $mm );
+			$ys = sprintf( "%04d" , $yyyy );
+			$expdate = $ys . $ms . $ds;
 			$expiration = 1;
 			$attrib["expiration"] = 1;
+		}
+		else {
+			$expdate = NULL;
+			$expiration = 0;
+			$attrib["expiration"] = 0;
 		}
 		$sql0 = "INSERT INTO `codattributes` (`code`, `bom`, `provider`, `origin`, `critical`, `important`, `testing`, `expiration`, `expiration_time`, `rohs`, `dangerous`, `regulatory`, `warranty`, `unit`, `compliance`, `tracebility`, `consumables`, `length`, `width`, `height`, `weight`, `createTS`, `modifyTS`) ";
 		$sql1 = "VALUES ('$code', '$bom', '$provider', '$origin', '$critical', '$important', '$testing', '$expiration', '$expdate', '$rohs', '$dangerous', '$regulatory', '$warranty', '$unit', '$compliance', '$tracebility', '$consumables', '$length', '$width', '$height', '$weight', current_timestamp(), current_timestamp())";
@@ -46,6 +53,10 @@ function	attrib_get_data_from_sql() {
 			$attrib[ $key ] = query_get_a_field( $sql , $key );
 		}
 	}
+	$expdate = query_get_a_field( "SELECT `expiration_time` FROM `codattributes` WHERE `code` LIKE '$code' " , "expiration_time" );
+	$attrib["yyyy"] = substr( $expdate , 0 , 4 );
+	$attrib["mm"]   = substr( $expdate , 4 , 2 );
+	$attrib["dd"]   = substr( $expdate , 6 , 2 );
 }
 
 
@@ -54,11 +65,17 @@ function	attrib_update_data() {
 	$code = $attrib["code"];
 	foreach( $attrib as $key=>$value ) {
 		if ( ( $key != "code" ) && ( $key != "action" ) && ( $key != "yyyy" ) && ( $key != "mm" ) && ( $key != "dd" ) ) {
-			//$sql = "UPDATE `codattributes` SET `$key` = '$value' WHERE `codattributes`.`Codice` = '$code'";
-			//echo $sql . "<br/>";
 			query_update_single_field( $code , "code" , "codattributes" , $key , $value );
 		}
 	}
+	$ds = sprintf( "%02d" , $attrib[ "dd" ] );
+	$ms = sprintf( "%02d" , $attrib[ "mm" ] );
+	$ys = sprintf( "%04d" , $attrib["yyyy"] );
+	$expdate = $ys . $ms . $ds;
+	if ( ! (int)$expdate ) 
+		$expdate = "";
+	query_update_single_field( $code , "code" , "codattributes" , "expiration_time" , $expdate );
+	
 	attrib_get_data_from_sql();
 }
 

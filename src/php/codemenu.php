@@ -78,27 +78,27 @@
 		if ( $nav["check"] ) {
 			$ncode_link = "";
 			if ( $nav["xnc"] )
-				$ncode_link = "<li><a href=\"code.php?code=" . $nav["nc"] . "&nav=1\" >Next ID on context</a></li>\n";
+				$ncode_link = "<li><a href=\"code.php?code=" . $nav["nc"] . "&nav=1\" >Next ID</a></li>\n";
 
 			$pcode_link = "";
 			if ( $nav["xpc"] )
-				$pcode_link = "<li><a href=\"code.php?code=" . $nav["pc"] . "&nav=1\" >Previous ID on context</a></li>\n";
+				$pcode_link = "<li><a href=\"code.php?code=" . $nav["pc"] . "&nav=1\" >Previous ID</a></li>\n";
 
 			$nrev_link = "";
 			if ( $nav["xnr"] ) {
 				if ( ( $nav["nr"] == $nav["lr"] ) ) {
-					$nrev_link = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next/Last REVISION on ID</a></li>\n";
+					$nrev_link = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next/Last REVISION</a></li>\n";
 				}
 				else {
-					$nrev_link  = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next REVISION on ID</a></li>\n";
-					$nrev_link .= "<li><a href=\"code.php?code=" . $nav["lr"] . "&nav=1\" >LAST REVISION on ID</a></li>\n";
+					$nrev_link  = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next REVISION</a></li>\n";
+					$nrev_link .= "<li><a href=\"code.php?code=" . $nav["lr"] . "&nav=1\" >LAST REVISION</a></li>\n";
 				}
 			}
 			
 			
 			$prev_link = "";
 			if ( $nav["xpr"] )
-				$prev_link = "<li><a href=\"code.php?code=$code&code=" . $nav["pr"] . "&nav=1\" >Previous REVISION on ID</a></li>";
+				$prev_link = "<li><a href=\"code.php?code=$code&code=" . $nav["pr"] . "&nav=1\" >Previous REVISION</a></li>";
 		}
 
 		

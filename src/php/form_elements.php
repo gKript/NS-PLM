@@ -63,7 +63,7 @@
 		return 0;
 	}
 
-	function select_composer_from_sql( $id , $name , $style , $sql , $undefined = 0 , $class = "" , $onchange = "" , $nl = 0 , $label = "" , $position = "" ) {
+	function select_composer_from_sql( $id , $name , $style , $sql , $undefined = 0 , $class = "" , $onchange = "" , $select = "" , $nl = 0 , $label = "" , $position = "" ) {
 		//	Style 0: solo array 0, Style 1 anche array 1, Style 2 anche array 2
 		global $mysqli;
 		
@@ -79,12 +79,15 @@
 		if ($result = $mysqli->query($sql)) {
 			for( $r = 0 ; $r < $rows ; $r++ ) {
 					$array = $result->fetch_array();
+					$ssel = "";
+					if ( $array[1] == $select ) 
+						$ssel = " selected ";
 					if ( $style == 0 ) 
-						println( "	<option value='" . $array[1] . "'>" . $array[1] . "</option>" );
+						println( "	<option value='" . $array[1] . "' $ssel >" . $array[1] . "</option>" );
 					else if ( $style == 1 ) 
-						println( "	<option value='" . $array[1] . "'>" . $array[1] . "   -   " . $array[2] . "</option>" );
+						println( "	<option value='" . $array[1] . "' $ssel >" . $array[1] . "   -   " . $array[2] . "</option>" );
 					else if ( $style == 2 ) 
-						println( "	<option value='" . $array[1] . "'>" . $array[1] . "   -   " . $array[2] . "   -   " . $array[3] . "</option>" );
+						println( "	<option value='" . $array[1] . "' $ssel >" . $array[1] . "   -   " . $array[2] . "   -   " . $array[3] . "</option>" );
 			}
 		}
 		?>
@@ -113,8 +116,8 @@
 		if ( $undefined )
 				$r = 0;
 		for( $r ; $r < $elements ; $r++ ) {
-				$ssel = "";
 				$array = select_option( "get" , "" , "" , $r );
+				$ssel = "";
 				if ( $array[0] == $select ) 
 					$ssel = " selected ";
 				println( "	<option value='" . $array[0] . "'$ssel>" . $array[1] . "</option>" );
