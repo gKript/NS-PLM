@@ -10,7 +10,7 @@
 -->
 
 <?php
-	$gk_page = "index";
+	$nspage = "index";
 	
 	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
 	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');

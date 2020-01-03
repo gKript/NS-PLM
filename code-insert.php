@@ -10,7 +10,7 @@
 -->
 
 <?php
-	$gk_page = "code-insert";
+	$nspage = "code-insert";
 	
 	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
 	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
@@ -60,7 +60,7 @@
 			if ($array) {
 				insert_blockquote( "The code creation has been succesfully completed!" , "Success" );
 				get_codetype( $array );
-				emphasis_code( $code );
+				emphasis_codeemphasis_code( $code );
 				?>
 			
 				<div class="insidecodelite">
@@ -142,7 +142,7 @@
 				println( "</tr>" );
 				println( "<tr>" );
 				println( "  <td style='text-align: right;' width='30%' >Attributes set</td>" );
-				$sql = "SELECT *  FROM `codattributes` WHERE `Codice` LIKE \"%$code%\"";
+				$sql = "SELECT *  FROM `codattributes` WHERE `code` LIKE \"%$code%\"";
 				if( query_get_num_rows( $sql )  )
 					$dbc = "YES";
 				else

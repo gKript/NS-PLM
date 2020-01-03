@@ -31,16 +31,24 @@
 		
 		if ( $echo ) 
 			echo $query."<br/>";
-		$mysqli->query ( $query ) or 
-			die( "query_single_line() : Problem with query<br/>&nbsp;&nbsp;&nbsp;&nbsp;Query : $query<br/>&nbsp;&nbsp;&nbsp;&nbsp;MySql :" . $mysqli->error ."<br/>" );
+		else {
+			$mysqli->query ( $query ) or 
+				die( "query_single_line() : Problem with query<br/>&nbsp;&nbsp;&nbsp;&nbsp;Query : $query<br/>&nbsp;&nbsp;&nbsp;&nbsp;MySql :" . $mysqli->error ."<br/>" );
+		}
 	}
 	
-	function query_update_single_field( $id , $id_field , $table , $field , $value ) {
+	function query_update_single_field( $id , $id_field , $table , $field , $value , $echo = 0 ) {
 		global $mysqli;
+		global $db;
 		
-		$query = "UPDATE `Formazione_E_school`.`$table` SET `$field` = '$value' WHERE `$table`.`$id_field` = '$id' LIMIT 1;";
-		$mysqli->query ( $query ) or 
-			die( "query_single_line() : Problem with query<br/>&nbsp;&nbsp;&nbsp;&nbsp;Query : $query<br/>&nbsp;&nbsp;&nbsp;&nbsp;MySql :" . $mysqli->error ."<br/>" );
+		$dbn = $db->dbname;
+		$query = "UPDATE `$table` SET `$field` = '$value' WHERE `$table`.`$id_field` = '$id'";
+		if ( $echo ) 
+			echo $query."<br/>";
+		else {
+			$mysqli->query ( $query ) or 
+				die( "query_single_line() : Problem with query<br/>&nbsp;&nbsp;&nbsp;&nbsp;Query : $query<br/>&nbsp;&nbsp;&nbsp;&nbsp;MySql :" . $mysqli->error ."<br/>" );
+		}
 	}
 
 	

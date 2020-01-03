@@ -1,12 +1,7 @@
 <?php
 
-	function emphasis_code( $code , $bl = 0 ) {
-		if ( ! $bl ) 
-			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . substr($code, 8, 2);
-		else if ( $bl == 1) 
-			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . "<span class=\"blink_text\">" . substr($code, 8, 2) . "</span>";
-		else if ( $bl == 2) 
-			$code_split = substr($code, 0, 3) . "  " . "<span class=\"blink_text\">" . substr($code, 3, 5) . "</span>" . "  " . substr($code, 8, 2);
+	
+	function check_next_prev_code( $code ) {
 		$cod_id = (int)substr($code, 3, 5);
 		$cod_rv = (int)substr($code, 8, 2);
 		$snc = "00000";
@@ -19,23 +14,110 @@
 		$snr = sprintf( "%02d" , $cod_rv + 1 );
 		$spr = sprintf( "%02d" , $cod_rv - 1 );
 //		echo $snc . "  " . $spc . "  " . $snr . "  " . $spr . "<br/>";
+	
 		$ncode = substr($code, 0, 3) . $snc . substr($code, 8, 2);
 		$pcode = substr($code, 0, 3) . $spc . substr($code, 8, 2);
 		$nrev  = substr($code, 0, 3) . substr($code, 3, 5) . $snr;
 		$prev  = substr($code, 0, 3) . substr($code, 3, 5) . $spr;
+		
+		$xnc = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$ncode'" );
+		$xpc = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$pcode'" );
+		$xnr = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$nrev'" );
+		$xpr = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$prev'" );
+		
+		$check = 0;
+		
+		if ( $nav["xnc"] = $xnc ) {
+			$nav["nc"] = $ncode;
+			$check++;
+		}
+		else
+			$nav["nc"] = null;
+		
+		if ( $nav["xpc"] = $xpc ) {
+			$nav["pc"] = $pcode;
+			$check++;
+		}
+		else
+			$nav["pc"] = null;
+		
+		if ( $nav["xnr"] = $xnr ) {
+			$nav["nr"] = $nrev;
+			$check++;
+			$lr = get_latest_revision( $code );
+			$nav["lr"] = $lr;
+		}
+		else
+			$nav["nr"] = null;
+		
+		if ( $nav["xpr"] = $xpr ) {
+			$nav["pr"] = $prev;
+			$check++;
+		}
+		else
+			$nav["pr"] = null;
+		
+		$nav["check"] = $check;
+		
+		//var_dump( $nav );
+		
+		return $nav;
+	}
+
+
+
+	function emphasis_code( $code , $bl = 0 ) {
+		if ( ! $bl ) 
+			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . substr($code, 8, 2);
+		else if ( $bl == 1) 
+			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . "<span class=\"blink_text\">" . substr($code, 8, 2) . "</span>";
+		else if ( $bl == 2) 
+			$code_split = substr($code, 0, 3) . "  " . "<span class=\"blink_text\">" . substr($code, 3, 5) . "</span>" . "  " . substr($code, 8, 2);
+
+		$nav = check_next_prev_code( $code );
+		if ( $nav["check"] ) {
+			$ncode_link = "";
+			if ( $nav["xnc"] )
+				$ncode_link = "<li><a href=\"code.php?code=" . $nav["nc"] . "&nav=1\" >Next ID on context</a></li>\n";
+
+			$pcode_link = "";
+			if ( $nav["xpc"] )
+				$pcode_link = "<li><a href=\"code.php?code=" . $nav["pc"] . "&nav=1\" >Previous ID on context</a></li>\n";
+
+			$nrev_link = "";
+			if ( $nav["xnr"] ) {
+				if ( ( $nav["nr"] == $nav["lr"] ) ) {
+					$nrev_link = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next/Last REVISION on ID</a></li>\n";
+				}
+				else {
+					$nrev_link  = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next REVISION on ID</a></li>\n";
+					$nrev_link .= "<li><a href=\"code.php?code=" . $nav["lr"] . "&nav=1\" >LAST REVISION on ID</a></li>\n";
+				}
+			}
+			
+			
+			$prev_link = "";
+			if ( $nav["xpr"] )
+				$prev_link = "<li><a href=\"code.php?code=$code&code=" . $nav["pr"] . "&nav=1\" >Previous REVISION on ID</a></li>";
+		}
+
+		
 		$synop_link  = "code.php?code=$code" ;
-		$attrib_link = "attributes.php?code=$code&nav=1" ;
-		$ncode_link  = "code.php?code=$ncode&pcode=$code&nav=1" ;
-		$pcode_link  = "code.php?code=$pcode&pcode=$code&nav=1" ;
-		$nrev_link   = "code.php?code=$nrev&pcode=$code&nav=1" ;
-		$prev_link   = "code.php?code=$prev&pcode=$code&nav=1" ;
+		$attrib_show_link = "attributes.php?code=$code&action=Show" ;
+		$attrib_edit_link = "attributes.php?code=$code&action=Edit" ;
+		if ( query_get_num_rows( "SELECT * FROM `codattributes` WHERE `code` like '$code'" ) )
+			$attrib_create_link = "";
+		else
+			$attrib_create_link = "<li><a href=\"attributes.php?code=$code&action=Create\">Create</a></li>" ;
+		
+
 		if ( ! $bl ) 
 			echo "<blockquote class=\"code\">";
 		else
 			echo "<blockquote class=\"code_update\">";
 		
-		
 ?>
+
 		<h1>
 			<?php 
 					echo $code_split;
@@ -47,32 +129,37 @@
 ?>
 		<div style="border:1px solid #ccc;" >
 			<ul id="navmenu">
-			
+
+				<?php if ( $nav["check"] ) { ?>
 				<li><a>Navigator +</a>
 					<ul>
-						<li><a href="<?php 	 	 echo $ncode_link; ?>">Next id</a></li>
 						<?php
-							if ( ($cod_id - 1)	> 0 ) {
-								echo "<li><a href=\"$pcode_link\">Prev id</a></li>";
-							}
+						echo $ncode_link;
+						echo $pcode_link;
+						echo $nrev_link;
+						echo $prev_link;
 						?>
-<!--				<li><a href="">Last Rev</a></li>		-->
-						<li><a href="<?php 	 	 echo $nrev_link; ?>">Next Rev</a></li>
-						<?php
-							if ( ($cod_rv - 1)	>= 0 ) {
-								echo "<li><a href=\"$prev_link\">Prev Rev</a></li>";
-							}
-						?>
-						
 					</ul>
 				</li>
+				<?php } ?>
 				<li><a>Details +</a>
 					<ul>
 						<li><a href="<?php 	 	 echo $synop_link; ?>">Synopsis</a></li>
-						<li><a href="<?php 	 	 echo $attrib_link; ?>">Attributes</a></li>
+						<li><a>Attributes +</a>
+							<ul>
+								<li><a href="<?php echo $attrib_show_link ?>">Show</a></li>
+								<?php echo $attrib_create_link . "\n"; ?>
+								<li><a href="<?php echo $attrib_edit_link ?>">Edit</a></li>
+							</ul>
+						</li>
 						<li><a href="">State</a></li>
 						<li><a href="">Provider</a></li>
-						<li><a href="">Price</a></li>
+						<li><a href="">Price +</a>
+							<ul>
+								<li><a href="">Last</a></li>
+								<li><a href="">Average</a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
 				<li><a href="code.php?code=0">Structure +</a>

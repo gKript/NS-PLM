@@ -1,13 +1,29 @@
 
+		ATTRIBUTES
+
+tutti i GET per attributes
+attributes.php?bom=1&provider=1&critical=1&important=1&expiration=1&warranty=1&rohs=1&dangerous=1&regulatory=1&tracebility=1&testing=1&consumables=1&element_2_1=2&element_2_2=01&element_2_3=2020&unit=N&compliance=EN+62353&length=15&width=33&height=22&weight=1.5&code=57C0000100&action=Insert
+
 Inserimento attributes ( da rivedere, attributi aumentati )
-$sql = "INSERT INTO `codattributes` (`Codice`, `bom`, `Provider`, `Origins`, `Critical`, `Important`, `Testing`, `Expiration`, `Expiration_time`, `RoHS`, `Dangerous`, `Regulatory`, `Warranty`, `Compliance`, `Tracebility`, `Length`, `Width`, `Height`, `Weight`) VALUES (\'54B0000101 \', \'1\', \'0\', \'0\', \'0\', \'1\', \'1\', \'0\', \'NULL\', \'0\', \'0\', \'0\', \'0\', \'GPL V3\', \'0\', \'0\', \'0\', \'0\', \'0\')";
+$sql = "INSERT INTO `codattributes` (`Codice`, `bom`, `Provider`, `Origins`, `Critical`, `Important`, `Testing`, `Expiration`, `Expiration_time`, `RoHS`, `Dangerous`, `Regulatory`, `Warranty`, `Unit`, `Compliance`, `Tracebility`, `Length`, `Width`, `Height`, `Weight`, `createTS`, `modifyTS`) VALUES (\'57C0000100 \', \'1\', \'0\', \'0\', \'0\', \'1\', \'1\', \'0\', \'NULL\', \'1\', \'0\', \'1\', \'1\', \'N\', \'EN62353\', \'1\', \'100\', \'35\', \'6\', \'10\', current_timestamp(), current_timestamp())";
+
+update un dato di attributes
+$sql = "UPDATE `codattributes` SET `Origins` = '1' WHERE `codattributes`.`code` = '57C0000100'";
+
+
+		CODE
 
 New code
 $sql = "INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazione`, `descrizione`, `dbCodici`, `createTS`, `modifyTS`) VALUES (NULL, \'43B0000100\', \'4\', \'3\', \'B\', \'Gim\', \'Generic Information manager PROTO\', \'0\', current_timestamp(), current_timestamp())";
 
+
+		STATISTICS
+
 grafico CodeCount
 $sql = "SELECT * FROM `statistics` WHERE `name` = 'CodeCountDaily' ORDER BY `statistics`.`value`  DESC";
 
+
+		BOM
 
 bom check
 $sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '57C0000100' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
@@ -18,3 +34,7 @@ $sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE \'57C0000100\' A
 
 Add in a bom
 $sql = "INSERT INTO `lista_composizione` (`id`, `father`, `son`, `quantity`, `revision`, `creation`, `modify`) VALUES (NULL, \'222\', \'111\', \'1\', \'1\', current_timestamp(), current_timestamp())";
+
+
+
+

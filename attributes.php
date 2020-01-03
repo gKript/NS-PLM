@@ -10,7 +10,7 @@
 -->
 
 <?php
-	$gk_page = "attributes";
+	$nspage = "attributes";
 	
 	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
 	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
@@ -19,6 +19,7 @@
 	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
 	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
+	require NSID_PLM_SRC_PHP . 'attributes_function.php';
 	require NSID_PLM_SRC_PHP . 'includes.php';
 	require NSID_PLM_SRC_PHP . 'code_functions.php';
 
@@ -42,6 +43,7 @@
 	
 	$bom					= get_check( 'bom' 					, "0" );
 	$provider			= get_check( 'provider'			, "0" );
+	$origin   		= get_check( 'origin'				, "0" );
 	$critical   	= get_check( 'critical'			, "0" );
 	$important		= get_check( 'important'		, "0" );
 	$expiration		= get_check( 'expiration'		, "0" );
@@ -66,10 +68,12 @@
 	$attrib["action"]				= $action;
 	$attrib["bom"]					= $bom;
 	$attrib["provider"]			= $provider;
+	$attrib["origin"]				= $origin;
 	$attrib["critical"]			= $critical;
 	$attrib["important"]		= $important;
 	$attrib["expiration"]		= $expiration;
 	$attrib["warranty"]			= $warranty;
+	$attrib["rohs"]					= $rohs;
 	$attrib["dangerous"]		= $dangerous;
 	$attrib["regulatory"]		= $regulatory;
 	$attrib["tracebility"]	= $tracebility;
@@ -78,6 +82,7 @@
 	$attrib["dd"]						= $element_2_1;
 	$attrib["mm"]						= $element_2_2;
 	$attrib["yyyy"]					= $element_2_3;
+	$attrib["unit"]					= $unit;
 	$attrib["compliance"]		= $compliance;
 	$attrib["length"]				= $length;
 	$attrib["width"]				= $width;
@@ -92,28 +97,60 @@
 
 	emphasis_code( $code );
 
-	$sql = "SELECT * FROM `codattributes` WHERE `Codice` like '%$code%'";
-	//echo $sql;
+	$sql = "SELECT * FROM `codattributes` WHERE `code` like '$code'";
+//	echo $sql;
 	$exist = query_get_num_rows( $sql );
-
+//		echo $exist;
 	if( ! $exist ) {
-		if ( $action != "Insert" )
-			insert_blockquote( "No attributes found for code:<b>$code</b>" , "Blockquote" );
+		if ( ( $action != "Insert" ) && ( $action != "Create" ) ) {
+			insert_blockquote( "No attributes found for code:<b>$code</b><br/><br/>Page switched in <b>Creation</b> mode." , "Caution" );
+			$action = "Create";
+		}
 	}
+	else {
+		if ( $action != "Modify" ) {
+			attrib_get_data_from_sql();
+			
+			$code = $attrib["code"];
+			$action = $attrib["action"];
+			$bom = $attrib["bom"];
+			$provider = $attrib["provider"];
+			$origin = $attrib["origin"];
+			$critical = $attrib["critical"];
+			$important = $attrib["important"];
+			$expiration = $attrib["expiration"];
+			$warranty = $attrib["warranty"];
+			$rohs = $attrib["rohs"];
+			$dangerous = $attrib["dangerous"];
+			$regulatory = $attrib["regulatory"];
+			$tracebility = $attrib["tracebility"];
+			$testing = $attrib["testing"];
+			$consumables = $attrib["consumables"];
+			$element_2_1 = $attrib["dd"];
+			$element_2_2 = $attrib["mm"];
+			$element_2_3 = $attrib["yyyy"];
+			$unit = $attrib["unit"];
+			$compliance = $attrib["compliance"];
+			$length = $attrib["length"];
+			$width = $attrib["width"];
+			$height = $attrib["height"];
+			$weight = $attrib["weight"];
+		}
+	}
+
+	
+	$disable = 0;
 
 	if ( $array ) {
 		
 		//-------------------------------------------------------CREATE INIZIO---------------------------------------------------------------
-		if ( $action == "create" ) {
+		if ( ( $action == "Create" ) || ( $action == "Edit" ) ) {
 ?>	
 			
 		<div class="insidecodelite">
-			<div class="codelite">
-				<h2>Code synopsis</h2><br/>
 <?php		
-				print( "<b>$code</b>" . "  -  " . $array["abbreviazione"] . "  -  " . $array["descrizione"] );
+			synopsis( $code , $array["abbreviazione"] , $array["descrizione"] );
 ?>
-			</div>
 			<div class="codelite">
 
 			<form id="form_att" class="appnitro"  method="get" action="">
@@ -150,15 +187,15 @@
 					
 					<label class="description" for="element_2">Expiration date </label>
 					<span>
-					<input id="element_2_1" name="element_2_1" class="element text" size="2" maxlength="2" value="" type="text"> /
+					<input id="element_2_1" name="element_2_1" class="element text" size="2" maxlength="2" value="<?php $element_2_1 ?>" type="text"> /
 					<label for="element_2_1">DD</label>
 					</span>
 					<span>
-					<input id="element_2_2" name="element_2_2" class="element text" size="2" maxlength="2" value="" type="text"> /
+					<input id="element_2_2" name="element_2_2" class="element text" size="2" maxlength="2" value="<?php $element_2_2 ?>" type="text"> /
 					<label for="element_2_2">MM</label>
 					</span>
 					<span>
-					<input id="element_2_3" name="element_2_3" class="element text" size="4" maxlength="4" value="" type="text">
+					<input id="element_2_3" name="element_2_3" class="element text" size="4" maxlength="4" value="<?php $element_2_3 ?>" type="text">
 					<label for="element_2_3">YYYY</label>
 					</span>
 
@@ -195,8 +232,8 @@
 					if ( ! $exist ) 
 						println ( "<input id=\"saveForm\" class=\"button_text\" type=\"submit\" name=\"action\" value=\"Insert\" />" );
 					else {
-						println ( "<input id=\"saveForm\" class=\"button_text\" type=\"submit\" name=\"action\" value=\"Update\" />" );
-						println ( "<input type=\"hidden\" name=\"action\" value=\"modify\" />" );
+						println ( "<input id=\"saveForm\" class=\"button_text\" type=\"submit\" name=\"action\" value=\"Modify\" />" );
+//						println ( "<input type=\"hidden\" name=\"action\" value=\"Edit\" />" );
 					}
 ?>
 					</li>
@@ -210,89 +247,123 @@
 		}		
 		//-------------------------------------------------------CREATE FINE---------------------------------------------------------------
 		//-------------------------------------------------------INSERT START--------------------------------------------------------------
-		if ( $action == "Insert" ) {	
-		//	new_attrib_insert( $code , $sdescr , $ldescr );
-			insert_blockquote( "The attributes tab creation has been succesfully completed!" , "Success" );
-
-
-?>	
-			
-		<div class="insidecodelite">
-			<div class="codelite">
-				<h2>Code synopsis</h2><br/>
+		if ( ( $action != "Create" ) && ( $action != "Edit" ) ) {
+	?>	
+			<div class="insidecodelite">
 <?php		
-				print( "<b>$code</b>" . "  -  " . $array["abbreviazione"] . "  -  " . $array["descrizione"] );
-?>
-			</div>
+			synopsis( $code , $array["abbreviazione"] , $array["descrizione"] );
+			
+			if ( ( $action == "Insert" ) || ( $action == "Update" ) ) {
+				new_attrib_insert( $attrib , $action );
+				$disable = 1;
+			}
+			else if  ( $action == "Show" ) {
+				$disable = 1;
+			}
+			else if ( $action == "Modify" ) {
+				new_attrib_insert( $_GET , $action );
+				
+				
+				$disable = 1	;
+			}
+			if ( $action != "Show" ) {
+				$code = $attrib["code"];
+				$action = $attrib["action"];
+				$bom = $attrib["bom"];
+				$provider = $attrib["provider"];
+				$origin = $attrib["origin"];
+				$critical = $attrib["critical"];
+				$important = $attrib["important"];
+				$expiration = $attrib["expiration"];
+				$warranty = $attrib["warranty"];
+				$rohs = $attrib["rohs"];
+				$dangerous = $attrib["dangerous"];
+				$regulatory = $attrib["regulatory"];
+				$tracebility = $attrib["tracebility"];
+				$testing = $attrib["testing"];
+				$consumables = $attrib["consumables"];
+				$element_2_1 = $attrib["dd"];
+				$element_2_2 = $attrib["mm"];
+				$element_2_3 = $attrib["yyyy"];
+				$unit = $attrib["unit"];
+				$compliance = $attrib["compliance"];
+				$length = $attrib["length"];
+				$width = $attrib["width"];
+				$height = $attrib["height"];
+				$weight = $attrib["weight"];
+			}
+			
+			
+?>		
+
 			<div class="codelite">
 
-			<form id="form_att" class="appnitro"  method="get" action="">
-			<div class="form_description">
-				<h3>Attributes</h3>
-			</div>						
-				<ul >
+				<form id="form_att" class="appnitro"  method="get" action="">
+				<div class="form_description">
+					<h3>Attributes</h3>
+				</div>						
+					<ul >
 
-					<li id="li_1" >
-					<label class="description" for="element_1"> </label>
-					<span >
-					<?php
-					checkbox_composer( "bom" 					, "1" , "element checkbox" , $bom 				, 1 , "choice" , "B.O.M." 			, "after"	, 1	);
-					checkbox_composer( "provider" 		, "1" , "element checkbox" , $provider		, 1 , "choice" , "Provider"			, "after"	, 1	);
-					checkbox_composer( "critical" 		, "1" , "element checkbox" , $critical		, 1 , "choice" , "Critical"			, "after"	, 1	);
-					checkbox_composer( "important"		, "1" , "element checkbox" , $important		, 1 , "choice" , "Important"		, "after"	, 1	);
-					checkbox_composer( "expiration" 	, "1" , "element checkbox" , $expiration	, 1 , "choice" , "Expiration"		, "after"	, 1	);
-					checkbox_composer( "warranty" 		, "1" , "element checkbox" , $warranty		, 1 , "choice" , "Warranty"			, "after"	, 1	);
-					?>
-					</span>
-					<span>
-					<?php
-					checkbox_composer( "rohs" 				, "1" , "element checkbox" , $rohs				, 1 , "choice" , "RoHS"					, "after"	, 1	);
-					checkbox_composer( "dangerous"		, "1" , "element checkbox" , $dangerous		, 1 , "choice" , "Dangerous"		, "after"	, 1	);
-					checkbox_composer( "regulatory" 	, "1" , "element checkbox" , $regulatory	, 1 , "choice" , "Regulatory"		, "after"	, 1	);
-					checkbox_composer( "tracebility"	, "1" , "element checkbox" , $tracebility	, 1 , "choice" , "Tracebility"	, "after"	, 1	);
-					checkbox_composer( "testing" 			, "1" , "element checkbox" , $testing			, 1 , "choice" , "Testing"			, "after"	, 1	);
-					checkbox_composer( "consumables"	, "1" , "element checkbox" , $consumables	, 1 , "choice" , "Consumables"	, "after"	, 1	);
-					?>
-					</span> 
+						<li id="li_1" >
+						<label class="description" for="element_1"> </label>
+						<span >
+						<?php
+						checkbox_composer( "bom" 					, "1" , "element checkbox" , $bom 				, 1 , "choice" , "B.O.M." 			, "after"	, $disable	);
+						checkbox_composer( "provider" 		, "1" , "element checkbox" , $provider		, 1 , "choice" , "Provider"			, "after"	, $disable	);
+						checkbox_composer( "critical" 		, "1" , "element checkbox" , $critical		, 1 , "choice" , "Critical"			, "after"	, $disable	);
+						checkbox_composer( "important"		, "1" , "element checkbox" , $important		, 1 , "choice" , "Important"		, "after"	, $disable	);
+						checkbox_composer( "expiration" 	, "1" , "element checkbox" , $expiration	, 1 , "choice" , "Expiration"		, "after"	, $disable	);
+						checkbox_composer( "warranty" 		, "1" , "element checkbox" , $warranty		, 1 , "choice" , "Warranty"			, "after"	, $disable	);
+						?>
+						</span>
+						<span>
+						<?php
+						checkbox_composer( "rohs" 				, "1" , "element checkbox" , $rohs				, 1 , "choice" , "RoHS"					, "after"	, $disable	);
+						checkbox_composer( "dangerous"		, "1" , "element checkbox" , $dangerous		, 1 , "choice" , "Dangerous"		, "after"	, $disable	);
+						checkbox_composer( "regulatory" 	, "1" , "element checkbox" , $regulatory	, 1 , "choice" , "Regulatory"		, "after"	, $disable	);
+						checkbox_composer( "tracebility"	, "1" , "element checkbox" , $tracebility	, 1 , "choice" , "Tracebility"	, "after"	, $disable	);
+						checkbox_composer( "testing" 			, "1" , "element checkbox" , $testing			, 1 , "choice" , "Testing"			, "after"	, $disable	);
+						checkbox_composer( "consumables"	, "1" , "element checkbox" , $consumables	, 1 , "choice" , "Consumables"	, "after"	, $disable	);
+						?>
+						</span> 
 
-					<br/><br/><br/><br/><br/><br/>
-					<br/><br/><br/><br/><br/>
-					
-					<label class="description" for="element_2">Expiration date </label>
-					<span>
-					<?php
-					text_input_composer( "element_2_1" , $element_2_1 , "element text" , "text" , "2" , "2" , 1 , "" , "DD"		, "after" , 1 );
-					?>
-					</span>
-					<span>
-					<?php
-					text_input_composer( "element_2_2" , $element_2_2 , "element text" , "text" , "2" , "2" , 1 , "" , "MM"		, "after" , 1 );
-					?>
-					</span>
-					<span>
-					<?php
-					text_input_composer( "element_2_3" , $element_2_3 , "element text" , "text" , "4" , "4" , 1 , "" , "YYYY"	, "after" , 1 );
-					?>
-					</span>
+						<br/><br/><br/><br/><br/><br/>
+						<br/><br/><br/><br/><br/>
+						
+						<label class="description" for="element_2">Expiration date </label>
+						<span>
+						<?php
+						text_input_composer( "element_2_1" , $element_2_1 , "element text" , "text" , "2" , "2" , 1 , "" , "DD"		, "after" , $disable );
+						?>
+						</span>
+						<span>
+						<?php
+						text_input_composer( "element_2_2" , $element_2_2 , "element text" , "text" , "2" , "2" , 1 , "" , "MM"		, "after" , $disable );
+						?>
+						</span>
+						<span>
+						<?php
+						text_input_composer( "element_2_3" , $element_2_3 , "element text" , "text" , "4" , "4" , 1 , "" , "YYYY"	, "after" , $disable );
+						?>
+						</span>
 
-					<br/><br/><br/>
-					
-					<?php
-					text_input_composer( "unit" 			, $unit 			, "element text medium" , "text" , "" , "255" , 1 , "description" , "Unit"				, "before" , 1 );
-					text_input_composer( "compliance" , $compliance , "element text medium" , "text" , "" , "255" , 1 , "description" , "Compliance"	, "before" , 1 );
-					text_input_composer( "length" 		, $length 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Length" 			, "before" , 1 );
-					text_input_composer( "width"			, $width			, "element text medium" , "text" , "" , "255" , 1 , "description" , "Width"				, "before" , 1 );
-					text_input_composer( "height" 		, $height 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Height" 			, "before" , 1 );
-					text_input_composer( "weight" 		, $weight 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Weight" 			, "before" , 1 );
-					?>
-					</li>
-				</ul>
-			</form>	
-
+						<br/><br/><br/>
+						
+						<?php
+						text_input_composer( "unit" 			, $unit 			, "element text medium" , "text" , "" , "255" , 1 , "description" , "Unit"				, "before" , $disable );
+						text_input_composer( "compliance" , $compliance , "element text medium" , "text" , "" , "255" , 1 , "description" , "Compliance"	, "before" , $disable );
+						text_input_composer( "length" 		, $length 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Length" 			, "before" , $disable );
+						text_input_composer( "width"			, $width			, "element text medium" , "text" , "" , "255" , 1 , "description" , "Width"				, "before" , $disable );
+						text_input_composer( "height" 		, $height 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Height" 			, "before" , $disable );
+						text_input_composer( "weight" 		, $weight 		, "element text medium" , "text" , "" , "255" , 1 , "description" , "Weight" 			, "before" , $disable );
+						?>
+						</li>
+					</ul>
+				</form>	
+				</div>
 			</div>
-		</div>
 
-<?php
+	<?php
 
 
 		}

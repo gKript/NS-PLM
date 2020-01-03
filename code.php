@@ -10,7 +10,7 @@
 -->
 
 <?php
-	$gk_page = "code";
+	$nspage = "code";
 	
 	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
 	define( 'NSID_PLM_SRC_PHP'	,	'src/php/');
@@ -296,17 +296,17 @@
 					println( "</tr>" );
 					println( "<tr>" );
 					println( "  <td style='text-align: right;' width='15%' >Attributes</td>" );
-					$sql = "SELECT *  FROM `codattributes` WHERE `Codice` LIKE \"%$code%\"";
+					$sql = "SELECT *  FROM `codattributes` WHERE `code` LIKE \"%$code%\"";
 					if( query_get_num_rows( $sql )  )
 						$dbc = "YES";
 					else
 						$dbc = "NO";
 					println( "  <td style='text-align: center; border:1px solid #999;' >"  . $dbc  . "</td>" );
 					if ( $dbc == "NO" )
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=create\"><span class=\"blink_text\"><b>Create</b></span></a></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=Create\"><span class=\"blink_text\"><b>Create</b></span></a></td>" );
 					else {
 						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code\"><b>Show</b></a></td>" );
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=modify\"><b>Modify</b></a></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=Edit\"><b>Edit</b></a></td>" );
 					}
 					println( "</tr>" );
 				?>

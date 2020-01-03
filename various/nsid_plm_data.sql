@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 02, 2020 alle 01:42
+-- Creato il: Gen 03, 2020 alle 15:01
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.2.18
 
@@ -104,37 +104,40 @@ INSERT INTO `catspecifica` (`ind`, `idCatSpec`, `CatSpec`, `CatSpecDesc`, `dbCat
 
 DROP TABLE IF EXISTS `codattributes`;
 CREATE TABLE IF NOT EXISTS `codattributes` (
-  `Codice` varchar(11) NOT NULL,
+  `code` varchar(11) NOT NULL,
   `bom` tinyint(1) NOT NULL,
-  `Provider` tinyint(1) NOT NULL,
-  `Origins` varchar(11) NOT NULL,
-  `Critical` tinyint(1) NOT NULL,
-  `Important` tinyint(1) NOT NULL,
-  `Testing` tinyint(1) NOT NULL,
-  `Expiration` tinyint(1) NOT NULL,
-  `Expiration_time` varchar(32) NOT NULL,
-  `RoHS` tinyint(1) NOT NULL,
-  `Dangerous` tinyint(1) NOT NULL,
-  `Regulatory` tinyint(1) NOT NULL,
-  `Warranty` varchar(32) NOT NULL,
-  `Unit` varchar(16) NOT NULL,
-  `Compliance` varchar(32) NOT NULL,
-  `Tracebility` tinyint(1) NOT NULL,
-  `Length` varchar(16) NOT NULL,
-  `Width` varchar(16) NOT NULL,
-  `Height` varchar(16) NOT NULL,
-  `Weight` varchar(16) NOT NULL,
+  `provider` tinyint(1) NOT NULL,
+  `origin` varchar(11) NOT NULL,
+  `critical` tinyint(1) NOT NULL,
+  `important` tinyint(1) NOT NULL,
+  `testing` tinyint(1) NOT NULL,
+  `expiration` tinyint(1) NOT NULL,
+  `expiration_time` varchar(32) NOT NULL,
+  `rohs` tinyint(1) NOT NULL,
+  `dangerous` tinyint(1) NOT NULL,
+  `regulatory` tinyint(1) NOT NULL,
+  `warranty` varchar(32) NOT NULL,
+  `unit` varchar(16) NOT NULL,
+  `compliance` varchar(32) NOT NULL,
+  `tracebility` tinyint(1) NOT NULL,
+  `consumables` tinyint(1) NOT NULL,
+  `length` varchar(16) NOT NULL,
+  `width` varchar(16) NOT NULL,
+  `height` varchar(16) NOT NULL,
+  `weight` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  UNIQUE KEY `Codice` (`Codice`)
+  UNIQUE KEY `Codice` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `codattributes`
 --
 
-INSERT INTO `codattributes` (`Codice`, `bom`, `Provider`, `Origins`, `Critical`, `Important`, `Testing`, `Expiration`, `Expiration_time`, `RoHS`, `Dangerous`, `Regulatory`, `Warranty`, `Unit`, `Compliance`, `Tracebility`, `Length`, `Width`, `Height`, `Weight`, `createTS`, `modifyTS`) VALUES
-('54B0000101 ', 1, 0, '0', 0, 1, 1, 0, 'NULL', 0, 0, 0, '0', 'NA', 'GPL V3', 0, '0', '0', '0', '0', '2019-12-25 00:20:55', '2020-01-01 17:27:19');
+INSERT INTO `codattributes` (`code`, `bom`, `provider`, `origin`, `critical`, `important`, `testing`, `expiration`, `expiration_time`, `rohs`, `dangerous`, `regulatory`, `warranty`, `unit`, `compliance`, `tracebility`, `consumables`, `length`, `width`, `height`, `weight`, `createTS`, `modifyTS`) VALUES
+('54B0000101', 1, 0, '0', 1, 1, 1, 0, 'NULL', 0, 0, 0, '0', 'NA', 'GPL V3', 0, 0, '0', '0', '0', '0', '2019-12-25 00:20:55', '2020-01-03 10:57:05'),
+('57C0000100', 1, 1, '1', 1, 1, 1, 1, '2020012', 1, 1, 1, '1', 'N', 'EN 62353', 1, 0, '15', '33', '22', '1.5', '2020-01-02 23:55:28', '2020-01-03 10:35:59'),
+('53E0000100', 0, 0, '0', 0, 1, 1, 1, '2020013', 0, 0, 0, '0', 'N', '', 0, 0, '', '', '', '', '2020-01-03 15:01:09', '2020-01-03 15:01:09');
 
 -- --------------------------------------------------------
 
@@ -202,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
@@ -242,7 +245,8 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (53, '3440000100', 3, '4', '4', 'Sensors wide firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF, Environment, Accellerometer)', 0, '2020-01-01 15:22:14', '2020-01-01 15:22:14'),
 (54, '3440000200', 3, '4', '4', 'Sensors small firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF)', 0, '2020-01-01 15:23:27', '2020-01-01 15:23:27'),
 (55, '4670000200', 4, '6', '7', 'TWD Slave', 'Tag Walking Device Slave', 0, '2020-01-01 15:29:45', '2020-01-01 15:29:45'),
-(57, '26C0000100', 2, '6', 'C', 'Contapersone CPX3D', 'Comptipix 3d contapersone PoE con sensori HDR', 0, '2020-01-01 23:12:50', '2020-01-01 23:12:50');
+(57, '26C0000100', 2, '6', 'C', 'Contapersone CPX3D', 'Comptipix 3d contapersone PoE con sensori HDR', 0, '2020-01-01 23:12:50', '2020-01-01 23:12:50'),
+(58, '16C0000200', 1, '6', 'C', 'Sensors Small', 'Sensors small ( FIR, TOF )', 0, '2020-01-02 01:47:58', '2020-01-02 01:47:58');
 
 -- --------------------------------------------------------
 
@@ -260,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `lista_composizione` (
   `creation` timestamp NOT NULL DEFAULT current_timestamp(),
   `modify` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `lista_composizione`
@@ -276,7 +280,10 @@ INSERT INTO `lista_composizione` (`id`, `father`, `son`, `quantity`, `revision`,
 (7, '16C0000100', '3440000100', 1, 1, '2020-01-01 20:03:48', '2020-01-01 20:03:48'),
 (9, '4670000100', '26C0000100', 1, 1, '2020-01-02 00:35:14', '2020-01-02 00:35:14'),
 (10, '4670000100', '1120000100', 1, 1, '2020-01-02 00:36:06', '2020-01-02 00:36:06'),
-(11, '4670000200', '1120000200', 1, 1, '2020-01-02 01:03:39', '2020-01-02 01:03:39');
+(11, '4670000200', '1120000200', 1, 1, '2020-01-02 01:03:39', '2020-01-02 01:03:39'),
+(12, '4670000200', '26C0000100', 1, 1, '2020-01-02 01:44:53', '2020-01-02 01:44:53'),
+(13, '4670000200', '16C0000200', 1, 1, '2020-01-02 01:48:32', '2020-01-02 01:48:32'),
+(14, '16C0000200', '3440000200', 1, 1, '2020-01-02 01:49:08', '2020-01-02 01:49:08');
 
 -- --------------------------------------------------------
 
@@ -291,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -310,7 +317,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (14, 'AttribCountDaily', '1', '2020-01-01 11:16:05'),
 (16, 'CodeCountDaily', '34', '2020-01-02 00:00:00'),
 (17, 'AttribCountDaily', '1', '2020-01-02 00:00:00'),
-(18, 'BomCountDaily', '3', '2020-01-02 00:55:21');
+(18, 'BomCountDaily', '3', '2020-01-02 00:55:21'),
+(19, 'CodeCountDaily', '35', '2020-01-03 01:13:55'),
+(20, 'AttribCountDaily', '2', '2020-01-03 01:13:55'),
+(21, 'BomCountDaily', '5', '2020-01-03 01:13:55');
 
 -- --------------------------------------------------------
 

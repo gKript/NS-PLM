@@ -11,7 +11,7 @@
 
 <?php
 
-	$gk_page = "Code_concept";
+	$nspage = "Code_concept";
 	
 	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
 	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');

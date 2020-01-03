@@ -99,7 +99,7 @@
 	
 	
 	function check_attributes_presence( $code ) {
-		$sql = "SELECT *  FROM `codattributes` WHERE `Codice` LIKE \"%$code%\" Limit 0,1;";
+		$sql = "SELECT *  FROM `codattributes` WHERE `code` LIKE \"%$code%\" Limit 0,1;";
 		return ( query_get_num_rows( $sql ));
 	}
 	
