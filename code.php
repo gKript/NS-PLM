@@ -252,7 +252,7 @@
 				<div class="clearfix">
 					<div class="box25" style="background-color:#ddd; height:160px;" >
 
-						<h2>Code details</h2><br/>
+						<h2>Code details</h2>
 						<table style="margin:1em;" width="80%">
 
 				<?php
@@ -285,17 +285,17 @@
 					</div>
 					<div class="box50" style="background-color:#ddd; height:160px;" >
 
-						<h2>Creation, modification and attributes</h2><br/>
+						<h2>Creation, modification and attributes</h2>
 						<table style="margin:1em;" width="80%">
 
 				<?php
 					println( "<tr>" );
 					println( "  <td style='text-align: right;' width='15%' >Created</td>" );
-					println( "  <td style='text-align: center; border:1px solid #999;' >"  . long_timestamp_human( $array["createTS"] ) . "</td>" );
+					println( "  <td style='text-align: center; border:1px solid #999;' >"  . timestamp_human( $array["createTS"] ) . "</td>" );
 					println( "</tr>" );
 					println( "<tr>" );
 					println( "  <td style='text-align: right;' width='15%' >Modified</td>" );
-					println( "  <td style='text-align: center; border:1px solid #999;' >"  . long_timestamp_human( $array["modifyTS"] )  . "</td>" );
+					println( "  <td style='text-align: center; border:1px solid #999;' >"  . timestamp_human( $array["modifyTS"] )  . "</td>" );
 					println( "</tr>" );
 					println( "<tr>" );
 					println( "  <td style='text-align: right;' width='15%' >Attributes</td>" );
@@ -309,13 +309,21 @@
 						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=Create\"><span class=\"blink_text\"><b>Create</b></span></a></td>" );
 					else {
 						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code&action=Show\"><b>Show</b></a></td>" );
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=Edit\"><b>Edit</b></a></td>" );
+						println( "</tr>" );
+						println( "<tr>" );
+						println( "  <td></td>" );
+						println( "  <td colspan=\"2\" style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=Edit\"><b>Edit</b></a></td>" );
 					}
 					println( "</tr>" );
 				?>
 				
 						</table>
 
+					</div>
+					<div class="box25" style="background-color:#ddd; height:160px;" >
+					<?php
+						//  small_box_provider_info( $code );
+					?>
 					</div>
 				</div>
 			</div>

@@ -25,6 +25,12 @@ $sql = "SELECT * FROM `statistics` WHERE `name` = 'CodeCountDaily' ORDER BY `sta
 
 		BOM
 
+Check environment hash
+$sql = "SELECT *  FROM `bom` WHERE `code` LIKE \'4670000200\' AND `Revisione` = 1";
+
+Insert environment hash
+$sql = "INSERT INTO `bom` (`idDistinta`, `code`, `hashid`, `Revisione`, `createTS`, `modifyTS`) VALUES (NULL, \'33333\', \'3333333333333333\', \'1\', current_timestamp(), current_timestamp())";
+
 bom check
 $sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '57C0000100' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
 

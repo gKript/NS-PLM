@@ -103,12 +103,16 @@
 
 		
 		$synop_link  = "code.php?code=$code" ;
-		$attrib_show_link = "attributes.php?code=$code&action=Show" ;
-		$attrib_edit_link = "attributes.php?code=$code&action=Edit" ;
-		if ( query_get_num_rows( "SELECT * FROM `codattributes` WHERE `code` like '$code'" ) )
+		if ( query_get_num_rows( "SELECT * FROM `codattributes` WHERE `code` like '$code'" ) ) {
 			$attrib_create_link = "";
-		else
+			$attrib_show_link   = "<li><a href=\"attributes.php?code=$code&action=Show\">Show</a></li>" ;
+			$attrib_edit_link   = "<li><a href=\attributes.php?code=$code&action=Edit\">Edit</a></li>" ;
+		}
+		else {
+			$attrib_show_link   = "" ;
+			$attrib_edit_link   = "" ;
 			$attrib_create_link = "<li><a href=\"attributes.php?code=$code&action=Create\">Create</a></li>" ;
+		}
 		
 
 		if ( ! $bl ) 
@@ -147,9 +151,10 @@
 						<li><a href="<?php 	 	 echo $synop_link; ?>">Synopsis</a></li>
 						<li><a>Attributes +</a>
 							<ul>
-								<li><a href="<?php echo $attrib_show_link ?>">Show</a></li>
+								<?php echo $attrib_show_link . "\n"; ?>
 								<?php echo $attrib_create_link . "\n"; ?>
-								<li><a href="<?php echo $attrib_edit_link ?>">Edit</a></li>
+								<?php echo $attrib_edit_link . "\n"; ?>
+
 							</ul>
 						</li>
 						<li><a href="">State</a></li>

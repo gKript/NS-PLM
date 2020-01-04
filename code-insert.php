@@ -60,7 +60,7 @@
 			if ($array) {
 				insert_blockquote( "The code creation has been succesfully completed!" , "Success" );
 				get_codetype( $array );
-				emphasis_codeemphasis_code( $code );
+				emphasis_code( $code );
 				?>
 			
 				<div class="insidecodelite">

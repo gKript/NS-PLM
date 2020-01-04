@@ -16,7 +16,7 @@
 	require_once( NSID_PLM_SRC_PHP."mysqli_utils.php" );
 	require_once( NSID_PLM_SRC_PHP."utils.php" );
 	require_once( NSID_PLM_SRC_PHP."form_elements.php" );
-	require_once( NSID_PLM_SRC_PHP."table.php" );
+//	require_once( NSID_PLM_SRC_PHP."table.php" );
 	require_once( NSID_PLM_SRC_PHP."qrcode.php" );
 
 	
@@ -41,7 +41,7 @@
 		link_css( "view.css"     , NSID_PLM_SRC_CSS );
 		
 		//CSS online
-//		link_css( "https://www.w3schools.com/w3css/4/w3.css"     , NSID_PLM_SRC_CSS );
+
 
 		//CSS locali	
 		link_js ( "view.js"      , NSID_PLM_SRC_JS  );

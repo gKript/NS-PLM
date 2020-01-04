@@ -32,13 +32,13 @@
 	}
 
 
-	function stat_BomCountDaily() {
+	function stat_BomCountDaily( $check = 0 ) {
 		$ins = 0;
 		$name = "BomCountDaily";
 		$today = today_mysql();
 		$sql = "SELECT * FROM `statistics` WHERE `name` = '$name' AND `timest` like '$today%'";
 		$res = query_get_num_rows( $sql );
-		if ( ! $res ) {
+		if ( ( ! $res ) || ( $check ) ) {
 			$bom = 0;
 			$result = query_get_result( "SELECT * FROM `elenco_codici`" );
 			$items = $result->num_rows;

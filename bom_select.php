@@ -1,6 +1,6 @@
-<!--
+ <!--
 |
-|	File: bom.php
+|	File: bom_select.php
 |
 |	Next Step ID  -  Product Lifecycle Management
 |	Danilo Zannoni
@@ -10,7 +10,7 @@
 -->
 
 <?php
-	$nspage = "bom";
+	$nspage = "bom_select";
 	
 	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
 	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
@@ -41,38 +41,30 @@
 
 <?php
 
-	$code			= get_check( 'code'							);
-	$level		= get_check( 'level'		, 1			);
-	$rev			= get_check( 'rev'			, 1			);
-	$newcode	= get_check( 'newcode'	, null	);
-	$quantity	= get_check( 'quantity'	, null	);
-	$action		= get_check( 'action'		, null	);
+	$code			= get_check( 'code' );
 
-	if ( $action == "Add to this bom" )
-		add_code_in_bom( $code , $newcode , $quantity , $rev );
-		
 	if ( ! $code ) 
 		insert_blockquote( "This page needs a code! " , "Error" , 1 );
 	
 	emphasis_code( $code );
+
 ?>
 
 	<div class="insidecodelite">
 
 <?php
-	
+
 	$array = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" );
 	synopsis( $code , $array["abbreviazione"] , $array["descrizione"]  );
 
-?>
-		
+	echo "<div class=\"insidecodelite\">\n";
 
-<?php
-	create_bom_table( $code , $level );
+
 
 ?>
 
 
+	</div>
 	</div>
 
 
@@ -81,7 +73,3 @@
 	include NSID_PLM_SRC_PHP . 'footer.php';
 	$mysqli->close();
 ?>
-
-
-
-

@@ -1,16 +1,24 @@
 <?php
 
 	require_once NSID_PLM_SRC_PHP . 'bom_funtions.php';
+	require_once NSID_PLM_SRC_PHP . "table.php";
 
 	function synopsis( $code , $sd , $ld , $image = "" ) {
+		
+		global $nspage;
+		
+		$lcode = $code;
+		if ( $nspage != "code" ) 
+			$lcode = return_code_link( $code );
+		
 		println( "<div class=\"codelite\">");
 		println ( "<h2>Code	 synopsis</h2><br/>" );
-		
+				
 		println( "<div class=\"box50\" style=\"height:150px;\">");
 		println( "<table class=\"codelite_img\" width=\"100%\" >" );
 		println( "	<tr>" );
 		println ( "		<td  style='border:1px solid #999;'width=\"20%\">Code:</td>" );
-		println ( "		<td style='border:1px solid #999;'><b>$code</b></td>" );
+		println ( "		<td style='border:1px solid #999;'><b>$lcode</b></td>" );
 		println( "	</tr>" );
 		println( "	<tr>" );
 		println ( "		<td  style='border:1px solid #999;' >Short descr:</td>" );
@@ -81,11 +89,6 @@
 		println( "<br/></div>" );
 	}
 
-
-	function check_bom_presence( $father ) {
-		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$father' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
-		return query_get_num_rows( $sql ); 
-	}
 
 
 	function code_link( $code , $link = "code.php?code" ) {
@@ -187,6 +190,44 @@
 		return $link;		
 	}
 
+
+
+
+	function get_codetype( $array ) {
+		
+		global $codetype;
+		
+		$codetype["T"] = $array["T"];
+		$codetype["CG"] = $array["CG"];
+		$codetype["CS"] = $array["CS"];
+		$res = query_code_category( 'T' , $codetype["T"] );
+		$codetype["Tname"] = $res["Tip"];
+		$res = query_code_category( 'CG' , $codetype["CG"] );
+		$codetype["CGname"] = $res["CatGen"];
+		$codetype["CGdescr"] = $res["CatGenDescr"];
+		$res = query_code_category( 'CS' , $codetype["CS"] );
+		$codetype["CSname"] = $res["CatSpec"];
+		$codetype["CSdescr"] = $res["CatSpecDesc"];
+	}
+
+
+
+	function get_codetype_from_tgs( $T , $G , $S ) {
+		
+		global $codetype;
+		
+		$codetype["T"] = $T;
+		$codetype["CG"] = $G;
+		$codetype["CS"] = $S;
+		$res = query_code_category( 'T' , $codetype["T"] );
+		$codetype["Tname"] = $res["Tip"];
+		$res = query_code_category( 'CG' , $codetype["CG"] );
+		$codetype["CGname"] = $res["CatGen"];
+		$codetype["CGdescr"] = $res["CatGenDescr"];
+		$res = query_code_category( 'CS' , $codetype["CS"] );
+		$codetype["CSname"] = $res["CatSpec"];
+		$codetype["CSdescr"] = $res["CatSpecDesc"];
+	}
 
 
 ?>

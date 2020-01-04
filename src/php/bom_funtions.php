@@ -1,5 +1,7 @@
 <?php
 
+	require_once NSID_PLM_SRC_PHP . 'attributes_function.php';
+
 	function create_bom_table( $code , $maxlevel ) {
 		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC";
 		$items = 0;
@@ -9,14 +11,27 @@
 		$code_detail = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" );
 		$level = 0;
 		$origin = $code;
+		$father = "<a href=\"bom.php?code=" . get_father( $code , 1 ) . "&level=" . (string)($maxlevel + 1) . "\" ><b>" . get_father( $code , 1 ) . "</b></a>";
 		
 		println( "<div class=\"codelite\">" );
-		println( "<h2>Bill of Materials</h2><br/>" );
-		$myTabella = new classTabella;
+		println( "<h2>Bill of Materials</h2>" );
 
+		echo "<span style=\"padding-right: 20px; float:right; \">";
+		insert_link( "bom.php?code=$code&level=16" , "Expand all" );
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+		insert_link( "bom.php?code=$code&level=1" , "Collaps all" );
+		echo "</span><br/><br/>";
+		
+		$myTabella = new classTabella;
 		$myTabella->setTabella();
 		$myTabella->stdAttributiTabella(array("class"=>"codellite_img" , "width"=>"100%" , "align"=>"center" , "style"=>"padding-left: 10px; padding-right: 10px;" ));
 		
+		if ( get_father( $code , 1 ) ) {
+			$myTabella->addValoreRiga(array( "" , "$father" , "UP one level" ));
+			$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold; background-color:#eee;" ) , 3 , array(array( "style"=>"background-color:#eee;" ,"align"=>"center" , "width"=>"2%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left" , "width"=>"30px" ) ) );
+			$myTabella->addValoreRiga(array( "&nbsp;" ));
+			$myTabella->aggiungiRiga(array( "style"=>"background-color:#eee;" ) , 1 , array(array( "align"=>"center" ) ) );
+		}
 		$myTabella->addValoreRiga(array( "" , "Code" , "Short description" , "Long description" , "Quantity" , "Unit" , "Attributes" ));
 		$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ) , 7 , array(array(  "align"=>"center" , "width"=>"2%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "width"=>"30px", "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "width"=>"50px", "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%"  )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"80px" ) ) );
 		$link = return_code_link( $code );
@@ -33,10 +48,6 @@
 		$level = 1;
 		if ( $items )
 			get_next_level_bom( $origin , $code , $level , $myTabella , $maxlevel );
-//		$l = "<span class=\"blink_text\"><a href=\"bom_insert.php&father=$code\" >ADD A NEW CODE TO THIS BOM</a></span>";
-		
-//		$myTabella->addValoreRiga( array( "" , $l ));
-//		$myTabella->aggiungiRiga( null , 2 , array( array(  "style"=>"background-color:#eee;" , "align"=>"center" , "width"=>"1%") , array("colspan"=>"5" , "style"=>"border:1px solid #999; font-weight:bold; background-color:#faa;" , "align"=>"center"  ) ) );
 
 		$code_input = "<input id=\"newcode\" name=\"newcode\" type=\"text\" size=\"10\" maxlength=\"10\" />";
 		$quantity_input = "<input id=\"quantity\" name=\"quantity\" type=\"numbers\" size=\"5\" maxlength=\"5\" />";
@@ -51,11 +62,6 @@
 		add_hidden( "code" , $code );
 		
 		println( "<br/>" );
-		echo "<span style=\"padding-left: 33px;\">";
-		insert_link( "bom.php?code=$code&level=16" , "Expand all" );
-		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-		insert_link( "bom.php?code=$code&level=1" , "Collaps all" );
-		echo "</span>";
 		println( "<br/></div>" );
 	}
 
@@ -102,12 +108,6 @@
 	}
 	
 	
-	function check_attributes_presence( $code ) {
-		$sql = "SELECT *  FROM `codattributes` WHERE `code` LIKE \"%$code%\" Limit 0,1;";
-		return ( query_get_num_rows( $sql ));
-	}
-	
-	
 	function get_level_bg_color( $level ) {
 		$result = "background-color:#";
 		if ( $level == 0 )			 $result .= "fff";
@@ -145,13 +145,32 @@
 	}
 
 
-	function get_father( $son ) {
+	function get_father( $son , $clean = 0 ) {
 		$sql = "SELECT *  FROM `lista_composizione` WHERE `son` LIKE '$son' limit 0,1";
 		$bom = query_single_line( $sql );
-		if ( ! $bom ) 
+		if ( ! $bom )
 			return "";
-		$link = return_code_link( $bom["father"] );
+		if ( $clean ) 
+			$link = $bom["father"];
+		else
+			$link = return_code_link( $bom["father"] );
 		return $link;
+	}
+
+
+	function create_bom_environment( $father , $rev ) {
+		$sql = "SELECT *  FROM `bom` WHERE `code` LIKE '$father' AND `Revisione` = $rev";
+		$r = query_get_result( $sql );
+		if ( $r ) {
+			$row = $result->fetch_array();
+			return $row["hashid"];
+		}
+		unset( $r );
+		$hfather = md5( $father . " " . ext_today_human() );
+		$sql  = "INSERT INTO `bom` (`idDistinta`, `code`, `hashid`, `Revisione`, `createTS`, `modifyTS`) ";
+		$sql .= "VALUES (NULL, '$father', '$hfather', '$rev', current_timestamp(), current_timestamp())";
+		query_insert_single_line( $sql );
+		return $hfather;
 	}
 
 
@@ -162,13 +181,15 @@
 			insert_blockquote( "$code: Code NOT found in the database.<br/><br/>Code NOT added." , "Caution" );
 			return 0;
 		}
+		$hfather = create_bom_environment( $father , $rev );
 		$sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE '$father' AND `son` LIKE '$code' AND `revision` = $rev";
 		$check = query_get_num_rows( $sql );
 		if ( $check ) {
 			insert_blockquote( "Code already present in this B.O.M. with Revison $rev.<br/><br/>Code NOT added." , "Caution" );
 			return 0;
 		}
-		$sql = "INSERT INTO `lista_composizione` (`id`, `father`, `son`, `quantity`, `revision`, `creation`, `modify`) VALUES (NULL, '$father', '$code', '$quantity', '$rev', current_timestamp(), current_timestamp())";
+		$sql  = "INSERT INTO `lista_composizione` (`id`, `hashid`, `father`, `son`, `quantity`, `revision`, `creation`, `modify`) ";
+		$sql .= "VALUES (NULL, '$hfather', '$father', '$code', '$quantity', '$rev', current_timestamp(), current_timestamp())";
 		query_insert_single_line( $sql );
 		$sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE '$father' AND `son` LIKE '$code' AND `revision` = $rev";
 		$check = query_get_num_rows( $sql );
@@ -183,40 +204,14 @@
 	}
 
 
-	function get_codetype( $array ) {
-		
-		global $codetype;
-		
-		$codetype["T"] = $array["T"];
-		$codetype["CG"] = $array["CG"];
-		$codetype["CS"] = $array["CS"];
-		$res = query_code_category( 'T' , $codetype["T"] );
-		$codetype["Tname"] = $res["Tip"];
-		$res = query_code_category( 'CG' , $codetype["CG"] );
-		$codetype["CGname"] = $res["CatGen"];
-		$codetype["CGdescr"] = $res["CatGenDescr"];
-		$res = query_code_category( 'CS' , $codetype["CS"] );
-		$codetype["CSname"] = $res["CatSpec"];
-		$codetype["CSdescr"] = $res["CatSpecDesc"];
+	function check_bom_presence( $father ) {
+		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$father' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
+		return query_get_num_rows( $sql );
 	}
 
-
-
-	function get_codetype_from_tgs( $T , $G , $S ) {
-		
-		global $codetype;
-		
-		$codetype["T"] = $T;
-		$codetype["CG"] = $G;
-		$codetype["CS"] = $S;
-		$res = query_code_category( 'T' , $codetype["T"] );
-		$codetype["Tname"] = $res["Tip"];
-		$res = query_code_category( 'CG' , $codetype["CG"] );
-		$codetype["CGname"] = $res["CatGen"];
-		$codetype["CGdescr"] = $res["CatGenDescr"];
-		$res = query_code_category( 'CS' , $codetype["CS"] );
-		$codetype["CSname"] = $res["CatSpec"];
-		$codetype["CSdescr"] = $res["CatSpecDesc"];
+	function check_upper_bom_presence( $code ) {
+		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE \"%$code%\" Limit 0,1;";
+		return ( query_get_num_rows( $sql ));
 	}
 
 
