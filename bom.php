@@ -46,11 +46,28 @@
 	$rev			= get_check( 'rev'			, 1			);
 	$newcode	= get_check( 'newcode'	, null	);
 	$quantity	= get_check( 'quantity'	, null	);
+	$delete		= get_check( 'delete'		, ""		);
 	$action		= get_check( 'action'		, null	);
+	$confirm	= get_check( 'confirm'	, ""		);
+	
 
 	if ( $action == "Add to this bom" )
 		add_code_in_bom( $code , $newcode , $quantity , $rev );
-		
+	
+	
+	if ( $action == "Remove" ) {
+		if ( $confirm == "YES" ) {
+			$sql = "DELETE FROM `lista_composizione` WHERE `son` LIKE '$delete' and `father` LIKE '$code'";
+			query_sql_run( $sql );
+			insert_blockquote( "Code <b>$delete</b> succesfully removed from the BOM [$code]" , "Success" );
+		}
+		else {
+			$syes = "<a class=\"codelite\" href=\"bom.php?code=$code&delete=$delete&action=Remove&confirm=YES\"><b>YES</b></a>";
+			$sno = "<a class=\"codelite\" href=\"bom.php?code=$code\"><b>NO</b></a>";
+			insert_blockquote( "Are you sure to <b>REMOVE</b> code <b>$delete</b> from the BOM [$code] ?<br/><br/><br/>$syes&nbsp;&nbsp;&nbsp;&nbsp;$sno" , "Are you sure?" );
+		}
+	}
+	
 	if ( ! $code ) 
 		insert_blockquote( "This page needs a code! " , "Error" , 1 );
 	

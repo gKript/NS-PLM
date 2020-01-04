@@ -57,7 +57,7 @@
 	$element_2_1	= get_check( 'element_2_1'	, "" 	);		//giorno
 	$element_2_2	= get_check( 'element_2_2'	, "" 	);		//mese
 	$element_2_3	= get_check( 'element_2_3'	, "" 	);		//anno
-	$unit					= get_check( 'unit'					, "" 	);
+	$unit					= get_check( 'unit'					, "N"	);
 	$compliance		= get_check( 'compliance'		, "" 	);
 	$length				= get_check( 'length'				, "" 	);
 	$width				= get_check( 'width'				, "" 	);

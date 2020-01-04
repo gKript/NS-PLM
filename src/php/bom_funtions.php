@@ -14,8 +14,10 @@
 		$father = "<a href=\"bom.php?code=" . get_father( $code , 1 ) . "&level=" . (string)($maxlevel + 1) . "\" ><b>" . get_father( $code , 1 ) . "</b></a>";
 		
 		println( "<div class=\"codelite\">" );
-		println( "<h2>Bill of Materials</h2>" );
-
+		println( "<h2>Bill of Materials</h2><br/>" );
+		$fhash = get_hashid_from_bom( $code );
+		println( "<small>BOM Hash ID: [ $fhash ]</small>" );
+	
 		echo "<span style=\"padding-right: 20px; float:right; \">";
 		insert_link( "bom.php?code=$code&level=16" , "Expand all" );
 		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -32,22 +34,23 @@
 			$myTabella->addValoreRiga(array( "&nbsp;" ));
 			$myTabella->aggiungiRiga(array( "style"=>"background-color:#eee;" ) , 1 , array(array( "align"=>"center" ) ) );
 		}
-		$myTabella->addValoreRiga(array( "" , "Code" , "Short description" , "Long description" , "Quantity" , "Unit" , "Attributes" ));
-		$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ) , 7 , array(array(  "align"=>"center" , "width"=>"2%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "width"=>"30px", "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "width"=>"50px", "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%"  )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"80px" ) ) );
+		
+		$myTabella->addValoreRiga(array( "" , "Code" , "Short description" , "Long description" , "Quantity" , "Unit" , "Actions" ));
+		$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ) , 7 , array(array(  "align"=>"center" , "width"=>"2%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "width"=>"15%", "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "width"=>"60%", "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%"  )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array( "colspan"=> "2" , "style"=>"border:1px solid #999; " , "align"=>"center" ) ) );
 		$link = return_code_link( $code );
-		$atttext = "<a href=\"attributes.php?code=$code&action=create\"><b>Create</b></a>";
+		$atttext = "<a href=\"attributes.php?code=$code&action=create\"><b>Att New</b></a>";
 		$chstyle = "border:1px solid #999;  background-color:#e99;";
 		$uexist = "-";
 		if ( check_attributes_presence( $code ) ) {
-			$atttext = "<a href=\"attributes.php?code=$code\"><b>Show</b></a>";
+			$atttext = "<a href=\"attributes.php?code=$code\"><b>Att Show</b></a>";
 			$chstyle = "border:1px solid #999;  background-color:#9e9;";
 			$uexist = "+";
 		}
 		$myTabella->addValoreRiga( array( "F" , $link , $code_detail["abbreviazione"] , $code_detail["descrizione"] , "-" , "-" , $atttext ));
-		$myTabella->aggiungiRiga( array("style"=>"background-color:#fff;") , 7 , array(array(  "style"=>"background-color:#eee;" , "align"=>"center") , array(  "style"=>"border:1px solid #999; font-weight:bold; " , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>$chstyle , "align"=>"center") ) );
+		$myTabella->aggiungiRiga( array("style"=>"background-color:#fff;") , 7 , array(array(  "style"=>"background-color:#eee;" , "align"=>"center") , array(  "style"=>"border:1px solid #999; font-weight:bold; " , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array( "colspan"=> "2" , "style"=>$chstyle , "align"=>"center") ) );
 		$level = 1;
 		if ( $items )
-			get_next_level_bom( $origin , $code , $level , $myTabella , $maxlevel );
+			get_next_level_bom( $origin , $code , $level , $myTabella , $fhash , $maxlevel );
 
 		$code_input = "<input id=\"newcode\" name=\"newcode\" type=\"text\" size=\"10\" maxlength=\"10\" />";
 		$quantity_input = "<input id=\"quantity\" name=\"quantity\" type=\"numbers\" size=\"5\" maxlength=\"5\" />";
@@ -66,7 +69,7 @@
 	}
 
 
-	function get_next_level_bom( $origin , $code , $curlevel , &$table , $maxlevel = 1 ) {
+	function get_next_level_bom( $origin , $code , $curlevel , &$table , $hash , $maxlevel = 1 ) {
 		if ( ( $maxlevel >= 1 ) && ( $curlevel <= $maxlevel ) ) {
 			$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC";
 			$result = query_get_result( $sql );
@@ -83,9 +86,9 @@
 					$nlevel = $level + 1;
 					$down = 1;
 					if ( $level < $maxlevel ) 
-						$level_link = "<a href=\"bom.php?code=$origin&level=$level\" ><b>-</b></a>";
+						$level_link = "<a href=\"bom.php?code=$origin&level=$level\" ><b>-</b></a> <a href=\"bom.php?code=$son\" ><b>B</b></a>";
 					else
-						$level_link = "<a href=\"bom.php?code=$origin&level=$nlevel\" ><b>+</b></a>";
+						$level_link = "<a href=\"bom.php?code=$origin&level=$nlevel\" ><b>+</b></a> <a href=\"bom.php?code=$son\" ><b>B</b></a>";
 				}
 				else {
 					$level_link = "";
@@ -99,10 +102,21 @@
 					$chstyle = "border:1px solid #999;  background-color:#9e9;";
 					$uexist = "+";
 				}
-			$table->addValoreRiga( array( $level_link , $link , $code_detail["abbreviazione"] , $code_detail["descrizione"] , $row["quantity"] , $uexist , $atttext ));
-			$table->aggiungiRiga( array("style"=>"$bglevel $fglevel") , 7 , array( array(  "style"=>"background-color:#eee;" , "align"=>"center" , "width"=>"1%") , array(  "style"=>"border:1px solid #999; font-weight:bold; background-color:#ddd;" , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>$chstyle , "align"=>"center") ) );
-			if ( $down )
-				get_next_level_bom( $origin , $son , $nlevel , $table , $maxlevel );
+
+				if ( check_in_bom_presence( $son , $hash ) ) {
+					$remove_link = "<a href=\"bom.php?code=$code&delete=$son&action=Remove\"><b>Remove</b></a>";
+					$remstyle = "border:1px solid #999;  background-color:#e99;";
+				}
+				else {
+					$remove_link = "";
+					$remstyle = "background-color:#eee;";
+				}
+					
+				$table->addValoreRiga( array( $level_link , $link , $code_detail["abbreviazione"] , $code_detail["descrizione"] , $row["quantity"] , $uexist , $atttext , $remove_link ));
+				$table->aggiungiRiga( array("style"=>"$bglevel $fglevel") , 8 , array( array(  "style"=>"background-color:#eee;" , "align"=>"center" , "width"=>"2%") , array(  "style"=>"border:1px solid #999; font-weight:bold; background-color:#ddd;" , "align"=>"left" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left" , "width"=>"15%" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"left" , "width"=>"60%" ) , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>$chstyle , "align"=>"center"  , "width"=>"80px" )  ,  array("style"=>$remstyle , "align"=>"center"  , "width"=>"80px") ) );
+				if ( $down ) {
+					get_next_level_bom( $origin , $son , $nlevel , $table , $hash , $maxlevel );
+				}
 			}
 		}
 	}
@@ -162,7 +176,7 @@
 		$sql = "SELECT *  FROM `bom` WHERE `code` LIKE '$father' AND `Revisione` = $rev";
 		$r = query_get_result( $sql );
 		if ( $r ) {
-			$row = $result->fetch_array();
+			$row = $r->fetch_array();
 			return $row["hashid"];
 		}
 		unset( $r );
@@ -203,15 +217,26 @@
 		}
 	}
 
-
-	function check_bom_presence( $father ) {
-		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$father' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
+	function check_bom_presence( $code ) {
+		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
 		return query_get_num_rows( $sql );
 	}
+
+
+	function get_hashid_from_bom( $father ) {
+		$sql = "SELECT *  FROM `bom` WHERE `code` LIKE '$father'";
+		return query_get_a_field( $sql , "hashid" );
+	}
+
 
 	function check_upper_bom_presence( $code ) {
 		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE \"%$code%\" Limit 0,1;";
 		return ( query_get_num_rows( $sql ));
+	}
+
+	function check_in_bom_presence( $code , $hash ) {
+		$sql = "SELECT *  FROM `lista_composizione` WHERE `son` LIKE '$code' and `hashid` LIKE '$hash' ORDER BY `creation` DESC";
+		return query_get_num_rows( $sql );
 	}
 
 

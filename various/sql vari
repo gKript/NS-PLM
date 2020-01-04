@@ -41,6 +41,7 @@ $sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE \'57C0000100\' A
 Add in a bom
 $sql = "INSERT INTO `lista_composizione` (`id`, `father`, `son`, `quantity`, `revision`, `creation`, `modify`) VALUES (NULL, \'222\', \'111\', \'1\', \'1\', current_timestamp(), current_timestamp())";
 
-
+Elimina da una bom
+$sql = "DELETE FROM `lista_composizione` WHERE `lista_composizione`.`id` = 33";
 
 

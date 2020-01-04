@@ -37,6 +37,8 @@
 			$border = "border-top:10px solid #be0000; border-bottom:10px solid #be0000; background-color:#f99;";
 		else if ( $type == "Success" )
 			$border = "border-top:10px solid #8f8; border-bottom:10px solid #8f8; background-color:#dfd;";
+		else if ( $type == "Are you sure?" )
+			$border = "border-top:10px solid #f88; border-bottom:10px solid #f88; background-color:#fdd;";
 		else
 			$border = "border:1px solid #be0000; background-color:#eee;";
 
