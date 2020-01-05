@@ -118,8 +118,7 @@
 					</ul>
 					<input type="hidden" name="code" value="<?php echo $ncode; ?>" />
 				</form>
-				</div>
-			
+			</div>
 		</div>
 <?php
 	}
@@ -320,6 +319,7 @@
 						</table>
 
 					</div>
+
 					<div class="box25" style="background-color:#ddd; height:160px;" >
 					<?php
 						//  small_box_provider_info( $code );
@@ -376,8 +376,8 @@
 	<?php
 	}
 	else {
-		echo "<div class=\"insidecodelite\">\n";
 		if ( $code == '0' ) {
+			echo "<div class=\"insidecodelite\">\n";
 			if ( $new ) {
 			echo "<h2 style=\"padding-left: 12px;\">Code Creation - spep 1</h2><br/>\n";
 			insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li><b>Choose the context</b></li><li>Enter all the others information</li></o	l>" , "Blockquote" );
@@ -424,8 +424,8 @@
 				button( "submit" , "action" , "Create" , 0 , "codelite" );
 				close_form();
 			}
+			echo "</div>\n";
 		}
-		echo "</div>\n";
 	}
 	
 	

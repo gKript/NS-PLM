@@ -47,13 +47,13 @@
 					</ol>
 					This is an example code :<br/><br/> 
 					<div class="clearfix">
-						<div class="box" style="background-color:#eee">
+						<div class="box33" style="background-color:#eee">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "code-context.png\" />" ); ?>
 						</div>
-						<div class="box" style="background-color:#ddd">
+						<div class="box33" style="background-color:#ddd">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "code-identifier.png\" />" ); ?>
 						</div>
-						<div class="box" style="background-color:#ccc">
+						<div class="box33" style="background-color:#ccc">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "code-revision.png\" />" ); ?>					
 						</div>
 					</div>
@@ -75,24 +75,24 @@
 					NS-PLM is to configure with your preferred categories options. After that you can start to codify everything you want or you need. Not only physical items but documentations or procedures too.
 					This is the meaning of the example code context with <a href="rules.php" >the current configuration</a>:<br/><br/> 
 					<div class="clearfix">
-						<div class="box" style="background-color:#eee">
+						<div class="box33" style="background-color:#eee">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "context-typology.png\" />" ); ?>
 						</div>
-						<div class="box" style="background-color:#ddd">
+						<div class="box33" style="background-color:#ddd">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "context-generic.png\" />" ); ?>
 						</div>
-						<div class="box" style="background-color:#ccc">
+						<div class="box33" style="background-color:#ccc">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "context-specific.png\" />" ); ?>					
 						</div>
 					</div>
 					<div class="clearfix">
-						<div class="box" style="background-color:#eee; height:70px; ">
+						<div class="box33" style="background-color:#eee; height:70px; ">
 							<h4 style="text-align: center;">5 - Project under development</h4>
 						</div>
-						<div class="box" style="background-color:#ddd; height:70px; ">
+						<div class="box33" style="background-color:#ddd; height:70px; ">
 							<h4 style="text-align: center;vertical-align: middle;">3 - Software</h4>
 						</div>
-						<div class="box" style="background-color:#ccc; height:70px; ">
+						<div class="box33" style="background-color:#ccc; height:70px; ">
 							<h4 style="text-align: center;">E - Management</h4>
 						</div>
 					</div>
@@ -107,13 +107,13 @@
 					The identifier part of a code is an auto-incremental counter, not choosable by the user, the give an unique id to the code.
 					This part of the code is a hexadecimal number by 5 digits and it cannot be defined '00000'.<br/><br/> 
 					<div class="clearfix">
-						<div class="box" style="background-color:#eee">
+						<div class="box33" style="background-color:#eee">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "identifier-notallowed.png\" />" ); ?>
 						</div>
-						<div class="box" style="background-color:#ddd">
+						<div class="box33" style="background-color:#ddd">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "identifier-minimum.png\" />" ); ?>
 						</div>
-						<div class="box" style="background-color:#ccc">
+						<div class="box33" style="background-color:#ccc">
 							<?php println ( "<img class=\"codelite_img\" src=\"" . NSID_PLM_SRC_IMG . "identifier-maximum.png\" />" ); ?>					
 						</div>
 					</div>

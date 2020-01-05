@@ -26,7 +26,7 @@
 		
 		$myTabella = new classTabella;
 		$myTabella->setTabella();
-		$myTabella->stdAttributiTabella(array("class"=>"codellite_img" , "width"=>"100%" , "align"=>"center" , "style"=>"padding-left: 10px; padding-right: 10px;" ));
+		$myTabella->stdAttributiTabella(array("width"=>"100%" , "align"=>"center" , "style"=>"padding: 10px 10px 10px 10px ;" ));
 		
 		if ( get_father( $code , 1 ) ) {
 			$myTabella->addValoreRiga(array( "" , "$father" , "UP one level" ));
@@ -150,7 +150,7 @@
 		else if ( $level == 6 )  $result .= "fff";
 		else if ( $level == 5 )  $result .= "fff";
 		else if ( $level == 4 )  $result .= "fff";
-		else if ( $level == 3 )  $result .= "000";
+		else if ( $level == 3 )  $result .= "fff";
 		else if ( $level == 2 )  $result .= "000";
 		else if ( $level == 1 )  $result .= "000";
 		else if ( $level == 0 )  $result .= "000";
@@ -234,10 +234,21 @@
 		return ( query_get_num_rows( $sql ));
 	}
 
-	function check_in_bom_presence( $code , $hash ) {
+	function check_in_bom_presence( $code , $hash = "%" ) {
 		$sql = "SELECT *  FROM `lista_composizione` WHERE `son` LIKE '$code' and `hashid` LIKE '$hash' ORDER BY `creation` DESC";
 		return query_get_num_rows( $sql );
 	}
+
+	function return_bom_link( $code , $link = "bom.php?code" ) {
+		return '<a href="' . $link . "=" . $code . '">' . $code . "</a>";
+	}
+
+	function return_bom_select_link( $code , $link = "where_used.php?code" ) {
+		return "<a href=\"$link=$code\">Where used</a>";
+	}
+
+
+
 
 
 ?>

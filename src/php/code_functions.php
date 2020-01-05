@@ -12,77 +12,86 @@
 			$lcode = return_code_link( $code );
 		
 		println( "<div class=\"codelite\">");
-		println ( "<h2>Code	 synopsis</h2><br/>" );
+		println( "	<h2>Code	 synopsis</h2><br/>" );
 				
-		println( "<div class=\"box50\" style=\"height:150px;\">");
-		println( "<table class=\"codelite_img\" width=\"100%\" >" );
-		println( "	<tr>" );
-		println ( "		<td  style='border:1px solid #999;'width=\"20%\">Code:</td>" );
-		println ( "		<td style='border:1px solid #999;'><b>$lcode</b></td>" );
-		println( "	</tr>" );
-		println( "	<tr>" );
-		println ( "		<td  style='border:1px solid #999;' >Short descr:</td>" );
-		println ( 		"<td style='border:1px solid #999;'>$sd</td>" );
-		println( "	</tr>" );
-		println( "	<tr>" );
-		println ( "		<td  style='border:1px solid #999;  height:70px; text-align: justify; text-justify: inter-word;'>Long descr:</td>" );
-		println ( 		"<td style='border:1px solid #999; text-align: justify; text-justify: inter-word;'>$ld</td>" );
-		println( "	</tr>" );
-		println( "</table>" );
-		println ( "</div>" );
+		println( "	<div class=\"box50\" style=\"height:150px;\">");
+		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
+		println( "			<tr>" );
+		println( "				<td style=\"border:1px solid #999;\" width=\"20%\" >Code:</td>" );
+		println( "				<td style=\"border:1px solid #999;\" width=\"80%\"><b>$lcode</b></td>" );
+		println( "			</tr>" );
+		println( "			<tr>" );
+		println( "				<td  style='border:1px solid #999;' >Short descr:</td>" );
+		println( "				<td style='border:1px solid #999;'>$sd</td>" );
+		println( "			</tr>" );
+		println( "			<tr>" );
+		println( "				<td  style='border:1px solid #999;  height:70px; text-align: justify; text-justify: inter-word;'>Long descr:</td>" );
+		println( "				<td style='border:1px solid #999; text-align: justify; text-justify: inter-word;'>$ld</td>" );
+		println( "			</tr>" );
+		println( "		</table>" );
+		println( "	</div>" );
 		
-		println( "<div class=\"box25\" style=\"height:150px;\">");
-		println( "<table class=\"codelite_img\" width=\"100%\" >" );
-		println( "	<tr>" );
-		println ( "		<td  style='border:1px solid #999;'width=\"40%\">Attachment:</td>" );
-		println ( "		<td style='border:1px solid #999;'>&nbsp;</td>" );
-		println( "	</tr>" );
-		println( "	<tr>" );
-		println ( "		<td  style='border:1px solid #999;'width=\"40%\">Documentation</td>" );
-		println ( 		"<td style='border:1px solid #999;'>&nbsp;</td>" );
-		println( "	</tr>" );
-		println( "	<tr>" );
-		println ( "		<td  style='border:1px solid #999;' width=\"40%\">Provider:</td>" );
-		println ( 		"<td style='border:1px solid #999;'>&nbsp;</td>" );
-		println( "	</tr>" );
-		println( "	<tr>" );
+		println( "	<div class=\"box25\" style=\"height:150px;\">");
+		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
+		println( "			<tr>" );
+		println( "				<td  style='border:1px solid #999;'width=\"40%\">Attachment:</td>" );
+		println( "				<td style='border:1px solid #999;'>&nbsp;</td>" );
+		println( "			</tr>" );
+		println( "			<tr>" );
+		println( "				<td  style='border:1px solid #999;'width=\"40%\">Documentation</td>" );
+		println( "				<td style='border:1px solid #999;'>&nbsp;</td>" );
+		println( "			</tr>" );
+		println( "			<tr>" );
+		println( "				<td  style='border:1px solid #999;' width=\"40%\">Provider:</td>" );
+		println( "				<td style='border:1px solid #999;'>&nbsp;</td>" );
+		println( "			</tr>" );
+		println( "			<tr>" );
 		
-		$ori = get_father( $code );
+		$ori = return_bom_select_link( $code );
 		
-		println ( "		<td  style='border:1px solid #999;' width=\"40%\">Origin:</td>" );
-		println ( 		"<td style='border:1px solid #999;text-align:center;'>$ori</td>" );
-		println( "	</tr>" );
-		println( "	<tr>" );
-		println ( "		<td  style='border:1px solid #999; ' width=\"40%\">Link:</td>" );
-		println ( 		"<td style='border:1px solid #999;'>&nbsp;</td>" );
-		println( "	</tr>" );
-		println( "</table>" );
+		println( "				<td  style='border:1px solid #999;' width=\"40%\">Origin:</td>" );
+		if ( check_in_bom_presence( $code ) )
+			println( "				<td style='border:1px solid #999;text-align:center; background-color:#e99;'>$ori</td>" );
+		else
+			println( "				<td style='border:1px solid #999;text-align:center;'>NO</td>" );
+		println( "			</tr>" );
+		println( "			<tr>" );
+		println( "				<td  style='border:1px solid #999; ' width=\"40%\">Link:</td>" );
+		println( "				<td style='border:1px solid #999;'>&nbsp;</td>" );
+		println( "			</tr>" );
+		println( "		</table>" );
 		
 		$load = array("code"=>$code, "Short description"=>$sd, "Long description"=>$ld);
 		$enc = json_encode($load);
 		$qr =  new QRCode();
 		$qrs = $qr->getQrCodeUrl( $enc , 150 , 150 , "UTF-8" );
 		
-		println ( "</div>" );
-		println( "<div class=\"box25\" style=\"height:150px;\">");
-		println ( "<img class=\"codelite_img\" src=\"$qrs\" style= \"border:1px solid #999;\" />" );
-		println ( "</div>" );
-		println ( "</div>" );
+		println( "	</div>" );
+		println( "	<div class=\"box25\" style=\"height:150px;\">");
+		println( "		<img class=\"codelite_img\" src=\"$qrs\" />" );
+		println( "	</div>" );
+		println( "</div>" );
 	}
 
 
 	function create_top_n_table( $top ) {
 		println( "<div class=\"codelite\">" );
-		println( "<h2>Top ten context advisor</h2><br/><br/>" );
+		println( "<h2>Top ten context advisor</h2><br/>" );
 		$myTabella = new classTabella;
 		$myTabella->setTabella();
-		$myTabella->stdAttributiTabella(array("class"=>"codellite_img" , "width"=>"95%" , "align"=>"center"));
+		$myTabella->stdAttributiTabella(array( "width"=>"100%" , "align"=>"center" , "style"=>"padding: 10px 10px 10px 10px ;" ));
 		$myTabella->addValoreRiga(array("Contexts" , "Occurrences" , "Percentages" , "Charts" ));
 		$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ),4,array(array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"100px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px") , array("style"=>"border:1px solid #999; ") ));
 		$items = count( $top );
-		for( $r = 0 ; $r < $items ; $r++ ) {
+		$ma = $top[ $items - 1 ]["max"];
+		$mi = $top[ $items - 1 ]["min"];
+		for( $r = 0 ; $r < $items - 1 ; $r++ ) {
+			$cr = sprintf( "%x" , map( $top[ $r ][ "perc" ] , $mi , $ma , 7 , 15 ) );
+			$cg = sprintf( "%x" , map( $top[ $r ][ "perc" ] , $mi , $ma , 5 , 13 ) );
+			$cb = sprintf( "%x" , map( $top[ $r ][ "perc" ] , $mi , $ma , 5 , 13 ) );
+			$col = $cr.$cg.$cb;
 			$link = new_code_step2_link_from_context( $top[ $r ][ "context" ] );
-			$myTabella->addValoreRiga(array( $link , $top[ $r ][ "value" ] , $top[ $r ][ "perc" ]."%" , "<div style=\"background:#eee; \"><div style=\"height:14px;width:" . $top[ $r ][ "perc" ] . "%; background:#aaa; \"></div></div>" ));	
+			$myTabella->addValoreRiga(array( $link , $top[ $r ][ "value" ] , $top[ $r ][ "perc" ]."%" , "<div style=\"background:#eee; \"><div class=\"bar\" style=\"background:#$col; width:" . $top[ $r ][ "perc" ] . "%;\"></div></div>" ));	
 			$myTabella->aggiungiRiga(null,4,array(array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"100px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px") , array("style"=>"border:1px solid #999; ") ));
 		}	
 		$myTabella->stampaTabella();

@@ -34,14 +34,18 @@ font-size:1em;
 	margin:1em;
 	background-color: #ddd;
 	border:1px solid #999;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 10px 10px 10px 10px;	
 }
 
 .codelite {
 	margin:1em;
 	padding:.5em;
 	background-color: #eee;
-	border:1px solid #be0000;
+/*	border:1px solid #be0000; */
 	overflow: auto; 
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
 }
 
 .codelite_img {
@@ -56,17 +60,16 @@ font-size:1em;
   box-sizing: border-box;
 }
 
-.box {
+.box33 {
   float: left;
-  width: 32.6%;
+  width: 32%;
   padding-left: 5px;
 	border:1px solid #ccc;
 	background-color: #dfdfdf	;
 	height:140px; 
-  margin-top: 3px;
-  margin-bottom: 3px;
-  margin-left: 3px;
-  margin-right: 3px;
+	margin: 3px 6px 6px 6px;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
 }
 
 .box25 {
@@ -76,23 +79,46 @@ font-size:1em;
 	border:1px solid #ccc;
 	background-color: #dfdfdf	;
 	height:120px; 
-  margin-top: 3px;
-  margin-bottom: 3px;
-  margin-left: 3px;
-  margin-right: 3px;
+  margin: 3px 6px 6px 6px;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
 }
 
 .box50 {
   float: left;
-  width: 49%;
+  width: 48.3%;
   padding-left: 5px;
 	border:1px solid #ccc;
 	background-color: #dfdfdf	;
 	height:120px; 
-  margin-top: 3px;
-  margin-bottom: 3px;
-  margin-left: 3px;
-  margin-right: 3px;
+	margin: 3px 6px 6px 6px;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+}
+
+.box75 {
+  float: left;
+  width: 73.5%;
+  padding-left: 5px;
+	border:1px solid #ccc;
+	background-color: #dfdfdf	;
+	height:120px; 
+	margin: 3px 6px 6px 6px;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+}
+
+
+.box100 {
+  float: left;
+  width: 99%;
+  padding-left: 5px;
+	border:1px solid #ccc;
+	background-color: #dfdfdf	;
+	height:120px; 
+	margin: 3px 6px 6px 6px;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
 }
 
 .clearfix::after {
@@ -101,12 +127,20 @@ font-size:1em;
   display: table;
 }
 
+.bar {
+/*	background-color: #966; */
+	border-radius: 7px;
+	height:10px;
+	box-shadow: 1px 2px 3px #999;
+}
+
 
 blockquote {
 margin:1em;
 padding:.5em;
 background-color:#f0f0f0;
-
+box-shadow: 1px 2px 3px #999;
+border-radius: 10px 10px 10px 10px;
 }
 
 blockquote p {
@@ -126,12 +160,14 @@ margin-right:6em;
 padding:1em .5em 2em .5em;
 background:#f5f5f5;
 text-align:left;
-border:1px solid #999999;
+/*border:1px solid #999999;*/
 }
 
 html>body #centerColumn {
 margin-left:6em;
 margin-right:6em;
+border-radius: 20px;
+box-shadow: 1px 2px 3px #999;
 }
 
 #centerColumn h2 {
@@ -142,8 +178,8 @@ letter-spacing:.1em;
 }
 
 #header {
-margin:-1em -.5em 0 -.5em !important;
-margin:-2em -1em 0 -1em;
+/*margin:-1em -.5em 0 -.5em !important;*/
+/*margin:-2em -1em 0 -1em;*/
 padding:0 0 10px 0;
 height:6.7em;
 background-color:#f5f5f5;
@@ -187,16 +223,13 @@ display:inline;
 position:relative;
 bottom:0;
 margin: 0 15px 2em 15px;
-
- 
-padding:0;
+padding:4px;
 line-height:1em;
 text-align:center;
 font-size:.7em;
-background:#eee;
-border-top:1px solid #999999;
-border-bottom:1px solid #999999;
-
+background:#ddd;
+box-shadow: 1px 2px 3px #999;
+border-radius: 10px 10px 10px 10px;
 }
 
 br.clear {

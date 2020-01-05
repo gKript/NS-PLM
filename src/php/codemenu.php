@@ -131,7 +131,7 @@
 
 		if ( ! $bl ) {
 ?>
-		<div style="border:1px solid #ccc;" >
+		<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;" >
 			<ul id="navmenu">
 
 				<?php if ( $nav["check"] ) { ?>
@@ -170,16 +170,13 @@
 				<li><a href="code.php?code=0">Structure +</a>
 					<ul>
 						<li><a href="">B.O.M.</a></li>
-						<li><a href="">Where used</a></li>
+						<li><a href="where_used.php?code=<?php echo $code; ?>">Where used</a></li>
 						<li><a href="">Documentation</a></li>
 					</ul>
 				</li>
-				<li><a href="code.php?code=0">Where used +</a>
-					<ul>
-						<li><a href="">Code</a></li>
-						<li><a href="">Description</a></li>
-					</ul>
-				</li>
+				<?php if ( check_in_bom_presence( $code ) ) { ?>
+				<li><a href="where_used.php?code=<?php echo $code; ?>">Where used</a></li>
+				<?php } ?>
 				<li><a href="code.php?code=0">Related +</a>
 					<ul>
 						<li><a href="">Attachment</a></li>

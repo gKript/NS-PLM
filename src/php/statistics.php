@@ -134,12 +134,18 @@
 		}
 		arsort( $res );
 		reset( $res );
+		$ma = 0;
+		$mi = 100;
 		for( $r = 0 ; $r < $n ; $r++ ) {
 			$k = (string)key( $res );
 			$perc = (int)( ( (float)$res[ $k ] / (float)$tot ) * 100 );
+			if ( $perc >= $ma ) $ma = $perc;
+			if ( $perc <= $mi ) $mi = $perc;
 			$ret[ $r ] = array( 'id'=>$r, 'context'=>(string)$k, 'value'=>$res[ $k ], 'perc'=>$perc );
 			next( $res );
 		}
+		$items = count( $ret );
+		$ret[ $items ] = array( 'min'=>$mi, 'max'=>$ma );
 		return $ret;
 	}
 		

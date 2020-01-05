@@ -19,11 +19,11 @@
 				<tr>
 					<td width="20%"><a href="index.php" ><img src="src/img/logo/ns-plm.png" border="0" width="310" alt="nsplm logo" /></a></td>
 					<td valign="middle" ><h1>Next Step PLM</h1><h2><b>Product Lifecycle Management</b> by gKript.org</h2></td>
-					<td width="20%"><img src="src/img/logo/gk.png" border="0" width="90px" style="float: right; vertical-align: middle; padding-right:20px;" alt="gk logo" /></td>
+					<td width="20%"><img src="src/img/logo/gk.png" border="0" width="90px" style="float: right; vertical-align: middle; padding-right:20px;padding-top: 20px;" alt="gk logo" /></td>
 				</tr>
 			</table>
 		</div>
-		<div style="border:1px solid #ddd; margin-left: 15px; margin-right: 15px;" >
+		<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;" >
 			<Form Name ="menu_srch" Method ="GET" ACTION = "index.php">
 				<ul id="navmenu">
 					<li><a href="index.php">Start</a></li>
@@ -70,7 +70,7 @@
 						</ul>
 					</li>
 					<li><a href="code.php?code=0&action=filter">Quick Filter</a></li>
-					<li><a>Search <INPUT TYPE = "Text" NAME = "text"><INPUT TYPE = "Submit" Name = "src" VALUE = "Go"></a></li>
+					<li><a>Search <INPUT style="border-radius: 5px;" TYPE = "Text" NAME = "text"><INPUT style="border-radius: 5px;" TYPE = "Submit" Name = "src" VALUE = "Go"></a></li>
 					<li><a href="<?php echo $back; ?>">Back</a></li>
 				</ul>
 			</FORM>
