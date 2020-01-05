@@ -51,7 +51,7 @@
 		
 		println( "				<td  style='border:1px solid #999;' width=\"40%\">Origin:</td>" );
 		if ( check_in_bom_presence( $code ) )
-			println( "				<td style='border:1px solid #999;text-align:center; background-color:#e99;'>$ori</td>" );
+			println( "				<td style='border:1px solid #999;text-align:center; background-color:#e99;border-radius: 7px;'>$ori</td>" );
 		else
 			println( "				<td style='border:1px solid #999;text-align:center;'>NO</td>" );
 		println( "			</tr>" );

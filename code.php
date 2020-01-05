@@ -208,9 +208,9 @@
 				if( $dbtip == 1 ) {
 					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >YES</td>" );
 					if ( check_bom_presence( $code ) )
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Go to the B.O.M.</b></span></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Go to the B.O.M.</b></span></td>" );
 					else
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Create</b></span></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Create</b></span></td>" );
 				}
 				else {
 					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >NO</td>" );
@@ -266,14 +266,14 @@
 					$nrev_exist = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$nrev'" );
 					//echo $nrev_exist;
 					if ( ! $nrev_exist ) 
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New</b></span></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New</b></span></td>" );
 					else {
 						$latest_rev = get_latest_revision( $code );
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New</b></span></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"code.php?code=". $code . "&new=2\"><span class=\"blink_text\"><b>New</b></span></td>" );
 						println( "</tr>" );
 						println( "<tr>" );
 						println( "  <td></td>" );
-						println( "  <td colspan=\"2\" style='text-align: center; border:1px solid #999; background-color:#ffd;' width=\"20%\" ><a href=\"code.php?code=$latest_rev\"><span class=\"blink_text\"><b>Latest</b></span></a></td>" );
+						println( "  <td colspan=\"2\" style='text-align: center; border:1px solid #999; background-color:#ffd;border-radius: 7px;' width=\"20%\" ><a href=\"code.php?code=$latest_rev\"><span class=\"blink_text\"><b>Latest</b></span></a></td>" );
 					}
 					println( "</tr>" );
 				?>
@@ -305,13 +305,13 @@
 						$dbc = "NO";
 					println( "  <td style='text-align: center; border:1px solid #999;' >"  . $dbc  . "</td>" );
 					if ( $dbc == "NO" )
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=Create\"><span class=\"blink_text\"><b>Create</b></span></a></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' ><a href=\"attributes.php?code=$code&action=Create\"><span class=\"blink_text\"><b>Create</b></span></a></td>" );
 					else {
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code&action=Show\"><b>Show</b></a></td>" );
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;border-radius: 7px;' ><a href=\"attributes.php?code=$code&action=Show\"><b>Show</b></a></td>" );
 						println( "</tr>" );
 						println( "<tr>" );
 						println( "  <td></td>" );
-						println( "  <td colspan=\"2\" style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=Edit\"><b>Edit</b></a></td>" );
+						println( "  <td colspan=\"2\" style='text-align: center; border:1px solid #999; background-color:#ffd;border-radius: 7px;' ><a href=\"attributes.php?code=$code&action=Edit\"><b>Edit</b></a></td>" );
 					}
 					println( "</tr>" );
 				?>
