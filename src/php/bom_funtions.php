@@ -3,7 +3,7 @@
 	require_once NSID_PLM_SRC_PHP . 'attributes_function.php';
 
 	function create_bom_table( $code , $maxlevel ) {
-		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC";
+		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC";
 		$items = 0;
 		$result = query_get_result( $sql );
 		if ( $result ) 
@@ -44,8 +44,8 @@
 			}		
 			$myTabella->addValoreRiga(array( "&nbsp;" ));
 			$myTabella->aggiungiRiga(array( "style"=>"background-color:#eee;" ) , 1 , array(array( "align"=>"center" ) ) );
-			$myTabella->addValoreRiga(array( "&nbsp;" ));
-			$myTabella->aggiungiRiga(array( "style"=>"background-color:#eee;" ) , 1 , array(array( "align"=>"center" ) ) );
+//			$myTabella->addValoreRiga(array( "&nbsp;" ));
+//			$myTabella->aggiungiRiga(array( "style"=>"background-color:#eee;" ) , 1 , array(array( "align"=>"center" ) ) );
 		}
 
 		$myTabella->addValoreRiga(array( "&nbsp;" , "B.O.M." ));
@@ -85,14 +85,17 @@
 
 	function get_next_level_bom( $origin , $code , $curlevel , &$table , $hash , $maxlevel = 1 ) {
 		if ( ( $maxlevel >= 1 ) && ( $curlevel <= $maxlevel ) ) {
-			$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC";
+			$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC";
 			$result = query_get_result( $sql );
 			$items = $result->num_rows;
 			$level = $curlevel;
 			for( $r = 0 ; $r < $items ; $r++ ) {
 				$row = $result->fetch_array();
 				$son = $row["son"];
-				$link = return_bom_link( $son );
+				if ( is_bom_allowed( $son ) )
+					$link = return_bom_link( $son );
+				else
+					$link = return_where_used_link( $son );
 				$code_detail = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$son'" );
 				$bglevel = get_level_bg_color( $level );
 				$fglevel = get_level_fg_color( $level );
@@ -216,7 +219,7 @@
 			insert_blockquote( "Code already present in this B.O.M. with Revison $rev.<br/><br/>Code NOT added." , "Caution" );
 			return 0;
 		}
-		$sql  = "INSERT INTO `lista_composizione` (`id`, `hashid`, `father`, `son`, `quantity`, `revision`, `creation`, `modify`) ";
+		$sql  = "INSERT INTO `lista_composizione` (`id`, `hashid`, `father`, `son`, `quantity`, `revision`, `createTS`, `modifyTS`) ";
 		$sql .= "VALUES (NULL, '$hfather', '$father', '$code', '$quantity', '$rev', current_timestamp(), current_timestamp())";
 		query_insert_single_line( $sql );
 		$sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE '$father' AND `son` LIKE '$code' AND `revision` = $rev";
@@ -232,7 +235,7 @@
 	}
 
 	function check_bom_presence( $code ) {
-		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";
+		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC LIMIT 0,1";
 		return query_get_num_rows( $sql );
 	}
 
@@ -249,7 +252,7 @@
 	}
 
 	function check_in_bom_presence( $code , $hash = "%" ) {
-		$sql = "SELECT *  FROM `lista_composizione` WHERE `son` LIKE '$code' and `hashid` LIKE '$hash' ORDER BY `creation` DESC";
+		$sql = "SELECT *  FROM `lista_composizione` WHERE `son` LIKE '$code' and `hashid` LIKE '$hash' ORDER BY `createTS` DESC";
 		return query_get_num_rows( $sql );
 	}
 
@@ -260,13 +263,21 @@
 			return '<a href="' . $link . "=" . $code . '">' . $code . "</a>";
 	}
 
-	function return_bom_select_link( $code , $link = "where_used.php?code" ) {
+	function return_where_used_text_link( $code , $link = "where_used.php?code" ) {
 		return "<a href=\"$link=$code\">Where used</a>";
 	}
 
+	function return_where_used_link( $code , $link = "where_used.php?code" ) {
+		return "<a href=\"$link=$code\">$code</a>";
+	}
 
-
-
-
+	function is_bom_allowed( $code ) {
+		$T = substr( $code , 0 , 1 );
+		$sql = "SELECT *  FROM `tipologia` WHERE `idTip` = \"$T\"";
+		$ret = query_get_a_field( $sql , "dbTip" );
+//		echo $T . " " . $ret;
+		return $ret;
+	}
 ?>
+
 

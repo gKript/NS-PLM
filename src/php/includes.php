@@ -7,6 +7,15 @@
 //
 //	Ver 0.10-x
 
+	define( 'NSID_PLM_TITLE'		,	'NS-PLM' );	
+
+	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
+	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
+	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
+	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
+	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
+
+
 //	--- SOURCES
 
 	require_once( NSID_PLM_SRC_PHP."db_connection.php" );
@@ -24,33 +33,7 @@
 	
 //	require_once( NSID_PLM_SRC_PHP."class/upload/class.upload.php" );
 	
-?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-	
-<?php
-		println( "<title>" . NSID_PLM_TITLE . "</title>" );
-		println( "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" );
-		
-		//CSS Locali
-		link_css( "menu.css"     , NSID_PLM_SRC_CSS );
-		link_css( "h.css"        , NSID_PLM_SRC_CSS );
-		link_css( "body.css"     , NSID_PLM_SRC_CSS );
-		link_css( "view.css"     , NSID_PLM_SRC_CSS );
-		
-		//CSS online
-
-
-		//CSS locali	
-		link_js ( "view.js"      , NSID_PLM_SRC_JS  );
-		link_js ( "calendar.js"  , NSID_PLM_SRC_JS  );
-?>		
-
-	</head>
-
-<?php
 
 
 //	session_start();

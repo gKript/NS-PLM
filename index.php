@@ -11,17 +11,11 @@
 
 <?php
 	$nspage = "index";
-	
-	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
-	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
-	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
-	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
-	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
-	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
-	require NSID_PLM_SRC_PHP . 'includes.php';
-	require NSID_PLM_SRC_PHP . 'code_functions.php';
-	require NSID_PLM_SRC_PHP . 'index_funtions.php';
+	require_once 'src/php/includes.php';
+	
+	require_once NSID_PLM_SRC_PHP . 'code_functions.php';
+	require_once NSID_PLM_SRC_PHP . 'index_funtions.php';
 	
 	
 
@@ -35,27 +29,28 @@
 
 
 <?php
+
+	$T			= get_check( 'T' 			, "_" 				);
+	$G			= get_check( 'G' 			, "_" 				);
+	$S 			= get_check( 'S' 			, "_" 				);
+	$text 	= get_check( 'text'									);
+	$order 	= get_check( 'order'	, "mod_desc"	);
+	$src		= get_check( 'src'									);
+	$action = get_check( 'action' 							);
+	$limit	=	get_check( 'limit' 	, 20					);
+
 	include NSID_PLM_SRC_PHP . 'navmenu.php';
-	global $A_options;
 ?>
 
 <?php
 
-	$T			= get_check( 'T' 			, "_" );
-	$G			= get_check( 'G' 			, "_" );
-	$S 			= get_check( 'S' 			, "_" );
-	$text 	= get_check( 'text'					);
-	$order 	= get_check( 'order'	, "mod_desc"	);
-	$src		= get_check( 'src'					);
-	$action = get_check( 'action' 			);
-	$limit	=	get_check( 'limit' 	, 20	);
-
+	global $A_options;
+	
 	$sql = "";
 	$test = 0;
-	$nores = 0;
+	$nores = 5;
 	$activity = 0;
-	
-		
+			
 	if ( ( ! $order ) || ( $order == "cod_desc" ) )
 		$sorder = "ORDER BY `elenco_codici`.`codice` DESC";
 	else if ( $order == "cod_asc" )
@@ -78,6 +73,9 @@
 		$sorder = "ORDER BY `elenco_codici`.`modifyTS` ASC";
 	
 //	echo $sorder;
+
+	$slimit = "Limit 0,$limit;";
+
 		
 	//echo $text . " " . $T . " " . $G . " " . $S . "<br/>";
 	if ( ( $T != "_" ) || ( $G != "_" ) || ( $S != "_" ) || ( $text != "" ) ) {
@@ -91,7 +89,7 @@
 			if ( ( $S == "x" ) || ( $S == "" ) )	$S = "_";
 			$str = "&nbsp;&nbsp;&nbsp;&nbsp;Context: \"" . $T.$G.$S . "\"";
 			$insflt = "WHERE `codice` LIKE '".$T.$G.$S."%'";
-			$sql = "SELECT * FROM `elenco_codici` $insflt $sorder Limit 0,$limit;"; 		//	 Limit 0,10;
+			$sql = "SELECT * FROM `elenco_codici` $insflt $sorder $slimit;"; 		//	 Limit 0,10;
 			if ( query_get_num_rows( $sql ) )	$test++;
 		}
 		else {
@@ -103,18 +101,18 @@
 				$S = substr( $upstr , 2 , 1 );
 			}
 			//	Ricerca da input testo
-			$sql = "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '%$text%' $sorder Limit 0,$limit;";
+			$sql = "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '%$text%' $sorder $slimit;";
 			if ( query_get_num_rows( $sql ) )	$test++;
-			$sql = "SELECT * FROM `elenco_codici` WHERE `abbreviazione` LIKE '%$text%' $sorder Limit 0,$limit;";
+			$sql = "SELECT * FROM `elenco_codici` WHERE `abbreviazione` LIKE '%$text%' $sorder $slimit;";
 			if ( query_get_num_rows( $sql ) )	$test++;
-			$sql = "SELECT * FROM `elenco_codici` WHERE `descrizione` LIKE '%$text%' $sorder Limit 0,$limit;";
+			$sql = "SELECT * FROM `elenco_codici` WHERE `descrizione` LIKE '%$text%' $sorder $slimit;";
 			if ( query_get_num_rows( $sql ) )	$test++;
 			$str = "&nbsp;&nbsp;&nbsp;&nbsp;" . "Text: \"" . $text . "\"";
 			$sql = "";
 		}
 	}
 	else
-		$sql = "SELECT * FROM `elenco_codici` $sorder Limit 0,$limit;";
+		$sql = "SELECT * FROM `elenco_codici` $sorder $slimit;";
 
 ?>
 	<div class="insidecodelite">
@@ -125,8 +123,9 @@
 ?>
 		<div class="codelite">
 			<h3>Welcome to NS-PLM</h3>
+			<img src="src/img/logo/ns.png" border="0" alt="nsplm logo" style="max-width: 20%; float: right; padding-right: 30px;" />
 			<p>
-				This page is designed to start the activities.<br/>
+				This page has been designed to start the activities.<br/>
 				You can start clicking a code from the table below or searching something.<br/>
 				The menu above is the best tool to use NS-PLM.<br/><br/>
 				Good work.
@@ -135,10 +134,12 @@
 <?php
 	}
 		
+		$iscnt = 0;
 		if ( $activity ) {
 			$cnt = $T . $G . $S;
-			
 			if ( is_context( $cnt ) )   {
+				$iscnt = 1;
+				
 ?>
 		<div class="codelite">
 			<h3>Context compete</h3>
@@ -188,7 +189,7 @@
 <?php
 
 		if ( ! $sql ) 
-			$sql = "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '%$text%' $sorder";
+			$sql = "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '%$text%' $sorder $slimit";
 //		echo $sql . "<br/>";
 		$rows = query_get_num_rows( $sql );
 		if ( $rows ) {
@@ -225,10 +226,121 @@
 <?php
 		}
 		else 
-			$nores++;
+			$nores--;
+		
+		if ( $iscnt ) {
+			
+			unset( $sordeer );
+			
+			if ( ( ! $order ) || ( $order == "cod_desc" ) )
+				$sorder = "ORDER BY `codice` DESC";
+			else if ( $order == "cod_asc" )
+				$sorder = "ORDER BY `codice` ASC";
+			else if ( $order == "creat_desc" )
+				$sorder = "ORDER BY `createTS` DESC";
+			else if ( $order == "creat_asc" )
+				$sorder = "ORDER BY `createTS` ASC";
+			else if ( $order == "mod_desc" ) 
+				$sorder = "ORDER BY `modifyTS` DESC";
+			if ( $order == "mod_asc" )
+				$sorder = "ORDER BY `modifyTS` ASC";
+			
+		
+				$sql = "SELECT * FROM `bom` WHERE `code` LIKE '$cnt%' $sorder $slimit";
+	//		echo $sql . "<br/>";
+			$rows = query_get_num_rows( $sql );
+			if ( $rows ) {
+	?>
+			<div class="codelite">
+				<h2>Father in a B.O.M. as key</h2><br/>
+
+
+				<table style="margin:1em;" width="90%">
+					<tr>
+						<th style="text-align: center;" >Code</th>
+						<th>Short desrciption</th>
+						<th>Long description</th>
+					</tr>
+		<?php
+				if ($result = $mysqli->query($sql)) {
+					for( $r = 0 ; $r < $rows ; $r++ ) {
+							println( "<tr>" );
+							$array = $result->fetch_array();
+							$fc = $array['code'];
+							$details = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$fc'" );
+							print( "<td style='text-align: center; border:1px solid #999;' width='15%'>" );
+							echo return_code_link( $fc ) . " rev." . $array["Revisione"] ;
+							println( "</td>" );
+							println( "<td style='border:1px solid #999;' width='25%'>" . $details['abbreviazione'] . "</td>" );
+							println( "<td style='border:1px solid #999;' >" . $details['descrizione'] . "</td>" );
+							println( "</tr>" );
+					}
+				}
+		?>		
+				</table>
+			</div>
+	<?php
+			}
+			else 
+				$nores--;
+		
+
+		
+			$sql = "SELECT *  FROM `lista_composizione` WHERE `son` LIKE '$cnt%'";
+	//		echo $sql . "<br/>";
+			$rows = query_get_num_rows( $sql );
+			if ( $rows ) {
+	?>
+			<div class="codelite">
+				<h2>Son [<?php echo $cnt ?>] inside a B.O.M. as key</h2><br/>
+
+
+				<table style="margin:1em;" width="90%">
+					<tr>
+						<th style="text-align: center;" >Father Code</th>
+						<th>Short desrciption</th>
+						<th>Long description</th>
+					</tr>
+		<?php
+				if ($result = $mysqli->query($sql)) {
+					$res = array();
+					$rev = array();
+					for( $r = 0 ; $r < $rows ; $r++ ) {
+						$array = $result->fetch_array();
+						$sc = $array['father'];
+						$rv = $array['revision'];
+						if ( ! in_array( $sc , $res ) ) {
+							$res[] = $sc;
+							$rev[] = $rv;
+						}
+					}
+					$rows = count( $res );
+					for( $r = 0 ; $r < $rows ; $r++ ) {
+							println( "<tr>" );
+							$sc = $res[$r];
+							$details = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$sc'" );
+							print( "<td style='text-align: center; border:1px solid #999;' width='15%'>" );
+							echo return_code_link( $sc ) . " rev." . $rev[$r] ;
+							println( "</td>" );
+							println( "<td style='border:1px solid #999;' width='25%'>" . $details['abbreviazione'] . "</td>" );
+							println( "<td style='border:1px solid #999;' >" . $details['descrizione'] . "</td>" );
+							println( "</tr>" );
+					}
+				}
+		?>		
+				</table>
+			</div>
+	<?php
+			}
+			else 
+				$nores--;
+		
+		}
+		else 
+			$nores = $nores - 2;
 		
 	if ( $text ) {
-		$sql = "SELECT * FROM `elenco_codici` WHERE `abbreviazione` LIKE '%$text%' $sorder";
+		$sql = "SELECT * FROM `elenco_codici` WHERE `abbreviazione` LIKE '%$text%' $sorder $slimit";
 //		echo $sql . "<br/>";
 		$rows = query_get_num_rows( $sql );
 		if ( $rows ) {
@@ -264,10 +376,11 @@
 <?php
 		}
 		else 
-			$nores++;
+			$nores--;
+
 
 	
-		$sql = "SELECT * FROM `elenco_codici` WHERE `descrizione` LIKE '%$text%' $sorder";
+		$sql = "SELECT * FROM `elenco_codici` WHERE `descrizione` LIKE '%$text%' $sorder $slimit";
 //		echo $sql . "<br/>";
 		$rows = query_get_num_rows( $sql );
 		if ( $rows ) {
@@ -304,10 +417,12 @@
 <?php
 		}
 		else 
-			$nores++;
+			$nores--;
 	}
-	if ( ( ( ! $text ) && ( $nores == 1 ) ) || ( ( $text ) && ( $nores == 3 ) ) ) {
-		//echo $nores;
+	
+	
+//	echo $nores;
+	if ( ! $nores  ) {
 		insert_blockquote( "No result with this parameters." , "Notice" ); 
 	}
 	

@@ -11,16 +11,10 @@
 
 <?php
 	$nspage = "code-insert";
-	
-	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
-	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
-	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
-	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
-	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
-	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
-	require NSID_PLM_SRC_PHP . 'includes.php';
-	require NSID_PLM_SRC_PHP . 'code_functions.php';
+	require_once 'src/php/includes.php';
+	
+	require_once NSID_PLM_SRC_PHP . 'code_functions.php';
 
 	$db = new config_database();
 	
@@ -32,18 +26,18 @@
 
 
 <?php
+
+	$code		= get_check( 'code'   );
+	$sdescr = get_check( 'sdescr' );
+	$ldescr = get_check( 'ldescr' );
+	$action = get_check( 'action' );
+	
 	include NSID_PLM_SRC_PHP . 'navmenu.php';
 ?>
 
 <?php
 	
 	$ppath = "";
-
-	$code = get_check( 'code' );
-	$sdescr = get_check( 'sdescr' );
-	$ldescr  = get_check( 'ldescr' );
-	$action = get_check( 'action' );
-	
 	if ( isset( $_SERVER["HTTP_REFERER"] ) ) {
 		$ppath = $_SERVER["HTTP_REFERER"];
 	}
@@ -149,7 +143,7 @@
 					$dbc = "NO";
 				println( "  <td style='text-align: center; border:1px solid #999;' >"  . $dbc  . "</td>" );
 				if ( $dbc == "NO" )
-					println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=create\"><span class=\"blink_text\"><b>Create</b></span></td>" );
+					println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;' ><a href=\"attributes.php?code=$code&action=Create\"><span class=\"blink_text\"><b>Create</b></span></td>" );
 				else {
 					println( "  <td style='text-align: center; border:1px solid #999; background-color:#dfd;' ><a href=\"attributes.php?code=$code\"><b>Show</b></td>" );
 					println( "  <td style='text-align: center; border:1px solid #999; background-color:#ffd;' ><a href=\"attributes.php?code=$code&action=modify\"><b>Modify</b></td>" );

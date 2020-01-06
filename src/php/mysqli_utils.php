@@ -61,6 +61,8 @@
 
 
 	function query_get_a_field( $query , $fname  , $echo = 0 ) {
+		if ( $echo ) 
+			echo $query . "<br/>";
 		$result = query_get_result( $query );
 		if ( ! $result ) 
 			return null;

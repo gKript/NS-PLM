@@ -45,7 +45,7 @@
 			for( $r = 0 ; $r < $items ; $r++ ) {
 				$row = $result->fetch_array();
 				$code = $row["codice"];
-				$sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modify` DESC LIMIT 0,1";	
+				$sql = "SELECT *  FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC LIMIT 0,1";	
 				$bom += query_get_num_rows( $sql );
 			}
 			$sql = "INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES (NULL, '$name', '$bom', current_timestamp())";

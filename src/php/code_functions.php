@@ -47,7 +47,7 @@
 		println( "			</tr>" );
 		println( "			<tr>" );
 		
-		$ori = return_bom_select_link( $code );
+		$ori = return_where_used_text_link( $code );
 		
 		println( "				<td  style='border:1px solid #999;' width=\"40%\">Origin:</td>" );
 		if ( check_in_bom_presence( $code ) )
@@ -198,7 +198,6 @@
 		$link = "<a href=\"code.php?T=$T&G=$G&S=$S&action=Create\">$context</a>";
 		return $link;		
 	}
-
 
 
 

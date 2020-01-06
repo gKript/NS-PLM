@@ -11,17 +11,11 @@
 
 <?php
 	$nspage = "attributes";
-	
-	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
-	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
-	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
-	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
-	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
-	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
-	require NSID_PLM_SRC_PHP . 'attributes_function.php';
-	require NSID_PLM_SRC_PHP . 'includes.php';
-	require NSID_PLM_SRC_PHP . 'code_functions.php';
+	require_once 'src/php/includes.php';
+
+	require_once NSID_PLM_SRC_PHP . 'attributes_function.php';
+	require_once NSID_PLM_SRC_PHP . 'code_functions.php';
 
 	$db = new config_database();
 	
@@ -31,10 +25,6 @@
 	}
 ?>
 
-
-<?php
-	include NSID_PLM_SRC_PHP . 'navmenu.php';
-?>
 
 <?php
 
@@ -64,6 +54,11 @@
 	$height				= get_check( 'height'				, "" 	);
 	$weight				= get_check( 'weight'				, "" 	);
 	
+	include NSID_PLM_SRC_PHP . 'navmenu.php';
+	
+?>
+
+<?php
 	$attrib["code"]					= $code;
 	$attrib["action"]				= $action;
 	$attrib["bom"]					= $bom;

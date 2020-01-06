@@ -11,15 +11,8 @@
 
 <?php
 	$nspage = "info";
-	
-	define( 'NSID_PLM_TITLE'		,	'NextStep PLM' );
-	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
-	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
-	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
-	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
-	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
 
-	require NSID_PLM_SRC_PHP.'includes.php';
+	require_once 'src/php/includes.php';
 
 	$db = new config_database();
 	

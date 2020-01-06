@@ -1,3 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	
+<?php
+		if ( ( $nspage == "code" ) || ( $nspage == "bom" ) || ( $nspage == "where_used" ) || ( $nspage == "code-insert" ) ) {
+			if ( ( $nspage == "code" ) && ( $action == "Create" ) ) {
+				println( "<title>" . NSID_PLM_TITLE . " - Create step 2</title>" );
+			}
+			if ( ( $nspage == "code" ) && ( $action == "filter" ) ) {
+				println( "<title>" . NSID_PLM_TITLE . " - Filtering
+				</title>" );
+			}
+			else if ( ( $nspage == "code" ) && ( $code == "0" ) ) {
+				println( "<title>" . NSID_PLM_TITLE . " - Create step 1</title>"  );
+			}
+			else {
+				println( "<title>" . NSID_PLM_TITLE . " - " . $code . "</title>" );
+			}
+		}
+		else 
+			println( "<title>" . NSID_PLM_TITLE . "</title>" );
+		println( "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" );
+		
+		println( "<link rel=\"shortcut icon\" href=\"src/img/logo/ns-plm.ico\">" );
+		
+		//CSS Locali
+		link_css( "menu.css"     , NSID_PLM_SRC_CSS );
+		link_css( "h.css"        , NSID_PLM_SRC_CSS );
+		link_css( "body.css"     , NSID_PLM_SRC_CSS );
+		link_css( "view.css"     , NSID_PLM_SRC_CSS );
+		
+		//CSS online
+
+
+		//CSS locali	
+		link_js ( "view.js"      , NSID_PLM_SRC_JS  );
+		link_js ( "calendar.js"  , NSID_PLM_SRC_JS  );
+?>		
+
+	</head>
 	<body>
 		<?php
 			$back = "";
