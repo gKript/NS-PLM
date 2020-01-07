@@ -420,6 +420,7 @@
 				close_form();
 			}
 			echo "</div>\n";
+			echo "</div>\n";
 		}
 	}
 	

@@ -5,7 +5,6 @@
 					<p>We are managing <b><?php echo stat_codes_total_from_stats(0); ?></b> items, <b><?php echo stat_attributes_total_from_stats(0); ?></b> attributes tabs and <b><?php echo stat_bom_total_from_stats(0); ?></b> B.O.M.</p>
 					<br/>
 				</div> 
-
 			</div>
 		</div>
 		<br/><br/>
