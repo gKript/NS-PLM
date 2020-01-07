@@ -4,7 +4,7 @@
 	$A_options = [	
 		'option0' => [
 			'value' => 'x',
-			'name' 	=> 'Undefined'
+			'name' 	=> ' '
 		],
 	];
 	
@@ -49,7 +49,7 @@
 			$A_options = [	
 				'option0' => [
 					'value' => 'x',
-					'name' 	=> 'Undefined'
+					'name' 	=> ' '
 				],
 			];
 			$elementi = count( $A_options );
@@ -103,6 +103,7 @@
 	function select_composer_from_array( $id , $name , $undefined = 0 , $class = "" , $onchange = "" , $select = "" , $nl = 0 , $label = "" , $position = "sx" ) {
 		
 		global 				$A_options;
+		
 		$Sclass 		= $class		? "class=\"$class\"" 				: "" ;
 		$Sonchange	=	$onchange ? "onchange=\"$onchange\""	: "" ;			// this.form.submit()
 		$elements		=	select_option( "count" );

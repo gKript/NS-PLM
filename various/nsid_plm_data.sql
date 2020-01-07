@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 06, 2020 alle 01:24
+-- Creato il: Gen 07, 2020 alle 10:08
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.2.18
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `catgenerica` (
   `dbCatGen` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`ind`),
   UNIQUE KEY `idCatGen` (`idCatGen`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `catgenerica`
@@ -93,7 +93,8 @@ INSERT INTO `catgenerica` (`ind`, `idCatGen`, `CatGen`, `CatGenDescr`, `dbCatGen
 (10, '9', 'Organizzazione', 'Regole e procedure', 0),
 (11, 'A', 'Marketing', 'Brochure, presentazioni, richieste', 0),
 (12, 'B', 'Metodo', 'Logica di utilizzo di un Progetto', 1),
-(13, 'C', 'Prodotto', 'Codice padre per distinta di vendita', 1);
+(13, 'C', 'Prodotto', 'Codice padre per distinta di vendita', 1),
+(14, 'D', 'Elettronica + Meccanica', 'Kit, assiemi particolari', 1);
 
 -- --------------------------------------------------------
 
@@ -251,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
@@ -317,7 +318,8 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (83, '22C0001500', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - Breadboard Jumper (4-pin) 10cm', 0, '2020-01-05 21:35:31', '2020-01-05 21:35:31'),
 (84, '22C0001600', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 50mm', 0, '2020-01-05 21:36:52', '2020-01-05 21:36:52'),
 (85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, '2020-01-05 21:38:25', '2020-01-05 21:38:25'),
-(86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, '2020-01-05 21:43:36', '2020-01-05 21:48:05');
+(86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, '2020-01-05 21:43:36', '2020-01-05 21:48:05'),
+(87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, '2020-01-06 01:36:43', '2020-01-06 01:36:43');
 
 -- --------------------------------------------------------
 
@@ -336,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `lista_composizione` (
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `lista_composizione`
@@ -398,7 +400,8 @@ INSERT INTO `lista_composizione` (`id`, `hashid`, `father`, `son`, `quantity`, `
 (58, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000900', 2, 1, '2020-01-05 22:13:23', '2020-01-05 22:13:23'),
 (59, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000800', 1, 1, '2020-01-05 22:13:36', '2020-01-05 22:13:36'),
 (60, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000700', 2, 1, '2020-01-05 22:13:52', '2020-01-05 22:13:52'),
-(61, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000600', 2, 1, '2020-01-05 22:14:07', '2020-01-05 22:14:07');
+(61, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000600', 2, 1, '2020-01-05 22:14:07', '2020-01-05 22:14:07'),
+(62, 'fc9543867a049fec8da044c42696cb7a', '12C0000100', '2DC0000100', 1, 1, '2020-01-06 01:38:15', '2020-01-06 01:38:15');
 
 -- --------------------------------------------------------
 
@@ -423,6 +426,28 @@ CREATE TABLE IF NOT EXISTS `provider` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `search`
+--
+
+DROP TABLE IF EXISTS `search`;
+CREATE TABLE IF NOT EXISTS `search` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `search` varchar(16) NOT NULL,
+  `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `search`
+--
+
+INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
+(1, '467', '2020-01-07 09:47:47'),
+(2, 'gim', '2020-01-07 09:47:47');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `statistics`
 --
 
@@ -433,7 +458,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -466,7 +491,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (29, 'BomCountDaily', '12', '2020-01-05 00:00:05'),
 (30, 'CodeCountDaily', '60', '2020-01-06 00:39:35'),
 (31, 'AttribCountDaily', '47', '2020-01-06 00:39:35'),
-(32, 'BomCountDaily', '13', '2020-01-06 00:39:35');
+(32, 'BomCountDaily', '13', '2020-01-06 00:39:35'),
+(33, 'CodeCountDaily', '61', '2020-01-07 09:27:59'),
+(34, 'AttribCountDaily', '47', '2020-01-07 09:27:59'),
+(35, 'BomCountDaily', '13', '2020-01-07 09:27:59');
 
 -- --------------------------------------------------------
 

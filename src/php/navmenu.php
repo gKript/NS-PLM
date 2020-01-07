@@ -112,8 +112,28 @@
 						</ul>
 					</li>
 					<li><a href="code.php?code=0&action=filter">Quick Filter</a></li>
-					<li><a>Search <INPUT style="border-radius: 5px;" TYPE = "Text" NAME = "text"><INPUT style="border-radius: 5px;" TYPE = "Submit" Name = "src" VALUE = "Go"></a></li>
 					<li><a href="<?php echo $back; ?>">Back</a></li>
+					<li style="float:right;">
+						<a>
+<?php
+							$sql = "SELECT * FROM `search` ORDER BY `search`.`createTS` DESC";
+							$result = query_get_result( $sql );
+							if ( $result ) {
+								$loop = ITEMS_IN_HISTORY;
+								if ( $result->num_rows < ITEMS_IN_HISTORY )
+									$loop = $result->num_rows;
+								select_option( "reset" );
+								for( $r = 0 ; $r < ITEMS_IN_HISTORY ; $r++ ) {
+									$row = $result->fetch_array();
+									select_option( "insert" , $row["search"] , $row["search"] );
+								}
+								select_composer_from_array( "hist" , "hist" , 1 , "" , "this.form.submit()" , "" , 0 , "History: " );
+							}
+?>							
+						</a>
+					</li>
+					<li style="float:right;"><a>Search <INPUT style="border-radius: 5px;" TYPE = "Text" NAME = "text"><INPUT style="border-radius: 5px;" TYPE = "Submit" Name = "src" VALUE = "Go"></a></li>
+					
 				</ul>
 			</FORM>
 		</div>

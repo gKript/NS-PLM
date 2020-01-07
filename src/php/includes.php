@@ -14,6 +14,8 @@
 	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
 	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
 	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
+	
+	define( 'ITEMS_IN_HISTORY'	,	10				);
 
 
 //	--- SOURCES
