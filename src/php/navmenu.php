@@ -132,7 +132,7 @@
 ?>							
 						</a>
 					</li>
-					<li style="float:right;"><a>Search <INPUT style="border-radius: 5px;" TYPE = "Text" NAME = "text"><INPUT style="border-radius: 5px;" TYPE = "Submit" Name = "src" VALUE = "Go"></a></li>
+					<li style="float:right;"><a>Search <INPUT style="border-radius: 5px;" TYPE = "Text" NAME = "text" value="<?php echo $text; ?>"><INPUT style="border-radius: 5px;" TYPE = "Submit" Name = "src" VALUE = "Go"></a></li>
 					
 				</ul>
 			</FORM>

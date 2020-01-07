@@ -33,13 +33,21 @@
 	$T			= get_check( 'T' 			, "_" 				);
 	$G			= get_check( 'G' 			, "_" 				);
 	$S 			= get_check( 'S' 			, "_" 				);
-	$text 	= get_check( 'text'									);
+	$hist 	= get_check( 'hist'				, ""				);
+	
+	if ( $hist != "" )
+		$text 	= $hist;
+	else
+		$text 	= get_check( 'text'				, $hist					);
 	$order 	= get_check( 'order'	, "mod_desc"	);
 	$src		= get_check( 'src'									);
 	$action = get_check( 'action' 							);
 	$limit	=	get_check( 'limit' 	, 20					);
 
 	include NSID_PLM_SRC_PHP . 'navmenu.php';
+	
+	echo $hist . "  " . $text;
+	
 ?>
 
 <?php
