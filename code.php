@@ -166,6 +166,9 @@
 		?>
 				
 				<div class="codelite">
+				<?php
+					echo tag_img( "top.svg" , "icona top" , "" , "float: right;" );
+				?>
 					<h2>Code structure - <a href="index.php?T=<?php echo $codetype["T"]; ?>&G=<?php echo $codetype["CG"]; ?>&S=<?php echo $codetype["CS"]; ?>&action=Filter"><?php echo $codetype["T"] . $codetype["CG"] . $codetype["CS"] ; ?></a></h2>
 					<table style="margin:1em;" width="90%">
 

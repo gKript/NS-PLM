@@ -3,7 +3,7 @@
 	
 	$A_options = [	
 		'option0' => [
-			'value' => 'x',
+			'value' => '' ,
 			'name' 	=> ' '
 		],
 	];
@@ -48,8 +48,8 @@
 			$A_options = array();
 			$A_options = [	
 				'option0' => [
-					'value' => 'x',
-					'name' 	=> ' '
+					'value' => '',
+					'name' 	=> '&nbsp;'
 				],
 			];
 			$elementi = count( $A_options );
@@ -63,6 +63,37 @@
 		return 0;
 	}
 
+	function select_composer_from_array( $id , $name , $undefined = 0 , $class = "" , $onchange = "" , $select = "" , $nl = 0 , $label = "" , $position = "sx" ) {
+		
+		global 				$A_options;
+		
+		$Sclass 		= $class		? "class=\"$class\"" 				: "" ;
+		$Sonchange	=	$onchange ? "onchange=\"$onchange\""	: "" ;			// this.form.submit()
+		$elements		=	select_option( "count" );
+		$r 					= 1;
+		
+		if ( $position == "sx" )
+			println( "<label for=\"$id\">$label</label>" );
+
+		println( "<select name=\"$name\" id=\"$id\" $Sclass $Sonchange >" );
+
+		if ( $undefined )
+				$r = 0;
+		for( $r ; $r < $elements ; $r++ ) {
+				$array = select_option( "get" , "" , "" , $r );
+				$ssel = "";
+				if ( $array[0] == $select ) 
+					$ssel = " selected ";
+				println( "	<option value='" . $array[0] . "'$ssel>" . $array[1] . "</option>" );
+		}
+		println( "</select>" );
+		if ( $position == "dx" )
+			println( "<label for=\"$id\">$label</label>" );
+		if ( $nl )
+			echo "<br/>";
+	}
+	
+	
 	function select_composer_from_sql( $id , $name , $style , $sql , $undefined = 0 , $class = "" , $onchange = "" , $select = "" , $nl = 0 , $label = "" , $position = "" ) {
 		//	Style 0: solo array 0, Style 1 anche array 1, Style 2 anche array 2
 		global $mysqli;
@@ -94,37 +125,6 @@
 		</select>
 		<?php			
 		if ( $position == "DX" )
-			println( "<label for=\"$id\">$label</label>" );
-		if ( $nl )
-			echo "<br/>";
-	}
-	
-	
-	function select_composer_from_array( $id , $name , $undefined = 0 , $class = "" , $onchange = "" , $select = "" , $nl = 0 , $label = "" , $position = "sx" ) {
-		
-		global 				$A_options;
-		
-		$Sclass 		= $class		? "class=\"$class\"" 				: "" ;
-		$Sonchange	=	$onchange ? "onchange=\"$onchange\""	: "" ;			// this.form.submit()
-		$elements		=	select_option( "count" );
-		$r 					= 1;
-		
-		if ( $position == "sx" )
-			println( "<label for=\"$id\">$label</label>" );
-
-		println( "<select name=\"$name\" id=\"$id\" $Sclass $Sonchange >" );
-
-		if ( $undefined )
-				$r = 0;
-		for( $r ; $r < $elements ; $r++ ) {
-				$array = select_option( "get" , "" , "" , $r );
-				$ssel = "";
-				if ( $array[0] == $select ) 
-					$ssel = " selected ";
-				println( "	<option value='" . $array[0] . "'$ssel>" . $array[1] . "</option>" );
-		}
-		println( "</select>" );
-		if ( $position == "dx" )
 			println( "<label for=\"$id\">$label</label>" );
 		if ( $nl )
 			echo "<br/>";

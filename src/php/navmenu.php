@@ -1,9 +1,27 @@
+<?php
+
+require_once NSID_PLM_SRC_PHP . 'index_funtions.php';
+
+?>
+
+
 <!DOCTYPE html>
 <!--  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	
 <?php
+
+		$hist 	= get_check( 'hist'	, "" );
+		if ( $hist != "" )
+			$text 	= $hist;
+		else
+			$text 	= get_check( 'text'				, $hist					);
+		
+		//echo $hist . "  " . $text;
+
+		$H = add_search_in_history( $text );
+
 		if ( ( $nspage == "code" ) || ( $nspage == "bom" ) || ( $nspage == "where_used" ) || ( $nspage == "code-insert" ) ) {
 			if ( ( $nspage == "code" ) && ( $action == "Create" ) ) {
 				println( "<title>" . NSID_PLM_TITLE . " - Create step 2</title>" );
@@ -21,6 +39,7 @@
 		}
 		else 
 			println( "<title>" . NSID_PLM_TITLE . "</title>" );
+		
 		println( "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" );
 		
 		println( "<link rel=\"shortcut icon\" href=\"src/img/logo/ns-plm.ico\">" );
@@ -31,7 +50,9 @@
 		link_css( "body.css"     , NSID_PLM_SRC_CSS );
 		link_css( "view.css"     , NSID_PLM_SRC_CSS );
 		
+		
 		//CSS online
+		link_css( "https://fonts.googleapis.com/icon?family=Material+Icons"     , null , "online" );
 
 
 		//CSS locali	
@@ -69,7 +90,7 @@
 			<Form Name ="menu_srch" Method ="GET" ACTION = "index.php">
 				<ul id="navmenu">
 					<li><a href="index.php">Start</a></li>
-					<li><a href="">Code +</a>
+					<li><a>Code +</a>
 						<ul>
 							<li><a>Change +</a>
 								<ul>
@@ -81,9 +102,9 @@
 							<li><a href="code.php?code=0&new=1">Create</a></li>
 						</ul>
 					</li>
-					<li><a href="">Provider +</a>
+					<li><a>Provider +</a>
 						<ul>
-							<li><a href="">Change +</a>
+							<li><a>Change +</a>
 								<ul>
 									<li><a href="">Modify</a></li>
 									<li><a href="">Delete</a></li>
@@ -93,7 +114,7 @@
 							<li><a href="">Create</a></li>
 						</ul>
 					</li>
-					<li><a href="code.php?code=0">Report +</a>
+					<li><a>Report +</a>
 						<ul>
 							<li><a href="">Code</a></li>
 							<li><a href="">B.O.M.</a></li>
@@ -113,25 +134,32 @@
 					</li>
 					<li><a href="code.php?code=0&action=filter">Quick Filter</a></li>
 					<li><a href="<?php echo $back; ?>">Back</a></li>
-					<li style="float:right;">
-						<a>
-<?php
-							$sql = "SELECT * FROM `search` ORDER BY `search`.`createTS` DESC";
-							$result = query_get_result( $sql );
-							if ( $result ) {
-								$loop = ITEMS_IN_HISTORY;
-								if ( $result->num_rows < ITEMS_IN_HISTORY )
-									$loop = $result->num_rows;
-								select_option( "reset" );
-								for( $r = 0 ; $r < ITEMS_IN_HISTORY ; $r++ ) {
-									$row = $result->fetch_array();
-									select_option( "insert" , $row["search"] , $row["search"] );
+					<?php
+					if ( $H ) { 
+					?>
+						<li style="float:right;">
+							<a>
+	<?php
+								$sql = "SELECT * FROM `search` ORDER BY `search`.`createTS` DESC";
+								$result = query_get_result( $sql );
+								if ( $result ) {
+									$loop = ITEMS_IN_HISTORY;
+									if ( $result->num_rows != ITEMS_IN_HISTORY )
+										$loop = $result->num_rows;
+									select_option( "reset" );
+									for( $r = 0 ; $r < $loop ; $r++ ) {
+										$row = $result->fetch_array();
+										select_option( "insert" , $row["search"] , $row["search"] );
+									}
+									//var_dump($A_options);
+									select_composer_from_array( "hist" , "hist" , 1 , "" , "this.form.submit()" , "" , 0 , "History: " );
 								}
-								select_composer_from_array( "hist" , "hist" , 1 , "" , "this.form.submit()" , "" , 0 , "History: " );
-							}
-?>							
-						</a>
-					</li>
+	?>							
+							</a>
+						</li>
+					<?php
+					}
+					?>
 					<li style="float:right;"><a>Search <INPUT style="border-radius: 5px;" TYPE = "Text" NAME = "text" value="<?php echo $text; ?>"><INPUT style="border-radius: 5px;" TYPE = "Submit" Name = "src" VALUE = "Go"></a></li>
 					
 				</ul>

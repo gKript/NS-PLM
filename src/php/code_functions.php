@@ -12,8 +12,9 @@
 			$lcode = return_code_link( $code );
 		
 		println( "<div class=\"codelite\">");
-		println( "	<h2>Code	 synopsis</h2><br/>" );
-				
+		$img = tag_img( "syn.svg" , "icona synopsis" );
+		echo tag_img( "top.svg" , "icona top" , "" , "float: right;" );
+		println( "<h2 style=\"vertical-align: middle;\">$img Code synopsis</h2><br/>" );
 		println( "	<div class=\"box50\" style=\"height:150px;\">");
 		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
 		println( "			<tr>" );

@@ -2,7 +2,7 @@
 
 	require_once NSID_PLM_SRC_PHP . 'attributes_function.php';
 
-	function create_bom_table( $code , $maxlevel ) {
+	function create_bom_table( $code , $maxlevel , $hl = "" ) {
 		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC";
 		$items = 0;
 		$result = query_get_result( $sql );
@@ -65,7 +65,7 @@
 		$myTabella->aggiungiRiga( array("style"=>"background-color:#fff;") , 7 , array(array( "width"=>"3%" , "style"=>"background-color:#eee;white-space: nowrap;" , "align"=>"center" , ) , array(  "style"=>"border:1px solid #999; font-weight:bold; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "align"=>"left") , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array( "colspan"=> "2" , "style"=>$chstyle , "align"=>"center") ) );
 		$level = 1;
 		if ( $items )
-			get_next_level_bom( $origin , $code , $level , $myTabella , $fhash , $maxlevel );
+			get_next_level_bom( $origin , $code , $level , $myTabella , $fhash , $hl , $maxlevel );
 
 		$code_input = "<input style=\"border-radius: 7px;\" id=\"newcode\" name=\"newcode\" type=\"text\" size=\"10\" maxlength=\"10\" />";
 		$quantity_input = "<input style=\"border-radius: 7px;\" id=\"quantity\" name=\"quantity\" type=\"numbers\" size=\"5\" maxlength=\"5\" />";
@@ -83,7 +83,7 @@
 	}
 
 
-	function get_next_level_bom( $origin , $code , $curlevel , &$table , $hash , $maxlevel = 1 ) {
+	function get_next_level_bom( $origin , $code , $curlevel , &$table , $hash , $hl = "" , $maxlevel = 1 ) {
 		if ( ( $maxlevel >= 1 ) && ( $curlevel <= $maxlevel ) ) {
 			$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC";
 			$result = query_get_result( $sql );
@@ -94,8 +94,12 @@
 				$son = $row["son"];
 				if ( is_bom_allowed( $son ) )
 					$link = return_bom_link( $son );
-				else
-					$link = return_where_used_link( $son );
+				else {
+					if ( $hl != $son )
+						$link = return_where_used_link( $son );
+					else
+						$link = return_where_used_link( $son , 1 );
+				}
 				$code_detail = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$son'" );
 				$bglevel = get_level_bg_color( $level );
 				$fglevel = get_level_fg_color( $level );
@@ -128,11 +132,14 @@
 					$remove_link = "";
 					$remstyle = "background-color:#eee;";
 				}
-					
+				if ( $hl != $son ) 
+					$cstyle = "border:1px solid #999; font-weight:bold; background-color:#ddd;";
+				else
+					$cstyle = "border:1px solid #999; font-weight:bold; background-color:#ffd;";
 				$table->addValoreRiga( array( $level_link , $link , $code_detail["abbreviazione"] , $code_detail["descrizione"] , $row["quantity"] , $uexist , $atttext , $remove_link ));
-				$table->aggiungiRiga( array("style"=>"$bglevel $fglevel") , 8 , array( array(  "style"=>"background-color:#eee;white-space: nowrap;" , "align"=>"center" , "width"=>"2%") , array(  "style"=>"border:1px solid #999; font-weight:bold; background-color:#ddd;" , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left" , "width"=>"15%" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"left" , "width"=>"60%" ) , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>$chstyle , "align"=>"center"  , "width"=>"6%" )  ,  array("style"=>$remstyle , "align"=>"center" , "width"=>"6%") ) );
+				$table->aggiungiRiga( array("style"=>"$bglevel $fglevel") , 8 , array( array(  "style"=>"background-color:#eee;white-space: nowrap;" , "align"=>"center" , "width"=>"2%") , array(  "style"=>$cstyle , "align"=>"center" )  ,  array("style"=>"border:1px solid #999;" , "align"=>"left" , "width"=>"15%" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"left" , "width"=>"60%" ) , array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>"border:1px solid #999; " , "align"=>"center" )  ,  array("style"=>$chstyle , "align"=>"center"  , "width"=>"6%" )  ,  array("style"=>$remstyle , "align"=>"center" , "width"=>"6%") ) );
 				if ( $down ) {
-					get_next_level_bom( $origin , $son , $nlevel , $table , $hash , $maxlevel );
+					get_next_level_bom( $origin , $son , $nlevel , $table , $hash , $hl , $maxlevel );
 				}
 			}
 		}
@@ -256,19 +263,26 @@
 		return query_get_num_rows( $sql );
 	}
 
-	function return_bom_link( $code , $clean = 0 , $link = "bom.php?code" ) {
+	function return_bom_link( $code , $fl = 0 , $clean = 0 , $link = "bom.php?code" ) {
 		if ( $clean ) 
 			return $code;
+		else {
+			if ( $fl )
+			return "<a href=\"$link=$code\" ><span class=\"blink_text\">$code</span></a>";
 		else
-			return '<a href="' . $link . "=" . $code . '">' . $code . "</a>";
+			return "<a href=\"$link=$code\" >$code</a>";
+		}
 	}
 
 	function return_where_used_text_link( $code , $link = "where_used.php?code" ) {
 		return "<a href=\"$link=$code\">Where used</a>";
 	}
 
-	function return_where_used_link( $code , $link = "where_used.php?code" ) {
-		return "<a href=\"$link=$code\">$code</a>";
+	function return_where_used_link( $code , $hl = 0 , $link = "where_used.php?code" ) {
+		if ( $hl )
+			return "<a href=\"$link=$code\"><span class=\"blink_text\">$code</span></a>";
+		else
+			return "<a href=\"$link=$code\">$code</a>";
 	}
 
 	function is_bom_allowed( $code ) {
@@ -278,6 +292,17 @@
 //		echo $T . " " . $ret;
 		return $ret;
 	}
+	
+	
+	function return_bom_link_highlighted( $code , $hl , $clean = 0 , $link = "bom.php?code" ) {
+		if ( $clean ) 
+			return $code;
+		else
+			return "<a href=\"$link=$code&hl=$hl\" >$code</a>";
+	}
+
+	
+	
 ?>
 
 

@@ -1,158 +1,139 @@
 /*******************************************************
-TITLE: Fluid Box Layout  V1.0
-DATE: 20060810
-AUTHOR: The CSS Tinderbox - http://www.csstinderbox.com
+TITLE: Fluid Box Layout V1.0DATE: 20060810AUTHOR: The CSS Tinderbox - http://www.csstinderbox.com
 *******************************************************/
 
 body {
-margin:0;
-padding:0;
-background-color:#777;
-color:#000000;  
-text-align:center;
-font-family:Arial, Helvetica, sans-serif;
-font-size:1em;
+	margin:0;
+	padding:0;
+	background-color:#777;
+	color:#000000;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:1em;
 }
-
-
 .code {
 	margin:1em;
 	padding:.5em;
 	background-color: #eef;
 	border:1px solid #99f;
 }
-
 .code_update {
 	margin:1em;
 	padding:.5em;
 	background-color: #efe;
 	border:4px solid #98b898;
 }
-
-
 .insidecodelite {
 	margin:1em;
 	background-color: #ddd;
 	border:1px solid #999;
 	box-shadow: 1px 2px 3px #999;
-	border-radius: 10px 10px 10px 10px;	
+	border-radius: 10px 10px 10px 10px;
 }
-
 .codelite {
 	margin:1em;
 	padding:.5em;
 	background-color: #eee;
-/*	border:1px solid #be0000; */
-	overflow: auto; 
+	/*border:1px solid #be0000;
+	*/
+	overflow: auto;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
-
 .codelite_img {
 	padding:.5em;
 	height: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
-
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
-
 .box33 {
-  float: left;
-  width: 32%;
-  padding-left: 5px;
+	float: left;
+	width: 32%;
+	padding-left: 5px;
 	border:1px solid #ccc;
-	background-color: #dfdfdf	;
-	height:140px; 
+	background-color: #dfdfdf;
+	height:140px;
 	margin: 3px 6px 6px 6px;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
-
 .box25 {
-  float: left;
-  width: 24%;
-  padding-left: 5px;
+	float: left;
+	width: 24%;
+	padding-left: 5px;
 	border:1px solid #ccc;
-	background-color: #dfdfdf	;
-	height:120px; 
-  margin: 3px 6px 6px 6px;
+	background-color: #dfdfdf;
+	height:120px;
+	margin: 3px 6px 6px 6px;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
-
 .box50 {
-  float: left;
-  width: 48.3%;
-  padding-left: 5px;
+	float: left;
+	width: 48.3%;
+	padding-left: 5px;
 	border:1px solid #ccc;
-	background-color: #dfdfdf	;
-	height:120px; 
+	background-color: #dfdfdf;
+	height:120px;
 	margin: 3px 6px 6px 6px;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
-
 .box75 {
-  float: left;
-  width: 73.5%;
-  padding-left: 5px;
+	float: left;
+	width: 73.5%;
+	padding-left: 5px;
 	border:1px solid #ccc;
-	background-color: #dfdfdf	;
-	height:120px; 
+	background-color: #dfdfdf;
+	height:120px;
 	margin: 3px 6px 6px 6px;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
-
-
 .box100 {
-  float: left;
-  width: 99%;
-  padding-left: 5px;
+	float: left;
+	width: 99%;
+	padding-left: 5px;
 	border:1px solid #ccc;
-	background-color: #dfdfdf	;
-	height:120px; 
+	background-color: #dfdfdf;
+	height:120px;
 	margin: 3px 6px 6px 6px;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
-
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
-
 .bar {
-/*	background-color: #966; */
+	/*background-color: #966;
+	*/
 	border-radius: 7px;
 	height:10px;
 	box-shadow: 1px 2px 3px #999;
 }
-
-
 blockquote {
-margin:1em;
-padding:.5em;
-background-color:#f0f0f0;
-box-shadow: 1px 2px 3px #999;
-border-radius: 10px 10px 10px 10px;
+	margin:1em;
+	padding:.5em;
+	background-color:#f0f0f0;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 10px 10px 10px 10px;
 }
-
 blockquote p {
-margin:.2em;
+	margin:.2em;
 }
-
 #centerColumn {
-margin-top:2em;
-margin-left: 6em;
-margin-right:6em;
-/*
-voice-family: "\"}\"";
+	margin-top:2em;
+	margin-left: 6em;
+	margin-right:6em;
+	/*voice-family: "\"
+}
+\"";
 voice-family: inherit;
 */
 margin-left:6em;
@@ -160,39 +141,38 @@ margin-right:6em;
 padding:1em .5em 2em .5em;
 background:#f5f5f5;
 text-align:left;
-/*border:1px solid #999999;*/
+/*border:1px solid #999999;
+*/
 }
-
 html>body #centerColumn {
 margin-left:6em;
 margin-right:6em;
 border-radius: 20px;
 box-shadow: 1px 2px 3px #999;
 }
-
 #centerColumn h2 {
 margin:0 0 -.5em 0;
 padding:.75em 0 0 0;
 font-size:1em;
 letter-spacing:.1em;
 }
-
 #header {
-/*margin:-1em -.5em 0 -.5em !important;*/
-/*margin:-2em -1em 0 -1em;*/
+/*margin:-1em -.5em 0 -.5em !important;
+*/
+/*margin:-2em -1em 0 -1em;
+*/
 padding:0 0 10px 0;
 height:6.7em;
 background-color:#f5f5f5;
-/*border-bottom:1px solid #be0000;*/
+/*border-bottom:1px solid #be0000;
+*/
 }
-
 #header h1 {
 margin:0 0 -.6em 0;
 padding:.5em 0 0 1em;
 font-size:1.5em;
 letter-spacing:.1em;
 }
-
 #header h2 {
 margin:0 0 0 0;
 padding:1em 0 0 1.75em;
@@ -200,25 +180,21 @@ font-size:.9em;
 font-weight:300;
 letter-spacing:.1em;
 }
-
 #nav {
 margin:0 0 1em 0;
 padding:.4em 0 0 0;
 background:#eeeeee;
 }
-
 #nav ul {
 margin:0;
 padding:0;
 list-style:none;
 }
-
 #nav li {
 margin:0;
 padding:.25em;
 display:inline;
 }
-
 #footer {
 position:relative;
 bottom:0;
@@ -231,52 +207,51 @@ background:#ddd;
 box-shadow: 1px 2px 3px #999;
 border-radius: 10px 10px 10px 10px;
 }
-
 br.clear {
-  clear: both;
+clear: both;
 }
-
 div.clear {
-  clear: both;
+clear: both;
 }
-
-
 .blink_text {
 animation:1s blinker linear infinite;
 -webkit-animation:1s blinker linear infinite;
 -moz-animation:1s blinker linear infinite;
-
- color: black;
+color: black;
 }
-
 a.blink_text {
- text-decoration: none;
+text-decoration: none;
 }
-
-@-moz-keyframes blinker {  
- 0% { opacity: 1.0; }
- 50% { opacity: 0.0; }
- 100% { opacity: 1.0; }
- }
-
-@-webkit-keyframes blinker {  
- 0% { opacity: 1.0; }
- 50% { opacity: 0.0; }
- 100% { opacity: 1.0; }
- }
-
-@keyframes blinker {  
- 0% { opacity: 1.0; }
- 50% { opacity: 0.0; }
- 100% { opacity: 1.0; }
+@-moz-keyframes blinker {
+0% {
+	opacity: 1.0;
 }
-
-
-
-
-
-
-
-
-
-
+50% {
+	opacity: 0.0;
+}
+100% {
+	opacity: 1.0;
+}
+}
+@-webkit-keyframes blinker {
+0% {
+	opacity: 1.0;
+}
+50% {
+	opacity: 0.0;
+}
+100% {
+	opacity: 1.0;
+}
+}
+@keyframes blinker {
+0% {
+	opacity: 1.0;
+}
+50% {
+	opacity: 0.0;
+}
+100% {
+	opacity: 1.0;
+}
+}

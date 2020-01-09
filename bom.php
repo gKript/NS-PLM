@@ -35,6 +35,7 @@
 	$quantity	= get_check( 'quantity'	, null	);
 	$delete		= get_check( 'delete'		, ""		);
 	$action		= get_check( 'action'		, null	);
+	$hl	= get_check( 'hl'	, ""		);
 	$confirm	= get_check( 'confirm'	, ""		);
 	
 	require_once NSID_PLM_SRC_PHP . 'code_functions.php';
@@ -83,7 +84,7 @@
 			
 
 	<?php
-		create_bom_table( $code , $level );
+		create_bom_table( $code , $level , $hl);
 
 	}
 	else {

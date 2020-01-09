@@ -29,6 +29,7 @@
 	require_once( NSID_PLM_SRC_PHP."form_elements.php" );
 //	require_once( NSID_PLM_SRC_PHP."table.php" );
 	require_once( NSID_PLM_SRC_PHP."qrcode.php" );
+	require_once( NSID_PLM_SRC_PHP."html.php" );
 
 	
 //	--- CLASSES

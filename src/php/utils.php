@@ -5,13 +5,15 @@
 		echo $text . "\n";
 	}
 	
-	function link_css( $name , $path , $src = "local"  ) {
+	function link_css( $name , $path , $src = "local" , $type = "" ) {
 		if ( $src == "local" ) {
 			$fname = $path . $name;
 			println( "<link rel=\"stylesheet\" href=\"$fname\" type=\"text/css\" />" );
 		}
 		else if ( $src == "online" ) {
-			println( "<link rel=\"stylesheet\" href=\"$path\" type=\"text/css\" />" );
+			if ( $type != "" )
+				$type = "type=\"text/css\"";
+			println( "<link rel=\"stylesheet\" href=\"$name\" $type />" );
 		}
 	}
 	
@@ -110,11 +112,10 @@
 
 
 
-	function get_check( $var , $notset = "" ) {
-		$res = isset($_GET[ "$var" ]) ? $_GET[ "$var" ] : NULL;
-		if ( $res == NULL )
-			$res = $notset;
-		return $res;
+	function get_check( $var , $notset = "" ) { 
+		if ( isset( $var ) )
+			return isset($_GET[ "$var" ]) ? $_GET[ "$var" ] : $notset;
+		return $notset;
 	}
 	
 	

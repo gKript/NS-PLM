@@ -82,7 +82,7 @@
 			$lcode = return_code_link( $code );
 			$fsd = $array["abbreviazione"];
 			$fld = $array["descrizione"];
-			$fcl = return_bom_link( $fc );
+			$fcl = return_bom_link_highlighted( $fc , $code );
 			$myTabella->addValoreRiga(array( $fcl , $fsd , $fld , $fr , $sq ));
 			$myTabella->aggiungiRiga( null , 5, array(array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "width"=>"25%", "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "width"=>"55%", "align"=>"left") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%") ) );
 		}		
