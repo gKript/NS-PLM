@@ -163,13 +163,14 @@
 
 		<?php 
 				}
-		?>
+			$hr  = "index.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
+			$hrt = $codetype["T"] . $codetype["CG"] . $codetype["CS"];
+			$title  = "Code structure - ";
+			$title .= link_generator( $hr , $hrt );
+			echo open_block( $title , "struct.png" );
+	
 				
-				<div class="codelite">
-				<?php
-					echo tag_img( "top.svg" , "icona top" , "" , "float: right;" );
 				?>
-					<h2>Code structure - <a href="index.php?T=<?php echo $codetype["T"]; ?>&G=<?php echo $codetype["CG"]; ?>&S=<?php echo $codetype["CS"]; ?>&action=Filter"><?php echo $codetype["T"] . $codetype["CG"] . $codetype["CS"] ; ?></a></h2>
 					<table style="margin:1em;" width="90%">
 
 			<?php
@@ -243,13 +244,13 @@
 				</div>
 		<?php 
 				if ( ! $new ) {
+					echo open_block( "Code details" , "details.svg" );
+					echo generic_tag_open( "div" , "clearfix" );
+					echo generic_tag_open( "div" , "box25" , "background-color:#ddd; height:160px;" );
+					echo title_h2( "Code identifier" , "identifier.svg" );
+//				echo tag_enclosed( "h2" , "Code identifier" );
 			?>
-			
-			<div class="codelite" style="height:200;">
-				<div class="clearfix">
-					<div class="box25" style="background-color:#ddd; height:160px;" >
 
-						<h2>Code details</h2>
 						<table style="margin:1em;" width="80%">
 
 				<?php
@@ -274,15 +275,13 @@
 						println( "  <td colspan=\"2\" style='text-align: center; border:1px solid #999; background-color:#ffd;border-radius: 7px;' width=\"20%\" ><a href=\"code.php?code=$latest_rev\"><span class=\"blink_text\"><b>Latest</b></span></a></td>" );
 					}
 					println( "</tr>" );
+					
+					echo generic_tag_close( "table" );
+					echo div_block_close();
+					echo div_block_open( "box50" , "background-color:#ddd; height:160px;" );
+					echo title_h2( "Creation, modification and attributes" , "create.svg" );
 				?>
 				
-						</table>
-
-
-					</div>
-					<div class="box50" style="background-color:#ddd; height:160px;" >
-
-						<h2>Creation, modification and attributes</h2>
 						<table style="margin:1em;" width="80%">
 
 				<?php

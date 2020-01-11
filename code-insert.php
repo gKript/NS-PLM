@@ -64,9 +64,13 @@
 				print( "<b>$code</b>" . "  -  " . $array["abbreviazione"] . "  -  " . $array["descrizione"] ); 	
 				?>
 				</div>
-				
-				<div class="codelite">
-				<h2>Code structure - <a href="index.php?T=<?php echo $codetype["T"]; ?>&G=<?php echo $codetype["CG"]; ?>&S=<?php echo $codetype["CS"]; ?>&action=Filter"><?php echo $codetype["T"] . $codetype["CG"] . $codetype["CS"] ; ?></a></h2>
+				<?php
+				$hr  = "index.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
+				$hrt = $codetype["T"] . $codetype["CG"] . $codetype["CS"];
+				$title  = "Code structure - ";
+				$title .= link_generator( $hr , $hrt );
+				echo open_block( $title );
+				?>
 				<table style="margin:1em;" width="90%">
 				<?php
 				println( "<tr>" );

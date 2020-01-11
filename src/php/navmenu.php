@@ -52,7 +52,7 @@ require_once NSID_PLM_SRC_PHP . 'index_funtions.php';
 		
 		
 		//CSS online
-		link_css( "https://fonts.googleapis.com/icon?family=Material+Icons"     , null , "online" );
+		link_css( "https://fonts.googleapis.com/css?family=Montserrat&display=swap"  , null , "online" );
 
 
 		//CSS locali	
