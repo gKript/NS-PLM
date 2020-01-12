@@ -12,7 +12,7 @@
 <?php
 	$nspage = "code";
 
-	require_once 'src/php/includes.php';
+	require_once 'src/php/gkphp/includes.php';
 	
 	$db = new config_database();
 	
@@ -33,8 +33,8 @@
 	$G = get_check( 'G' );
 	$S = get_check( 'S' );
 
-	require NSID_PLM_SRC_PHP . 'code_functions.php';
-	include NSID_PLM_SRC_PHP . 'navmenu.php';
+	require NSID_PLM_SRC_TEMPLATE . 'code_functions.php';
+	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 
 ?>
 
@@ -434,7 +434,7 @@
 	?>
 
 <?php
-	include NSID_PLM_SRC_PHP . 'footer.php';
+	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 ?>
 

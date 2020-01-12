@@ -1,6 +1,6 @@
 <?php
 
-require_once NSID_PLM_SRC_PHP . 'index_funtions.php';
+require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
 
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 
-	require_once NSID_PLM_SRC_PHP . 'bom_funtions.php';
-	require_once NSID_PLM_SRC_PHP . "table.php";
+	require_once NSID_PLM_SRC_TEMPLATE . 'bom_funtions.php';
+	require_once GKPHP . "table.php";
 
 	function synopsis( $code , $sd , $ld , $image = "" ) {
 		

@@ -1,6 +1,6 @@
 <?php
 
-	require_once NSID_PLM_SRC_PHP . 'attributes_function.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'attributes_function.php';
 
 	function create_bom_table( $code , $maxlevel , $hl = "" ) {
 		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC";

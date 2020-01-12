@@ -12,8 +12,7 @@
 <?php
 	$nspage = "info";
 
-	require_once 'src/php/includes.php';
-
+	require_once 'src/php/gkphp/includes.php';
 	$db = new config_database();
 	
 	$mysqli = new mysqli( $db->host , $db->username , $db->password , $db->dbname , $db->port );
@@ -22,7 +21,7 @@
 	}
 	
 	
-	include NSID_PLM_SRC_PHP . 'navmenu.php';
+	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 ?>
 
 	<div class="insidecodelite">
@@ -739,7 +738,7 @@
 	</div>
 
 <?php
-	include NSID_PLM_SRC_PHP . 'footer.php';
+	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 ?>
 

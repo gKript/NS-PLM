@@ -12,9 +12,8 @@
 <?php
 	$nspage = "code-insert";
 
-	require_once 'src/php/includes.php';
-	
-	require_once NSID_PLM_SRC_PHP . 'code_functions.php';
+	require_once 'src/php/gkphp/includes.php';	
+	require_once NSID_PLM_SRC_TEMPLATE . 'code_functions.php';
 
 	$db = new config_database();
 	
@@ -32,7 +31,7 @@
 	$ldescr = get_check( 'ldescr' );
 	$action = get_check( 'action' );
 	
-	include NSID_PLM_SRC_PHP . 'navmenu.php';
+	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 ?>
 
 <?php
@@ -188,6 +187,6 @@
 		</div>
 	
 <?php
-	include NSID_PLM_SRC_PHP . 'footer.php';
+	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 ?>

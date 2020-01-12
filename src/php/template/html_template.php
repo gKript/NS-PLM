@@ -1,6 +1,6 @@
 <?php
 
-	require_once NSID_PLM_SRC_PHP . 'html.php';
+	require_once( GKPHP . "html.php" );
 	
 	function open_block( $title , $icon = "" , $class ="codelite" ) {
 		$url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];	

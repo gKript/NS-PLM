@@ -7,30 +7,34 @@
 //
 //	Ver 0.10-x
 
-	define( 'NSID_PLM_TITLE'		,	'NS-PLM' );	
+	define( 'NSID_PLM_TITLE'				,	'NS-PLM' );	
 
-	define( 'NSID_PLM_SRC_PHP'	, 'src/php/');
-	define( 'NSID_PLM_SRC_HTML'	, 'src/html/');
-	define( 'NSID_PLM_SRC_CSS'	, 'src/css/');
-	define( 'NSID_PLM_SRC_JS'	  , 'src/js/');
-	define( 'NSID_PLM_SRC_IMG'  ,	'src/img/');
+	define( 'GKPHP'									, 'src/php/gkphp/');
+	define( 'NSID_PLM_SRC_TEMPLATE'	, 'src/php/template/');
+	define( 'NSID_PLM_SRC_HTML'			, 'src/html/');
+	define( 'NSID_PLM_SRC_CSS'			, 'src/css/');
+	define( 'NSID_PLM_SRC_JS'	  		, 'src/js/');
+	define( 'NSID_PLM_SRC_IMG'  		,	'src/img/');
 	
-	define( 'ITEMS_IN_HISTORY'	,	10				);
+	define( 'ITEMS_IN_HISTORY'			,	10				);
 
 
-//	--- SOURCES
+//	--- gkphp
 
-	require_once( NSID_PLM_SRC_PHP."db_connection.php" );
-	require_once( NSID_PLM_SRC_PHP."codemenu.php" );
-	require_once( NSID_PLM_SRC_PHP."date.php" );
-	require_once( NSID_PLM_SRC_PHP."statistics.php" );
-	require_once( NSID_PLM_SRC_PHP."mysqli_utils.php" );
-	require_once( NSID_PLM_SRC_PHP."utils.php" );
-	require_once( NSID_PLM_SRC_PHP."form_elements.php" );
-//	require_once( NSID_PLM_SRC_PHP."table.php" );
-	require_once( NSID_PLM_SRC_PHP."qrcode.php" );
-	require_once( NSID_PLM_SRC_PHP."html.php" );
-	require_once( NSID_PLM_SRC_PHP."html_template.php" );
+	require_once( GKPHP . "date.php" );
+	require_once( GKPHP . "db_connection.php" );
+	require_once( GKPHP . "form_elements.php" );
+	require_once( GKPHP . "html.php" );
+	require_once( GKPHP . "mysqli_utils.php" );
+	require_once( GKPHP . "qrcode.php" );
+	require_once( GKPHP . "table.php" );
+	require_once( GKPHP . "utils.php" );
+
+//	--- template
+
+	require_once( NSID_PLM_SRC_TEMPLATE . "codemenu.php" );
+	require_once( NSID_PLM_SRC_TEMPLATE . "statistics.php" );
+	require_once( NSID_PLM_SRC_TEMPLATE . "html_template.php" );
 
 	
 //	--- CLASSES

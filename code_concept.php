@@ -13,8 +13,7 @@
 
 	$nspage = "Code_concept";
 
-	require_once 'src/php/includes.php';
-
+	require_once 'src/php/gkphp/includes.php';
 	$db = new config_database();
 	
 	$mysqli = new mysqli( $db->host , $db->username , $db->password , $db->dbname , $db->port );
@@ -22,7 +21,7 @@
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
 
-	include NSID_PLM_SRC_PHP . 'navmenu.php';
+	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 
 ?>
 
@@ -134,7 +133,7 @@
 
 <?php
 
-	include NSID_PLM_SRC_PHP . 'footer.php';
+	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 
 ?>

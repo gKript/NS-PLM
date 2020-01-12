@@ -12,8 +12,7 @@
 <?php
 	$nspage = "rules";
 	
-	require_once 'src/php/includes.php';
-
+	require_once 'src/php/gkphp/includes.php';
 	$db = new config_database();
 	
 	$mysqli = new mysqli( $db->host , $db->username , $db->password , $db->dbname , $db->port );
@@ -24,7 +23,7 @@
 
 
 <?php
-	include NSID_PLM_SRC_PHP . 'navmenu.php';
+	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 	insert_blockquote( "This page helps you to understand the codes meaning and to manage them in the proper way ." , "Blockquote" );
 ?>
 
@@ -99,7 +98,7 @@
 
 	
 <?php
-	include NSID_PLM_SRC_PHP . 'footer.php';
+	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 ?>
 

@@ -12,10 +12,9 @@
 <?php
 	$nspage = "bom";
 
-	require_once 'src/php/includes.php';
-	
-	require_once NSID_PLM_SRC_PHP.'index_funtions.php';
-	require_once( NSID_PLM_SRC_PHP."table.php" );
+	require_once 'src/php/gkphp/includes.php';	
+	require_once NSID_PLM_SRC_TEMPLATE.'index_funtions.php';
+	require_once GKPHP."table.php";
 	
 
 	$db = new config_database();
@@ -38,9 +37,9 @@
 	$hl	= get_check( 'hl'	, ""		);
 	$confirm	= get_check( 'confirm'	, ""		);
 	
-	require_once NSID_PLM_SRC_PHP . 'code_functions.php';
-	require_once NSID_PLM_SRC_PHP . 'bom_funtions.php';
-	require_once NSID_PLM_SRC_PHP . 'navmenu.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'code_functions.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'bom_funtions.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 	
 ?>
 
@@ -104,7 +103,7 @@
 
 	
 <?php
-	include NSID_PLM_SRC_PHP . 'footer.php';
+	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 ?>
 
