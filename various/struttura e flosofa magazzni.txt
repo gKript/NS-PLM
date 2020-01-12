@@ -1,0 +1,35 @@
+Plant
+
+	xxxyy						xxx:	Numero che indica l'edificio fisico
+									yy:		Reparto di assegnazione
+	
+		Warehouse
+		-	xyzw				x:		dimensione (grande, piccolo)
+									y:		prelievo (automatico, manuale)
+									z:		tipologia (fisico/virtuale , non/valorizzato , prodotti finiti/non , spendizione/interno , ...)
+									w:		
+									
+				identificatore
+				- x				x:		indicatore progressivo identificatore del magazzino specifico
+									
+Esempio
+
+	00201 12
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	Coperto / scoperto
+	Virtuale / fisico
+	Valorizzato / non
+	Per uscita / Interno
+	

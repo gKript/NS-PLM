@@ -13,8 +13,11 @@
 		$origin = $code;
 		$father = "<a href=\"bom.php?code=" . get_father( $code , 1 ) . "&level=" . (string)($maxlevel + 1) . "\" ><b>" . get_father( $code , 1 ) . "</b></a>";
 		
-		println( "<div class=\"codelite\">" );
-		println( "<h2>Bill of Materials</h2><br/>" );
+//		println( "<div class=\"codelite\">" );
+//		println( "<h2>Bill of Materials</h2><br/>" );
+
+		echo open_block( "Bill of Materials" , "bom.svg" );
+
 		$fhash = get_hashid_from_bom( $code );
 		println( "<small>BOM Hash ID: [ $fhash ]</small>" );
 	

@@ -30,7 +30,7 @@
 	
 	function tag_enclosed( $tag , $enclose , $style = "" ) {
 		$ret  = "<$tag ";
-		$ret .= "$style >";
+		$ret .= "style=\"$style\" >";
 		$ret .= $enclose;
 		$ret .= "</$tag>";
 		return $ret;
@@ -47,14 +47,14 @@
 			$path = "src/img/";
 		if ( $tag == "open" )
 			$c = "";
-		return "<img src=\"$path$img\" $s alt=\"$alt\" $w $h $b $c>\n";
+		return "<img src=\"$path$img\" $s alt=\"$alt\" width=\"$w\" heigth=\$2h\" border=\"$b\" $c>\n";
 	}
 
 	function div_block_open( $class , $style = "" ) {
-		return "<div class=\"$class\" $style >\n";
+		return "<div class=\"$class\" style=\"$style\" >\n";
 	}
 
-	function div_block_close( ) {
+	function div_block_close() {
 		return "</div>\n";
 	}
 	

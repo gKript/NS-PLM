@@ -12,19 +12,19 @@
 <?php
 	$nspage = "phpinfo";
 
-	require_once 'src/php/gkphp/includes.php';
+	require_once 'includes.php';
 	$db = new config_database();
 	
-	$mysqli = new mysqli( $db->host , $db->username , $db->password , $db->dbname , $db->port );
+	$mysqli = new mysqli( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME , NS_DB_PORT );
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
 	
-	
-	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'php_info.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 ?>
 
-<div class="codelite" >
+<div class="insidecodelite" >
 
 <?php
 

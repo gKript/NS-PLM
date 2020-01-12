@@ -12,14 +12,12 @@
 <?php
 	$nspage = "where_used";
 
-	require_once 'src/php/gkphp/includes.php';	
-	require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
-	require_once NSID_PLM_SRC_PHP . 'table.php' ;
-	
+	require_once 'includes.php';	
+	require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';	
 
 	$db = new config_database();
 	
-	$mysqli = new mysqli( $db->host , $db->username , $db->password , $db->dbname , $db->port );
+	$mysqli = new mysqli( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME , NS_DB_PORT );
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
@@ -60,12 +58,16 @@
 	$result = query_get_result( $sql );
 	if ( $result ) {
 
-
+/*
 		println( "<div class=\"codelite\">" );
 		println( "<h2>Where Used</h2><br/>" );
+*/		
+		echo open_block( "Where Used" );
 
-		println( "<div class=\"box100\" style=\"height:300px;\">");
-		
+//		println( "<div class=\"box100\" style=\"height:300px;\">");
+	//	echo div_block_open( "insidecodelite" );
+
+	
 		$myTabella = new classTabella;
 		$myTabella->setTabella();	
 		$myTabella->stdAttributiTabella(array( "width"=>"100%" , "align"=>"center" , "style"=>"padding: 10px 10px 10px 10px ;" ));
@@ -86,8 +88,8 @@
 			$myTabella->aggiungiRiga( null , 5, array(array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "width"=>"25%", "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "width"=>"55%", "align"=>"left") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%") ) );
 		}		
 		$myTabella->stampaTabella();
-		println( "	</div>" );	
-		println( "</div>" );	
+		//echo div_block_close();	
+		echo div_block_close();	
 	}
 	else {
 		insert_blockquote( "This code is not involved in any high level assemble code!" , "Notice" );
@@ -96,7 +98,6 @@
 
 
 ?>
-
 
 
 	</div>

@@ -1,6 +1,27 @@
 <?php
 	
 	
+	
+	class config_database {
+		
+		
+		public $host;
+		public $username;
+		public $password;
+		public $dbname;
+		public $port;
+
+		function __construct() {
+			$this->host = (string) "localhost";
+			$this->username = (string) "root";
+			$this->password = (string) "";
+			$this->dbname = (string) "nsid_plm_data";
+			$this->port = (int) 3306;
+		}
+	}
+	
+	
+	
 	function query_single_line( $query , $echo = 0 ) {
 		global $mysqli;
 		if ( $echo ) 

@@ -1,12 +1,11 @@
 <?php
 
-	require_once( GKPHP . "html.php" );
 	
 	function open_block( $title , $icon = "" , $class ="codelite" ) {
 		$url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];	
 		//echo $page;		
 		$page  = div_block_open( $class );
-		$page .= link_generator( $url , img_generator( "top.svg" , "icona top" , "" , "float: right;" ) );
+		$page .= link_generator( $url , img_generator( "top.svg" , "icona top" , "" , "float: right;" , "autoclose" , 0 , 24 , 24) );
 //		$text = img_generator( "syn.svg" , "icona synopsis" ) . $title;
 //		echo tag_enclosed( "h2" , $title , "vertical-align: middle;" );
 		$page .= title_h2( $title , $icon );
@@ -14,6 +13,10 @@
 		return $page;	
 	}
 	
+	
+	function close_block() {
+		return div_block_close();
+	}	
 	
 	function top_link( ) {
 		$page = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];	
@@ -27,7 +30,7 @@
 		if ( $icon == "" )
 			$text = $title;
 		else
-			$text = img_generator( $icon , "generic tag" ) . $title;
+			$text = img_generator( $icon , "generic tag" , "" , "" , "autoclose" , 0 , 24 , 24 ) . $title;
 		$ret = tag_enclosed( "h2" , $text , "vertical-align: middle;" );
 //		$ret .= BR( 1 , 0 );
 		return $ret;

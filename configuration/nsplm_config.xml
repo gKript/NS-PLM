@@ -1,0 +1,29 @@
+<ns>
+	<db>
+		<loop>
+			<host>localhost</host>
+			<username>root</username>
+			<password></password>
+			<dbname>nsid_plm_data</dbname>
+			<port>3306</port>
+		</loop>
+		<online>
+			<host>localhost</host>
+			<username>gkrip_dbuser</username>
+			<password>ns00.6-reader</password>
+			<dbname>gkriptorg_nsid_plm_data</dbname>
+			<port>3306</port>
+		</online>
+	</db>
+	<plm>
+		<title>NS-PLM</title>
+		<debug type="int">0</debug>
+		<version>00.2</version>
+		<status>dev</status>
+	</plm>
+	<param>
+		<search>
+			<history type="int">10</history>
+		</search>
+	</param>
+</ns>

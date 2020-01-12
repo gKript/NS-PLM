@@ -1,65 +1,5 @@
 <?php
 
-//------------------------------------------------------------
-//	gKript.org since 27/11/2001
-//	gk_includes.php 
-//	code by AsYntote	
-//
-//	Ver 0.10-x
-
-	define( 'NSID_PLM_TITLE'				,	'NS-PLM' );	
-
-	define( 'GKPHP'									, 'src/php/gkphp/');
-	define( 'NSID_PLM_SRC_TEMPLATE'	, 'src/php/template/');
-	define( 'NSID_PLM_SRC_HTML'			, 'src/html/');
-	define( 'NSID_PLM_SRC_CSS'			, 'src/css/');
-	define( 'NSID_PLM_SRC_JS'	  		, 'src/js/');
-	define( 'NSID_PLM_SRC_IMG'  		,	'src/img/');
-	
-	define( 'ITEMS_IN_HISTORY'			,	10				);
-
-
-//	--- gkphp
-
-	require_once( GKPHP . "date.php" );
-	require_once( GKPHP . "db_connection.php" );
-	require_once( GKPHP . "form_elements.php" );
-	require_once( GKPHP . "html.php" );
-	require_once( GKPHP . "mysqli_utils.php" );
-	require_once( GKPHP . "qrcode.php" );
-	require_once( GKPHP . "table.php" );
-	require_once( GKPHP . "utils.php" );
-
-//	--- template
-
-	require_once( NSID_PLM_SRC_TEMPLATE . "codemenu.php" );
-	require_once( NSID_PLM_SRC_TEMPLATE . "statistics.php" );
-	require_once( NSID_PLM_SRC_TEMPLATE . "html_template.php" );
-
-	
-//	--- CLASSES
-	
-//	require_once( NSID_PLM_SRC_PHP."class/upload/class.upload.php" );
-	
-
-
-
-//	session_start();
-
-
-	$codetype = array(
-   'T' => 0,
-	 'Tname' => '',
-   'CG' => 0,
-	 'CGname' => '',
-	 'CGdescr' => '',
-	 'CS' => 0,
-	 'CSname' => '',
-	 'CSdescr' => '',
-	 'bom' => 0
-	);
-	
-	
 
 
 	function embedded_phpinfo() {
@@ -94,6 +34,6 @@
 					</div>
 					";
 	}
-
+	
 
 ?>

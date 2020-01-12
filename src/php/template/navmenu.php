@@ -86,7 +86,7 @@ require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
 				</tr>
 			</table>
 		</div>
-		<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;" >
+		<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 24px;" >
 			<Form Name ="menu_srch" Method ="GET" ACTION = "index.php">
 				<ul id="navmenu">
 					<li><a href="index.php">Start</a></li>
