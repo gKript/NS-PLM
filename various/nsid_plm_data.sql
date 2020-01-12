@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 07, 2020 alle 10:08
--- Versione del server: 10.3.14-MariaDB
--- Versione PHP: 7.2.18
+-- Creato il: Gen 12, 2020 alle 10:23
+-- Versione del server: 10.4.10-MariaDB
+-- Versione PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -235,6 +235,41 @@ CREATE TABLE IF NOT EXISTS `dbupdate` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `distinta`
+--
+
+DROP TABLE IF EXISTS `distinta`;
+CREATE TABLE IF NOT EXISTS `distinta` (
+  `idDistinta` int(11) NOT NULL AUTO_INCREMENT,
+  `dbCodice` text NOT NULL,
+  `dbCodice_padre` text NOT NULL,
+  `dbDescrizione` text NOT NULL,
+  `dbQuantita` int(11) NOT NULL,
+  PRIMARY KEY (`idDistinta`),
+  UNIQUE KEY `idDistinta` (`idDistinta`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `distinta`
+--
+
+INSERT INTO `distinta` (`idDistinta`, `dbCodice`, `dbCodice_padre`, `dbDescrizione`, `dbQuantita`) VALUES
+(2, '125000100', '557000100', 'SPA Control PCB', 1),
+(3, '425000100', '557000100', 'SPA Prototipo 3ch Sense + 1ch Shot PCB', 1),
+(4, '157000100', '557000100', 'Supporto vibrante sensori + PCB Sense e Shot', 1),
+(5, '011000100', '112000100', 'Grano M2 brugola', 1),
+(6, '011000200', '112000100', 'Vite M2x3 Testa piana a taglio', 2),
+(7, '112000100', '157000200', 'SPA Sense supporto vibrante', 1),
+(8, '125000200', '157000200', 'SPA Sense PCB', 1),
+(9, '023000100', '157000200', 'Sensore piezoceramico bimorfo vibrazione Cod RS 285784', 1),
+(10, '157000200', '157000100', 'SPA Sense modulo ( Supporto + PCB + Sensore )', 8),
+(11, '157000300', '157000100', 'SPA Shot modulo ( Supporto + PCB + Sensore )', 1),
+(12, '886000100', '136000300', 'Generic Information Manager Documentation', 1),
+(13, '536000300', '136000300', 'Generic Information Manager 3', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `elenco_codici`
 --
 
@@ -435,15 +470,20 @@ CREATE TABLE IF NOT EXISTS `search` (
   `search` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
 --
 
 INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
-(1, '467', '2020-01-07 09:47:47'),
-(2, 'gim', '2020-01-07 09:47:47');
+(75, '2dc', '2020-01-10 09:49:43'),
+(74, '467', '2020-01-09 22:47:16'),
+(72, 'varco', '2020-01-09 22:46:09'),
+(73, '22c', '2020-01-09 22:46:43'),
+(69, '223', '2020-01-09 21:23:57'),
+(67, '122', '2020-01-09 21:23:48'),
+(68, '224', '2020-01-09 21:23:50');
 
 -- --------------------------------------------------------
 
@@ -458,7 +498,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -494,7 +534,22 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (32, 'BomCountDaily', '13', '2020-01-06 00:39:35'),
 (33, 'CodeCountDaily', '61', '2020-01-07 09:27:59'),
 (34, 'AttribCountDaily', '47', '2020-01-07 09:27:59'),
-(35, 'BomCountDaily', '13', '2020-01-07 09:27:59');
+(35, 'BomCountDaily', '13', '2020-01-07 09:27:59'),
+(36, 'CodeCountDaily', '61', '2020-01-08 20:59:36'),
+(37, 'AttribCountDaily', '47', '2020-01-08 20:59:36'),
+(38, 'BomCountDaily', '13', '2020-01-08 20:59:36'),
+(39, 'CodeCountDaily', '61', '2020-01-09 08:34:18'),
+(40, 'AttribCountDaily', '47', '2020-01-09 08:34:18'),
+(41, 'BomCountDaily', '13', '2020-01-09 08:34:18'),
+(42, 'CodeCountDaily', '61', '2020-01-10 06:35:14'),
+(43, 'AttribCountDaily', '47', '2020-01-10 06:35:14'),
+(44, 'BomCountDaily', '13', '2020-01-10 06:35:14'),
+(45, 'CodeCountDaily', '61', '2020-01-11 14:37:32'),
+(46, 'AttribCountDaily', '47', '2020-01-11 14:37:32'),
+(47, 'BomCountDaily', '13', '2020-01-11 14:37:32'),
+(48, 'CodeCountDaily', '61', '2020-01-12 00:27:46'),
+(49, 'AttribCountDaily', '47', '2020-01-12 00:27:46'),
+(50, 'BomCountDaily', '13', '2020-01-12 00:27:46');
 
 -- --------------------------------------------------------
 
