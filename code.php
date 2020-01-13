@@ -376,7 +376,7 @@
 		if ( $code == '0' ) {
 			echo "<div class=\"insidecodelite\">\n";
 			if ( $new ) {
-			echo "<h2 style=\"padding-left: 12px;\">Code Creation - spep 1</h2><br/>\n";
+			echo "<h2 style=\"padding-left: 12px;\">Code Creation - step 1</h2><br/>\n";
 			insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li><b>Choose the context</b></li><li>Enter all the others information</li></o	l>" , "Blockquote" );
 //			echo "<hr/>\n";
 

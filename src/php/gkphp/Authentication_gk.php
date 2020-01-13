@@ -25,7 +25,7 @@
 	
 		var $debug;
 
-		function gkAuthentication ( $n_user , $dbhost , $dbuser , $dbpwd , $dbname , $md5_pass , $user_debug = false ) {
+		function __construct ( $n_user , $dbhost , $dbuser , $dbpwd , $dbname , $md5_pass , $user_debug = false ) {
 			if ( $user_debug == false ) 
 				$this->debug = GK_AUTH_DEBUG_STATUS;
 			else
@@ -388,5 +388,27 @@
 	
 	
 	}
+
+
+	function gkAuth_start( $host , $user , $pass , $dbname ) {
+		if ( ! isset( $_SESSION["user"] ) ) {
+			$_SESSION["user"]				= "guest";
+			$_SESSION["clean_user"]	= "guest";
+			$_SESSION["pass"]				= "guest";
+			$_SESSION["role"]				= "guest";
+			$_SESSION["auth"]				= false;
+			
+			if ( isset( $_COOKIE["GK_USER"] ) )
+				$gk_Auth = new gkAuthentication( $_SESSION["user"] , $host , $user , $pass , $dbname , true );
+			else
+				$gk_Auth = new gkAuthentication( $_SESSION["user"] , $host , $user , $pass , $dbname , false );
+		}
+		else {
+			$_SESSION["auth"] = true;
+			$gk_Auth = new gkAuthentication( $_SESSION["user"] , $host , $user , $pass , $dbname , true );
+		}	
+	}
+
+
 
 ?>

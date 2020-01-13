@@ -36,13 +36,17 @@
 	ConfigurationLoader::update( GKPHP_CFG_PATH."gk_cfg.xml" , GKPHP_CFG_PATH."gk_cfg.php" );
 	require_once( GKPHP_CFG_PATH."gk_cfg.php" );
 	$gkcfg = new gk();
+	
+	$db = new config_database();
 
 	if( $gkcfg->param->session )
 		session_start();
 
-	if( $gkcfg->param->authentication->enable )
-		require_once( GKPHP_PATH . "Authentication_gk.php" );
-
+	if( $gkcfg->param->authentication->enable ) {
+			require_once( GKPHP_PATH . "Authentication_gk.php" );
+	}
+	
+	
 	define	( 'GK_STATUS'		, $gkcfg->info->status );
 	define	( 'GK_SUBMINOR'	, $gkcfg->info->subminor );
 	define	( 'GK_VERSION'	, $gkcfg->info->version.GK_STATUS.'-'.GK_SUBMINOR );

@@ -65,7 +65,13 @@
 	define	( 'NS_DB_USER'		, $nsDb->username );
 	define	( 'NS_DB_PASS'		, $nsDb->password );
 	define	( 'NS_DB_PORT'		,	$nsDb->port );
+	
+	$mysqli = new mysqli( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME , NS_DB_PORT );
+	if ($mysqli->connect_error) {
+		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+	}
 
+	//gkAuth_start( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME );
 
 
 ?>
