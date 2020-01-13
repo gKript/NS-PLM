@@ -17,10 +17,10 @@
 		return "</$tag>\n";		
 	}
 	
-	function BR( $repeat = 1 , $print = 1 , $class = "" ) {
+	function BR( $repeat = 1 , $clean = 1 , $class = "" ) {
 		$ret = "";
 		for( $r = 0 ; $r < $repeat ; $r++ ) {
-			if ( ! $print )
+			if ( ! $clean )
 				$ret .= "<br $class />\n";
 			else
 				echo "<br $class />\n";
@@ -32,7 +32,7 @@
 		$ret  = "<$tag ";
 		$ret .= "style=\"$style\" >";
 		$ret .= $enclose;
-		$ret .= "</$tag>";
+		$ret .= "</$tag>\n";
 		return $ret;
 	}
 

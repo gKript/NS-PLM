@@ -9,6 +9,8 @@
 
 	define( 'NSID_PLM_TITLE'	,	'NS-PLM' );	
 	define( 'NSID_ONLINE'			, false );
+	
+	$using_gkphp = true;
 
 //	--- gkphp
 	require_once( "gk.php" );

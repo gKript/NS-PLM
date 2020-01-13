@@ -378,7 +378,7 @@
 			if ( $new ) {
 			echo "<h2 style=\"padding-left: 12px;\">Code Creation - spep 1</h2><br/>\n";
 			insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li><b>Choose the context</b></li><li>Enter all the others information</li></o	l>" , "Blockquote" );
-			echo "<hr/>\n";
+//			echo "<hr/>\n";
 
 			$rest = stat_top_n_context();
 			
@@ -408,9 +408,9 @@
 				button( "submit" , "action" , "Filter" , 0 , "codelite" );
 			close_form();
 			
-			if ( ( ! $new ) && ( ! $action ) )
+/*			if ( ( ! $new ) && ( ! $action ) )
 				echo "<hr/>";
-			
+*/			
 			if ( ( ! $new ) && ( ! $action ) ) {
 				echo "<h2 style=\"padding-left: 12px;\">Code Creation</h2><br/>\n";
 				insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li>Choose the context</li><li>Enter all the others information</li></o	l>" , "Blockquote" );
