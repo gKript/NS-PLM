@@ -6,7 +6,7 @@
 		<debug type="int">0</debug>
 		<version>00.1</version>
 		<status>dev</status>
-		<subminor>2</subminor>
+		<subminor>3</subminor>
 	</info>
 	<param>
 		<authentication>

@@ -50,8 +50,8 @@
 		return "<img src=\"$path$img\" $s alt=\"$alt\" width=\"$w\" heigth=\$2h\" border=\"$b\" $c>\n";
 	}
 
-	function div_block_open( $class , $style = "" ) {
-		return "<div class=\"$class\" style=\"$style\" >\n";
+	function div_block_open( $class , $style = "" , $id = "" ) {
+		return "<div class=\"$class\" style=\"$style\" id=\"$id\" >\n";
 	}
 
 	function div_block_close() {

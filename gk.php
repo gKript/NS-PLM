@@ -49,7 +49,7 @@
 	
 	define	( 'GK_STATUS'		, $gkcfg->info->status );
 	define	( 'GK_SUBMINOR'	, $gkcfg->info->subminor );
-	define	( 'GK_VERSION'	, $gkcfg->info->version.GK_STATUS.'-'.GK_SUBMINOR );
+	define	( 'GK_VERSION'	, $gkcfg->info->version.'-'.GK_STATUS.'-'.GK_SUBMINOR );
 	define	( 'GK_DEBUG'		, $gkcfg->info->debug );
 
 
