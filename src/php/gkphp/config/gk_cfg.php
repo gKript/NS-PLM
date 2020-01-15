@@ -48,7 +48,7 @@ class gk_param_authentication
 public $enable;
 function __construct()
 {
-$this->enable = (int) 0;
+$this->enable = (int) 1;
 $this->tables = new gk_param_authentication_tables();
 
 }

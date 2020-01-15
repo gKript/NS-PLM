@@ -6,10 +6,10 @@
 	define	( 'GK_USER_ADMIN'	, "administrator" );
 	
 	define	( 'GK_MAX_DELTA'	, 300 );
-	
 	define	( 'GK_AUTH_DEBUG_STATUS'	, false );
 	
 	class gkAuthentication {
+		
 		var $user;
 		var $clean_user;
 		var $password;
@@ -61,17 +61,14 @@
 					$this->autoconnect = false;
 					$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 					$this->gk_update_values_to_session();
-					$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-					mysql_select_db( $this->db_name );
 					$query = 'SELECT * FROM `gk_users_online` WHERE `online_session_id` = CONVERT(_utf8 \''.$this->session.'\' USING latin1) COLLATE latin1_swedish_ci';
 					$this->gk_debug( $query."<br>" );
-					$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-					$nrow = mysql_num_rows( $result );
-					if ( $nrow != 0 ) {
+					$nrow = query_get_num_rows( $query );
+					if ( $nrow ) {
 						$this->gk_debug( "Updating last access<br>" );
 						$query = "UPDATE `gk_users_online` SET `online_last_access` = ".time()." WHERE `online_session_id` = CONVERT(_utf8 '".$this->session."' USING latin1) COLLATE latin1_swedish_ci";
 						$this->gk_debug( $query."<br>" );
-						$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
+						query_sql_run( $query );
 						$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 						$this->gk_update_values_to_session();
 					}
@@ -79,7 +76,7 @@
 						$this->gk_debug( "Insert online guest session<br>" );
 						$query = 'INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES (NULL, \'guest\', \'guest\', \'guest\', \''.$this->session.'\', '.time().' ) ;';
 						$this->gk_debug( $query."<br>" );
-						$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
+						query_sql_run( $query );
 						$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 						$this->gk_update_values_to_session();
 						$this->gk_debug( $this->role."<br>" );
@@ -114,15 +111,11 @@
 		}
 	
 		function gk_clean_online_table() {
-			$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-			mysql_select_db( $this->db_name );
 			$query = 'SELECT * FROM `gk_users_online` ';
 			$this->gk_debug( $query."<br>" );
-			$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-			$nrow = mysql_num_rows( $result );
-			mysql_close( $db_link );
-			if ( $nrow != 0 ) {
-				while ( $row = mysql_fetch_array( $result ) ) {
+			$result = query_get_result( $query );
+			if ( $result ) {
+				while ( $row = $result->fetch_array() ) {
 					$before = date( "U", $row["online_last_access"] );
 					$session = $row["online_session_id"];
 					$now	= time();
@@ -130,11 +123,8 @@
 					$this->gk_debug( $row["online_user_name"]." has $delta seconds of inactivity<br>" );
 					if ( $delta > GK_MAX_DELTA ) {
 						$this->gk_debug( "<font COLOR=\"#C7A700\">DELETING ".$row["online_user_name"]." session</font><br>" );
-						$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-						mysql_select_db( $this->db_name );
 						$query = "DELETE FROM `gk_users_online` WHERE `gk_users_online`.`online_session_id` = CONVERT(_utf8 '$session' USING latin1) COLLATE latin1_swedish_ci LIMIT 1";
-						mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-						mysql_close( $db_link );
+						query_sql_run( $query );
 					}
 					else {
 						$this->gk_debug( "<font COLOR=\"#C7A700\">User ".$row["online_user_name"]." is ok</font><br>" );
@@ -144,37 +134,29 @@
 		}
 	
 		function gk_clean_online_session_id() {
-			$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-			mysql_select_db( $this->db_name );
 			$query = 'SELECT * FROM `gk_users_online` WHERE `online_session_id` = CONVERT(_utf8 \''.$this->session.'\' USING latin1) COLLATE latin1_swedish_ci';
 			$this->gk_debug( $query."<br>" );
-			$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-			$nrow = mysql_num_rows( $result );
-			if ( $nrow != 0 ) {
+			$result = query_get_result( $query );
+			if ( $result ) {
 				$this->gk_debug( "Deleting last access<br>" );
 				$query = "DELETE FROM `gk_users_online` WHERE `online_session_id` = CONVERT(_utf8 '".$this->session."' USING latin1) COLLATE latin1_swedish_ci";
 				$this->gk_debug( $query."<br>" );
-				$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
+				query_sql_run( $query );
 				$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 				$this->gk_update_values_to_session();
 			}
 			else
 				$this->gk_debug( "User not found<br>" );
-			mysql_close( $db_link );
 		}
 			
 		function user_exist( $user ) {
 			$this->gk_debug( "Checking for user $user exist<br>" );
-			$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-			mysql_select_db( $this->db_name );
 			$query= 'SELECT * FROM `gk_users` where user_login = \''.$user.'\' ';
 			$this->gk_debug( $query."<br>" );
-			$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-			$nrow = mysql_num_rows( $result );
-			mysql_close( $db_link );
-			if ( $nrow != 0 ) {
+			$result = query_get_result( $query );
+			if ( $result ) {
 				$this->gk_debug( "find an user in registered list<br>" );
-				$row = mysql_fetch_array( $result );
+				$row = $result->fetch_array();
 				extract( $row );
 				$this->gk_debug( "find $user_login and check with $user<br>" );
 				if ( $user_login == $user ) {
@@ -204,15 +186,12 @@
 			else {
 				$this->gk_debug( "User exist<br>" );
 				$this->gk_debug( "Check for user online<br>" );
-				$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-				mysql_select_db( $this->db_name );
 				$query = 'SELECT * FROM `gk_users_online` WHERE `online_session_id` = CONVERT(_utf8 \''.$this->session.'\' USING latin1) COLLATE latin1_swedish_ci';
 				$this->gk_debug( $query."<br>" );
-				$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-				$nrow = mysql_num_rows( $result );
-				if ( $nrow != 0 ) {
+				$result = query_get_result( $query );
+				if ( $result ) {
 					$this->gk_debug( "<font COLOR=\"#C7A700\">found an user online</font><br>" );
-					$row = mysql_fetch_array( $result );
+					$row = $result->fetch_array();
 					extract( $row , EXTR_PREFIX_ALL , "gkv_" );
 					$this->gk_debug( $row["online_user_name"]."<br>" );
 					$this->gk_debug( $_SESSION["user"]."<br>" );
@@ -221,10 +200,9 @@
 						$this->gk_debug( "Updating last access<br>" );
 						$query = "UPDATE `gk_users_online` SET `online_last_access` = ".time()." WHERE `online_session_id` = CONVERT(_utf8 '".$this->session."' USING latin1) COLLATE latin1_swedish_ci";
 						$this->gk_debug( $query."<br>" );
-						$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
+						query_sql_run( $query );
 						$this->gk_update_internal_values( $row["online_user_name"] , $row["online_clean_name"] , $row["online_user_role"] , $_SESSION["pass"] , true );
 						$this->gk_update_values_to_session();
-						mysql_close( $db_link );
 						$this->gk_debug( "<font COLOR=\"#C7A700\">OK. User authenticated</font><br>" );
 						return $gkv_online_user_role;
 					}
@@ -232,7 +210,6 @@
 						$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
 						$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 						$this->gk_update_values_to_session();
-						mysql_close( $db_link );
 						$this->gk_debug( $this->role."<br>" );
 						return GK_USER_GUEST;
 					}
@@ -240,11 +217,10 @@
 				$this->gk_debug( "User is not online<br>" );
 				$query = 'SELECT * FROM `gk_users` where user_login = \''.$user.'\' ';
 				$this->gk_debug( $query."<br>" );
-				$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-				$nrow = mysql_num_rows( $result );
-				if ( $nrow != 0 ) {
+				$nrow = query_get_result( $query );
+				if ( $result ) {
 					$this->gk_debug( "User found on the registered list<br>" );
-					$row = mysql_fetch_array( $result );
+					$row = $result->fetch_array();
 					extract( $row );
 					$this->gk_debug( "find $user_login and check with $user<br>" );
 					if ( $user_login == $user ) {
@@ -268,18 +244,16 @@
 							$this->gk_debug( "<font COLOR=\"#C7A700\">OK. User authenticated</font><br>" );
 							$query = 'INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES (NULL, \''.$user_login.'\', \''.$user_name.'\', \''.$user_role.'\', \''.$this->session.'\', '.time().' ) ;';
 							$this->gk_debug( $query."<br>" );
-							$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
+							query_sql_run( $query );
 							$this->gk_update_internal_values( $user , $user_name , $user_role , $user_password , true );
 							$this->gk_update_values_to_session();
 							$this->gk_debug( $this->role."<br>" );
-							//gk_browser_dinamic_recognition();
 							return $this->role;
 						}
 						else {
 							$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
 							$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 							$this->gk_update_values_to_session();
-							mysql_close( $db_link );
 							$this->gk_debug( $this->role."<br>" );
 							return GK_USER_GUEST;
 						}
@@ -289,7 +263,6 @@
 					$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
 					$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 					$this->gk_update_values_to_session();
-					mysql_close( $db_link );
 					$this->gk_debug( $this->role."<br>" );
 					return GK_USER_GUEST;
 				}
@@ -309,6 +282,7 @@
 			$this->session = session_id();
 		}
 	
+	
 		function gk_update_values_to_session() {
 			$_SESSION["user"] = $this->user;
 			$_SESSION["clean_user"] = $this->clean_user;
@@ -318,19 +292,12 @@
 	
 	
 		function gk_logout( $session ) {
-			$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-			mysql_select_db( $this->db_name );
 			$query = "SELECT * FROM `gk_users_online` WHERE `online_session_id` = CONVERT(_utf8 '$session' USING latin1) COLLATE latin1_swedish_ci";
 			$this->gk_debug( $query."<br>" );
-			$result = mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-			$nrow = mysql_num_rows( $result );
-			mysql_close( $db_link );
-			if ( $nrow != 0 ) {
-				$db_link = mysql_connect( $this->db_host , $this->db_user , $this->db_pass ) or die( "Cannot Connect To Database" );
-				mysql_select_db( $this->db_name );
+			$nrow = query_get_result( $query );
+			if ( $result ) {
 				$query = "DELETE FROM `gk_users_online` WHERE `gk_users_online`.`online_session_id` = CONVERT(_utf8 '$session' USING latin1) COLLATE latin1_swedish_ci LIMIT 1";
-				mysql_query( $query , $db_link ) or die( "Query non valida: " . mysql_error() );
-				mysql_close( $db_link );
+				query_sql_run( $query );
 				$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 				$this->gk_update_values_to_session();
 				if ( isset( $_COOKIE["GK_USER"] ) )

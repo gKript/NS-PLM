@@ -10,7 +10,7 @@
 	</info>
 	<param>
 		<authentication>
-			<enable type="int" >0</enable>
+			<enable type="int" >1</enable>
 			<tables>
 				<users>users</users>
 				<online_users>online_users</online_users>

@@ -43,7 +43,7 @@
 		session_start();
 
 	if( $gkcfg->param->authentication->enable ) {
-			require_once( GKPHP_PATH . "Authentication_gk.php" );
+		require_once( GKPHP_PATH . "Authentication_gk.php" );
 	}
 	
 	
