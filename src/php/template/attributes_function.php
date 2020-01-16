@@ -27,7 +27,7 @@
 			}
 			else 
 				$check = 1;
-			if ( $check ) {
+			if ( $check ) { 
 				insert_blockquote( "Attributes tab correctly ADDED." , "Success" );
 				return 1;
 			}

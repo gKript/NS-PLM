@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 12, 2020 alle 10:23
+-- Creato il: Gen 16, 2020 alle 08:03
 -- Versione del server: 10.4.10-MariaDB
 -- Versione PHP: 7.3.12
 
@@ -359,6 +359,85 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `gk_role`
+--
+
+DROP TABLE IF EXISTS `gk_role`;
+CREATE TABLE IF NOT EXISTS `gk_role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(32) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `gk_role`
+--
+
+INSERT INTO `gk_role` (`role_id`, `role_name`) VALUES
+(1, 'administrator'),
+(2, 'superuser'),
+(3, 'user'),
+(4, 'guest');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `gk_users`
+--
+
+DROP TABLE IF EXISTS `gk_users`;
+CREATE TABLE IF NOT EXISTS `gk_users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_login` varchar(32) NOT NULL,
+  `user_name` varchar(32) NOT NULL,
+  `user_password` varchar(64) NOT NULL,
+  `user_status` int(11) NOT NULL,
+  `user_role` varchar(32) NOT NULL DEFAULT 'user',
+  `user_ip` varchar(16) DEFAULT NULL,
+  `user_registration` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_last_visit` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_visit_counter` bigint(20) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `gk_users`
+--
+
+INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_status`, `user_role`, `user_ip`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
+(1, 'asyntote', 'AsYntote', '8bb2f60b910590d003738ec5551ba60b', 0, 'administrator', NULL, '2008-06-07 04:06:37', '0000-00-00 00:00:00', 0),
+(2, 'skymatrix', 'SkyMatrix', '18eac1cec2383ff8b01c34bf03b247c1', 0, 'administrator', NULL, '2008-06-07 04:08:57', '0000-00-00 00:00:00', 0),
+(3, 'noe', 'Noe', 'f564ba0f45d8a2d269ec562309124f71', 0, 'superuser', NULL, '2008-06-21 03:19:06', '0000-00-00 00:00:00', 0),
+(4, 'tatti', 'Tatti', '79df64f73eab9bc0d7b448d2008d876e', 0, 'superuser', NULL, '2008-06-21 07:20:27', '0000-00-00 00:00:00', 0),
+(5, 'usertest', 'UserTest', '8bb2f60b910590d003738ec5551ba60b', 0, 'user', NULL, '2008-06-21 08:38:11', '0000-00-00 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `gk_users_online`
+--
+
+DROP TABLE IF EXISTS `gk_users_online`;
+CREATE TABLE IF NOT EXISTS `gk_users_online` (
+  `online_id` int(11) NOT NULL AUTO_INCREMENT,
+  `online_user_name` varchar(32) NOT NULL,
+  `online_clean_name` varchar(32) NOT NULL,
+  `online_user_role` varchar(32) NOT NULL DEFAULT '4',
+  `online_session_id` varchar(64) NOT NULL,
+  `online_last_access` int(11) NOT NULL,
+  PRIMARY KEY (`online_id`)
+) ENGINE=MEMORY AUTO_INCREMENT=509 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `gk_users_online`
+--
+
+INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
+(508, 'guest', 'guest', 'guest', 'c062eqq00umrb3gvejn7mbssok', 1579161575);
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `lista_composizione`
 --
 
@@ -498,7 +577,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -549,7 +628,16 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (47, 'BomCountDaily', '13', '2020-01-11 14:37:32'),
 (48, 'CodeCountDaily', '61', '2020-01-12 00:27:46'),
 (49, 'AttribCountDaily', '47', '2020-01-12 00:27:46'),
-(50, 'BomCountDaily', '13', '2020-01-12 00:27:46');
+(50, 'BomCountDaily', '13', '2020-01-12 00:27:46'),
+(51, 'CodeCountDaily', '61', '2020-01-14 13:34:49'),
+(52, 'AttribCountDaily', '47', '2020-01-14 13:34:49'),
+(53, 'BomCountDaily', '13', '2020-01-14 13:34:49'),
+(54, 'CodeCountDaily', '61', '2020-01-15 07:48:53'),
+(55, 'AttribCountDaily', '47', '2020-01-15 07:48:53'),
+(56, 'BomCountDaily', '13', '2020-01-15 07:48:53'),
+(57, 'CodeCountDaily', '61', '2020-01-16 06:43:41'),
+(58, 'AttribCountDaily', '47', '2020-01-16 06:43:41'),
+(59, 'BomCountDaily', '13', '2020-01-16 06:43:42');
 
 -- --------------------------------------------------------
 

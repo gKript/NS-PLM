@@ -71,7 +71,7 @@
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
 
-	//gkAuth_start( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME );
+	gkAuth_start( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME );
 
 
 ?>

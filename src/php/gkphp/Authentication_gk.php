@@ -81,7 +81,6 @@
 						$this->gk_update_values_to_session();
 						$this->gk_debug( $this->role."<br>" );
 					}
-					mysql_close( $db_link );
 					$_SESSION["auth"] = false;
 				}
 			}

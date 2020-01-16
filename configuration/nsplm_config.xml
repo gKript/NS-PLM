@@ -18,7 +18,7 @@
 	<plm>
 		<title>NS-PLM</title>
 		<debug type="int">0</debug>
-		<version>00.2</version>
+		<version>00.3</version>
 		<status>dev</status>
 	</plm>
 	<param>

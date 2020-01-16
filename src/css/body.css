@@ -10,7 +10,7 @@ body {
 	text-align:center;
 /*	font-family:Arial, Helvetica, sans-serif; */
 	font-family: 'Montserrat', sans-serif;
-	font-size: 1em;
+/*	font-size: 0.5em;*/
 }
 .code {
 	margin:1em;
@@ -154,7 +154,7 @@ box-shadow: 1px 2px 3px #999;
 #centerColumn h2 {
 margin:0 0 -.5em 0;
 padding:.75em 0 0 0;
-font-size:1em;
+/*  font-size:1em;  */
 letter-spacing:.1em;
 }
 #header {

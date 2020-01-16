@@ -66,7 +66,7 @@ function __construct()
 {
 $this->title = (string) "NS-PLM";
 $this->debug = (int) 0;
-$this->version = (string) "00.2";
+$this->version = (string) "00.3";
 $this->status = (string) "dev";
 
 }
