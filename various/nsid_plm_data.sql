@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 16, 2020 alle 08:03
--- Versione del server: 10.4.10-MariaDB
--- Versione PHP: 7.3.12
+-- Creato il: Gen 17, 2020 alle 16:06
+-- Versione del server: 10.3.14-MariaDB
+-- Versione PHP: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -398,18 +398,14 @@ CREATE TABLE IF NOT EXISTS `gk_users` (
   `user_last_visit` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_visit_counter` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users`
 --
 
 INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_status`, `user_role`, `user_ip`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
-(1, 'asyntote', 'AsYntote', '8bb2f60b910590d003738ec5551ba60b', 0, 'administrator', NULL, '2008-06-07 04:06:37', '0000-00-00 00:00:00', 0),
-(2, 'skymatrix', 'SkyMatrix', '18eac1cec2383ff8b01c34bf03b247c1', 0, 'administrator', NULL, '2008-06-07 04:08:57', '0000-00-00 00:00:00', 0),
-(3, 'noe', 'Noe', 'f564ba0f45d8a2d269ec562309124f71', 0, 'superuser', NULL, '2008-06-21 03:19:06', '0000-00-00 00:00:00', 0),
-(4, 'tatti', 'Tatti', '79df64f73eab9bc0d7b448d2008d876e', 0, 'superuser', NULL, '2008-06-21 07:20:27', '0000-00-00 00:00:00', 0),
-(5, 'usertest', 'UserTest', '8bb2f60b910590d003738ec5551ba60b', 0, 'user', NULL, '2008-06-21 08:38:11', '0000-00-00 00:00:00', 0);
+(6, 'danilo.zannoni', 'Danilo Zannoni', 'japotek1972', 0, 'Administrator', NULL, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -426,14 +422,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=509 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(508, 'guest', 'guest', 'guest', 'c062eqq00umrb3gvejn7mbssok', 1579161575);
+(56, 'guest', 'guest', 'guest', 'ibl38i35l5vgjkhastfg7u9ek2', 1579277172);
 
 -- --------------------------------------------------------
 
@@ -549,7 +545,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `search` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=88 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -558,11 +554,12 @@ CREATE TABLE IF NOT EXISTS `search` (
 INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
 (75, '2dc', '2020-01-10 09:49:43'),
 (74, '467', '2020-01-09 22:47:16'),
-(72, 'varco', '2020-01-09 22:46:09'),
+(87, 'varco', '2020-01-17 15:15:58'),
 (73, '22c', '2020-01-09 22:46:43'),
-(69, '223', '2020-01-09 21:23:57'),
+(86, '223', '2020-01-17 15:05:38'),
 (67, '122', '2020-01-09 21:23:48'),
-(68, '224', '2020-01-09 21:23:50');
+(83, '__4%', '2020-01-17 15:03:53'),
+(79, 'onesto', '2020-01-17 14:48:28');
 
 -- --------------------------------------------------------
 
@@ -577,7 +574,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -637,7 +634,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (56, 'BomCountDaily', '13', '2020-01-15 07:48:53'),
 (57, 'CodeCountDaily', '61', '2020-01-16 06:43:41'),
 (58, 'AttribCountDaily', '47', '2020-01-16 06:43:41'),
-(59, 'BomCountDaily', '13', '2020-01-16 06:43:42');
+(59, 'BomCountDaily', '13', '2020-01-16 06:43:42'),
+(60, 'CodeCountDaily', '61', '2020-01-17 00:46:03'),
+(61, 'AttribCountDaily', '47', '2020-01-17 00:46:03'),
+(62, 'BomCountDaily', '13', '2020-01-17 00:46:03');
 
 -- --------------------------------------------------------
 
