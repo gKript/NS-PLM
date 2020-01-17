@@ -32,6 +32,9 @@
 	$action = get_check( 'action' );
 	
 	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
+	
+	if ( ( $_SESSION["clean_user"] == "guest" ) && ( ! $nscfg->param->user->guest_allowed ) ) 
+		insert_blockquote( "Sorry but Guest user is not allowed here!<br/>Please, go to <a href=\"index.php\">home page</a> to log in." , "Error" , 1 );
 ?>
 
 <?php

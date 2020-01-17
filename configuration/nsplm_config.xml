@@ -25,5 +25,8 @@
 		<search>
 			<history type="int">10</history>
 		</search>
+		<user>
+			<guest_allowed type="int">0</guest_allowed>
+		</user>
 	</param>
 </ns>

@@ -76,6 +76,7 @@ class ns_param
 function __construct()
 {
 $this->search = new ns_param_search();
+$this->user = new ns_param_user();
 
 }
 }
@@ -85,6 +86,15 @@ public $history;
 function __construct()
 {
 $this->history = (int) 10;
+
+}
+}
+class ns_param_user
+{
+public $guest_allowed;
+function __construct()
+{
+$this->guest_allowed = (int) 0;
 
 }
 }

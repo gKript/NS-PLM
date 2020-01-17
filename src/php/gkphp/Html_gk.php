@@ -19,11 +19,25 @@
 	
 	function BR( $repeat = 1 , $clean = 1 , $class = "" ) {
 		$ret = "";
+		$cl  = $class == ""	? ""	: "class=\"$class\"";
+
 		for( $r = 0 ; $r < $repeat ; $r++ ) {
 			if ( ! $clean )
-				$ret .= "<br $class />\n";
+				$ret .= "<br $cl />\n";
 			else
-				echo "<br $class />\n";
+				echo "<br $cl />\n";
+		}
+		return $ret;
+	}
+	
+	function TAB( $repeat = 1 , $print = 1 ) {
+		$ret = "";
+		$sp = "&nbsp;&nbsp;&nbsp;&nbsp;\n";
+		for( $r = 0 ; $r < $repeat ; $r++ ) {
+			if ( ! $print )
+				$ret .= $sp;
+			else
+				echo $sp;
 		}
 		return $ret;
 	}
@@ -47,7 +61,7 @@
 			$path = "src/img/";
 		if ( $tag == "open" )
 			$c = "";
-		return "<img src=\"$path$img\" $s alt=\"$alt\" width=\"$w\" heigth=\$2h\" border=\"$b\" $c>\n";
+		return "<img src=\"$path$img\" $s alt=\"$alt\" width=\"$w\" heigth=\"$h\" border=\"$b\" $c>\n";
 	}
 
 	function div_block_open( $class , $style = "" , $id = "" ) {
@@ -63,10 +77,10 @@
 		$ret  = "<a ";
 		$ret .= "href=\"$ref\" ";
 		$ret .= "$target ";
-		$ret .= "$style >";
+		$ret .= "$style >\n";
 		$ret .= $text;
 		if ( $tag == "autoclose" )
-			$ret .= "</a>";
+			$ret .= "</a>\n";
 		return $ret;
 	}
 

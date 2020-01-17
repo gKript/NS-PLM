@@ -4,11 +4,18 @@
 	function open_block( $title , $icon = "" , $class ="codelite" ) {
 		$url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];	
 		//echo $page;		
-		$page  = div_block_open( $class );
+		$page  = div_block_open( $class , "padding-left: 16px; padding-right: 16px;" );
 		$page .= link_generator( $url , img_generator( "top.svg" , "icona top" , "" , "float: right;" , "autoclose" , 0 , 24 , 24) );
-//		$text = img_generator( "syn.svg" , "icona synopsis" ) . $title;
-//		echo tag_enclosed( "h2" , $title , "vertical-align: middle;" );
-		$page .= title_h2( $title , $icon );
+		if ( ! $icon ) {
+			$text  = $title;
+			$st =  "margin-left: 12px; vertical-align: middle; ";
+		}
+		else {
+			$text  = img_generator( $icon , "Generic tag" , "" , "margin-left: 12px;" , "autoclose" , 0 , 24 , 24 ) . $title;
+			$st = "vertical-align: middle;";
+		}
+		$page .= tag_enclosed( "h2" , $text , $st );
+//		$page .= title_h2( $title , $icon );
 		$page .= BR( 1 , 0 );
 		return $page;	
 	}
