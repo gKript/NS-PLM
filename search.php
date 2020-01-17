@@ -289,7 +289,7 @@
 							$sc = $res[$r];
 							$details = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$sc'" );
 							print( "<td style='text-align: center; border:1px solid #999;' width='15%'>" );
-							echo return_code_link( $sc ) . " rev." . $rev[$r] ;
+							echo return_bom_link( $sc ) . " rev." . $rev[$r] ;
 							println( "</td>" );
 							println( "<td style='border:1px solid #999;' width='25%'>" . $details['abbreviazione'] . "</td>" );
 							println( "<td style='border:1px solid #999;' >" . $details['descrizione'] . "</td>" );

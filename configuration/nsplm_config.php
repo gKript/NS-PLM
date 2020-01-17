@@ -91,10 +91,14 @@ $this->history = (int) 10;
 }
 class ns_param_user
 {
+public $md5_passw;
+public $auth_debug;
 public $guest_allowed;
 function __construct()
 {
-$this->guest_allowed = (int) 0;
+$this->md5_passw = (int) 0;
+$this->auth_debug = (int) 0;
+$this->guest_allowed = (int) 1	;
 
 }
 }

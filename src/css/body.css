@@ -10,7 +10,7 @@ body {
 	text-align:center;
 /*	font-family:Arial, Helvetica, sans-serif; */
 	font-family: 'Montserrat', sans-serif;
-/*	font-size: 0.5em;*/
+	font-size: 0.8em;
 }
 .code {
 	margin:1em;
@@ -51,24 +51,24 @@ body {
 * {
 	box-sizing: border-box;
 }
-.box33 {
-	float: left;
-	width: 33.3%;
-	padding-left: 5px;
-	border:1px solid #888;
-	background-color: #dfdfdf;
-	height:140px;
-	margin: auto;
-	box-shadow: 1px 2px 3px #999;
-	border-radius: 5px;
-}
 .box25 {
 	float: left;
 	width: 25%;
 	padding-left: 5px;
 	border:1px solid #888;
 	background-color: #dfdfdf;
-	height:120px;
+	height:150px;
+	margin: auto;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+}
+.box33 {
+	float: left;
+	width: 33.3%;
+	padding-left: 5px;
+	border:1px solid #888;
+	background-color: #dfdfdf;
+	height:150px;
 	margin: auto;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
@@ -79,18 +79,28 @@ body {
 	padding-left: 5px;
 	border:1px solid #888;
 	background-color: #dfdfdf;
-	height:120px;
+	height:150px;
 	margin: auto;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
-.box75 {
+.box66 {
+	float: left;
+	width: 66.6%;
+	padding-left: 5px;
+	border:1px solid #888;
+	background-color: #dfdfdf;
+	height:150px;
+	margin: auto;
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+}.box75 {
 	float: left;
 	width: 75%;
 	padding-left: 5px;
 	border:1px solid #888;
 	background-color: #dfdfdf;
-	height:120px;
+	height:150px;
 	margin: auto;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
@@ -101,7 +111,7 @@ body {
 	padding-left: 5px;
 	border:1px solid #888;
 	background-color: #dfdfdf;
-	height:120px;
+	height:150px;
 	margin: auto;
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
@@ -168,8 +178,9 @@ letter-spacing:.1em;
 */
 /*margin:-2em -1em 0 -1em;
 */
+margin: 1em;
 padding:0 0 10px 0;
-height:6.7em;
+height:8em;
 background-color:#f5f5f5;
 /*border-bottom:1px solid #be0000;
 */
@@ -209,7 +220,7 @@ margin: 28px 15px 0 15px;
 padding:4px;
 /* line-height:1em; */
 text-align:center;
-font-size:.7em;
+font-size:.9em;
 background:#ddd;
 box-shadow: 1px 2px 3px #999;
 border-radius: 10px 10px 10px 10px;

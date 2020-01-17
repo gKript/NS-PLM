@@ -46,9 +46,11 @@ $this->session = (int) 1;
 class gk_param_authentication
 {
 public $enable;
+public $timeout;
 function __construct()
 {
 $this->enable = (int) 1;
+$this->timeout =  600;
 $this->tables = new gk_param_authentication_tables();
 
 }

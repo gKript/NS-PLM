@@ -1,0 +1,37 @@
+
+	INDEX
+		
+		POST?
+		
+				SI	-	Procedo con Auth da Post
+				
+						Autenticato??
+						
+								SI	-	FINE
+			
+						NO			-	Vai a FORM
+						
+			NO	-	Next
+			
+		SESSION?
+		
+				SI	-	Auth OK
+						-	Vai a FINE
+
+			NO	-	Procedo
+			
+		COOKIE?
+		
+				SI	-	Procedo con Auth da Cookie
+
+						Autenticato??
+						
+								SI	-	FINE
+			
+						NO			-	Vai a FORM
+				
+			NO	-	Procedi
+			
+		FORM
+			
+	FINE

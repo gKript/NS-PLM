@@ -43,4 +43,14 @@
 		return $ret;
 	}
 	
+	function title_h3( $title , $icon = "" ) {
+		if ( $icon == "" )
+			$text = $title;
+		else
+			$text = img_generator( $icon , "generic tag" , "" , "" , "autoclose" , 0 , 24 , 24 ) . $title;
+		$ret = tag_enclosed( "h3" , $text , "vertical-align: middle;" );
+//		$ret .= BR( 1 , 0 );
+		return $ret;
+	}
+	
 ?>

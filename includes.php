@@ -71,7 +71,23 @@
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
 
-	gkAuth_start( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME );
-
+		if ( ! isset( $_SESSION["user"] ) ) {
+			$_SESSION["user"]				= "guest";
+			$_SESSION["clean_user"]	= "guest";
+			$_SESSION["pass"]				= "guest";
+			$_SESSION["role"]				= "guest";
+			$_SESSION["auth"]				= false;
+			
+			if ( isset( $_COOKIE["GK_USER"] ) ) {
+				echo "Cookie!!<br>";
+				$gk_Auth = new gkAuthentication( $_COOKIE["GK_USER"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
+			}
+			else
+				$gk_Auth = new gkAuthentication( $_SESSION["user"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
+		}
+		else {
+			$_SESSION["auth"] = true;
+			$gk_Auth = new gkAuthentication( $_SESSION["user"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
+		}	
 
 ?>

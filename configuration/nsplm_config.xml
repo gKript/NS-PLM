@@ -26,7 +26,9 @@
 			<history type="int">10</history>
 		</search>
 		<user>
-			<guest_allowed type="int">0</guest_allowed>
+			<md5_passw type="int">0</md5_passw>
+			<auth_debug type="int">0</auth_debug>
+			<guest_allowed type="int">1	</guest_allowed>
 		</user>
 	</param>
 </ns>

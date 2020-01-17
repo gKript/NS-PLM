@@ -165,7 +165,7 @@
 
 		<?php 
 				}
-			$hr  = "index.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
+			$hr  = "search.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
 			$hrt = $codetype["T"] . $codetype["CG"] . $codetype["CS"];
 			$title  = "Code structure - ";
 			$title .= link_generator( $hr , $hrt );
@@ -180,7 +180,7 @@
 				println( "  <td style='text-align: right;' width='13%' >Typology</td>" );
 				$ln = $codetype["T"];
 				if ( ! $new ) 
-					$ln = TGS_link( $codetype["T"]  , "T" , "index.php?text" );
+					$ln = TGS_link( $codetype["T"]  , "T" , "search.php?text" );
 				println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
 				println( "  <td style='border:1px solid #999;' width='20%'>"   . $codetype["Tname"]   . "</td>" );
 				println( "  <td></td>" );
@@ -189,7 +189,7 @@
 				println( "  <td style='text-align: right;' >Generic category</td>" );
 				$ln = $codetype["CG"];
 				if ( ! $new )
-					$ln = TGS_link( $codetype["CG"]  , "G" , "index.php?text" );
+					$ln = TGS_link( $codetype["CG"]  , "G" , "search.php?text" );
 				println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
 				println( "  <td style='border:1px solid #999;' >"  . $codetype["CGname"]  . "</td>" );
 				println( "  <td style='border:1px solid #999;' >"              . $codetype["CGdescr"] . "</td>" );
@@ -198,7 +198,7 @@
 				println( "  <td style='text-align: right;' >Specific category</td>" );
 				$ln = $codetype["CS"];
 				if ( ! $new )
-					$ln = TGS_link( $codetype["CS"]  , "S" , "index.php?text" );
+					$ln = TGS_link( $codetype["CS"]  , "S" , "search.php?text" );
 				println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
 				println( "  <td style='border:1px solid #999;' >"  . $codetype["CSname"]  . "</td>" );
 				println( "  <td style='border:1px solid #999;' >"              . $codetype["CSdescr"] . "</td>" );
@@ -248,8 +248,8 @@
 				if ( ! $new ) {
 					echo open_block( "Code details" , "details.svg" );
 					echo generic_tag_open( "div" , "clearfix" );
-					echo generic_tag_open( "div" , "box25" , "background-color:#ddd; height:160px;" );
-					echo title_h2( "Code identifier" , "identifier.svg" );
+					echo generic_tag_open( "div" , "box33" , "background-color:#ccc; height:160px;" );
+					echo title_h3( "Code identifier" , "identifier.svg" );
 //				echo tag_enclosed( "h2" , "Code identifier" );
 			?>
 
@@ -280,8 +280,8 @@
 					
 					echo generic_tag_close( "table" );
 					echo div_block_close();
-					echo div_block_open( "box50" , "background-color:#ddd; height:160px;" );
-					echo title_h2( "Creation, modification and attributes" , "create.svg" );
+					echo div_block_open( "box66" , "background-color:#ddd; height:160px;" );
+					echo title_h3( "Creation, modification and attributes" , "create.svg" );
 				?>
 				
 						<table style="margin:1em;" width="80%">
@@ -316,15 +316,9 @@
 				?>
 				
 						</table>
-
-					</div>
-
-					<div class="box25" style="background-color:#ddd; height:160px;" >
-					<?php
-						//  small_box_provider_info( $code );
-					?>
 					</div>
 				</div>
+				<br/>
 			</div>
 
 			<?php

@@ -11,6 +11,7 @@
 	<param>
 		<authentication>
 			<enable type="int" >1</enable>
+			<timeout>600</timeout>
 			<tables>
 				<users>users</users>
 				<online_users>online_users</online_users>

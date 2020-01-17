@@ -6,18 +6,19 @@ h1, h2, h3. h4, h5, h6 {
 }
 h1 {
 	font-size: 30pt;
+	padding-left: 18px;
 }
 h2 {
 	color: #333;
 	/* grigio scuro */
-	font-size: 20pt;
+	font-size: 14pt;
 	margin-bottom: 0px;
 	margin-top: 10px;
 }
 h3 {
 	color: #333;
 	/* grigio scuro */
-	font-size: 16pt;
+	font-size: 12pt;
 	margin-bottom: 0px;
 	margin-top: 10px;
 }

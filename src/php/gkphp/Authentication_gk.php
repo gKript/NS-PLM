@@ -1,11 +1,13 @@
 <?php
+	
+	global	$gkcfg;
 
 	define	( 'GK_USER_GUEST'	, "guest" );
 	define	( 'GK_USER_USER'	, "user" );
 	define	( 'GK_USER_SUPER'	, "superuser" );
 	define	( 'GK_USER_ADMIN'	, "administrator" );
 	
-	define	( 'GK_MAX_DELTA'	, 300 );
+	define	( 'GK_MAX_DELTA'	, $gkcfg->param->authentication->timeout );
 	define	( 'GK_AUTH_DEBUG_STATUS'	, false );
 	
 	class gkAuthentication {
@@ -25,27 +27,18 @@
 	
 		var $debug;
 
-		function __construct ( $n_user , $dbhost , $dbuser , $dbpwd , $dbname , $md5_pass , $user_debug = false ) {
+		function __construct ( $n_user , $md5_pass , $user_debug = false ) {
 			if ( $user_debug == false ) 
 				$this->debug = GK_AUTH_DEBUG_STATUS;
 			else
 				$this->debug = $user_debug;
-			$this->db_host = $dbhost;
-			$this->db_user = $dbuser;
-			$this->db_pass = $dbpwd;
-			$this->db_name = $dbname;
+
 			$this->session = session_id();
 			$this->password_md5 = $md5_pass;
 			$this->gk_clean_online_table();
 			$this->set_current_user_name( $n_user );
 		}
-	
-		function set_mysql_params( $dbhost , $dbuser , $dbpwd , $dbname ) {
-			$this->db_host = $dbhost;
-			$this->db_user = $dbuser;
-			$this->db_pass = $dbpwd;
-			$this->db_name = $dbname;
-		}
+
 	
 		function set_current_user_name( $n_user ) {
 			$this->user = $n_user;
@@ -119,7 +112,7 @@
 					$session = $row["online_session_id"];
 					$now	= time();
 					$delta	= $now - $before;
-					$this->gk_debug( $row["online_user_name"]." has $delta seconds of inactivity<br>" );
+					$this->gk_debug( $row["online_user_name"]." has $delta seconds of inactivity on " .  GK_MAX_DELTA  . "<br>" );
 					if ( $delta > GK_MAX_DELTA ) {
 						$this->gk_debug( "<font COLOR=\"#C7A700\">DELETING ".$row["online_user_name"]." session</font><br>" );
 						$query = "DELETE FROM `gk_users_online` WHERE `gk_users_online`.`online_session_id` = CONVERT(_utf8 '$session' USING latin1) COLLATE latin1_swedish_ci LIMIT 1";
@@ -149,6 +142,7 @@
 		}
 			
 		function user_exist( $user ) {
+			$this->gk_debug( "I am in user_exist <br>" );
 			$this->gk_debug( "Checking for user $user exist<br>" );
 			$query= 'SELECT * FROM `gk_users` where user_login = \''.$user.'\' ';
 			$this->gk_debug( $query."<br>" );
@@ -170,6 +164,7 @@
 		}
 	
 		function get_authentication( $user , $passw ) {
+			$this->gk_debug( "I am in get_authentication <br>" );
 			if ( $user == "guest" ) {
 				$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
 				$this->gk_update_values_to_session();
@@ -189,7 +184,7 @@
 				$this->gk_debug( $query."<br>" );
 				$result = query_get_result( $query );
 				if ( $result ) {
-					$this->gk_debug( "<font COLOR=\"#C7A700\">found an user online</font><br>" );
+					$this->gk_debug( "<font COLOR=\"#C7A700\">found the user online</font><br>" );
 					$row = $result->fetch_array();
 					extract( $row , EXTR_PREFIX_ALL , "gkv_" );
 					$this->gk_debug( $row["online_user_name"]."<br>" );
@@ -203,7 +198,7 @@
 						$this->gk_update_internal_values( $row["online_user_name"] , $row["online_clean_name"] , $row["online_user_role"] , $_SESSION["pass"] , true );
 						$this->gk_update_values_to_session();
 						$this->gk_debug( "<font COLOR=\"#C7A700\">OK. User authenticated</font><br>" );
-						return $gkv_online_user_role;
+						return $row["online_user_role"];
 					}
 					else {
 						$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
@@ -216,47 +211,48 @@
 				$this->gk_debug( "User is not online<br>" );
 				$query = 'SELECT * FROM `gk_users` where user_login = \''.$user.'\' ';
 				$this->gk_debug( $query."<br>" );
-				$nrow = query_get_result( $query );
+				$result = query_get_result( $query );
 				if ( $result ) {
-					$this->gk_debug( "User found on the registered list<br>" );
+					$this->gk_debug( "User founduuuu on the registered list<br>" );
 					$row = $result->fetch_array();
 					extract( $row );
 					$this->gk_debug( "find $user_login and check with $user<br>" );
-					if ( $user_login == $user ) {
-						if ( $this->password_md5 == false ) {
-							
-							$this->gk_debug( "MD5 false : Check for password<br>" );
-							$this->gk_debug( $passw." : ".md5( $passw )."<br>" );
-							$this->gk_debug( $user_password."<br>" );
-							$tmppassw = md5( $passw );
-						}
-						else {
-							$this->gk_debug( "MD5 true : Check for password<br>" );
-							$this->gk_debug( $passw."<br>" );
-							$this->gk_debug( $user_password."<br>" );
-							$tmppassw = $passw;
-						}
-						if ( $user_password == $tmppassw ) {
-							if ( $this->autoconnect == true ) {
-								$this->gk_set_cookie( $user , $user_password );
-							}
-							$this->gk_debug( "<font COLOR=\"#C7A700\">OK. User authenticated</font><br>" );
-							$query = 'INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES (NULL, \''.$user_login.'\', \''.$user_name.'\', \''.$user_role.'\', \''.$this->session.'\', '.time().' ) ;';
-							$this->gk_debug( $query."<br>" );
-							query_sql_run( $query );
-							$this->gk_update_internal_values( $user , $user_name , $user_role , $user_password , true );
-							$this->gk_update_values_to_session();
-							$this->gk_debug( $this->role."<br>" );
-							return $this->role;
-						}
-						else {
-							$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
-							$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
-							$this->gk_update_values_to_session();
-							$this->gk_debug( $this->role."<br>" );
-							return GK_USER_GUEST;
-						}
+//					if ( $user_login == $user ) {
+					if ( $this->password_md5 == true ) {
+						$this->gk_debug( "MD5 false : Check for password<br>" );
+						$this->gk_debug( $passw." : ".md5( $passw )."<br>" );
+						$this->gk_debug( $user_password."<br>" );
+						$tmppassw = md5( $passw );
 					}
+					else {
+						$this->gk_debug( "MD5 true : Check for password<br>" );
+						$this->gk_debug( $passw."<br>" );
+						$this->gk_debug( $user_password."<br>" );
+						$tmppassw = $passw;
+					}
+					if ( $user_password == $tmppassw ) {
+						if ( $this->autoconnect == true ) {
+							$this->gk_set_cookie( $user , $user_password );
+						}
+						$this->gk_debug( "<font COLOR=\"#C7A700\">OK. User authenticated</font><br>" );
+						$query = 'INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES (NULL, \''.$user_login.'\', \''.$user_name.'\', \''.$user_role.'\', \''.$this->session.'\', '.time().' ) ;';
+						$this->gk_debug( $query."<br>" );
+						query_sql_run( $query );
+						$this->gk_update_internal_values( $user , $user_name , $user_role , $user_password , true );
+						$this->gk_update_values_to_session();
+						$this->gk_debug( $this->role."<br>" );
+						return $this->role;
+					}
+					else {
+						$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
+						$this->gk_update_internal_values( "guest" , "guest" , GK_USER_GUEST , "guest" , false );
+						$this->gk_update_values_to_session();
+						$this->gk_debug( $this->role."<br>" );
+						return GK_USER_GUEST;
+					}
+//					}
+//					else
+//						$this->gk_debug( "Are not equal<br>" );
 				}
 				else {
 					$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
@@ -365,13 +361,13 @@
 			$_SESSION["auth"]				= false;
 			
 			if ( isset( $_COOKIE["GK_USER"] ) )
-				$gk_Auth = new gkAuthentication( $_SESSION["user"] , $host , $user , $pass , $dbname , true );
+				$gk_Auth = new gkAuthentication( $_SESSION["user"] , true );
 			else
-				$gk_Auth = new gkAuthentication( $_SESSION["user"] , $host , $user , $pass , $dbname , false );
+				$gk_Auth = new gkAuthentication( $_SESSION["user"] , false );
 		}
 		else {
 			$_SESSION["auth"] = true;
-			$gk_Auth = new gkAuthentication( $_SESSION["user"] , $host , $user , $pass , $dbname , true );
+			$gk_Auth = new gkAuthentication( $_SESSION["user"] , true );
 		}	
 	}
 
