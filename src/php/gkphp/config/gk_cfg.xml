@@ -12,7 +12,7 @@
 		<authentication>
 			<enable type="int" >1</enable>
 			<timeout>600</timeout>
-			<cookie_allowed type="int">0</cookie_allowed>
+			<cookie_allowed type="int">1</cookie_allowed>
 			<cookie_days type="int">5</cookie_days>
 			<tables>
 				<users>users</users>

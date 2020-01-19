@@ -81,32 +81,59 @@ require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
 <div id="header">
 <table border="0" width="100%" >
 <tr>
-<td width="20%"><a href="index.php" ><img src="src/img/logo/ns-plm.png" border="0" width="310" alt="nsplm logo" /></a></td>
+<td width="20%">
+<?php
+if ( $nscfg->param->company->logo ) {
+	echo link_generator( $nscfg->param->company->link , "" , $nscfg->param->company->target , "" , "open" ); 
+	echo img_generator( "logo/".$nscfg->param->company->image , "logo" , "" ,  "float: left; vertical-align: middle; padding-right:32px; " , "autoclose" , 0 , $nscfg->param->company->heigth );
+}
+else {
+	echo link_generator( "index.php" ); 
+	echo "<img src=\"src/img/logo/ns-plm.png\" border=\"0\" width=\"310\" alt=\"nsplm logo\" />";
+}
+?>
+</a></td>
 <td valign="middle" ><h1>Next Step PLM</h1><h2><b>Product Lifecycle Management</b> by gKript.org</h2></td>
 <td width="396px" style=" vertical-align: middle; " >
 <?php
-if ( $_SESSION["user"] == "guest" ) {
-?>	<div style="padding:.5em; margin-right: -3; background-color: #edd; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" > <?php
+if ( $gk_Auth->get_current_user_name() == "guest" ) {
+?>
+<div style="padding:.5em; margin-right: -3; background-color: #edd; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" > <?php
 }
 else {
-?>	<div style="padding:.5em; margin-right: -3; background-color: #efe; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" > <?php
+?>
+<div style="padding:.5em; margin-right: -3; background-color: #ddd; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" > <?php
 }
 ?>
 <?php
-echo img_generator( "account.svg" , "account icon" , "" , "margin-bottom: 16px;float: right;" , "autoclose" , 0 , 40 , 40 );
 
-println( "User: " . tag_enclosed( "big" , tag_enclosed( "b" , $_SESSION["clean_user"]		) ) );
+if ( ( $gk_Auth->get_current_clean_user_name() != "guest" ) && ( $gk_Auth->get_image_flag() == true ) )
+	echo img_generator( "users/".$gk_Auth->get_current_user_name().".jpg" , "user image" , "" , "border:1px solid #000; margin-bottom: 16px;float: right; box-shadow: 1px 2px 3px #999;  border-radius: 20px;" , "autoclose" , 0 , 46 , 46 );
+else
+	echo img_generator( "account.svg" , "account icon" , "" , "margin-bottom: 16px;float: right;" , "autoclose" , 0 , 40 , 40 );
+
+println( "User: " . tag_enclosed( "big" , tag_enclosed( "b" , $gk_Auth->get_current_clean_user_name()		) ) );
 BR();
-println( "Role: " . $_SESSION["role"] );
+println( "Role: " . $gk_Auth->get_current_user_role() );
 ?>
 </div>
+
+<?php
+if ( $gk_Auth->get_current_clean_user_name() != "guest" ) {
+?>
+<ul id="navmenu">
+<li><a>Change passw</a></li>
+<li><a href="index.php?action=logout">Logout</a></li></ul>
 </td>
+<?php
+}
+?>
 </tr>
 </table>
 </div>
 
 <?php
-if ( ( ( $_SESSION["clean_user"] != "guest" ) || ( $nscfg->param->user->guest_allowed ) ) || ( $ck ) ) {
+if ( ( ( $gk_Auth->get_current_clean_user_name() != "guest" ) || ( $nscfg->param->user->guest_allowed ) ) || ( $ck ) ) {
 ?>
 <div style="margin-left: 16px; margin-right: 16px; margin-bottom: 24px; margin-top: 24px;" >
 <Form Name ="menu_srch" Method ="GET" ACTION = "search.php">

@@ -202,7 +202,7 @@
 						<li><a href="">Statistics</a></li>
 					</ul>
 				</li>
-				<li><a href="code.php?code=0">Tracebility +</a>
+				<li><a href="code.php?code=0">traceability +</a>
 					<ul>
 						<li><a href="">Serial number</a></li>
 					</ul>

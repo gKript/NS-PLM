@@ -66,8 +66,26 @@ function __construct()
 {
 $this->title = (string) "NS-PLM";
 $this->debug = (int) 0;
-$this->version = (string) "00.3";
+$this->version = (string) "00.3-5";
 $this->status = (string) "d";
+$this->modules = new ns_plm_modules();
+
+}
+}
+class ns_plm_modules
+{
+public $warehouse;
+public $providers;
+public $movements;
+public $inventory;
+public $traceability;
+function __construct()
+{
+$this->warehouse = (int) 0;
+$this->providers = (int) 0;
+$this->movements = (int) 0;
+$this->inventory = (int) 0;
+$this->traceability = (int) 0;
 
 }
 }
@@ -79,6 +97,7 @@ function __construct()
 $this->timezone = (string) "Europe/Rome";
 $this->search = new ns_param_search();
 $this->user = new ns_param_user();
+$this->company = new ns_param_company();
 
 }
 }
@@ -101,6 +120,23 @@ function __construct()
 $this->md5_passw = (int) 0;
 $this->auth_debug = (int) 0;
 $this->guest_allowed = (int) 0;
+
+}
+}
+class ns_param_company
+{
+public $logo;
+public $image;
+public $heigth;
+public $link;
+public $target;
+function __construct()
+{
+$this->logo = (int) 1;
+$this->image = (string) "coelme.png";
+$this->heigth = (string) "400px";
+$this->link = (string) "index.php";
+$this->target =  null;
 
 }
 }

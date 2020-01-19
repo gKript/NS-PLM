@@ -29,7 +29,7 @@ Code	+
 	11	Regulatory Validation
 	12	Warranty
 	13	Compliance
-	14	Tracebility
+	14	traceability
 		Phisical	+
 	15		Length
 	16		Width
@@ -98,7 +98,7 @@ Code	+
 		Charts
 		Statistics
 	
-	Tracebility
+	traceability
 		Serial Number
 
 	Packages

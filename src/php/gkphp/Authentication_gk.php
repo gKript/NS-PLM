@@ -21,6 +21,7 @@
 		var $session;
 		var $autoconnect;
 		var $first_pass;
+		var $image;
 	
 		var $db_host;
 		var $db_user;
@@ -36,6 +37,7 @@
 				$this->debug = $user_debug;
 
 			$this->first_pass = false;
+			$this->image = false;
 			$this->session = session_id();
 			$this->password_md5 = $md5_pass;
 			$this->gk_clean_online_table();
@@ -101,6 +103,10 @@
 		function get_current_user_role() {
 			return $this->role;
 		}
+		
+		function get_image_flag() {
+			return $this->image;
+		}
 	
 		function gk_debug( $message ) {
 			if ( $this->debug == true ) {
@@ -164,6 +170,8 @@
 				$this->gk_debug( "find $user_login and check with $user<br>" );
 				if ( $user_login == $user ) {
 					$this->gk_debug( "<font COLOR=\"#C7A700\">$user_login exist</font><br>" );
+					if ( $row["image"] == 1 )
+						$this->image = true;
 					return true;
 				}
 				$this->gk_debug( "<font COLOR=\"#C7A700\">$user NOT exist</font><br>" );
@@ -299,7 +307,7 @@
 		function gk_logout( $session ) {
 			$query = "SELECT * FROM `gk_users_online` WHERE `online_session_id` = CONVERT(_utf8 '$session' USING latin1) COLLATE latin1_swedish_ci";
 			$this->gk_debug( $query."<br>" );
-			$nrow = query_get_result( $query );
+			$result = query_get_result( $query );
 			if ( $result ) {
 				$query = "DELETE FROM `gk_users_online` WHERE `gk_users_online`.`online_session_id` = CONVERT(_utf8 '$session' USING latin1) COLLATE latin1_swedish_ci LIMIT 1";
 				query_sql_run( $query );
@@ -320,9 +328,10 @@
 				$this->gk_debug( "<strong>In DEBUG autoconnect disabled</strong><br>" );
 			}
 			else {
-				$days = 
-				setcookie( "GK_USER" , $user , ( time() + ( 3600  * 24 * GK_DAYS_COOKIES ) ) );
-				setcookie( "GK_PASS" , $pass , ( time() + ( 3600  * 24 * GK_DAYS_COOKIES ) ) );
+//				$opt = array( "samesite" => "None" , "secure" => "false" , "expires" => ( time() + ( 3600  * 24 * GK_DAYS_COOKIES ) ) );
+				$opt = array( "samesite" => "None" , "expires" => ( time() + ( 3600  * 24 * GK_DAYS_COOKIES ) ) );
+				setcookie( "GK_USER" , $user , $opt );
+				setcookie( "GK_PASS" , $pass , $opt );
 			}
 		}
 		

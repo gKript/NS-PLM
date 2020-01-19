@@ -76,9 +76,10 @@
 	function link_generator( $ref , $text = "" , $target = "" , $style = "" , $tag = "autoclose" ) {
 		$ret  = "<a ";
 		$ret .= "href=\"$ref\" ";
-		$ret .= "$target ";
-		$ret .= "$style >\n";
+		$ret .= $target != ""	? "target=\"$target\"" : "";
+		$ret .= $style != ""	? "style=\"$style\"" : "";
 		$ret .= $text;
+		$ret .= " >";	
 		if ( $tag == "autoclose" )
 			$ret .= "</a>\n";
 		return $ret;

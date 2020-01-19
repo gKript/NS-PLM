@@ -18,8 +18,15 @@
 	<plm>
 		<title>NS-PLM</title>
 		<debug type="int">0</debug>
-		<version>00.3</version>
+		<version>00.3-5</version>
 		<status>d</status>			<!-- d-dev  r-rel  b-beta	-->
+		<modules>
+			<warehouse type="int">0</warehouse>
+			<providers type="int">0</providers>
+			<movements type="int">0</movements>
+			<inventory type="int">0</inventory>
+			<traceability type="int">0</traceability>
+		</modules>
 	</plm>
 	<param>
 		<timezone>Europe/Rome</timezone>
@@ -31,5 +38,13 @@
 			<auth_debug type="int">0</auth_debug>
 			<guest_allowed type="int">0</guest_allowed>
 		</user>
+		<company>
+			<logo type="int">1</logo>
+			<image>coelme.png</image>
+			<heigth>400px</heigth>
+<!--	<link>https://www.coelmesrl.it/</link> -->
+			<link>index.php</link>
+			<target></target>		<!-- _blank : in a new tab		-->
+		</company>
 	</param>
 </ns>

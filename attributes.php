@@ -41,7 +41,7 @@
 	$rohs					= get_check( 'rohs'					, "0" );
 	$dangerous		= get_check( 'dangerous'		, "0" );
 	$regulatory		= get_check( 'regulatory'		, "0" );
-	$tracebility	= get_check( 'tracebility'	, "0" );
+	$traceability	= get_check( 'traceability'	, "0" );
 	$testing			= get_check( 'testing'			, "0" );
 	$consumables	= get_check( 'consumables'	, "0" );
 	$element_2_1	= get_check( 'element_2_1'	, "" 	);		//giorno
@@ -73,7 +73,7 @@
 	$attrib["rohs"]					= $rohs;
 	$attrib["dangerous"]		= $dangerous;
 	$attrib["regulatory"]		= $regulatory;
-	$attrib["tracebility"]	= $tracebility;
+	$attrib["traceability"]	= $traceability;
 	$attrib["testing"]			= $testing;
 	$attrib["consumables"]	= $consumables;
 	$attrib["dd"]						= $element_2_1;
@@ -120,7 +120,7 @@
 			$rohs = $attrib["rohs"];
 			$dangerous = $attrib["dangerous"];
 			$regulatory = $attrib["regulatory"];
-			$tracebility = $attrib["tracebility"];
+			$traceability = $attrib["traceability"];
 			$testing = $attrib["testing"];
 			$consumables = $attrib["consumables"];
 			$element_2_1 = $attrib["dd"];
@@ -173,7 +173,7 @@
 					checkbox_composer( "rohs" 				, "1" , "element checkbox" , $rohs				, 1 , "choice" , "RoHS"					);
 					checkbox_composer( "dangerous"		, "1" , "element checkbox" , $dangerous		, 1 , "choice" , "Dangerous"		);
 					checkbox_composer( "regulatory" 	, "1" , "element checkbox" , $regulatory	, 1 , "choice" , "Regulatory"		);
-					checkbox_composer( "tracebility"	, "1" , "element checkbox" , $tracebility	, 1 , "choice" , "Tracebility"	);
+					checkbox_composer( "traceability"	, "1" , "element checkbox" , $traceability	, 1 , "choice" , "traceability"	);
 					checkbox_composer( "testing" 			, "1" , "element checkbox" , $testing			, 1 , "choice" , "Testing"			);
 					checkbox_composer( "consumables"	, "1" , "element checkbox" , $consumables	, 1 , "choice" , "Consumables"	);
 					?>
@@ -276,7 +276,7 @@
 				$rohs = $attrib["rohs"];
 				$dangerous = $attrib["dangerous"];
 				$regulatory = $attrib["regulatory"];
-				$tracebility = $attrib["tracebility"];
+				$traceability = $attrib["traceability"];
 				$testing = $attrib["testing"];
 				$consumables = $attrib["consumables"];
 				$element_2_1 = $attrib["dd"];
@@ -318,7 +318,7 @@
 						checkbox_composer( "rohs" 				, "1" , "element checkbox" , $rohs				, 1 , "choice" , "RoHS"					, "after"	, $disable	);
 						checkbox_composer( "dangerous"		, "1" , "element checkbox" , $dangerous		, 1 , "choice" , "Dangerous"		, "after"	, $disable	);
 						checkbox_composer( "regulatory" 	, "1" , "element checkbox" , $regulatory	, 1 , "choice" , "Regulatory"		, "after"	, $disable	);
-						checkbox_composer( "tracebility"	, "1" , "element checkbox" , $tracebility	, 1 , "choice" , "Tracebility"	, "after"	, $disable	);
+						checkbox_composer( "traceability"	, "1" , "element checkbox" , $traceability	, 1 , "choice" , "traceability"	, "after"	, $disable	);
 						checkbox_composer( "testing" 			, "1" , "element checkbox" , $testing			, 1 , "choice" , "Testing"			, "after"	, $disable	);
 						checkbox_composer( "consumables"	, "1" , "element checkbox" , $consumables	, 1 , "choice" , "Consumables"	, "after"	, $disable	);
 						?>

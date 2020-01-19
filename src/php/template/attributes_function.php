@@ -17,8 +17,8 @@
 				$expiration = 0;
 				$attrib["expiration"] = 0;
 			}
-			$sql0 = "INSERT INTO `codattributes` (`code`, `bom`, `provider`, `origin`, `critical`, `important`, `testing`, `expiration`, `expiration_time`, `rohs`, `dangerous`, `regulatory`, `warranty`, `unit`, `compliance`, `tracebility`, `consumables`, `length`, `width`, `height`, `weight`, `createTS`, `modifyTS`) ";
-			$sql1 = "VALUES ('$code', '$bom', '$provider', '$origin', '$critical', '$important', '$testing', '$expiration', '$expdate', '$rohs', '$dangerous', '$regulatory', '$warranty', '$unit', '$compliance', '$tracebility', '$consumables', '$length', '$width', '$height', '$weight', current_timestamp(), current_timestamp())";
+			$sql0 = "INSERT INTO `codattributes` (`code`, `bom`, `provider`, `origin`, `critical`, `important`, `testing`, `expiration`, `expiration_time`, `rohs`, `dangerous`, `regulatory`, `warranty`, `unit`, `compliance`, `traceability`, `consumables`, `length`, `width`, `height`, `weight`, `createTS`, `modifyTS`) ";
+			$sql1 = "VALUES ('$code', '$bom', '$provider', '$origin', '$critical', '$important', '$testing', '$expiration', '$expdate', '$rohs', '$dangerous', '$regulatory', '$warranty', '$unit', '$compliance', '$traceability', '$consumables', '$length', '$width', '$height', '$weight', current_timestamp(), current_timestamp())";
 			$sql = $sql0 . $sql1;
 			if ( $en ) {
 				query_insert_single_line( $sql );

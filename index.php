@@ -31,6 +31,12 @@
 		$gk_Auth->get_authentication( $_POST["user_login"] , $_POST["user_password"] );
 	}
 
+	$action = get_check( 'action' );
+
+	if ( $action == "logout" ) 
+		$gk_Auth->gk_logout( session_id() );
+	
+
 	require_once NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 		
 	echo div_block_open( "insidecodelite" );
@@ -50,35 +56,11 @@
 
 	echo 		open_block( "Login information" );
 	echo 		BR( 1, 0);
-/*	if ( $gk_Auth->role == GK_USER_GUEST ) {
-		$_SESSION["user"] = "guest";
-		$_SESSION["role"] = GK_USER_GUEST;
-		$_SESSION["pass"] = "guest";
-		if ( ! isset( $_POST["register"] ) )
-			echo "<br /><b>You are NOT logged in.</b> You are a GUEST<br><br>";
-		else
-			echo "<br /><h4>You are NOT logged in as user ".$_POST["user_login"]."</h4> You are a GUEST<br><br>";
-	}
-	else {
-		$out = "Welcome ".$_SESSION["clean_user"].". You are ";
-		switch ( $gk_Auth->role ) {
-				case GK_USER_ADMIN :
-						$out .= "ADMINISTRATOR<br>";
-						break;
-				case GK_USER_SUPER :
-						$out .= "SUPER USER<br>";
-						break;
-				case GK_USER_USER :
-						$out .= "USER<br>";
-						break;
-		}
-		$out .= "Click <a href=\"index.php\">here</a> to continue<br><br>Wait. In a few seconds you will be redirected.<br><br>";
-	}
-*/
+
 	if ( $gk_Auth->role == "guest" ) {
 		
 		if ( $ck ) {
-			insert_blockquote( "Found authentication cookies for user [ ". tag_enclosed( "b" , $_COOKIE["GK_USER"] ) ." ].<br/>if it's not you, please, sign in with your credentials through the following form.<br/>Otherwise, continue working normally.<br/><br/>Bye<br/><br/>" , "Warning" );
+			insert_blockquote( "Found authentication cookies for user [ ". tag_enclosed( "b" , $_COOKIE["GK_USER"] ) ." ].<br/>if it's not you, please, sign in with your credentials through the following form.<br/>Otherwise, continue working normally.<br/><br/>Bye<br/><br/>" , "Success" );
 			echo BR( 1,0);
 		}		
 		echo '<div class="insidecodelite" style="width: 350px; padding: 10px" >'."\n";
