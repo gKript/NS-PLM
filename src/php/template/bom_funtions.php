@@ -60,7 +60,7 @@
 		$chstyle = "border:1px solid #999;  background-color:#e99;border-radius: 7px;";
 		$uexist = "-";
 		if ( check_attributes_presence( $code ) ) {
-			$atttext = "<a href=\"attributes.php?code=$code\"><b>Attributes Show</b></a>";
+			$atttext = "<a href=\"attributes.php?code=$code&action=Show\"><b>Attributes Show</b></a>";
 			$chstyle = "border:1px solid #999;  background-color:#9e9;border-radius: 7px;";
 			$uexist = "+";
 		}

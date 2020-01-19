@@ -6,12 +6,14 @@
 		<debug type="int">0</debug>
 		<version>00.1</version>
 		<status>dev</status>
-		<subminor>3</subminor>
+		<subminor>29</subminor>
 	</info>
 	<param>
 		<authentication>
 			<enable type="int" >1</enable>
 			<timeout>600</timeout>
+			<cookie_allowed type="int">0</cookie_allowed>
+			<cookie_days type="int">5</cookie_days>
 			<tables>
 				<users>users</users>
 				<online_users>online_users</online_users>

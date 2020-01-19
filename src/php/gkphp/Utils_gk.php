@@ -22,53 +22,6 @@
 		println( "<script type=\"text/javascript\" src=\"$fname\"></script>" );
 	}
 	
-	
-	function insert_blockquote( $text , $type = "Blockquote" , $die = 0 ) {
-		global $mysqli;
-		$border = "";
-		if ( $type == "Blockquote" )
-			$border = "border-top:1px solid #999; border-bottom:1px solid #999; background-color:#edd;";
-
-		if ( $type == "Notice" )
-			$border = "border-top:1px solid #999; border-bottom:1px solid #999; background-color:#eef;";
-		else if ( $type == "Caution" )
-			$border = "border-top:4px solid #e8e848; border-bottom:4px solid #e8e848; background-color:#ffd;";
-		else if ( $type == "Warning" )
-			$border = "border-top:4px solid #be0000; border-bottom:4px solid #be0000; background-color:#fee; text-align: justify; text-justify: inter-word;";
-		else if ( $type == "Error" )
-			$border = "border-top:10px solid #be0000; border-bottom:10px solid #be0000; background-color:#f99;";
-		else if ( $type == "Success" )
-			$border = "border-top:10px solid #8f8; border-bottom:10px solid #8f8; background-color:#dfd;";
-		else if ( $type == "Are you sure?" )
-			$border = "border-top:10px solid #f88; border-bottom:10px solid #f88; background-color:#fdd;";
-		else
-			$border = "border:1px solid #be0000; background-color:#eee;";
-
-		if ( $type != "Blockquote" ) {
-?>
-		<blockquote style = "<?php print( $border ); ?>" >
-			<p>
-				<?php print( $text ); ?><br /><br />
-				<h3>&nbsp;&nbsp;&nbsp;&nbsp;<span class="blink_text"><?php print( $type); ?></span></h3><br />
-			</p>
-<?php
-		}
-		else {
-?>
-		<blockquote style = "<?php print( $border ); ?>" >
-			<p><?php print( $text ); ?></p>
-<?php
-		}
-		if ( $die ) {
-//			echo "<br/>&nbsp;<b>I'm died!</b>";
-			if ( ! $mysqli->connect_error)
-				$mysqli->close();
-			die();
-		}
-		echo "		</blockquote>";
-	}
-
-	
 	function emphasis( $title , $text  ) {
 		println( "<blockquote class=\"code\">" );
 		if ( $title ) 

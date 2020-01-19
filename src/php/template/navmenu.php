@@ -83,7 +83,7 @@ require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
 <tr>
 <td width="20%"><a href="index.php" ><img src="src/img/logo/ns-plm.png" border="0" width="310" alt="nsplm logo" /></a></td>
 <td valign="middle" ><h1>Next Step PLM</h1><h2><b>Product Lifecycle Management</b> by gKript.org</h2></td>
-<td width="20%" style=" vertical-align: middle; " >
+<td width="396px" style=" vertical-align: middle; " >
 <?php
 if ( $_SESSION["user"] == "guest" ) {
 ?>	<div style="padding:.5em; margin-right: -3; background-color: #edd; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" > <?php
@@ -93,11 +93,11 @@ else {
 }
 ?>
 <?php
-echo img_generator( "account.svg" , "account icon" , "" , "margin-bottom: 16px" , "autoclose" , 0 , 24 , 24 );
+echo img_generator( "account.svg" , "account icon" , "" , "margin-bottom: 16px;float: right;" , "autoclose" , 0 , 40 , 40 );
+
+println( "User: " . tag_enclosed( "big" , tag_enclosed( "b" , $_SESSION["clean_user"]		) ) );
 BR();
-println( "User: " . tag_enclosed( "b" , $_SESSION["clean_user"]		) );
-BR();
-println( "Role: " . tag_enclosed( "b" , $_SESSION["role"]					) );
+println( "Role: " . $_SESSION["role"] );
 ?>
 </div>
 </td>
@@ -106,7 +106,7 @@ println( "Role: " . tag_enclosed( "b" , $_SESSION["role"]					) );
 </div>
 
 <?php
-if ( ( $_SESSION["clean_user"] != "guest" ) || ( $nscfg->param->user->guest_allowed ) ) {
+if ( ( ( $_SESSION["clean_user"] != "guest" ) || ( $nscfg->param->user->guest_allowed ) ) || ( $ck ) ) {
 ?>
 <div style="margin-left: 16px; margin-right: 16px; margin-bottom: 24px; margin-top: 24px;" >
 <Form Name ="menu_srch" Method ="GET" ACTION = "search.php">

@@ -2,12 +2,13 @@
 	
 	global	$gkcfg;
 
-	define	( 'GK_USER_GUEST'	, "guest" );
-	define	( 'GK_USER_USER'	, "user" );
-	define	( 'GK_USER_SUPER'	, "superuser" );
-	define	( 'GK_USER_ADMIN'	, "administrator" );
+	define	( 'GK_USER_GUEST'					, "guest" );
+	define	( 'GK_USER_USER'					, "user" );
+	define	( 'GK_USER_SUPER'					, "superuser" );
+	define	( 'GK_USER_ADMIN'					, "administrator" );
 	
-	define	( 'GK_MAX_DELTA'	, $gkcfg->param->authentication->timeout );
+	define	( 'GK_MAX_DELTA'					, $gkcfg->param->authentication->timeout );
+	define	( 'GK_DAYS_COOKIES'				, $gkcfg->param->authentication->cookie_days );
 	define	( 'GK_AUTH_DEBUG_STATUS'	, false );
 	
 	class gkAuthentication {
@@ -19,6 +20,7 @@
 		var $role;
 		var $session;
 		var $autoconnect;
+		var $first_pass;
 	
 		var $db_host;
 		var $db_user;
@@ -33,6 +35,7 @@
 			else
 				$this->debug = $user_debug;
 
+			$this->first_pass = false;
 			$this->session = session_id();
 			$this->password_md5 = $md5_pass;
 			$this->gk_clean_online_table();
@@ -44,6 +47,8 @@
 			$this->user = $n_user;
 			if ( $n_user == "guest" ) {
 				if ( isset( $_COOKIE["GK_USER"] ) ) {
+					if ( ! isset( $_COOKIE["GK_PASS"] ) )
+						$_COOKIE["GK_PASS"] = "";
 					$this->gk_debug( $_COOKIE["GK_USER"]."<br>" );
 					$this->gk_debug( $_COOKIE["GK_PASS"]."<br>" );	
 					$this->autoconnect = true;
@@ -66,6 +71,7 @@
 						$this->gk_update_values_to_session();
 					}
 					else {
+						$this->first_pass = true;
 						$this->gk_debug( "Insert online guest session<br>" );
 						$query = 'INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES (NULL, \'guest\', \'guest\', \'guest\', \''.$this->session.'\', '.time().' ) ;';
 						$this->gk_debug( $query."<br>" );
@@ -100,6 +106,10 @@
 			if ( $this->debug == true ) {
 				echo $message;
 			}
+		}
+		
+		function first() {
+			return $this->first_pass;
 		}
 	
 		function gk_clean_online_table() {
@@ -310,8 +320,9 @@
 				$this->gk_debug( "<strong>In DEBUG autoconnect disabled</strong><br>" );
 			}
 			else {
-				setcookie( "GK_USER" , $user , ( time() + ( 3600  * 24 * 365 ) ) );
-				setcookie( "GK_PASS" , $pass , ( time() + ( 3600  * 24 * 365 ) ) );
+				$days = 
+				setcookie( "GK_USER" , $user , ( time() + ( 3600  * 24 * GK_DAYS_COOKIES ) ) );
+				setcookie( "GK_PASS" , $pass , ( time() + ( 3600  * 24 * GK_DAYS_COOKIES ) ) );
 			}
 		}
 		
@@ -351,26 +362,5 @@
 	
 	}
 
-
-	function gkAuth_start( $host , $user , $pass , $dbname ) {
-		if ( ! isset( $_SESSION["user"] ) ) {
-			$_SESSION["user"]				= "guest";
-			$_SESSION["clean_user"]	= "guest";
-			$_SESSION["pass"]				= "guest";
-			$_SESSION["role"]				= "guest";
-			$_SESSION["auth"]				= false;
-			
-			if ( isset( $_COOKIE["GK_USER"] ) )
-				$gk_Auth = new gkAuthentication( $_SESSION["user"] , true );
-			else
-				$gk_Auth = new gkAuthentication( $_SESSION["user"] , false );
-		}
-		else {
-			$_SESSION["auth"] = true;
-			$gk_Auth = new gkAuthentication( $_SESSION["user"] , true );
-		}	
-	}
-
-
-
 ?>
+

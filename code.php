@@ -58,7 +58,7 @@
 		$ncode = get_new_code( $T ,$G , $S );
 		//echo $ncode;
 		echo "<div class=\"insidecodelite\">\n<h2 style=\"padding-left: 12px;\">Code Creation - step 2</h2><br/>\n";
-		insert_blockquote( "This page is going to access to Database in write modality.<br/>Please proceed only if you are sure about what you are doing, but always after a double check." , "Warning" );
+		insert_blockquote( "This page is going to access to Database in write mode.<br/>Please proceed only if you are sure about what you are doing, but always after a double check." , "Warning" );
 //		echo "<hr/>\n";
 		?>
 
@@ -409,7 +409,7 @@
 */			
 			if ( ( ! $new ) && ( ! $action ) ) {
 				echo "<h2 style=\"padding-left: 12px;\">Code Creation</h2><br/>\n";
-				insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li>Choose the context</li><li>Enter all the others information</li></o	l>" , "Blockquote" );
+				insert_blockquote( "The <b>code creation</b> is divided in 2 steps: <br/><ol><li>Choose the context</li><li>Enter all the others information</li></ol>" , "Blockquote" );
 				open_form( "GET" , "code.php" );
 				select_composer_from_sql( "Typology" , "T" , 1 , "SELECT * FROM `tipologia`"    , 1 , "codelite" , "" , "" , 1 , "Typology"					, "DX" );
 				select_composer_from_sql( "Generic"  , "G" , 1 , "SELECT * FROM `catgenerica`"  , 1 , "codelite" , "" , "" , 1 , "Generic category"	, "DX" );
@@ -417,7 +417,9 @@
 				button( "submit" , "action" , "Create" , 0 , "codelite" );
 				close_form();
 			}
-			echo "</div>\n";
+
+			if ( $new )
+				echo "</div>\n";
 			echo "</div>\n";
 		}
 	}

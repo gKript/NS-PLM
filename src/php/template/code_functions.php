@@ -69,7 +69,7 @@
 		$qrs = $qr->getQrCodeUrl( $enc , 150 , 150 , "UTF-8" );
 		
 		println( "	</div>" );
-		println( "	<div class=\"box25\" style=\"height:150px; background-color: #eee; \">");
+		println( "	<div class=\"box25\" style=\"height:150px; background-color: #fff; \">");
 		println( "		<img class=\"codelite_img\" src=\"$qrs\" />" );
 		println( "	</div>" );
 		println( "</div>" );

@@ -19,16 +19,17 @@
 		<title>NS-PLM</title>
 		<debug type="int">0</debug>
 		<version>00.3</version>
-		<status>dev</status>
+		<status>d</status>			<!-- d-dev  r-rel  b-beta	-->
 	</plm>
 	<param>
+		<timezone>Europe/Rome</timezone>
 		<search>
 			<history type="int">10</history>
 		</search>
 		<user>
 			<md5_passw type="int">0</md5_passw>
 			<auth_debug type="int">0</auth_debug>
-			<guest_allowed type="int">1	</guest_allowed>
+			<guest_allowed type="int">0</guest_allowed>
 		</user>
 	</param>
 </ns>

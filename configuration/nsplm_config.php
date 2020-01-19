@@ -67,14 +67,16 @@ function __construct()
 $this->title = (string) "NS-PLM";
 $this->debug = (int) 0;
 $this->version = (string) "00.3";
-$this->status = (string) "dev";
+$this->status = (string) "d";
 
 }
 }
 class ns_param
 {
+public $timezone;
 function __construct()
 {
+$this->timezone = (string) "Europe/Rome";
 $this->search = new ns_param_search();
 $this->user = new ns_param_user();
 
@@ -98,7 +100,7 @@ function __construct()
 {
 $this->md5_passw = (int) 0;
 $this->auth_debug = (int) 0;
-$this->guest_allowed = (int) 1	;
+$this->guest_allowed = (int) 0;
 
 }
 }

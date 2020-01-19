@@ -11,6 +11,7 @@
 	define( 'NSID_ONLINE'			, false );
 	
 	$using_gkphp = true;
+	
 
 //	--- gkphp
 	require_once( "gk.php" );
@@ -54,6 +55,9 @@
 	ConfigurationLoader::update( "configuration/nsplm_config.xml" , "configuration/nsplm_config.php" );
 	require_once( "configuration/nsplm_config.php" );
 	$nscfg = new ns();
+	
+	$ck_allowed = $gkcfg->param->authentication->cookie_allowed;
+	$ck = false;
 
 	if ( NSID_ONLINE )
 		$nsDb = $nscfg->db->online;
@@ -66,28 +70,49 @@
 	define	( 'NS_DB_PASS'		, $nsDb->password );
 	define	( 'NS_DB_PORT'		,	$nsDb->port );
 	
+	date_default_timezone_set( $nscfg->param->timezone );
+	
 	$mysqli = new mysqli( NS_DB_SERVER , NS_DB_USER , NS_DB_PASS , NS_DB_NAME , NS_DB_PORT );
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
 
-		if ( ! isset( $_SESSION["user"] ) ) {
-			$_SESSION["user"]				= "guest";
-			$_SESSION["clean_user"]	= "guest";
-			$_SESSION["pass"]				= "guest";
-			$_SESSION["role"]				= "guest";
-			$_SESSION["auth"]				= false;
+	if ( isset( $_POST["user_login"] ) ) {
+		$gk_Auth = new gkAuthentication( $_POST["user_login"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
+	}
+	else if ( isset( $_SESSION["user"] ) ) {
+		$_SESSION["auth"] = true;
+		$gk_Auth = new gkAuthentication( $_SESSION["user"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
+	}
+	else if ( ! isset( $_SESSION["user"] ) ) {
+		$_SESSION["user"]				= "guest";
+		$_SESSION["clean_user"]	= "guest";
+		$_SESSION["pass"]				= "guest";
+		$_SESSION["role"]				= "guest";
+		$_SESSION["auth"]				= false;
+		
+		if ( $ck_allowed ) {
 			
 			if ( isset( $_COOKIE["GK_USER"] ) ) {
-				echo "Cookie!!<br>";
+				$ck = true;
 				$gk_Auth = new gkAuthentication( $_COOKIE["GK_USER"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
 			}
-			else
+			else {
+				$ck = false;
 				$gk_Auth = new gkAuthentication( $_SESSION["user"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
+			}
 		}
 		else {
-			$_SESSION["auth"] = true;
-			$gk_Auth = new gkAuthentication( $_SESSION["user"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
-		}	
+				$ck = false;
+				$gk_Auth = new gkAuthentication( $_SESSION["user"] , $nscfg->param->user->md5_passw , $nscfg->param->user->auth_debug );
+		}
+	}
+	else {
+		$_SESSION["user"]				= "guest";
+		$_SESSION["clean_user"]	= "guest";
+		$_SESSION["pass"]				= "guest";
+		$_SESSION["role"]				= "guest";
+		$_SESSION["auth"]				= false;
+	}
 
 ?>

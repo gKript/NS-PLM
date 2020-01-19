@@ -29,7 +29,7 @@ $this->name = (string) "gK.php";
 $this->debug = (int) 0;
 $this->version = (string) "00.1";
 $this->status = (string) "dev";
-$this->subminor =  3;
+$this->subminor =  29;
 
 }
 }
@@ -47,10 +47,14 @@ class gk_param_authentication
 {
 public $enable;
 public $timeout;
+public $cookie_allowed;
+public $cookie_days;
 function __construct()
 {
 $this->enable = (int) 1;
 $this->timeout =  600;
+$this->cookie_allowed = (int) 0;
+$this->cookie_days = (int) 5;
 $this->tables = new gk_param_authentication_tables();
 
 }

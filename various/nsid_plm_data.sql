@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 17, 2020 alle 16:06
+-- Creato il: Gen 19, 2020 alle 03:18
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.2.18
 
@@ -88,7 +88,7 @@ INSERT INTO `catgenerica` (`ind`, `idCatGen`, `CatGen`, `CatGenDescr`, `dbCatGen
 (5, '4', 'Firmware', 'SW per scheda specifica NON basato su OS', 0),
 (6, '5', 'Software + Firmware', 'Elemento Sw/Fw per Apparato o Sistema', 0),
 (7, '6', 'Apparato', 'Meccanica + Elettonica + Sw/Fw', 1),
-(8, '7', 'Sistema', 'Più apparati anche con metodi', 1),
+(8, '7', 'Sistema', 'Apparati anche con metodi', 1),
 (9, '8', 'Simulazione', 'Simulazione di progetti, calcoli, circuiti analogici o digitali', 0),
 (10, '9', 'Organizzazione', 'Regole e procedure', 0),
 (11, 'A', 'Marketing', 'Brochure, presentazioni, richieste', 0),
@@ -128,7 +128,7 @@ INSERT INTO `catspecifica` (`ind`, `idCatSpec`, `CatSpec`, `CatSpecDesc`, `dbCat
 (8, '7', 'Apparato', 'Apparato meccanico + pcb + firmware/software', 1),
 (9, '8', 'Firmware', 'Firmaware per scheda', 0),
 (10, '9', 'Simulazione', 'Simulazione di progetti con programmi tipo LTSpice o Cedar', 0),
-(11, 'A', 'Sistema', 'Più apparati con anche metodi', 1),
+(11, 'A', 'Sistema', 'Apparati con anche metodi', 1),
 (12, 'B', 'Libreria', 'SW, Eagle, ...', 1),
 (13, 'C', 'Elettronica', 'Varia ( schede e parti assemblate di vario tipo )', 1),
 (14, 'D', 'Organizzazione', 'Regole e procedure', 0),
@@ -398,14 +398,15 @@ CREATE TABLE IF NOT EXISTS `gk_users` (
   `user_last_visit` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_visit_counter` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users`
 --
 
 INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_status`, `user_role`, `user_ip`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
-(6, 'danilo.zannoni', 'Danilo Zannoni', 'japotek1972', 0, 'Administrator', NULL, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0);
+(6, 'danilo.zannoni', 'Danilo Zannoni', 'japotek1972', 0, 'Administrator', NULL, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0),
+(7, 'corrado.tumiati', 'Corrado Tumiati', 'vecchiobaule', 0, 'Administrator', NULL, '2020-01-19 02:37:12', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -422,14 +423,15 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(56, 'guest', 'guest', 'guest', 'ibl38i35l5vgjkhastfg7u9ek2', 1579277172);
+(104, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', '7qqtk5c2r9gp1evh0k40hsitqq', 1579403840),
+(102, 'corrado.tumiati', 'Corrado Tumiati', 'Administrator', '182qvbldbn4kh83s3cvt5q28dj', 1579403280);
 
 -- --------------------------------------------------------
 
@@ -545,7 +547,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `search` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=88 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -553,13 +555,13 @@ CREATE TABLE IF NOT EXISTS `search` (
 
 INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
 (75, '2dc', '2020-01-10 09:49:43'),
-(74, '467', '2020-01-09 22:47:16'),
+(95, '467', '2020-01-19 03:08:20'),
 (87, 'varco', '2020-01-17 15:15:58'),
 (73, '22c', '2020-01-09 22:46:43'),
 (86, '223', '2020-01-17 15:05:38'),
 (67, '122', '2020-01-09 21:23:48'),
 (83, '__4%', '2020-01-17 15:03:53'),
-(79, 'onesto', '2020-01-17 14:48:28');
+(91, 'onesto', '2020-01-19 01:52:26');
 
 -- --------------------------------------------------------
 
@@ -574,7 +576,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -637,7 +639,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (59, 'BomCountDaily', '13', '2020-01-16 06:43:42'),
 (60, 'CodeCountDaily', '61', '2020-01-17 00:46:03'),
 (61, 'AttribCountDaily', '47', '2020-01-17 00:46:03'),
-(62, 'BomCountDaily', '13', '2020-01-17 00:46:03');
+(62, 'BomCountDaily', '13', '2020-01-17 00:46:03'),
+(87, 'CodeCountDaily', '61', '2020-01-18 23:33:09'),
+(88, 'AttribCountDaily', '47', '2020-01-18 23:33:09'),
+(89, 'BomCountDaily', '13', '2020-01-18 23:33:09');
 
 -- --------------------------------------------------------
 
