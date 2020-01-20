@@ -37,14 +37,15 @@ Code	+
 	18		Weight
 	
 	State		+
-		Draft
-		Modified
-		Uder Review
-		Prototype
-		Approved
-		Released
-		End of life
-		Obsolete
+		Draft						0
+		Modified				1
+		Uder Review			2
+		Prototype				3
+		Approved				4
+		Stable					5
+		Released				6
+		End of life			7
+		Obsolete				8
 		
 	Price	+
 		Last

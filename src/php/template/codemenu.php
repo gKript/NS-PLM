@@ -1,5 +1,6 @@
 <?php
 
+
 	
 	function check_next_prev_code( $code ) {
 		$cod_id = (int)substr($code, 3, 5);
@@ -66,7 +67,10 @@
 
 
 
-	function emphasis_code( $code , $bl = 0 ) {
+	function emphasis_code( $code , $bl = 0 , $updstate = "" ) {
+		
+		global $codestate;
+		
 		if ( ! $bl ) 
 			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . substr($code, 8, 2);
 		else if ( $bl == 1) 
@@ -120,8 +124,59 @@
 		else
 			echo "<blockquote class=\"code_update\">";
 		
-?>
-
+		
+		if ( $bl == 0 ) {
+			$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+			if ( $updstate != "" ) {
+				if ( $updstate == "prev" ) {
+					if ( $cstate > 1 ) 
+						$newstate = $cstate - 1;
+					else
+						$newstate = $cstate;
+				}
+				if ( $updstate == "next" )
+					if ( $cstate < 9 ) 
+						$newstate = $cstate + 1;
+					else
+						$newstate = $cstate;
+				query_sql_run( "UPDATE `elenco_codici` SET `state` = '$newstate' WHERE `elenco_codici`.`codice` LIKE '$code'" );
+				$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+			}
+			$pstate = $cstate - 1;
+			$nstate = $cstate + 1;
+	?>
+			
+			<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
+				<?php echo title_h2( "State $cstate" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
+				<br/><br/>
+				<table width=100%>
+					<tr >
+						<th>Previous state</th>
+						<th>Current state</th>
+						<th>Next state</th>
+					</tr>
+					<tr align="center" valign="center" height="40px" >
+						<td style="border:1px solid #999; background-color: #ada;">
+							<img src="src/img/ok.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
+							<a href="code.php?code=<?php echo $code; ?>&updstate=prev" ><?php echo $codestate[ $pstate ]; ?></a>
+							</small>
+						</td>
+						<td style="border:1px solid #999; background-color: #dda;">
+							<img src="src/img/pause.svg" alt="ok" border=0 height=24 style="float: left;"/><b>
+							<?php echo $codestate[ $cstate ]; ?>
+							</b>
+						</td>
+						<td style="border:1px solid #999; background-color: #bbb;">
+							<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
+							<a href="code.php?code=<?php echo $code; ?>&updstate=next" ><?php echo $codestate[ $nstate ]; ?></a>
+							</small>
+						</td>
+					</tr>
+				</table>
+			</div>
+<?php
+		}
+?>		
 		<h1>
 			<?php 
 					echo $code_split;

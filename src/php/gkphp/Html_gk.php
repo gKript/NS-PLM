@@ -44,8 +44,8 @@
 	
 	function tag_enclosed( $tag , $enclose , $style = "" ) {
 		$ret  = "<$tag ";
-		$ret .= "style=\"$style\" >";
-		$ret .= $enclose;
+		$ret .= "style=\"$style\" >\n";
+		$ret .= $enclose."\n";
 		$ret .= "</$tag>\n";
 		return $ret;
 	}
@@ -59,7 +59,7 @@
 		$c = "/";
 		if ( ! $path )
 			$path = "src/img/";
-		if ( $tag == "open" )
+		if ( $tag != "autoclose" )
 			$c = "";
 		return "<img src=\"$path$img\" $s alt=\"$alt\" width=\"$w\" heigth=\"$h\" border=\"$b\" $c>\n";
 	}
@@ -78,11 +78,25 @@
 		$ret .= "href=\"$ref\" ";
 		$ret .= $target != ""	? "target=\"$target\"" : "";
 		$ret .= $style != ""	? "style=\"$style\"" : "";
-		$ret .= $text;
 		$ret .= " >";	
+		$ret .= $text;
 		if ( $tag == "autoclose" )
 			$ret .= "</a>\n";
 		return $ret;
 	}
+	
+	
+	function open_script( $type ) {
+		return "<script type=\"$type\">";
+	}
+
+
+	function close_script() {
+		return "</script>";
+	}
+
 
 ?>
+
+
+

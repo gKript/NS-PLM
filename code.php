@@ -26,6 +26,7 @@
 
 	$code = get_check( 'code' );
 	$pcode = get_check( 'pcode' );
+	$updstate  = get_check( 'updstate' );
 	$action = get_check( 'action' );
 	$nav  = get_check( 'nav' );
 	$new = (int)get_check( 'new' );
@@ -150,7 +151,7 @@
 					if ( $nrev_exist ) {
 						insert_blockquote( "Pay attention! This is not the latest revision of the code $code. Please, proceed with caution." , "Caution" );
 					}
-					emphasis_code( $code );
+					emphasis_code( $code , 0 , $updstate );
 				}
 				
 				

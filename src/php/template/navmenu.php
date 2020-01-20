@@ -59,7 +59,18 @@ require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
 		//CSS locali	
 		link_js ( "view.js"      , NSID_PLM_SRC_JS  );
 		link_js ( "calendar.js"  , NSID_PLM_SRC_JS  );
-?>		
+
+		if ( $redirect ) {
+			echo open_script( "text/javascript" );
+			$js  = "function doRedirect() {\n";
+			$js .= "location.href = \"index.php\"\n";
+			$js .= "}\n";
+			$js .= "window.setTimeout(\"doRedirect()\", 5000 );\n";
+			echo $js;
+			echo close_script();
+		}
+
+?>
 
 </head>
 <body>

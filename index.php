@@ -42,7 +42,7 @@
 	echo div_block_open( "insidecodelite" );
 	
 	if ( 	$gk_Auth->first() == true ) {
-		echo 		open_block( "Welcome" , "welcome.svg" );
+		echo 		open_block_no_top( "Welcome" , "welcome.svg" );
 		$text  = 		"This page has been designed to start the activities.\n";
 		$text .= 		BR(1,0);
 		$text .= 		"You can start clicking a code from the table below or searching something.\n";
@@ -54,50 +54,53 @@
 		echo 		div_block_close();
 	}
 
-	echo 		open_block( "Login information" );
+	echo 		open_block_no_top( "Login information" );
 	echo 		BR( 1, 0);
 
 	if ( $gk_Auth->role == "guest" ) {
 		
-		if ( $ck ) {
-			insert_blockquote( "Found authentication cookies for user [ ". tag_enclosed( "b" , $_COOKIE["GK_USER"] ) ." ].<br/>if it's not you, please, sign in with your credentials through the following form.<br/>Otherwise, continue working normally.<br/><br/>Bye<br/><br/>" , "Success" );
+		if ( $redirect ) {
+			insert_blockquote( "Found authentication cookies for user [ ". tag_enclosed( "b" , $_COOKIE["GK_USER"] ) ." ].<br/>You will be signed in in 5 seconds. Please wait" , "Redirect" );
+//			insert_blockquote( "Found authentication cookies for user [ ". tag_enclosed( "b" , $_COOKIE["GK_USER"] ) ." ].<br/>if it's not you, please, sign in with your credentials through the following form.<br/>Otherwise, continue working normally.<br/><br/>Bye<br/><br/>" , "Success" );
 			echo BR( 1,0);
-		}		
-		echo '<div class="insidecodelite" style="width: 350px; padding: 10px" >'."\n";
-		echo '  <form method="post" action="index.php">'."\n";
-		echo '   <table width="100%">'."\n";
-		echo '     <tr>'."\n";
-		echo '       <td class="user">User name</td>'."\n";
-		echo '       <td class="input"><input type="text" name="user_login" size="12" /></td>'."\n";
-		echo '     </tr>'."\n";
-		echo '     <tr>'."\n";
-		echo '       <td class="user">Password</td>'."\n";
-		echo '       <td class="input"><input type="password" name="user_password" size="12"/></td>'."\n";
-		echo '     </tr>'."\n";
-		if ( $ck_allowed ) {
+		}	
+		else {
+			echo '<div class="insidecodelite" style="width: 350px; padding: 10px" >'."\n";
+			echo '  <form method="post" action="index.php">'."\n";
+			echo '   <table width="100%">'."\n";
 			echo '     <tr>'."\n";
-			echo '       <td class="user">Remember me</td>'."\n";
-			echo '       <td class="input"><input type="checkbox" name="autologin"></input></td>'."\n";
+			echo '       <td class="user">User name</td>'."\n";
+			echo '       <td class="input"><input type="text" name="user_login" size="12" /></td>'."\n";
 			echo '     </tr>'."\n";
+			echo '     <tr>'."\n";
+			echo '       <td class="user">Password</td>'."\n";
+			echo '       <td class="input"><input type="password" name="user_password" size="12"/></td>'."\n";
+			echo '     </tr>'."\n";
+			if ( $ck_allowed ) {
+				echo '     <tr>'."\n";
+				echo '       <td class="user">Remember me</td>'."\n";
+				echo '       <td class="input"><input type="checkbox" name="autologin"></input></td>'."\n";
+				echo '     </tr>'."\n";
+			}
+			echo '     <tr>'."\n";
+			echo '      <td class="user">&nbsp;</td>'."\n";
+			echo '      <td class="input"><input type="submit" value="Login" /></td>'."\n";
+			echo '     </tr>'."\n";
+	/*		if ( ! $ck_allowed ) {
+				echo "<input type=\"hidden\" value=\"0\" name=\"autologin\" />"
+			}
+	*/	echo '</table>'."\n";
+			echo '</form>'."\n";
+			echo '</div>'."\n";
+			echo '<div class="stripes"><span></span></div>'."\n";
 		}
-		echo '     <tr>'."\n";
-		echo '      <td class="user">&nbsp;</td>'."\n";
-		echo '      <td class="input"><input type="submit" value="Login" /></td>'."\n";
-		echo '     </tr>'."\n";
-/*		if ( ! $ck_allowed ) {
-			echo "<input type=\"hidden\" value=\"0\" name=\"autologin\" />"
-		}
-*/	echo '</table>'."\n";
-		echo '</form>'."\n";
-		echo '</div>'."\n";
-		echo '<div class="stripes"><span></span></div>'."\n";
 	echo div_block_close();
 	}
 	else {
 		echo '<div class="subnav">'."\n";
 		echo '<table width="500px">'."\n";
 		echo '<tr>'."\n";
-		$img = img_generator( "account.svg" , "account" , "" , "" , "autoclose" , 0 , 48 , 48 );
+		$img = img_generator( "people.svg" , "account" , "" , "" , "autoclose" , 0 , 48 , 48 );
 		echo '<td rowspan="2">'.$img.'</td>'."\n";
 		echo '<td class="user">User name:</td>'."\n";
 		$tx = tag_enclosed( "big" , tag_enclosed( "b" , $gk_Auth->get_current_clean_user_name() ) );

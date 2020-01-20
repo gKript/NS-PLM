@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 19, 2020 alle 13:06
+-- Creato il: Gen 20, 2020 alle 01:25
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.3.5
 
@@ -283,78 +283,80 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `abbreviazione` text NOT NULL,
   `descrizione` text NOT NULL,
   `dbCodici` int(11) NOT NULL DEFAULT 0,
+  `state` int(3) NOT NULL DEFAULT 1,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
 --
 
-INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazione`, `descrizione`, `dbCodici`, `createTS`, `modifyTS`) VALUES
-(1, '2110000100', 2, '1', '1', 'Grano', 'Grano M2 brugola', 0, '2013-07-13 01:52:20', '2019-12-24 01:24:11'),
-(16, '54B0000101', 5, '4', 'B', 'PicGIM', 'Generic Information Manager for PIC', 1, '2013-07-09 19:42:14', '2019-12-23 22:28:12'),
-(18, '89D0000102', 8, '9', 'D', 'gKCodeRules', 'Regole per la codifica', 0, '2013-07-09 23:29:52', '2019-12-23 22:28:12'),
-(19, '2110000200', 2, '1', '1', 'Vite', 'Vite M2x3 Testa piana a taglio', 0, '2013-07-13 09:51:53', '2019-12-24 01:23:22'),
-(20, '2230000100', 2, '2', '3', 'Piezo', 'Sensore piezoceramico bimorfo vibrazione Cod RS 285784', 1, '2013-07-15 23:36:42', '2019-12-24 00:57:23'),
-(21, '2230000200', 2, '2', '3', '74lv138', 'Decoder/Demultiplexer Single 3-to-8 74lv138 Cod RS 663-2688', 0, '2013-07-15 23:47:47', '2019-12-24 00:57:33'),
-(22, '89B0000103', 8, '9', 'B', 'Gim Documentation', 'Generic Information Manager Documentation', 1, '2013-07-16 19:03:40', '2019-12-27 01:15:24'),
-(23, '53B0000103', 5, '3', 'B', 'Gim3', 'Generic Information Manager 3', 0, '2013-07-16 19:18:23', '2019-12-23 22:28:12'),
-(28, '2240000100', 2, '2', '4', 'PreReg-lm2596', 'Modulo preregolatore buck step down LM2596', 0, '2013-08-24 22:26:52', '2019-12-24 01:23:45'),
-(30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, '2019-12-22 23:20:23', '2020-01-01 15:33:43'),
-(31, '8C00000100', 8, 'C', '0', 'Onesto P.C.', 'Onesto Product Concept', 0, '2019-12-22 23:20:23', '2019-12-23 22:28:12'),
-(32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, '2019-12-22 23:22:22', '2019-12-23 22:28:12'),
-(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, '2019-12-22 23:22:22', '2020-01-01 15:29:15'),
-(34, '16C0000100', 1, '6', 'C', 'Sensors Wide', 'Sensors Wide', 0, '2019-12-22 23:24:04', '2019-12-23 22:28:12'),
-(35, '2240000200', 2, '2', '4', 'Arduino Due', 'Arduino Due', 0, '2019-12-22 23:24:04', '2019-12-24 01:23:32'),
-(36, '53E0000100', 5, '3', 'E', 'NS-PLM', 'Next Step PLM by NSID', 0, '2019-12-26 21:17:14', '2019-12-26 21:18:05'),
-(37, '43B0000100', 4, '3', 'B', 'Gim', 'Generic Information manager PROTO', 0, '2019-12-27 22:07:02', '2019-12-27 22:07:02'),
-(38, '53B0000101', 5, '3', 'B', 'Gim 1', 'Generic information manager 1', 0, '2019-12-27 22:23:54', '2019-12-27 22:23:54'),
-(39, '53B0000102', 5, '3', 'B', 'Gim 2', 'Generic information manager 2', 0, '2019-12-27 22:24:48', '2019-12-27 22:24:48'),
-(40, '2240000300', 2, '2', '4', 'Raspberry PI 1', 'Model B+ 512MB RAM ', 0, '2019-12-27 22:46:18', '2019-12-27 22:46:18'),
-(41, '2230000300', 2, '2', '3', 'MicroSD 64GB', 'MicroSCXC UHS-I Card Pro Plus Class 10 U3 I ', 0, '2019-12-27 22:51:17', '2019-12-27 22:51:17'),
-(42, '22C0000100', 2, '2', 'C', 'Switch eth 8 ports PoE', 'UBIQUITI Networks UniFi Switch 8 Gigabit Ethernet (10/100/1000) PoE', 0, '2019-12-29 21:52:50', '2019-12-29 21:52:50'),
-(43, '2230000400', 2, '2', '3', 'Stepdown 24V->5V', 'JZK 24V-12V --> 5V 5A LM2596S step down', 0, '2019-12-29 22:06:42', '2020-01-03 23:34:05'),
-(44, '2230000500', 2, '2', '3', 'DC Stepdown 48V->12V', '36V 48V a 12V 25A 300W di Tensione Riduttore DC Step-Down convertitore', 0, '2019-12-29 22:08:27', '2019-12-29 22:08:27'),
-(46, '22C0000200', 2, '2', 'C', 'Power Supply 48V ', '48V 12.5A 600W 110/220VAC-DC48V Switching Power Supply 600 Watts', 0, '2019-12-29 22:10:36', '2019-12-29 22:10:36'),
-(47, '2240000400', 2, '2', '4', 'Raspberry PI 4 Computer', 'Model B 2GB RAM ', 0, '2020-01-01 13:49:21', '2020-01-01 13:49:21'),
-(49, '22C0000300', 2, '2', 'C', 'Cavo Ethernet ', 'Cat.7 Cavo di Rete 1m - Rosso', 0, '2020-01-01 13:58:58', '2020-01-01 13:58:58'),
-(50, '1120000100', 1, '1', '2', 'Scatola TWD Master', 'Supporti elastici, pannello connessioni Master', 0, '2020-01-01 14:01:33', '2020-01-01 14:01:33'),
-(51, '1120000200', 1, '1', '2', 'Scatola TWD Slave', 'Supporti elastici, pannello connessioni Slave', 0, '2020-01-01 14:02:00', '2020-01-01 14:02:00'),
-(52, '22C0000400', 2, '2', 'C', 'PoE splitter cable', '12v-48v Cavetti Splitter Adattatori Poe', 0, '2020-01-01 14:15:31', '2020-01-01 14:15:31'),
-(53, '3440000100', 3, '4', '4', 'Sensors wide firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF, Environment, Accellerometer)', 0, '2020-01-01 15:22:14', '2020-01-01 15:22:14'),
-(54, '3440000200', 3, '4', '4', 'Sensors small firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF)', 0, '2020-01-01 15:23:27', '2020-01-01 15:23:27'),
-(55, '4670000200', 4, '6', '7', 'TWD Slave', 'Tag Walking Device Slave', 0, '2020-01-01 15:29:45', '2020-01-01 15:29:45'),
-(57, '26C0000100', 2, '6', 'C', 'Contapersone CPX3D', 'Comptipix 3d contapersone PoE con sensori HDR', 0, '2020-01-01 23:12:50', '2020-01-01 23:12:50'),
-(58, '16C0000200', 1, '6', 'C', 'Sensors Small', 'Sensors small ( FIR, TOF )', 0, '2020-01-02 01:47:58', '2020-01-02 01:47:58'),
-(59, '26C0000200', 2, '6', 'C', 'RFID Reader Speedway', 'Speedway Revolution R420 - 4 antenne fino a 32 con hub', 0, '2020-01-03 22:04:57', '2020-01-03 22:04:57'),
-(62, '22C0000500', 2, '2', 'C', 'GPIO Adapter ', 'Speedway GPIO Adapter with GPIO cable', 0, '2020-01-03 22:53:30', '2020-01-03 22:53:30'),
-(63, '22C0000600', 2, '2', 'C', 'Antenna HUB', 'Speedway Antenna HUB Impinj for Speedway Revolution R420 - From 1 to 8 antenna SMA', 0, '2020-01-03 23:03:22', '2020-01-03 23:03:22'),
-(64, '22C0000700', 2, '2', 'C', 'Cavo convertitore', 'Da Micro HDMI maschio a HDMI femmina', 0, '2020-01-03 23:09:25', '2020-01-03 23:09:25'),
-(65, '22C0000800', 2, '2', 'C', 'Monitor Serial Cable ', 'Impinj Speedway R420 Serial Console Cable ETH connector -> RS232', 0, '2020-01-03 23:14:36', '2020-01-03 23:14:36'),
-(66, '22C0000900', 2, '2', 'C', 'MatchBox Antenna', 'Short range RFID UHF Antenna 5-8cm range', 0, '2020-01-03 23:17:33', '2020-01-03 23:17:33'),
-(67, '22C0001000', 2, '2', 'C', 'Convertitore connettore', 'Da N maschio a SMA femmina', 0, '2020-01-03 23:21:57', '2020-01-03 23:21:57'),
-(69, '22C0001100', 2, '2', 'C', 'Threshold RFID Antenna', 'RFID UHF Antenna Impinj - Long range (3 meter) SMA female', 0, '2020-01-03 23:26:47', '2020-01-03 23:26:47'),
-(70, '20E0000100', 2, '0', 'E', 'DVD disk 4.7GB', 'Single Layer DVD laser disk', 0, '2020-01-04 01:13:40', '2020-01-04 01:13:40'),
-(71, '22C0001200', 2, '2', 'C', 'Connettore a pannello', 'N femmina / N femmina (silver)', 0, '2020-01-04 10:21:10', '2020-01-04 10:21:10'),
-(72, '22C0001300', 2, '2', 'C', 'Wide RFID antenna', 'Slimline CP Antenna ETSI - RFID UHF Antenna Far Field (4 meter)', 0, '2020-01-04 10:35:47', '2020-01-04 10:35:47'),
-(73, '2240000500', 2, '2', '4', 'PoE Raspberry', 'PoE Module for Raspberry PI 4 ', 0, '2020-01-04 10:49:37', '2020-01-04 10:49:37'),
-(74, '12C0000100', 1, '2', 'C', 'Raspberry PI 4 PoE ', 'Raspberry PI 4 Complete PoE - Ready to use', 0, '2020-01-04 10:52:49', '2020-01-04 11:02:04'),
-(75, '3540000100', 3, '5', '4', 'Raspbian ', 'Raspbian Buster image 2019', 0, '2020-01-04 10:56:25', '2020-01-04 10:56:25'),
-(76, '12C0000200', 1, '2', 'C', 'Raspberry PI 4 Ext Alim', 'Raspberry PI 4 Complete NOT PoE - Alim 12V 5A - Ready to use', 0, '2020-01-04 14:12:08', '2020-01-04 20:43:28'),
-(77, '22C0001400', 2, '2', 'C', 'Cavo convertitore', 'USB Type A maschio --> MicroUSB 2.0 maschio  30cm', 0, '2020-01-04 14:17:49', '2020-01-04 14:17:49'),
-(78, '2240000600', 2, '2', '4', 'Laser Distance Sensor', 'VL53L1X Time-of-flight distance sensor carrier 400cm max', 0, '2020-01-05 21:23:36', '2020-01-05 21:23:36'),
-(79, '2240000700', 2, '2', '4', 'Deffierential breakout', 'Spurkfun defferential I2C breakoutPCA9615 Qwiic', 0, '2020-01-05 21:28:20', '2020-01-05 21:28:20'),
-(80, '2240000800', 2, '2', '4', 'Qwiic shield', 'Sparkfun Qwiic shield for arduino', 0, '2020-01-05 21:30:20', '2020-01-05 21:30:20'),
-(81, '2240000900', 2, '2', '4', 'FIR Camera', 'FIR array breakout 55 degrees F', 0, '2020-01-05 21:32:27', '2020-01-05 21:32:27'),
-(82, '2240001000', 2, '2', '4', 'Accelerometer breakout', 'Sparkfun Accelerometer breakout MMA845', 0, '2020-01-05 21:33:58', '2020-01-05 21:33:58'),
-(83, '22C0001500', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - Breadboard Jumper (4-pin) 10cm', 0, '2020-01-05 21:35:31', '2020-01-05 21:35:31'),
-(84, '22C0001600', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 50mm', 0, '2020-01-05 21:36:52', '2020-01-05 21:36:52'),
-(85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, '2020-01-05 21:38:25', '2020-01-05 21:38:25'),
-(86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, '2020-01-05 21:43:36', '2020-01-05 21:48:05'),
-(87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, '2020-01-06 01:36:43', '2020-01-06 01:36:43');
+INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazione`, `descrizione`, `dbCodici`, `state`, `createTS`, `modifyTS`) VALUES
+(1, '2110000100', 2, '1', '1', 'Grano', 'Grano M2 brugola', 0, 3, '2013-07-13 01:52:20', '2020-01-20 01:10:02'),
+(16, '54B0000101', 5, '4', 'B', 'PicGIM', 'Generic Information Manager for PIC', 1, 3, '2013-07-09 19:42:14', '2020-01-20 01:10:02'),
+(18, '89D0000102', 8, '9', 'D', 'gKCodeRules', 'Regole per la codifica', 0, 3, '2013-07-09 23:29:52', '2020-01-20 01:10:02'),
+(19, '2110000200', 2, '1', '1', 'Vite', 'Vite M2x3 Testa piana a taglio', 0, 3, '2013-07-13 09:51:53', '2020-01-20 01:10:02'),
+(20, '2230000100', 2, '2', '3', 'Piezo', 'Sensore piezoceramico bimorfo vibrazione Cod RS 285784', 1, 3, '2013-07-15 23:36:42', '2020-01-20 01:10:02'),
+(21, '2230000200', 2, '2', '3', '74lv138', 'Decoder/Demultiplexer Single 3-to-8 74lv138 Cod RS 663-2688', 0, 3, '2013-07-15 23:47:47', '2020-01-20 01:10:02'),
+(22, '89B0000103', 8, '9', 'B', 'Gim Documentation', 'Generic Information Manager Documentation', 1, 3, '2013-07-16 19:03:40', '2020-01-20 01:10:02'),
+(23, '53B0000103', 5, '3', 'B', 'Gim3', 'Generic Information Manager 3', 0, 3, '2013-07-16 19:18:23', '2020-01-20 01:10:02'),
+(28, '2240000100', 2, '2', '4', 'PreReg-lm2596', 'Modulo preregolatore buck step down LM2596', 0, 3, '2013-08-24 22:26:52', '2020-01-20 01:10:02'),
+(30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
+(31, '8C00000100', 8, 'C', '0', 'Onesto P.C.', 'Onesto Product Concept', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
+(32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, 3, '2019-12-22 23:22:22', '2020-01-20 01:10:02'),
+(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 3, '2019-12-22 23:22:22', '2020-01-20 01:10:02'),
+(34, '16C0000100', 1, '6', 'C', 'Sensors Wide', 'Sensors Wide', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
+(35, '2240000200', 2, '2', '4', 'Arduino Due', 'Arduino Due', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
+(36, '53E0000100', 5, '3', 'E', 'NS-PLM', 'Next Step PLM by NSID', 0, 3, '2019-12-26 21:17:14', '2020-01-20 01:10:02'),
+(37, '43B0000100', 4, '3', 'B', 'Gim', 'Generic Information manager PROTO', 0, 3, '2019-12-27 22:07:02', '2020-01-20 01:10:02'),
+(38, '53B0000101', 5, '3', 'B', 'Gim 1', 'Generic information manager 1', 0, 3, '2019-12-27 22:23:54', '2020-01-20 01:10:02'),
+(39, '53B0000102', 5, '3', 'B', 'Gim 2', 'Generic information manager 2', 0, 3, '2019-12-27 22:24:48', '2020-01-20 01:08:53'),
+(40, '2240000300', 2, '2', '4', 'Raspberry PI 1', 'Model B+ 512MB RAM ', 0, 3, '2019-12-27 22:46:18', '2020-01-20 01:10:02'),
+(41, '2230000300', 2, '2', '3', 'MicroSD 64GB', 'MicroSCXC UHS-I Card Pro Plus Class 10 U3 I ', 0, 3, '2019-12-27 22:51:17', '2020-01-20 01:10:02'),
+(42, '22C0000100', 2, '2', 'C', 'Switch eth 8 ports PoE', 'UBIQUITI Networks UniFi Switch 8 Gigabit Ethernet (10/100/1000) PoE', 0, 3, '2019-12-29 21:52:50', '2020-01-20 01:10:02'),
+(43, '2230000400', 2, '2', '3', 'Stepdown 24V->5V', 'JZK 24V-12V --> 5V 5A LM2596S step down', 0, 3, '2019-12-29 22:06:42', '2020-01-20 01:10:02'),
+(44, '2230000500', 2, '2', '3', 'DC Stepdown 48V->12V', '36V 48V a 12V 25A 300W di Tensione Riduttore DC Step-Down convertitore', 0, 3, '2019-12-29 22:08:27', '2020-01-20 01:11:29'),
+(46, '22C0000200', 2, '2', 'C', 'Power Supply 48V ', '48V 12.5A 600W 110/220VAC-DC48V Switching Power Supply 600 Watts', 0, 3, '2019-12-29 22:10:36', '2020-01-20 01:11:38'),
+(47, '2240000400', 2, '2', '4', 'Raspberry PI 4 Computer', 'Model B 2GB RAM ', 0, 3, '2020-01-01 13:49:21', '2020-01-20 01:11:29'),
+(49, '22C0000300', 2, '2', 'C', 'Cavo Ethernet ', 'Cat.7 Cavo di Rete 1m - Rosso', 0, 3, '2020-01-01 13:58:58', '2020-01-20 01:11:29'),
+(50, '1120000100', 1, '1', '2', 'Scatola TWD Master', 'Supporti elastici, pannello connessioni Master', 0, 3, '2020-01-01 14:01:33', '2020-01-20 01:11:29'),
+(51, '1120000200', 1, '1', '2', 'Scatola TWD Slave', 'Supporti elastici, pannello connessioni Slave', 0, 3, '2020-01-01 14:02:00', '2020-01-20 01:11:29'),
+(52, '22C0000400', 2, '2', 'C', 'PoE splitter cable', '12v-48v Cavetti Splitter Adattatori Poe', 0, 3, '2020-01-01 14:15:31', '2020-01-20 01:11:29'),
+(53, '3440000100', 3, '4', '4', 'Sensors wide firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF, Environment, Accellerometer)', 0, 3, '2020-01-01 15:22:14', '2020-01-20 01:11:29'),
+(54, '3440000200', 3, '4', '4', 'Sensors small firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF)', 0, 3, '2020-01-01 15:23:27', '2020-01-20 01:11:29'),
+(55, '4670000200', 4, '6', '7', 'TWD Slave', 'Tag Walking Device Slave', 0, 3, '2020-01-01 15:29:45', '2020-01-20 01:11:29'),
+(57, '26C0000100', 2, '6', 'C', 'Contapersone CPX3D', 'Comptipix 3d contapersone PoE con sensori HDR', 0, 3, '2020-01-01 23:12:50', '2020-01-20 01:11:29'),
+(58, '16C0000200', 1, '6', 'C', 'Sensors Small', 'Sensors small ( FIR, TOF )', 0, 3, '2020-01-02 01:47:58', '2020-01-20 01:11:29'),
+(59, '26C0000200', 2, '6', 'C', 'RFID Reader Speedway', 'Speedway Revolution R420 - 4 antenne fino a 32 con hub', 0, 3, '2020-01-03 22:04:57', '2020-01-20 01:11:29'),
+(62, '22C0000500', 2, '2', 'C', 'GPIO Adapter ', 'Speedway GPIO Adapter with GPIO cable', 0, 3, '2020-01-03 22:53:30', '2020-01-20 01:11:29'),
+(63, '22C0000600', 2, '2', 'C', 'Antenna HUB', 'Speedway Antenna HUB Impinj for Speedway Revolution R420 - From 1 to 8 antenna SMA', 0, 3, '2020-01-03 23:03:22', '2020-01-20 01:11:29'),
+(64, '22C0000700', 2, '2', 'C', 'Cavo convertitore', 'Da Micro HDMI maschio a HDMI femmina', 0, 3, '2020-01-03 23:09:25', '2020-01-20 01:11:29'),
+(65, '22C0000800', 2, '2', 'C', 'Monitor Serial Cable ', 'Impinj Speedway R420 Serial Console Cable ETH connector -> RS232', 0, 3, '2020-01-03 23:14:36', '2020-01-20 01:11:29'),
+(66, '22C0000900', 2, '2', 'C', 'MatchBox Antenna', 'Short range RFID UHF Antenna 5-8cm range', 0, 3, '2020-01-03 23:17:33', '2020-01-20 01:11:29'),
+(67, '22C0001000', 2, '2', 'C', 'Convertitore connettore', 'Da N maschio a SMA femmina', 0, 3, '2020-01-03 23:21:57', '2020-01-20 01:11:29'),
+(69, '22C0001100', 2, '2', 'C', 'Threshold RFID Antenna', 'RFID UHF Antenna Impinj - Long range (3 meter) SMA female', 0, 3, '2020-01-03 23:26:47', '2020-01-20 01:11:29'),
+(70, '20E0000100', 2, '0', 'E', 'DVD disk 4.7GB', 'Single Layer DVD laser disk', 0, 3, '2020-01-04 01:13:40', '2020-01-20 01:11:29'),
+(71, '22C0001200', 2, '2', 'C', 'Connettore a pannello', 'N femmina / N femmina (silver)', 0, 3, '2020-01-04 10:21:10', '2020-01-20 01:11:29'),
+(72, '22C0001300', 2, '2', 'C', 'Wide RFID antenna', 'Slimline CP Antenna ETSI - RFID UHF Antenna Far Field (4 meter)', 0, 3, '2020-01-04 10:35:47', '2020-01-20 01:11:29'),
+(73, '2240000500', 2, '2', '4', 'PoE Raspberry', 'PoE Module for Raspberry PI 4 ', 0, 3, '2020-01-04 10:49:37', '2020-01-20 01:11:29'),
+(74, '12C0000100', 1, '2', 'C', 'Raspberry PI 4 PoE ', 'Raspberry PI 4 Complete PoE - Ready to use', 0, 3, '2020-01-04 10:52:49', '2020-01-20 01:11:29'),
+(75, '3540000100', 3, '5', '4', 'Raspbian ', 'Raspbian Buster image 2019', 0, 3, '2020-01-04 10:56:25', '2020-01-20 01:12:31'),
+(76, '12C0000200', 1, '2', 'C', 'Raspberry PI 4 Ext Alim', 'Raspberry PI 4 Complete NOT PoE - Alim 12V 5A - Ready to use', 0, 3, '2020-01-04 14:12:08', '2020-01-20 01:12:31'),
+(77, '22C0001400', 2, '2', 'C', 'Cavo convertitore', 'USB Type A maschio --> MicroUSB 2.0 maschio  30cm', 0, 3, '2020-01-04 14:17:49', '2020-01-20 01:12:31'),
+(78, '2240000600', 2, '2', '4', 'Laser Distance Sensor', 'VL53L1X Time-of-flight distance sensor carrier 400cm max', 0, 3, '2020-01-05 21:23:36', '2020-01-20 01:12:31'),
+(79, '2240000700', 2, '2', '4', 'Deffierential breakout', 'Spurkfun defferential I2C breakoutPCA9615 Qwiic', 0, 3, '2020-01-05 21:28:20', '2020-01-20 01:12:31'),
+(80, '2240000800', 2, '2', '4', 'Qwiic shield', 'Sparkfun Qwiic shield for arduino', 0, 3, '2020-01-05 21:30:20', '2020-01-20 01:12:31'),
+(81, '2240000900', 2, '2', '4', 'FIR Camera', 'FIR array breakout 55 degrees F', 0, 3, '2020-01-05 21:32:27', '2020-01-20 01:12:31'),
+(82, '2240001000', 2, '2', '4', 'Accelerometer breakout', 'Sparkfun Accelerometer breakout MMA845', 0, 3, '2020-01-05 21:33:58', '2020-01-20 01:12:31'),
+(83, '22C0001500', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - Breadboard Jumper (4-pin) 10cm', 0, 3, '2020-01-05 21:35:31', '2020-01-20 01:08:31'),
+(84, '22C0001600', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 50mm', 0, 3, '2020-01-05 21:36:52', '2020-01-20 01:12:31'),
+(85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, 3, '2020-01-05 21:38:25', '2020-01-20 01:12:31'),
+(86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, 3, '2020-01-05 21:43:36', '2020-01-20 01:12:31'),
+(87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, 3, '2020-01-06 01:36:43', '2020-01-20 01:10:02'),
+(88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 1, '2020-01-20 01:20:23', '2020-01-20 01:20:23');
 
 -- --------------------------------------------------------
 
@@ -424,14 +426,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(31, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'gvgq6nn9jjr2o2tk5leplpssk1', 1579438584);
+(25, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'up5qclormvau5bol1ba22udejp', 1579483358);
 
 -- --------------------------------------------------------
 
@@ -547,7 +549,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `search` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -557,11 +559,11 @@ INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
 (75, '2dc', '2020-01-10 09:49:43'),
 (97, '467', '2020-01-19 12:19:36'),
 (87, 'varco', '2020-01-17 15:15:58'),
-(73, '22c', '2020-01-09 22:46:43'),
+(101, '22c', '2020-01-19 13:49:57'),
 (86, '223', '2020-01-17 15:05:38'),
 (67, '122', '2020-01-09 21:23:48'),
 (83, '__4%', '2020-01-17 15:03:53'),
-(98, 'onesto', '2020-01-19 12:25:13');
+(100, 'onesto', '2020-01-19 13:38:23');
 
 -- --------------------------------------------------------
 
@@ -576,7 +578,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -642,7 +644,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (62, 'BomCountDaily', '13', '2020-01-17 00:46:03'),
 (99, 'CodeCountDaily', '61', '2020-01-19 12:51:02'),
 (100, 'AttribCountDaily', '47', '2020-01-19 12:51:02'),
-(101, 'BomCountDaily', '13', '2020-01-19 12:51:02');
+(101, 'BomCountDaily', '13', '2020-01-19 12:51:02'),
+(102, 'CodeCountDaily', '61', '2020-01-19 23:37:53'),
+(103, 'AttribCountDaily', '47', '2020-01-19 23:37:53'),
+(104, 'BomCountDaily', '13', '2020-01-19 23:37:53');
 
 -- --------------------------------------------------------
 

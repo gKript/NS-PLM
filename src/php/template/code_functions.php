@@ -9,12 +9,7 @@
 		$lcode = $code;
 		if ( $nspage != "code" ) 
 			$lcode = return_code_link( $code );
-		
-/*		println( "<div class=\"codelite\">");
-		echo img_generator( "top.svg" , "icona top" , "" , "float: right;" );
-		$img = img_generator( "syn.svg" , "icona synopsis" );
-		println( "<h2 style=\"vertical-align: middle;\">$img Code synopsis</h2><br/>" );
-*/
+
 		echo open_block( "Code synopsis" , "syn.svg" );
 		println( "	<div class=\"box50\" style=\"height:150px; background-color: #ccc; \">");
 		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
@@ -237,6 +232,12 @@
 		$res = query_code_category( 'CS' , $codetype["CS"] );
 		$codetype["CSname"] = $res["CatSpec"];
 		$codetype["CSdescr"] = $res["CatSpecDesc"];
+	}
+
+	
+
+	function get_state( $code ) {
+		
 	}
 
 

@@ -51,6 +51,21 @@
 	 'bom' => 0
 	);
 	
+	$codestate = array(
+	
+		0 => "",
+		1 => "Draft",
+		2 => "Modified",
+		3 => "Under review",
+		4 => "Prototype",
+		5 => "Approved",
+		6 => "Stable",
+		7 => "Released",
+		8 => "End of life",
+		9 => "Obsolete",
+		10 => ""
+	);
+	
 
 	ConfigurationLoader::update( "configuration/nsplm_config.xml" , "configuration/nsplm_config.php" );
 	require_once( "configuration/nsplm_config.php" );
@@ -113,6 +128,11 @@
 		$_SESSION["pass"]				= "guest";
 		$_SESSION["role"]				= "guest";
 		$_SESSION["auth"]				= false;
+	}
+
+	$redirect = false;
+	if ( ( $gk_Auth->get_current_user_name() == "guest" ) && ( isset( $_COOKIE["GK_USER"] ) ) ) {
+		$redirect = true;
 	}
 
 ?>
