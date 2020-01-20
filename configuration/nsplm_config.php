@@ -133,8 +133,8 @@ public $target;
 function __construct()
 {
 $this->logo = (int) 1;
-$this->image = (string) "coelme.png";
-$this->heigth = (string) "400px";
+$this->image = (string) "nsid.png";
+$this->heigth = (string) "300px";
 $this->link = (string) "index.php";
 $this->target =  null;
 

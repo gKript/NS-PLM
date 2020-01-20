@@ -58,7 +58,9 @@
 		println( "			</tr>" );
 		println( "		</table>" );
 		
-		$load = array("code"=>$code, "Short description"=>$sd, "Long description"=>$ld);
+		$cs = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+		
+		$load = array("code"=>$code, "Short description"=>$sd, "Long description"=>$ld , "state"=>$cs );
 		$enc = json_encode($load);
 		$qr =  new QRCode();
 		$qrs = $qr->getQrCodeUrl( $enc , 150 , 150 , "UTF-8" );
