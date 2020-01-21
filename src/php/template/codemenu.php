@@ -142,18 +142,19 @@
 				query_sql_run( "UPDATE `elenco_codici` SET `state` = '$newstate' WHERE `elenco_codici`.`codice` LIKE '$code'" );
 				$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
 			}
+			$cstatestr = $codestate[ $cstate ];
 			$pstate = $cstate - 1;
 			$nstate = $cstate + 1;
 	?>
 			
 			<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
-				<?php echo title_h2( "State $cstate" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
-				<br/><br/>
-				<table width=100%>
+				<?php echo title_h2( "Current state -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
+				<br/>
+				<table style="margin:9px;" width="97%">
 					<tr >
-						<th>Previous state</th>
-						<th>Current state</th>
-						<th>Next state</th>
+						<th width="25%">Previous state</th>
+						<th width="50%">Current state</th>
+						<th width="25%">Next state</th>
 					</tr>
 					<tr align="center" valign="center" height="40px" >
 						<td style="border:1px solid #999; background-color: #ada;">
@@ -262,11 +263,12 @@
 						<li><a href="">Serial number</a></li>
 					</ul>
 				</li>
-				<li><a href="code.php?code=0">Packages +</a>
+<!--				<li><a href="code.php?code=0">Packages +</a>
 					<ul>
 						<li><a href="">Shipment</a></li>
 					</ul>
 				</li>
+-->
 				<li><a href="">New +</a>
 					<ul>
 						<li><a href="code.php?code=0&new=1">Code</a></li>

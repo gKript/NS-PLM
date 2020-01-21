@@ -64,9 +64,9 @@ public $version;
 public $status;
 function __construct()
 {
-$this->title = (string) "NS-PLM";
+$this->title = (string) "Coelme NS-PLM";
 $this->debug = (int) 0;
-$this->version = (string) "00.3-5";
+$this->version = (string) "00.3-6";
 $this->status = (string) "d";
 $this->modules = new ns_plm_modules();
 
@@ -91,9 +91,11 @@ $this->traceability = (int) 0;
 }
 class ns_param
 {
+public $redirect_time;
 public $timezone;
 function __construct()
 {
+$this->redirect_time = (int) 5;
 $this->timezone = (string) "Europe/Rome";
 $this->search = new ns_param_search();
 $this->user = new ns_param_user();

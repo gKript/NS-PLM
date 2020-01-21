@@ -114,7 +114,7 @@
 							<input id="saveForm" class="button_text" type="submit" name="action" value="Insert" />
 						</li>
 					</ul>
-					<input type="hidden" name="code" value="<?php echo $ncode; ?>" />
+					<input type="hidden" name="code" value="<?php echo $ncode; ?>" />  
 				</form>
 			</div>
 		</div>
@@ -226,7 +226,7 @@
 		<?php		
 				if ( $new == 2 ) {
 		?>
-					<form id="form_att" class="appnitro"  method="get" action="">
+					<form id="form_att" class="appnitro"  method="get" action="code-insert.php">
 						<ul>
 							<li id="li_1" >
 								<label class="description" for="sdescr">Short desrciption</label>
@@ -240,6 +240,7 @@
 								<input id="saveForm" class="button_text" type="submit" name="action" value="Insert" />
 							</li>
 						</ul>
+						<input type="hidden" name="code" value="<?php echo $ncode; ?>" />
 					</form>
 		<?php			
 				}

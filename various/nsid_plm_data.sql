@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 20, 2020 alle 01:25
--- Versione del server: 10.3.14-MariaDB
--- Versione PHP: 7.3.5
+-- Creato il: Gen 21, 2020 alle 16:36
+-- Versione del server: 10.4.10-MariaDB
+-- Versione PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
@@ -307,7 +307,7 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
 (31, '8C00000100', 8, 'C', '0', 'Onesto P.C.', 'Onesto Product Concept', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
 (32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, 3, '2019-12-22 23:22:22', '2020-01-20 01:10:02'),
-(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 3, '2019-12-22 23:22:22', '2020-01-20 01:10:02'),
+(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 5, '2019-12-22 23:22:22', '2020-01-20 23:02:01'),
 (34, '16C0000100', 1, '6', 'C', 'Sensors Wide', 'Sensors Wide', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
 (35, '2240000200', 2, '2', '4', 'Arduino Due', 'Arduino Due', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
 (36, '53E0000100', 5, '3', 'E', 'NS-PLM', 'Next Step PLM by NSID', 0, 3, '2019-12-26 21:17:14', '2020-01-20 01:10:02'),
@@ -356,7 +356,8 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, 3, '2020-01-05 21:38:25', '2020-01-20 01:12:31'),
 (86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, 3, '2020-01-05 21:43:36', '2020-01-20 01:12:31'),
 (87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, 3, '2020-01-06 01:36:43', '2020-01-20 01:10:02'),
-(88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 1, '2020-01-20 01:20:23', '2020-01-20 01:20:23');
+(88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 1, '2020-01-20 01:20:23', '2020-01-20 01:20:23'),
+(91, '83E0000101', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 3, '2020-01-20 13:53:15', '2020-01-20 13:57:41');
 
 -- --------------------------------------------------------
 
@@ -369,17 +370,17 @@ CREATE TABLE IF NOT EXISTS `gk_role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(32) NOT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_role`
 --
 
 INSERT INTO `gk_role` (`role_id`, `role_name`) VALUES
-(1, 'administrator'),
-(2, 'superuser'),
-(3, 'user'),
-(4, 'guest');
+(4, 'administrator'),
+(3, 'superuser'),
+(2, 'user'),
+(1, 'guest');
 
 -- --------------------------------------------------------
 
@@ -426,14 +427,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(25, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'up5qclormvau5bol1ba22udejp', 1579483358);
+(4, 'corrado.tumiati', 'Corrado Tumiati', 'Administrator', '3qjgpgknm18ad7vqfspo84a2vj', 1579593563);
 
 -- --------------------------------------------------------
 
@@ -549,7 +550,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `search` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=109 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -557,12 +558,12 @@ CREATE TABLE IF NOT EXISTS `search` (
 
 INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
 (75, '2dc', '2020-01-10 09:49:43'),
-(97, '467', '2020-01-19 12:19:36'),
-(87, 'varco', '2020-01-17 15:15:58'),
-(101, '22c', '2020-01-19 13:49:57'),
-(86, '223', '2020-01-17 15:05:38'),
+(104, '467', '2020-01-21 07:58:50'),
+(108, 'varco', '2020-01-21 07:59:23'),
+(106, '22c', '2020-01-21 07:59:10'),
+(105, '223', '2020-01-21 07:59:03'),
 (67, '122', '2020-01-09 21:23:48'),
-(83, '__4%', '2020-01-17 15:03:53'),
+(107, '__4%', '2020-01-21 07:59:16'),
 (100, 'onesto', '2020-01-19 13:38:23');
 
 -- --------------------------------------------------------
@@ -578,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -647,7 +648,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (101, 'BomCountDaily', '13', '2020-01-19 12:51:02'),
 (102, 'CodeCountDaily', '61', '2020-01-19 23:37:53'),
 (103, 'AttribCountDaily', '47', '2020-01-19 23:37:53'),
-(104, 'BomCountDaily', '13', '2020-01-19 23:37:53');
+(104, 'BomCountDaily', '13', '2020-01-19 23:37:53'),
+(105, 'CodeCountDaily', '63', '2020-01-20 23:00:33'),
+(106, 'AttribCountDaily', '47', '2020-01-20 23:00:33'),
+(107, 'BomCountDaily', '13', '2020-01-20 23:00:33');
 
 -- --------------------------------------------------------
 

@@ -32,10 +32,10 @@
 	}
 
 	$action = get_check( 'action' );
-
 	if ( $action == "logout" ) 
 		$gk_Auth->gk_logout( session_id() );
 	
+	$redirect_addy = "index.php";
 
 	require_once NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 		

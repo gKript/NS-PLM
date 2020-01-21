@@ -16,9 +16,9 @@
 		</online>
 	</db>
 	<plm>
-		<title>NS-PLM</title>
+		<title>Coelme NS-PLM</title>
 		<debug type="int">0</debug>
-		<version>00.3-5</version>
+		<version>00.3-6</version>
 		<status>d</status>			<!-- d-dev  r-rel  b-beta	-->
 		<modules>
 			<warehouse type="int">0</warehouse>
@@ -29,6 +29,7 @@
 		</modules>
 	</plm>
 	<param>
+		<redirect_time type="int">5</redirect_time>
 		<timezone>Europe/Rome</timezone>
 		<search>
 			<history type="int">10</history>

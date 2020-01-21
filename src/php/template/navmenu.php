@@ -12,6 +12,8 @@ require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
 
 <?php
 
+		$rtime = $nscfg->param->redirect_time;
+
 		$hist 	= get_check( 'hist'	, "" );
 		if ( $hist != "" )
 			$text 	= $hist;
@@ -63,9 +65,9 @@ require_once NSID_PLM_SRC_TEMPLATE . 'index_funtions.php';
 		if ( $redirect ) {
 			echo open_script( "text/javascript" );
 			$js  = "function doRedirect() {\n";
-			$js .= "location.href = \"index.php\"\n";
+			$js .= "location.href = \"$redirect_addy\"\n";
 			$js .= "}\n";
-			$js .= "window.setTimeout(\"doRedirect()\", 5000 );\n";
+			$js .= "window.setTimeout(\"doRedirect()\", $rtime * 1000 );\n";
 			echo $js;
 			echo close_script();
 		}
