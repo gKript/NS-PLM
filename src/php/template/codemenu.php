@@ -152,9 +152,9 @@
 				<br/>
 				<table style="margin:9px;" width="97%">
 					<tr >
-						<th width="25%">Previous state</th>
+						<th width="25%"><small>Previous state</small></th>
 						<th width="50%">Current state</th>
-						<th width="25%">Next state</th>
+						<th width="25%"><small>Next state</small></th>
 					</tr>
 					<tr align="center" valign="center" height="40px" >
 						<td style="border:1px solid #999; background-color: #ada;">
@@ -163,8 +163,9 @@
 							</small>
 						</td>
 						<td style="border:1px solid #999; background-color: #dda;">
-							<img src="src/img/pause.svg" alt="ok" border=0 height=24 style="float: left;"/><b>
-							<?php echo $codestate[ $cstate ]; ?>
+							<b>
+<!--						<img src="src/img/pause.svg" alt="ok" border=0 height=24 style="float: left;"/>		-->
+								<big><?php echo $codestate[ $cstate ]; ?></big>
 							</b>
 						</td>
 						<td style="border:1px solid #999; background-color: #bbb;">
