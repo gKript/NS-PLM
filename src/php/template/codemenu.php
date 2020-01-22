@@ -70,6 +70,7 @@
 	function emphasis_code( $code , $bl = 0 , $updstate = "" ) {
 		
 		global $codestate;
+		global $gk_Auth;
 		
 		if ( ! $bl ) 
 			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . substr($code, 8, 2);

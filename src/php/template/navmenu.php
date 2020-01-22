@@ -128,6 +128,11 @@ else
 println( "User: " . tag_enclosed( "big" , tag_enclosed( "b" , $gk_Auth->get_current_clean_user_name()		) ) );
 BR();
 println( "Role: " . $gk_Auth->get_current_user_role() );
+if ( $gk_Auth->get_current_clean_user_name() != "guest" ) {
+	BR();
+	$strlev = "Auth level: " . tag_enclosed( "b" ,$gk_Auth->get_current_user_level() );
+	echo tag_enclosed( "small" , $strlev );
+}
 ?>
 </div>
 

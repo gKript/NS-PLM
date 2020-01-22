@@ -1,0 +1,52 @@
+<NotepadPlus>
+    <Project name="NS-plm">
+        <File name="C:\wamp64\www\trunk\attributes.php" />
+        <File name="C:\wamp64\www\trunk\bom.php" />
+        <File name="C:\wamp64\www\trunk\code.php" />
+        <File name="C:\wamp64\www\trunk\code_action.php" />
+        <File name="C:\wamp64\www\trunk\code_concept.php" />
+        <File name="C:\wamp64\www\trunk\code-insert.php" />
+        <File name="C:\wamp64\www\trunk\gk.php" />
+        <File name="C:\wamp64\www\trunk\includes.php" />
+        <File name="C:\wamp64\www\trunk\index.php" />
+        <File name="C:\wamp64\www\trunk\index_p.php" />
+        <File name="C:\wamp64\www\trunk\info.php" />
+        <File name="C:\wamp64\www\trunk\phpinfo.php" />
+        <File name="C:\wamp64\www\trunk\rules.php" />
+        <File name="C:\wamp64\www\trunk\search.php" />
+        <File name="C:\wamp64\www\trunk\template_test.php" />
+        <File name="C:\wamp64\www\trunk\where_used.php" />
+        <Folder name="Template script">
+            <File name="C:\wamp64\www\trunk\src\php\template\attributes_function.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\bom_funtions.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\code_functions.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\codemenu.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\footer.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\html_template.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\index_funtions.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\navmenu.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\php_info.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\provider_functions.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\statistics.php" />
+        </Folder>
+        <Folder name="gK.php">
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Authentication_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Configuration_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Date_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Forms_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Html_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Mysqli_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\QRcode_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Table_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Utils_gk.php" />
+            <Folder name="config">
+                <File name="C:\wamp64\www\trunk\src\php\gkphp\config\gk_cfg.php" />
+                <File name="C:\wamp64\www\trunk\src\php\gkphp\config\gk_cfg.xml" />
+            </Folder>
+        </Folder>
+        <Folder name="PLM config">
+            <File name="C:\wamp64\www\trunk\configuration\nsplm_config.php" />
+            <File name="C:\wamp64\www\trunk\configuration\nsplm_config.xml" />
+        </Folder>
+    </Project>
+</NotepadPlus>

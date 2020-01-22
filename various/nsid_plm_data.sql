@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 21, 2020 alle 23:58
--- Versione del server: 10.3.14-MariaDB
--- Versione PHP: 7.3.5
+-- Creato il: Gen 22, 2020 alle 16:29
+-- Versione del server: 10.4.10-MariaDB
+-- Versione PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -261,7 +261,7 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
 (31, '8C00000100', 8, 'C', '0', 'Onesto P.C.', 'Onesto Product Concept', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
 (32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, 2, '2019-12-22 23:22:22', '2020-01-21 21:08:36'),
-(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 1, '2019-12-22 23:22:22', '2020-01-21 21:11:07'),
+(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 3, '2019-12-22 23:22:22', '2020-01-22 08:05:18'),
 (34, '16C0000100', 1, '6', 'C', 'Sensors Wide', 'Sensors Wide', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
 (35, '2240000200', 2, '2', '4', 'Arduino Due', 'Arduino Due', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
 (36, '53E0000100', 5, '3', 'E', 'NS-PLM', 'Next Step PLM by NSID', 0, 3, '2019-12-26 21:17:14', '2020-01-20 01:10:02'),
@@ -431,14 +431,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(14, 'wh test', 'Warehouse', 'user', 'gparudti23i72ftbmr8p6oocun', 1579644462);
+(1, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'so3n2uboeds4fd2ub7cu6ccg80', 1579698702);
 
 -- --------------------------------------------------------
 
@@ -554,7 +554,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `search` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -562,7 +562,7 @@ CREATE TABLE IF NOT EXISTS `search` (
 
 INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
 (75, '2dc', '2020-01-10 09:49:43'),
-(104, '467', '2020-01-21 07:58:50'),
+(111, '467', '2020-01-22 13:11:39'),
 (108, 'varco', '2020-01-21 07:59:23'),
 (106, '22c', '2020-01-21 07:59:10'),
 (105, '223', '2020-01-21 07:59:03'),
@@ -583,7 +583,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -655,7 +655,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (104, 'BomCountDaily', '13', '2020-01-19 23:37:53'),
 (105, 'CodeCountDaily', '63', '2020-01-20 23:00:33'),
 (106, 'AttribCountDaily', '47', '2020-01-20 23:00:33'),
-(107, 'BomCountDaily', '13', '2020-01-20 23:00:33');
+(107, 'BomCountDaily', '13', '2020-01-20 23:00:33'),
+(108, 'CodeCountDaily', '62', '2020-01-22 07:59:44'),
+(109, 'AttribCountDaily', '47', '2020-01-22 07:59:44'),
+(110, 'BomCountDaily', '13', '2020-01-22 07:59:44');
 
 -- --------------------------------------------------------
 
