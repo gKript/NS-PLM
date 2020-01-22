@@ -29,6 +29,18 @@
 		var $db_name;
 	
 		var $debug;
+		
+		
+		function check_user_level( $uact , $uwhat ) {
+			$u = $this->user;
+			$reqlev	= query_get_a_field( "SELECT *  FROM `gk_permisisons`" , $uact.$uwhat );
+			$r			= query_get_a_field( "SELECT *  FROM `gk_users` WHERE `user_login` LIKE '$u'" , "user_role" );
+			$ulevel	= query_get_a_field( "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$r'" , "role_id" );
+			if ( $ulevel >= $reqlev )
+				return true;
+			return false;
+		}
+		
 
 		function __construct ( $n_user , $md5_pass , $user_debug = false ) {
 			if ( $user_debug == false ) 

@@ -11,7 +11,7 @@
 			$lcode = return_code_link( $code );
 
 		echo open_block( "Code synopsis" , "syn.svg" );
-		println( "	<div class=\"box50\" style=\"height:150px; background-color: #ccc; \">");
+		println( "	<div class=\"box50\" style=\"height:160px; background-color: #ccc; \">");
 		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
 		println( "			<tr>" );
 		println( "				<td style=\"border:1px solid #999;\" width=\"20%\" >Code:</td>" );
@@ -28,7 +28,7 @@
 		println( "		</table>" );
 		println( "	</div>" );
 		
-		println( "	<div class=\"box25\" style=\"height:150px; background-color: #ddd; \">");
+		println( "	<div class=\"box25\" style=\"height:160px; background-color: #ddd; \">");
 		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
 		println( "			<tr>" );
 		println( "				<td  style='border:1px solid #999;'width=\"40%\">Attachment:</td>" );
@@ -66,7 +66,7 @@
 		$qrs = $qr->getQrCodeUrl( $enc , 150 , 150 , "UTF-8" );
 		
 		println( "	</div>" );
-		println( "	<div class=\"box25\" style=\"height:150px; background-color: #fff; \">");
+		println( "	<div class=\"box25\" style=\"height:160px; background-color: #fff; \">");
 		println( "		<img class=\"codelite_img\" src=\"$qrs\" />" );
 		println( "	</div>" );
 		println( "</div>" );

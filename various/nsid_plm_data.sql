@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 21, 2020 alle 16:36
--- Versione del server: 10.4.10-MariaDB
--- Versione PHP: 7.3.12
+-- Creato il: Gen 21, 2020 alle 23:58
+-- Versione del server: 10.3.14-MariaDB
+-- Versione PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `codattributes` (
   `warranty` varchar(32) NOT NULL,
   `unit` varchar(16) NOT NULL,
   `compliance` varchar(32) NOT NULL,
-  `tracebility` tinyint(1) NOT NULL,
+  `traceability` tinyint(1) NOT NULL,
   `consumables` tinyint(1) NOT NULL,
   `length` varchar(16) NOT NULL,
   `width` varchar(16) NOT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `codattributes` (
 -- Dump dei dati per la tabella `codattributes`
 --
 
-INSERT INTO `codattributes` (`code`, `bom`, `provider`, `origin`, `critical`, `important`, `testing`, `expiration`, `expiration_time`, `rohs`, `dangerous`, `regulatory`, `warranty`, `unit`, `compliance`, `tracebility`, `consumables`, `length`, `width`, `height`, `weight`, `createTS`, `modifyTS`) VALUES
+INSERT INTO `codattributes` (`code`, `bom`, `provider`, `origin`, `critical`, `important`, `testing`, `expiration`, `expiration_time`, `rohs`, `dangerous`, `regulatory`, `warranty`, `unit`, `compliance`, `traceability`, `consumables`, `length`, `width`, `height`, `weight`, `createTS`, `modifyTS`) VALUES
 ('54B0000101', 1, 0, '0', 1, 1, 1, 0, '', 0, 0, 0, '0', 'NA', 'GPL V3', 0, 0, '0', '0', '0', '0', '2019-12-25 00:20:55', '2020-01-03 18:56:06'),
 ('57C0000100', 1, 0, '0', 0, 1, 1, 0, '', 1, 0, 1, '1', 'N', '', 1, 0, '100cm', '35cm', '6cm', '5 Kg', '2020-01-02 23:55:28', '2020-01-03 20:14:28'),
 ('53E0000100', 0, 0, '0', 0, 1, 1, 1, '20200103', 0, 0, 0, '0', 'N', '', 0, 0, '', '', '', '', '2020-01-03 15:01:09', '2020-01-03 18:54:07'),
@@ -224,52 +224,6 @@ INSERT INTO `codattributes` (`code`, `bom`, `provider`, `origin`, `critical`, `i
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `dbupdate`
---
-
-DROP TABLE IF EXISTS `dbupdate`;
-CREATE TABLE IF NOT EXISTS `dbupdate` (
-  `last_write` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `distinta`
---
-
-DROP TABLE IF EXISTS `distinta`;
-CREATE TABLE IF NOT EXISTS `distinta` (
-  `idDistinta` int(11) NOT NULL AUTO_INCREMENT,
-  `dbCodice` text NOT NULL,
-  `dbCodice_padre` text NOT NULL,
-  `dbDescrizione` text NOT NULL,
-  `dbQuantita` int(11) NOT NULL,
-  PRIMARY KEY (`idDistinta`),
-  UNIQUE KEY `idDistinta` (`idDistinta`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-
---
--- Dump dei dati per la tabella `distinta`
---
-
-INSERT INTO `distinta` (`idDistinta`, `dbCodice`, `dbCodice_padre`, `dbDescrizione`, `dbQuantita`) VALUES
-(2, '125000100', '557000100', 'SPA Control PCB', 1),
-(3, '425000100', '557000100', 'SPA Prototipo 3ch Sense + 1ch Shot PCB', 1),
-(4, '157000100', '557000100', 'Supporto vibrante sensori + PCB Sense e Shot', 1),
-(5, '011000100', '112000100', 'Grano M2 brugola', 1),
-(6, '011000200', '112000100', 'Vite M2x3 Testa piana a taglio', 2),
-(7, '112000100', '157000200', 'SPA Sense supporto vibrante', 1),
-(8, '125000200', '157000200', 'SPA Sense PCB', 1),
-(9, '023000100', '157000200', 'Sensore piezoceramico bimorfo vibrazione Cod RS 285784', 1),
-(10, '157000200', '157000100', 'SPA Sense modulo ( Supporto + PCB + Sensore )', 8),
-(11, '157000300', '157000100', 'SPA Shot modulo ( Supporto + PCB + Sensore )', 1),
-(12, '886000100', '136000300', 'Generic Information Manager Documentation', 1),
-(13, '536000300', '136000300', 'Generic Information Manager 3', 1);
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `elenco_codici`
 --
 
@@ -288,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
@@ -306,8 +260,8 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (28, '2240000100', 2, '2', '4', 'PreReg-lm2596', 'Modulo preregolatore buck step down LM2596', 0, 3, '2013-08-24 22:26:52', '2020-01-20 01:10:02'),
 (30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
 (31, '8C00000100', 8, 'C', '0', 'Onesto P.C.', 'Onesto Product Concept', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
-(32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, 3, '2019-12-22 23:22:22', '2020-01-20 01:10:02'),
-(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 5, '2019-12-22 23:22:22', '2020-01-20 23:02:01'),
+(32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, 2, '2019-12-22 23:22:22', '2020-01-21 21:08:36'),
+(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 1, '2019-12-22 23:22:22', '2020-01-21 21:11:07'),
 (34, '16C0000100', 1, '6', 'C', 'Sensors Wide', 'Sensors Wide', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
 (35, '2240000200', 2, '2', '4', 'Arduino Due', 'Arduino Due', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
 (36, '53E0000100', 5, '3', 'E', 'NS-PLM', 'Next Step PLM by NSID', 0, 3, '2019-12-26 21:17:14', '2020-01-20 01:10:02'),
@@ -356,8 +310,54 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, 3, '2020-01-05 21:38:25', '2020-01-20 01:12:31'),
 (86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, 3, '2020-01-05 21:43:36', '2020-01-20 01:12:31'),
 (87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, 3, '2020-01-06 01:36:43', '2020-01-20 01:10:02'),
-(88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 1, '2020-01-20 01:20:23', '2020-01-20 01:20:23'),
-(91, '83E0000101', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 3, '2020-01-20 13:53:15', '2020-01-20 13:57:41');
+(88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 1, '2020-01-20 01:20:23', '2020-01-20 01:20:23');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `gk_permissions`
+--
+
+DROP TABLE IF EXISTS `gk_permissions`;
+CREATE TABLE IF NOT EXISTS `gk_permissions` (
+  `View` int(3) NOT NULL,
+  `CreateCode` int(3) NOT NULL,
+  `CreateRevision` int(3) NOT NULL,
+  `CreateAtribute` int(3) NOT NULL,
+  `CreateBom` int(3) NOT NULL,
+  `CreateProvider` int(3) NOT NULL,
+  `CreateReport` int(3) NOT NULL,
+  `ModifyCode` int(3) NOT NULL,
+  `ModifyRevision` int(3) NOT NULL,
+  `ModifyAtribute` int(3) NOT NULL,
+  `ModifyBom` int(3) NOT NULL,
+  `ModifyProvider` int(3) NOT NULL,
+  `ModifyReport` int(3) NOT NULL,
+  `DeleteCode` int(3) NOT NULL,
+  `DeleteRevision` int(3) NOT NULL,
+  `DeleteAtribute` int(3) NOT NULL,
+  `DeleteBom` int(3) NOT NULL,
+  `DeleteProvider` int(3) NOT NULL,
+  `DeleteReport` int(3) NOT NULL,
+  `ApproveCode` int(3) NOT NULL,
+  `ApproveRevision` int(3) NOT NULL,
+  `ApproveBom` int(3) NOT NULL,
+  `CreateActivity` int(3) NOT NULL,
+  `ManageAttachment` int(3) NOT NULL,
+  `CreateUser` int(3) NOT NULL,
+  `ModifyUser` int(3) NOT NULL,
+  `DeleteUser` int(3) NOT NULL,
+  `CreateUnit` int(3) NOT NULL,
+  `ModifyUnit` int(3) NOT NULL,
+  `DeleteUnit` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `gk_permissions`
+--
+
+INSERT INTO `gk_permissions` (`View`, `CreateCode`, `CreateRevision`, `CreateAtribute`, `CreateBom`, `CreateProvider`, `CreateReport`, `ModifyCode`, `ModifyRevision`, `ModifyAtribute`, `ModifyBom`, `ModifyProvider`, `ModifyReport`, `DeleteCode`, `DeleteRevision`, `DeleteAtribute`, `DeleteBom`, `DeleteProvider`, `DeleteReport`, `ApproveCode`, `ApproveRevision`, `ApproveBom`, `CreateActivity`, `ManageAttachment`, `CreateUser`, `ModifyUser`, `DeleteUser`, `CreateUnit`, `ModifyUnit`, `DeleteUnit`) VALUES
+(1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 20, 20, 20, 20, 20, 40, 40, 40, 30, 30, 30);
 
 -- --------------------------------------------------------
 
@@ -370,17 +370,19 @@ CREATE TABLE IF NOT EXISTS `gk_role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(32) NOT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_role`
 --
 
 INSERT INTO `gk_role` (`role_id`, `role_name`) VALUES
-(4, 'administrator'),
-(3, 'superuser'),
-(2, 'user'),
-(1, 'guest');
+(40, 'Administrator'),
+(30, 'Superuser'),
+(2, 'User'),
+(1, 'guest'),
+(10, 'Editor'),
+(20, 'Approver');
 
 -- --------------------------------------------------------
 
@@ -393,6 +395,7 @@ CREATE TABLE IF NOT EXISTS `gk_users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_login` varchar(32) NOT NULL,
   `user_name` varchar(32) NOT NULL,
+  `dept` varchar(32) NOT NULL,
   `user_password` varchar(64) NOT NULL,
   `user_status` int(11) NOT NULL,
   `user_role` varchar(32) NOT NULL DEFAULT 'user',
@@ -402,15 +405,16 @@ CREATE TABLE IF NOT EXISTS `gk_users` (
   `user_last_visit` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_visit_counter` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users`
 --
 
-INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_status`, `user_role`, `image`, `user_ip`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
-(6, 'danilo.zannoni', 'Danilo Zannoni', 'japotek1972', 0, 'Administrator', 1, NULL, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0),
-(7, 'corrado.tumiati', 'Corrado Tumiati', 'vecchiobaule', 0, 'Administrator', 0, NULL, '2020-01-19 02:37:12', '0000-00-00 00:00:00', 0);
+INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `dept`, `user_password`, `user_status`, `user_role`, `image`, `user_ip`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
+(6, 'danilo.zannoni', 'Danilo Zannoni', '', 'japotek1972', 0, 'Administrator', 1, NULL, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0),
+(7, 'corrado.tumiati', 'Corrado Tumiati', '', 'vecchiobaule', 0, 'Administrator', 0, NULL, '2020-01-19 02:37:12', '0000-00-00 00:00:00', 0),
+(8, 'wh test', 'Warehouse', 'Warehouse', 'test', 0, 'user', 0, NULL, '2020-01-21 20:45:23', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -427,14 +431,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(4, 'corrado.tumiati', 'Corrado Tumiati', 'Administrator', '3qjgpgknm18ad7vqfspo84a2vj', 1579593563);
+(14, 'wh test', 'Warehouse', 'user', 'gparudti23i72ftbmr8p6oocun', 1579644462);
 
 -- --------------------------------------------------------
 
@@ -550,7 +554,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `search` varchar(16) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=109 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -564,7 +568,7 @@ INSERT INTO `search` (`id`, `search`, `createTS`) VALUES
 (105, '223', '2020-01-21 07:59:03'),
 (67, '122', '2020-01-09 21:23:48'),
 (107, '__4%', '2020-01-21 07:59:16'),
-(100, 'onesto', '2020-01-19 13:38:23');
+(109, 'onesto', '2020-01-21 21:06:26');
 
 -- --------------------------------------------------------
 

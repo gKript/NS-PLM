@@ -57,13 +57,13 @@
 		1 => "Draft",
 		2 => "Modified",
 		3 => "Under review",
-		4 => "Prototype",
-		5 => "Approved",
-		6 => "Stable",
-		7 => "Released",
-		8 => "End of life",
-		9 => "Obsolete",
-		10 => ""
+//		4 => "Prototype",
+		4 => "Approved",
+		5 => "Stable",
+		6 => "Released",
+		7 => "End of life",
+		8 => "Obsolete",
+		9 => ""
 	);
 	
 

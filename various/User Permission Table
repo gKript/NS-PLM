@@ -1,0 +1,32 @@
+Action							Min User LEVEL
+
+View								1
+CreateCode 					10
+CreateRevision			10
+CreateAtribute			10	
+CreateBom						10
+CreateProvider			10
+CreateReport				10
+ModifyCode 					10
+ModifyRevision			10
+ModifyAtribute			10
+ModifyBom						10
+ModifyProvider			10
+ModifyReport				10
+DeleteCode 					10
+DeleteRevision			10
+DeleteAtribute			10
+DeleteBom						10
+DeleteProvider			10
+DeleteReport				10
+ApproveCode					20
+ApproveRevision			20
+ApproveBom					20
+CreateActivity			20
+ManageAttachment		20
+CreateUser					40
+ModifyUser					40
+DeleteUser					40
+CreateUnit					30
+ModifyUnit					30
+DeleteUnit					30

@@ -125,58 +125,88 @@
 			echo "<blockquote class=\"code_update\">";
 		
 		
-		if ( $bl == 0 ) {
-			$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
-			if ( $updstate != "" ) {
-				if ( $updstate == "prev" ) {
-					if ( $cstate > 1 ) 
-						$newstate = $cstate - 1;
-					else
-						$newstate = $cstate;
+		$uname = $gk_Auth->get_current_user_name();
+		if ( $uname != "guest" ) {
+			if ( $bl == 0 ) {
+				$query = 'SELECT * FROM `gk_users` where user_login = \''. $uname .'\' ';
+				$urole = query_get_a_field( $query , "user_role" );
+				$sql = "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$urole'";
+				$ulevel = query_get_a_field( $query , "user_role" );
+				$cstate = query_get_a_field( "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+				if ( $updstate != "" ) {
+					if ( $updstate == "prev" ) {
+						if ( $cstate == 3 ) {
+							$newstate = 1;
+						}
+						else if ( $cstate > 3 ) 
+							$newstate = $cstate - 1;
+						else
+							$newstate = $cstate;
+					}
+					if ( $updstate == "next" ) {
+						if ( $cstate == 1 ) {
+							$newstate = 3;
+						}
+						else if ( ( $cstate < 8 ) && ( $cstate >= 3 ) )
+							$newstate = $cstate + 1;
+						else
+							$newstate = $cstate;
+					}
+					query_sql_run( "UPDATE `elenco_codici` SET `state` = '$newstate' WHERE `elenco_codici`.`codice` LIKE '$code'" );
+					$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
 				}
-				if ( $updstate == "next" )
-					if ( $cstate < 9 ) 
-						$newstate = $cstate + 1;
-					else
-						$newstate = $cstate;
-				query_sql_run( "UPDATE `elenco_codici` SET `state` = '$newstate' WHERE `elenco_codici`.`codice` LIKE '$code'" );
-				$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+				$cstatestr = $codestate[ $cstate ];
+				if ( $cstate == 1 ) {
+					$pstate = 0;
+					$nstate = 3;
+				}
+				else if ( $cstate == 2 ) {
+					$pstate = 0;
+					$nstate = 3;
+				}
+				else if ( $cstate == 3 ) {
+					$pstate = 1;
+					$nstate = 4;
+				}
+				else {
+					$pstate = $cstate - 1;
+					$nstate = $cstate + 1;
+				}
+		?>
+				
+				<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
+					<?php echo title_h2( "Current state -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
+					<br/>
+					<table style="margin:9px;" width="97%">
+						<tr >
+							<th width="25%"><small>Previous state</small></th>
+							<th width="50%">Current state</th>
+							<th width="25%"><small>Next state</small></th>
+						</tr>
+						<tr align="center" valign="center" height="40px" >
+							<td style="border:1px solid #999; background-color: #ada;">
+								<a href="code.php?code=<?php echo $code; ?>&updstate=prev" >
+								<img src="src/img/prev.svg" alt="ok" border=0 height=24 style="float: right;"/><small>
+								<?php echo $codestate[ $pstate ]; ?></a>
+								</small>
+							</td>
+							<td style="border:1px solid #999; background-color: #dda;">
+								<b>
+	<!--						<img src="src/img/pause.svg" alt="ok" border=0 height=24 style="float: left;"/>		-->
+									<big><?php echo $codestate[ $cstate ]; ?></big>
+								</b>
+							</td>
+							<td style="border:1px solid #999; background-color: #bbb;">
+								<a href="code.php?code=<?php echo $code; ?>&updstate=next" >
+								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
+								<?php echo $codestate[ $nstate ]; ?></a>
+								</small>
+							</td>
+						</tr>
+					</table>
+				</div>
+	<?php
 			}
-			$cstatestr = $codestate[ $cstate ];
-			$pstate = $cstate - 1;
-			$nstate = $cstate + 1;
-	?>
-			
-			<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
-				<?php echo title_h2( "Current state -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
-				<br/>
-				<table style="margin:9px;" width="97%">
-					<tr >
-						<th width="25%"><small>Previous state</small></th>
-						<th width="50%">Current state</th>
-						<th width="25%"><small>Next state</small></th>
-					</tr>
-					<tr align="center" valign="center" height="40px" >
-						<td style="border:1px solid #999; background-color: #ada;">
-							<img src="src/img/ok.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
-							<a href="code.php?code=<?php echo $code; ?>&updstate=prev" ><?php echo $codestate[ $pstate ]; ?></a>
-							</small>
-						</td>
-						<td style="border:1px solid #999; background-color: #dda;">
-							<b>
-<!--						<img src="src/img/pause.svg" alt="ok" border=0 height=24 style="float: left;"/>		-->
-								<big><?php echo $codestate[ $cstate ]; ?></big>
-							</b>
-						</td>
-						<td style="border:1px solid #999; background-color: #bbb;">
-							<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
-							<a href="code.php?code=<?php echo $code; ?>&updstate=next" ><?php echo $codestate[ $nstate ]; ?></a>
-							</small>
-						</td>
-					</tr>
-				</table>
-			</div>
-<?php
 		}
 ?>		
 		<h1>
