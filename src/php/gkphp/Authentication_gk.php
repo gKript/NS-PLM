@@ -3,9 +3,9 @@
 	global	$gkcfg;
 
 	define	( 'GK_USER_GUEST'					, "guest" );
-	define	( 'GK_USER_USER'					, "user" );
+/*define	( 'GK_USER_USER'					, "user" );
 	define	( 'GK_USER_SUPER'					, "superuser" );
-	define	( 'GK_USER_ADMIN'					, "administrator" );
+	define	( 'GK_USER_ADMIN'					, "administrator" ); */	
 	
 	define	( 'GK_MAX_DELTA'					, $gkcfg->param->authentication->timeout );
 	define	( 'GK_DAYS_COOKIES'				, $gkcfg->param->authentication->cookie_days );
@@ -22,15 +22,9 @@
 		var $autoconnect;
 		var $first_pass;
 		var $image;
-	
-		var $db_host;
-		var $db_user;
-		var $db_pass;
-		var $db_name;
+		var $level;
 	
 		var $debug;
-		
-		
 
 		function __construct ( $n_user , $md5_pass , $user_debug = false ) {
 			if ( $user_debug == false ) 
@@ -44,6 +38,8 @@
 			$this->password_md5 = $md5_pass;
 			$this->gk_clean_online_table();
 			$this->set_current_user_name( $n_user );
+			$r = $this->role;
+			$this->level = query_get_a_field( "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$r'" , "role_id" );
 		}
 
 	
@@ -51,8 +47,7 @@
 			$u = $this->user;
 			$r = $this->role;
 			
-			$reqlev	= query_get_a_field( "SELECT *  FROM `gk_permisisons`" , $uact.$uwhat );
-//			$r			= query_get_a_field( "SELECT *  FROM `gk_users` WHERE `user_login` LIKE '$u'" , "user_role" );
+			$reqlev	= query_get_a_field( "SELECT * FROM `gk_permissions`" , $uact.$uwhat );
 			$ulevel	= query_get_a_field( "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$r'" , "role_id" );
 			if ( $ulevel >= $reqlev )
 				return true;
@@ -60,8 +55,7 @@
 		}
 		
 		function get_current_user_level() {
-			$r = $this->role;
-			return query_get_a_field( "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$r'" , "role_id" );
+			return $this->level;
 		}
 		
 

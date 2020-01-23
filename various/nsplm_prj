@@ -35,6 +35,7 @@
             <File name="C:\wamp64\www\trunk\src\php\gkphp\Date_gk.php" />
             <File name="C:\wamp64\www\trunk\src\php\gkphp\Forms_gk.php" />
             <File name="C:\wamp64\www\trunk\src\php\gkphp\Html_gk.php" />
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\Menu_gk.php" />
             <File name="C:\wamp64\www\trunk\src\php\gkphp\Mysqli_gk.php" />
             <File name="C:\wamp64\www\trunk\src\php\gkphp\QRcode_gk.php" />
             <File name="C:\wamp64\www\trunk\src\php\gkphp\Table_gk.php" />
@@ -47,6 +48,14 @@
         <Folder name="PLM config">
             <File name="C:\wamp64\www\trunk\configuration\nsplm_config.php" />
             <File name="C:\wamp64\www\trunk\configuration\nsplm_config.xml" />
+        </Folder>
+        <Folder name="Various">
+            <File name="890000100  -  regole_per la_codifica_gKript.txt" />
+            <File name="Flusso Auth" />
+            <File name="PLM Sitemap .txt" />
+            <File name="sql vari" />
+            <File name="struttura e flosofa magazzni.txt" />
+            <File name="User Permission Table" />
         </Folder>
     </Project>
 </NotepadPlus>

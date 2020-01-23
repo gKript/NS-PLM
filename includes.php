@@ -29,7 +29,6 @@
 	
 	define( 'ITEMS_IN_HISTORY'			,	10				);
 
-	require_once( NSID_PLM_SRC_TEMPLATE . "codemenu.php" );
 	require_once( NSID_PLM_SRC_TEMPLATE . "statistics.php" );
 	require_once( NSID_PLM_SRC_TEMPLATE . "html_template.php" );
 
@@ -57,7 +56,6 @@
 		1 => "Draft",
 		2 => "Modified",
 		3 => "Under review",
-//		4 => "Prototype",
 		4 => "Approved",
 		5 => "Stable",
 		6 => "Released",
@@ -134,5 +132,7 @@
 	if ( ( $gk_Auth->get_current_user_name() == "guest" ) && ( isset( $_COOKIE["GK_USER"] ) ) ) {
 		$redirect = true;
 	}
+	
+	require_once( NSID_PLM_SRC_TEMPLATE . "codemenu.php" );
 
 ?>

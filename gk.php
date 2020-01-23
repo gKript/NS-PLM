@@ -20,14 +20,15 @@
 		unset( $gkconfpath );
 
 
+	require_once( GKPHP_PATH . "Configuration_gk.php" );
 	require_once( GKPHP_PATH . "Date_gk.php" );
 	require_once( GKPHP_PATH . "Forms_gk.php" );
 	require_once( GKPHP_PATH . "Html_gk.php" );
+	require_once( GKPHP_PATH . "Menu_gk.php" );
 	require_once( GKPHP_PATH . "Mysqli_gk.php" );
 	require_once( GKPHP_PATH . "QRcode_gk.php" );
 	require_once( GKPHP_PATH . "Table_gk.php" );
 	require_once( GKPHP_PATH . "Utils_gk.php" );
-	require_once( GKPHP_PATH . "Configuration_gk.php" );
 	
 	if( ( ! isset( $using_gkphp ) ) || ( $using_gkphp == false ) ) {
 		gkphp_error_page();
@@ -60,14 +61,12 @@
 		echo generic_tag_open( "body" );
 		echo div_block_open( ""  , "	margin:1em; background-color:#f44; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" );
 		echo tag_enclosed( "h2" , "Error!!!" , "padding: 1em;" );
-		$page = substr( "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] , 0 , -6 );
-		$link = link_generator( $page , "here" );
-		println( "You cannot call directly gK.php library. Try clicking $link.");
+		$link = link_generator( substr( "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] , 0 , -6 ) , "here" );
+		println( "You cannot call directly a gK.php library file. Try clicking $link.");
 		echo BR( 2 );
 		echo div_block_close();
 		echo generic_tag_close( "body" );
 		echo generic_tag_close( "html" );
-		
 		die();
 	}
 

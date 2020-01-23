@@ -1,6 +1,8 @@
 <?php
-
-
+	
+	global $gk_Auth;
+	
+	$codemenu = new gkMenu( $gk_Auth->get_current_user_level() );
 	
 	function check_next_prev_code( $code ) {
 		$cod_id = (int)substr($code, 3, 5);
@@ -66,10 +68,13 @@
 	}
 
 
+	
+
 
 	function emphasis_code( $code , $bl = 0 , $updstate = "" ) {
 		
 		global $codestate;
+		global $codemenu;
 		global $gk_Auth;
 		
 		if ( ! $bl ) 
@@ -166,8 +171,10 @@
 					$nstate = 3;
 				}
 				else if ( $cstate == 3 ) {
-					$pstate = 1;
-					$nstate = 4;
+					if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) {
+						$pstate = 1;
+						$nstate = 4;
+					}
 				}
 				else {
 					$pstate = $cstate - 1;
@@ -186,22 +193,33 @@
 						</tr>
 						<tr align="center" valign="center" height="40px" >
 							<td style="border:1px solid #999; background-color: #ada;">
+							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
 								<a href="code.php?code=<?php echo $code; ?>&updstate=prev" >
 								<img src="src/img/prev.svg" alt="ok" border=0 height=24 style="float: right;"/><small>
 								<?php echo $codestate[ $pstate ]; ?></a>
 								</small>
+							<?php } 
+										else {
+											echo "&nbsp;";
+										}
+							?>
 							</td>
 							<td style="border:1px solid #999; background-color: #dda;">
 								<b>
-	<!--						<img src="src/img/pause.svg" alt="ok" border=0 height=24 style="float: left;"/>		-->
 									<big><?php echo $codestate[ $cstate ]; ?></big>
 								</b>
 							</td>
 							<td style="border:1px solid #999; background-color: #bbb;">
+							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
 								<a href="code.php?code=<?php echo $code; ?>&updstate=next" >
 								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
 								<?php echo $codestate[ $nstate ]; ?></a>
 								</small>
+							<?php } 
+										else {
+											echo "&nbsp;";
+										}
+							?>
 							</td>
 						</tr>
 					</table>
@@ -218,59 +236,49 @@
 <?php
 
 		if ( ! $bl ) {
+//			echo $codemenu->get_level();
+			echo $codemenu->open( "navmenu" , "margin-left: 10px; margin-right: 10px; margin-bottom: 10px; " );
+			if ( $nav["check"] ) {
+				echo $codemenu->submenu_open( "Navigator +" );
+				echo $ncode_link;
+				echo $pcode_link;
+				echo $nrev_link;
+				echo $prev_link;
+				echo $codemenu->submenu_close();
+			}
+			echo $codemenu->submenu_open( "Details +" );
+				echo $codemenu->submenu_open( "Attributes +" );
+					echo $attrib_show_link . "\n";
+					echo $attrib_create_link . "\n";
+					echo $attrib_edit_link . "\n";
+				echo $codemenu->submenu_close();
+				echo $codemenu->submenu_open( "Price +" );
+					echo $codemenu->voice( "Last" );
+					echo $codemenu->voice( "Average" );
+				echo $codemenu->submenu_close();
+				echo $codemenu->voice( "Synopsis" , $synop_link );
+				echo $codemenu->voice( "State" , $synop_link );
+				echo $codemenu->voice( "Provider" , $synop_link );
+			echo $codemenu->submenu_close();
+			echo $codemenu->submenu_open( "Structure +" );
+				echo $codemenu->voice( "B.O.M." , $synop_link );
+				echo $codemenu->voice( "Where used" , "where_used.php?code=".$code );
+				echo $codemenu->voice( "Documentation" );
+			echo $codemenu->submenu_close();
+			if ( check_in_bom_presence( $code ) )
+				echo $codemenu->voice( "Where used" , "where_used.php?code=".$code  );
+			echo $codemenu->submenu_open( "Related +" );
+				echo $codemenu->voice( "Attachment" );
+				echo $codemenu->voice( "Link" );
+			echo $codemenu->submenu_close();
+			
+			
+			echo $codemenu->close();
+			echo BR(8,0);
 ?>
 		<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;" >
 			<ul id="navmenu">
 
-				<?php if ( $nav["check"] ) { ?>
-				<li><a>Navigator +</a>
-					<ul>
-						<?php
-						echo $ncode_link;
-						echo $pcode_link;
-						echo $nrev_link;
-						echo $prev_link;
-						?>
-					</ul>
-				</li>
-				<?php } ?>
-				<li><a>Details +</a>
-					<ul>
-						<li><a href="<?php 	 	 echo $synop_link; ?>">Synopsis</a></li>
-						<li><a>Attributes +</a>
-							<ul>
-								<?php echo $attrib_show_link . "\n"; ?>
-								<?php echo $attrib_create_link . "\n"; ?>
-								<?php echo $attrib_edit_link . "\n"; ?>
-
-							</ul>
-						</li>
-						<li><a href="">State</a></li>
-						<li><a href="">Provider</a></li>
-						<li><a href="">Price +</a>
-							<ul>
-								<li><a href="">Last</a></li>
-								<li><a href="">Average</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li><a href="code.php?code=0">Structure +</a>
-					<ul>
-						<li><a href="">B.O.M.</a></li>
-						<li><a href="where_used.php?code=<?php echo $code; ?>">Where used</a></li>
-						<li><a href="">Documentation</a></li>
-					</ul>
-				</li>
-				<?php if ( check_in_bom_presence( $code ) ) { ?>
-				<li><a href="where_used.php?code=<?php echo $code; ?>">Where used</a></li>
-				<?php } ?>
-				<li><a href="code.php?code=0">Related +</a>
-					<ul>
-						<li><a href="">Attachment</a></li>
-						<li><a href="">Link</a></li>
-					</ul>
-				</li>
 				<li><a href="code.php?code=0">Changes +</a>
 					<ul>
 						<li><a href="">Request</a></li>
@@ -295,12 +303,6 @@
 						<li><a href="">Serial number</a></li>
 					</ul>
 				</li>
-<!--				<li><a href="code.php?code=0">Packages +</a>
-					<ul>
-						<li><a href="">Shipment</a></li>
-					</ul>
-				</li>
--->
 				<li><a href="">New +</a>
 					<ul>
 						<li><a href="code.php?code=0&new=1">Code</a></li>

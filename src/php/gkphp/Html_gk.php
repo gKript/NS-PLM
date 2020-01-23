@@ -1,16 +1,19 @@
 <?php
 
-	function generic_tag_open( $tag , $class ="" , $style ="" , $type = "" ) {
+	function generic_tag_open( $tag , $class ="" , $style ="" , $type = "" , $id = "" ) {
 		$cl = "";
 		$s = "";
 		$c = "";
+		$i = "";
 		if ( $class )
 			$cl = "class=\"$class\"";
 		if ( $style )
 			$s = "style=\"$style\"";
+		if ( $id )
+			$i = "id=\"$id\"";
 		if ( $type == "autoclose" )
 			$c = "/";
-		return "<$tag $cl $s $c>\n";
+		return "<$tag $cl $s $i $c>\n";
 	}
 
 	function generic_tag_close( $tag ) {
