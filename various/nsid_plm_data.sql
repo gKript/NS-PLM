@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 26, 2020 alle 01:17
+-- Creato il: Gen 26, 2020 alle 22:47
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.3.5
 
@@ -258,15 +258,15 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (22, '89B0000103', 8, '9', 'B', 'Gim Documentation', 'Generic Information Manager Documentation', 1, 3, '2013-07-16 19:03:40', '2020-01-20 01:10:02'),
 (23, '53B0000103', 5, '3', 'B', 'Gim3', 'Generic Information Manager 3', 0, 3, '2013-07-16 19:18:23', '2020-01-20 01:10:02'),
 (28, '2240000100', 2, '2', '4', 'PreReg-lm2596', 'Modulo preregolatore buck step down LM2596', 0, 3, '2013-08-24 22:26:52', '2020-01-20 01:10:02'),
-(30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 3, '2019-12-22 23:20:23', '2020-01-25 21:15:29'),
+(30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 4, '2019-12-22 23:20:23', '2020-01-26 22:23:00'),
 (31, '8C00000100', 8, 'C', '0', 'Onesto P.C.', 'Onesto Product Concept', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
 (32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, 2, '2019-12-22 23:22:22', '2020-01-21 21:08:36'),
-(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 4, '2019-12-22 23:22:22', '2020-01-25 00:54:40'),
-(34, '16C0000100', 1, '6', 'C', 'Sensors Wide', 'Sensors Wide', 0, 4, '2019-12-22 23:24:04', '2020-01-25 21:18:34'),
+(33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 3, '2019-12-22 23:22:22', '2020-01-26 11:05:48'),
+(34, '16C0000100', 1, '6', 'C', 'Sensors Wide', 'Sensors Wide', 0, 3, '2019-12-22 23:24:04', '2020-01-26 13:16:43'),
 (35, '2240000200', 2, '2', '4', 'Arduino Due', 'Arduino Due', 0, 3, '2019-12-22 23:24:04', '2020-01-20 01:10:02'),
 (36, '53E0000100', 5, '3', 'E', 'NS-PLM', 'Next Step PLM by NSID', 0, 3, '2019-12-26 21:17:14', '2020-01-20 01:10:02'),
 (37, '43B0000100', 4, '3', 'B', 'Gim', 'Generic Information manager PROTO', 0, 3, '2019-12-27 22:07:02', '2020-01-20 01:10:02'),
-(38, '53B0000101', 5, '3', 'B', 'Gim 1', 'Generic information manager 1', 0, 3, '2019-12-27 22:23:54', '2020-01-20 01:10:02'),
+(38, '53B0000101', 5, '3', 'B', 'Gim 1', 'Generic information manager 1', 0, 4, '2019-12-27 22:23:54', '2020-01-26 19:42:05'),
 (39, '53B0000102', 5, '3', 'B', 'Gim 2', 'Generic information manager 2', 0, 3, '2019-12-27 22:24:48', '2020-01-20 01:08:53'),
 (40, '2240000300', 2, '2', '4', 'Raspberry PI 1', 'Model B+ 512MB RAM ', 0, 3, '2019-12-27 22:46:18', '2020-01-20 01:10:02'),
 (41, '2230000300', 2, '2', '3', 'MicroSD 64GB', 'MicroSCXC UHS-I Card Pro Plus Class 10 U3 I ', 0, 3, '2019-12-27 22:51:17', '2020-01-20 01:10:02'),
@@ -281,7 +281,7 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (52, '22C0000400', 2, '2', 'C', 'PoE splitter cable', '12v-48v Cavetti Splitter Adattatori Poe', 0, 3, '2020-01-01 14:15:31', '2020-01-20 01:11:29'),
 (53, '3440000100', 3, '4', '4', 'Sensors wide firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF, Environment, Accellerometer)', 0, 3, '2020-01-01 15:22:14', '2020-01-20 01:11:29'),
 (54, '3440000200', 3, '4', '4', 'Sensors small firmware', 'FW (Arduino) per la gestione dei sensori (FIR, TOF)', 0, 3, '2020-01-01 15:23:27', '2020-01-20 01:11:29'),
-(55, '4670000200', 4, '6', '7', 'TWD Slave', 'Tag Walking Device Slave', 0, 4, '2020-01-01 15:29:45', '2020-01-22 23:38:50'),
+(55, '4670000200', 4, '6', '7', 'TWD Slave', 'Tag Walking Device Slave', 0, 5, '2020-01-01 15:29:45', '2020-01-26 19:41:07'),
 (57, '26C0000100', 2, '6', 'C', 'Contapersone CPX3D', 'Comptipix 3d contapersone PoE con sensori HDR', 0, 3, '2020-01-01 23:12:50', '2020-01-20 01:11:29'),
 (58, '16C0000200', 1, '6', 'C', 'Sensors Small', 'Sensors small ( FIR, TOF )', 0, 3, '2020-01-02 01:47:58', '2020-01-20 01:11:29'),
 (59, '26C0000200', 2, '6', 'C', 'RFID Reader Speedway', 'Speedway Revolution R420 - 4 antenne fino a 32 con hub', 0, 3, '2020-01-03 22:04:57', '2020-01-20 01:11:29'),
@@ -441,15 +441,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(20, 'guest', 'guest', 'guest', 'hs0j9o1740evrlt8dok3h6o16o', 1579997267),
-(19, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'mafclc6qaionv7mnkkfsggr0rn', 1579997219);
+(25, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'uh10bpk5acoj8gfnlnt9v8jlm7', 1580078608);
 
 -- --------------------------------------------------------
 
@@ -566,7 +565,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `user` varchar(32) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=161 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=187 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -574,22 +573,30 @@ CREATE TABLE IF NOT EXISTS `search` (
 
 INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (75, '2dc', 'danilo.zannoni', '2020-01-10 09:49:43'),
-(139, '467', 'danilo.zannoni', '2020-01-25 00:54:28'),
+(163, '467', 'danilo.zannoni', '2020-01-26 11:22:11'),
 (112, 'varco', 'danilo.zannoni', '2020-01-22 20:15:48'),
-(144, '22c', 'danilo.zannoni', '2020-01-25 22:07:32'),
+(185, '22c', 'danilo.zannoni', '2020-01-26 20:45:06'),
 (105, '223', 'danilo.zannoni', '2020-01-21 07:59:03'),
 (67, '122', 'danilo.zannoni', '2020-01-09 21:23:48'),
 (107, '__4%', 'danilo.zannoni', '2020-01-21 07:59:16'),
-(109, 'onesto', 'danilo.zannoni', '2020-01-21 21:06:26'),
-(131, 'gim', 'danilo.zannoni', '2020-01-24 16:51:26'),
+(186, 'onesto', 'danilo.zannoni', '2020-01-26 22:12:27'),
+(183, 'gim', 'danilo.zannoni', '2020-01-26 19:52:34'),
 (138, 'eth', 'wh.editor', '2020-01-24 23:45:07'),
-(145, '467', 'wh.editor', '2020-01-25 22:52:20'),
+(166, '467', 'wh.editor', '2020-01-26 12:48:03'),
 (140, 'onesto', 'wh.editor', '2020-01-25 21:13:21'),
 (143, 'onesto', 'rnd.approver', '2020-01-25 21:17:56'),
 (159, '57C0000100', 'wh.editor', '2020-01-25 23:44:28'),
 (146, '22c', 'wh.editor', '2020-01-25 22:52:30'),
 (158, '22e', 'wh.user', '2020-01-25 23:29:21'),
-(160, '20E0000100', 'wh.user', '2020-01-25 23:49:05');
+(160, '20E0000100', 'wh.user', '2020-01-25 23:49:05'),
+(173, '467', 'rnd.approver', '2020-01-26 15:30:16'),
+(167, '467', 'guest', '2020-01-26 12:50:07'),
+(179, '22e', 'rnd.approver', '2020-01-26 19:40:10'),
+(178, '22c', 'rnd.approver', '2020-01-26 19:40:02'),
+(181, 'gim', 'rnd.approver', '2020-01-26 19:40:49'),
+(175, '57c', 'wh.editor', '2020-01-26 19:08:36'),
+(180, '57c', 'rnd.approver', '2020-01-26 19:40:14'),
+(184, '57c', 'danilo.zannoni', '2020-01-26 20:44:56');
 
 -- --------------------------------------------------------
 
