@@ -170,8 +170,8 @@
 			<table style="margin:1em;" width="90%">
 				<tr>
 					<th style="text-align: center;" >Code</th>
-					<th>Short desrciption</th>
-					<th>Long description</th>
+					<th style="text-align: left;" >Short desrciption</th>
+					<th style="text-align: left;" >Long description</th>
 				</tr>
 
 
@@ -227,8 +227,8 @@
 				<table style="margin:1em;" width="90%">
 					<tr>
 						<th style="text-align: center;" >Code</th>
-						<th>Short desrciption</th>
-						<th>Long description</th>
+						<th style="text-align: left;" >Short desrciption</th>
+						<th style="text-align: left;" >Long description</th>
 					</tr>
 		<?php
 				if ($result = $mysqli->query($sql)) {
@@ -267,8 +267,8 @@
 				<table style="margin:1em;" width="90%">
 					<tr>
 						<th style="text-align: center;" >Father Code</th>
-						<th>Short desrciption</th>
-						<th>Long description</th>
+						<th style="text-align: left;" >Short desrciption</th>
+						<th style="text-align: left;" >Long description</th>
 					</tr>
 		<?php
 				if ($result = $mysqli->query($sql)) {
@@ -320,8 +320,8 @@
 			<table style="margin:1em;" width="90%">
 				<tr>
 					<th style="text-align: center;" >Code</th>
-					<th>Short desrciption</th>
-					<th>Long description</th>
+					<th style="text-align: left;" >Short desrciption</th>
+					<th style="text-align: left;" >Long description</th>
 				</tr>
 
 
@@ -361,8 +361,8 @@
 			<table style="margin:1em;" width="90%">
 				<tr>
 					<th style="text-align: center;" >Code</th>
-					<th>Short desrciption</th>
-					<th>Long description</th>
+					<th style="text-align: left;" >Short desrciption</th>
+					<th style="text-align: left;" >Long description</th>
 				</tr>
 
 

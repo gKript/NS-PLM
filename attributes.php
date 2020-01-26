@@ -32,7 +32,7 @@
 	$action 			= get_check( 'action'							);
 	
 	$bom					= get_check( 'bom' 					, "0" );
-	$provider			= get_check( 'provider'			, "0" );
+	$Supplier			= get_check( 'Supplier'			, "0" );
 	$origin   		= get_check( 'origin'				, "0" );
 	$critical   	= get_check( 'critical'			, "0" );
 	$important		= get_check( 'important'		, "0" );
@@ -54,17 +54,53 @@
 	$height				= get_check( 'height'				, "" 	);
 	$weight				= get_check( 'weight'				, "" 	);
 	
-	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
-	
-	if ( ( $_SESSION["clean_user"] == "guest" ) && ( ! $nscfg->param->user->guest_allowed ) ) 
+	if ( ( $action == "Edit" ) || ( $action == "Create" ) || ( $action == "Modify" ) ) {
+		if ( ! $gk_Auth->check_user_level( "Delete" , "Bom" ) ) {
+			$back = "";
+			if ( isset( $_SERVER["HTTP_REFERER"] ) ) {
+				$back = $_SERVER["HTTP_REFERER"];
+			}
+			$redirect = true;
+			if ( $back != "" )
+				$redirect_addy = $back;
+			else
+				$redirect_addy = "index.php";
+			$pagetime = 10;
+		}
+	}
+	if ( ( $gk_Auth->get_current_user_name() == "guest" ) && ( ! $nscfg->param->user->guest_allowed ) ) {
+		$redirect = true;
+		$redirect_addy = "index.php";
+		$pagetime = 10;
 		insert_blockquote( "Sorry but Guest user is not allowed here!<br/>Please, go to <a href=\"index.php\">home page</a> to log in." , "Error" , 1 );
+	}
+	
+	
+	require_once NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
+	
+	if ( ( $gk_Auth->get_current_user_name() == "guest" ) && ( ! $nscfg->param->user->guest_allowed ) ) {
+		$redirect = true;
+		$redirect_addy = "index.php";
+		$pagetime = 10;
+		insert_blockquote( "Sorry but Guest user is not allowed here!<br/>Please, go to <a href=\"index.php\">home page</a> to log in." , "Error" , 1 );
+	}
+	
+	if ( ( $action == "Edit" ) || ( $action == "Create" ) || ( $action == "Modify" ) ) {
+		if ( ! $gk_Auth->check_user_level( "Delete" , "Bom" ) ) {
+			insert_blockquote( "You haven't the necessary privileges to perform this action.<br/><br/>If you are thinking there's something wrong please, contact the system administrator!<br/>For security policy, this event is logged.<br/>Please wait! You will be redirected to the previous page in  <b><span id=\"time\">$pagetime</span></b> seconds." , "Caution" );
+//				echo div_block_close();
+			include NSID_PLM_SRC_TEMPLATE . 'footer.php';
+			$mysqli->close();
+			die();		}
+	}
+
 ?>
 
 <?php
 	$attrib["code"]					= $code;
 	$attrib["action"]				= $action;
 	$attrib["bom"]					= $bom;
-	$attrib["provider"]			= $provider;
+	$attrib["Supplier"]			= $Supplier;
 	$attrib["origin"]				= $origin;
 	$attrib["critical"]			= $critical;
 	$attrib["important"]		= $important;
@@ -111,7 +147,7 @@
 			$code = $attrib["code"];
 			$action = $attrib["action"];
 			$bom = $attrib["bom"];
-			$provider = $attrib["provider"];
+			$Supplier = $attrib["Supplier"];
 			$origin = $attrib["origin"];
 			$critical = $attrib["critical"];
 			$important = $attrib["important"];
@@ -161,7 +197,7 @@
 					<span >
 					<?php
 					checkbox_composer( "bom" 					, "1" , "element checkbox" , $bom 				, 1 , "choice" , "B.O.M." 			);
-					checkbox_composer( "provider" 		, "1" , "element checkbox" , $provider		, 1 , "choice" , "Provider"			);
+					checkbox_composer( "Supplier" 		, "1" , "element checkbox" , $Supplier		, 1 , "choice" , "Supplier"			);
 					checkbox_composer( "critical" 		, "1" , "element checkbox" , $critical		, 1 , "choice" , "Critical"			);
 					checkbox_composer( "important"		, "1" , "element checkbox" , $important		, 1 , "choice" , "Important"		);
 					checkbox_composer( "expiration" 	, "1" , "element checkbox" , $expiration	, 1 , "choice" , "Expiration"		);
@@ -267,7 +303,7 @@
 				$code = $attrib["code"];
 				$action = $attrib["action"];
 				$bom = $attrib["bom"];
-				$provider = $attrib["provider"];
+				$Supplier = $attrib["Supplier"];
 				$origin = $attrib["origin"];
 				$critical = $attrib["critical"];
 				$important = $attrib["important"];
@@ -306,7 +342,7 @@
 						<span >
 						<?php
 						checkbox_composer( "bom" 					, "1" , "element checkbox" , $bom 				, 1 , "choice" , "B.O.M." 			, "after"	, $disable	);
-						checkbox_composer( "provider" 		, "1" , "element checkbox" , $provider		, 1 , "choice" , "Provider"			, "after"	, $disable	);
+						checkbox_composer( "Supplier" 		, "1" , "element checkbox" , $Supplier		, 1 , "choice" , "Supplier"			, "after"	, $disable	);
 						checkbox_composer( "critical" 		, "1" , "element checkbox" , $critical		, 1 , "choice" , "Critical"			, "after"	, $disable	);
 						checkbox_composer( "important"		, "1" , "element checkbox" , $important		, 1 , "choice" , "Important"		, "after"	, $disable	);
 						checkbox_composer( "expiration" 	, "1" , "element checkbox" , $expiration	, 1 , "choice" , "Expiration"		, "after"	, $disable	);

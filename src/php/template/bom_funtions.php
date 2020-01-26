@@ -3,6 +3,9 @@
 	require_once NSID_PLM_SRC_TEMPLATE . 'attributes_function.php';
 
 	function create_bom_table( $code , $maxlevel , $hl = "" ) {
+		
+		global $gk_Auth;
+		
 		$sql = "SELECT * FROM `lista_composizione` WHERE `father` LIKE '$code' ORDER BY `lista_composizione`.`modifyTS` DESC";
 		$items = 0;
 		$result = query_get_result( $sql );
@@ -70,13 +73,14 @@
 		if ( $items )
 			get_next_level_bom( $origin , $code , $level , $myTabella , $fhash , $hl , $maxlevel );
 
-		$code_input = "<input style=\"border-radius: 7px;\" id=\"newcode\" name=\"newcode\" type=\"text\" size=\"10\" maxlength=\"10\" />";
-		$quantity_input = "<input style=\"border-radius: 7px;\" id=\"quantity\" name=\"quantity\" type=\"numbers\" size=\"5\" maxlength=\"5\" />";
-		$button = "<input style=\"border-radius: 7px;\" type=\"submit\" name=\"action\" value=\"Add to this bom\">";
+		if ( $gk_Auth->check_user_level( "Modify" , "Bom" ) ) {
+			$code_input = "<input style=\"border-radius: 7px;\" id=\"newcode\" name=\"newcode\" type=\"text\" size=\"10\" maxlength=\"10\" />";
+			$quantity_input = "<input style=\"border-radius: 7px;\" id=\"quantity\" name=\"quantity\" type=\"numbers\" size=\"5\" maxlength=\"5\" />";
+			$button = "<input style=\"border-radius: 7px;\" type=\"submit\" name=\"action\" value=\"Add to this bom\">";
 
-		$myTabella->addValoreRiga( array( "" , $code_input , "" , $quantity_input , "" , $button ));
-		$myTabella->aggiungiRiga( null , 6 , array( array(  "style"=>"background-color:#eee;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" , "align"=>"center"  )  , array( "colspan"=>"2" , "style"=>"border:1px solid #999; background-color:#c55;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" , "align"=>"center" , "colspan"=>"2"  )   ) );
-	
+			$myTabella->addValoreRiga( array( "" , $code_input , "" , $quantity_input , "" , $button ));
+			$myTabella->aggiungiRiga( null , 6 , array( array(  "style"=>"background-color:#eee;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" , "align"=>"center"  )  , array( "colspan"=>"2" , "style"=>"border:1px solid #999; background-color:#c55;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" ) , array( "style"=>"border:1px solid #999; background-color:#c55;" , "align"=>"center" , "colspan"=>"2"  )   ) );
+		}
 		open_form( "GET" , "bom.php" );
 		$myTabella->stampaTabella();
 		add_hidden( "code" , $code );

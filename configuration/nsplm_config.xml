@@ -41,8 +41,8 @@
 		</user>
 		<company>
 			<logo type="int">1</logo>
-			<image>nsid.png</image>
-			<heigth>300px</heigth>
+			<image>coelme.png</image>
+			<heigth>380px</heigth>
 <!--	<link>https://www.coelmesrl.it/</link> -->
 			<link>index.php</link>
 			<target></target>		<!-- _blank : in a new tab		-->

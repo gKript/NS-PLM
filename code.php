@@ -20,9 +20,6 @@
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
-?>
-
-<?php
 
 	$code = get_check( 'code' );
 	$pcode = get_check( 'pcode' );
@@ -33,12 +30,31 @@
 	$T = get_check( 'T' );
 	$G = get_check( 'G' );
 	$S = get_check( 'S' );
+	
+	if ( $action == "Create" )  {
+		if ( ! $gk_Auth->check_user_level( "Create" , "Code" ) ) {
+			$back = "";
+			if ( isset( $_SERVER["HTTP_REFERER"] ) ) {
+				$back = $_SERVER["HTTP_REFERER"];
+			}
+			$redirect = true;
+			if ( $back != "" )
+				$redirect_addy = $back;
+			else
+				$redirect_addy = "index.php";
+			$pagetime = 10;
+		}
+	}
+	if ( ( $gk_Auth->get_current_user_name() == "guest" ) && ( ! $nscfg->param->user->guest_allowed ) ) {
+		$redirect = true;
+		$redirect_addy = "index.php";
+		$pagetime = 10;
+		insert_blockquote( "Sorry but Guest user is not allowed here!<br/>Please, go to <a href=\"index.php\">home page</a> to log in." , "Error" , 1 );
+	}
 
 	require NSID_PLM_SRC_TEMPLATE . 'code_functions.php';
 	include NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 	
-	if ( ( $_SESSION["clean_user"] == "guest" ) && ( ! $nscfg->param->user->guest_allowed ) ) 
-		insert_blockquote( "Sorry but Guest user is not allowed here!<br/>Please, go to <a href=\"index.php\">home page</a> to log in." , "Error" , 1 );
 ?>
 
 <?php
@@ -48,53 +64,54 @@
 	//	Create Secondo step
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	if ( $action == "Create" ) {
-		if ( ( $T == "x" ) || ( $G == "x" ) || ( $S == "x" ) ) {
-			if ( isset( $_SERVER["HTTP_REFERER"] ) )
-				$ppath = $_SERVER["HTTP_REFERER"];
-			insert_blockquote( "To create a new code each context is needed and must be indicated.<br/>Please, duly fill the code context using the selection boxes in the first step page.<br/><br/>Come back here : <a href=\"$ppath\" >Last page</a>" , "Error" , 1 );
-		}
-		
-		get_codetype_from_tgs( $T ,$G , $S );
-		$ncode = get_new_code( $T ,$G , $S );
-		//echo $ncode;
-		echo "<div class=\"insidecodelite\">\n<h2 style=\"padding-left: 12px;\">Code Creation - step 2</h2><br/>\n";
-		insert_blockquote( "This page is going to access to Database in write mode.<br/>Please proceed only if you are sure about what you are doing, but always after a double check." , "Warning" );
-//		echo "<hr/>\n";
-		?>
+	if ( $action == "Create" )  {
+		if ( $gk_Auth->check_user_level( "Create" , "Code" ) ) {
+			if ( ( $T == "x" ) || ( $G == "x" ) || ( $S == "x" ) ) {
+				if ( isset( $_SERVER["HTTP_REFERER"] ) )
+					$ppath = $_SERVER["HTTP_REFERER"];
+				insert_blockquote( "To create a new code each context is needed and must be indicated.<br/>Please, duly fill the code context using the selection boxes in the first step page.<br/><br/>Come back here : <a href=\"$ppath\" >Last page</a>" , "Error" , 1 );
+			}
+			
+			get_codetype_from_tgs( $T ,$G , $S );
+			$ncode = get_new_code( $T ,$G , $S );
+			//echo $ncode;
+			echo "<div class=\"insidecodelite\">\n<h2 style=\"padding-left: 12px;\">Code Creation - step 2</h2><br/>\n";
+			insert_blockquote( "This page is going to access to Database in write mode.<br/>Please proceed only if you are sure about what you are doing, but always after a double check." , "Warning" );
+	//		echo "<hr/>\n";
+			?>
 
-			
-			<?php	emphasis_code( $ncode , 2 );	?>
-			
-			<?php	stat_presence_of_context();		?>
-			
-			
-			<div class="codelite">
-				<h2>Context information</h2><br/>
-				Please, insert all the others information for the new code:<br/>	
+				
+				<?php	emphasis_code( $ncode , 2 );	?>
+				
+				<?php	stat_presence_of_context();		?>
+				
+				
+				<div class="codelite">
+					<h2>Context information</h2><br/>
+					Please, insert all the others information for the new code:<br/>	
 
-				<table style="margin:1em;" width="90%">
-		<?php
-		
-		println( "<tr>" );
-		println( "  <td style='text-align: right;' width='13%' >Typology</td>" );
-		println( "  <td style='text-align: center; border:1px solid #999;' width='5%' ><b>$T</b></td>" );
-		println( "  <td style='border:1px solid #999;' width='25%'>"   . $codetype["Tname"]   . "</td>" );
-		println( "  <td></td>" );
-		println( "</tr>" );
-		println( "<tr>" );
-		println( "  <td style='text-align: right;' >Generic category</td>" );
-		println( "  <td style='text-align: center; border:1px solid #999;' width='5%' ><b>$G</b></td>" );
-		println( "  <td style='border:1px solid #999;' width='25%' >"  . $codetype["CGname"]  . "</td>" );
-		println( "  <td style='border:1px solid #999;' >"              . $codetype["CGdescr"] . "</td>" );
-		println( "</tr>" );
-		println( "<tr>" );
-		println( "  <td style='text-align: right;' >Specific category</td>" );
-		println( "  <td style='text-align: center; border:1px solid #999;' width='5%' ><b>$S</b></td>" );
-		println( "  <td style='border:1px solid #999;' width='25%' >"  . $codetype["CSname"]  . "</td>" );
-		println( "  <td style='border:1px solid #999;' >"              . $codetype["CSdescr"] . "</td>" );
-		println( "</tr>" );
-		
+					<table style="margin:1em;" width="90%">
+			<?php
+			
+			println( "<tr>" );
+			println( "  <td style='text-align: right;' width='13%' >Typology</td>" );
+			println( "  <td style='text-align: center; border:1px solid #999;' width='5%' ><b>$T</b></td>" );
+			println( "  <td style='border:1px solid #999;' width='25%'>"   . $codetype["Tname"]   . "</td>" );
+			println( "  <td></td>" );
+			println( "</tr>" );
+			println( "<tr>" );
+			println( "  <td style='text-align: right;' >Generic category</td>" );
+			println( "  <td style='text-align: center; border:1px solid #999;' width='5%' ><b>$G</b></td>" );
+			println( "  <td style='border:1px solid #999;' width='25%' >"  . $codetype["CGname"]  . "</td>" );
+			println( "  <td style='border:1px solid #999;' >"              . $codetype["CGdescr"] . "</td>" );
+			println( "</tr>" );
+			println( "<tr>" );
+			println( "  <td style='text-align: right;' >Specific category</td>" );
+			println( "  <td style='text-align: center; border:1px solid #999;' width='5%' ><b>$S</b></td>" );
+			println( "  <td style='border:1px solid #999;' width='25%' >"  . $codetype["CSname"]  . "</td>" );
+			println( "  <td style='border:1px solid #999;' >"              . $codetype["CSdescr"] . "</td>" );
+			println( "</tr>" );
+			
 ?>
 				</table>
 			</div>
@@ -119,6 +136,10 @@
 			</div>
 		</div>
 <?php
+		}
+		else {
+			insert_blockquote( "You haven't the necessary privileges to perform this action.<br/><br/>If you are thinking there's something wrong please, contact the system administrator!<br/>For security policy, this event is logged.<br/>Please wait! You will be redirected to the previous page in  <b><span id=\"time\">$pagetime</span></b> seconds." , "Caution" );
+		}
 	}
 
 	// ----------------------------------------------------------------------
@@ -149,7 +170,7 @@
 					$nrev_exist = query_get_num_rows( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$nrev'" );
 					$latest_rev = get_latest_revision( $code );
 					if ( $nrev_exist ) {
-						insert_blockquote( "Pay attention! This is not the latest revision of the code $code. Please, proceed with caution." , "Caution" );
+						insert_blockquote( "Pay attention!<br/>This is not the latest code $code revision. Please, proceed with caution." , "Caution" );
 					}
 					emphasis_code( $code , 0 , $updstate );
 				}
@@ -395,7 +416,7 @@
 				open_form( "GET" , "code.php" );
 			else {
 				echo "<h2 style=\"padding-left: 12px;\">Code Filtering</h2><br/>\n";
-				open_form( "GET" , "index.php" );
+				open_form( "GET" , "search.php" );
 			}
 			select_composer_from_sql( "Typology" , "T" , 1 , "SELECT * FROM `tipologia`"    , 1 , "codelite" , "" , "" , 1 , "Typology"					, "DX" );
 			select_composer_from_sql( "Generic"  , "G" , 1 , "SELECT * FROM `catgenerica`"  , 1 , "codelite" , "" , "" , 1 , "Generic category"	, "DX" );

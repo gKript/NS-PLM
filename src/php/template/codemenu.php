@@ -1,8 +1,9 @@
 <?php
 	
 	global $gk_Auth;
+	global $nspage;
 	
-	$codemenu = new gkMenu( $gk_Auth->get_current_user_level() );
+	$codemenu = new gkMenu( $nspage , $gk_Auth->get_current_user_level() );
 	
 	function check_next_prev_code( $code ) {
 		$cod_id = (int)substr($code, 3, 5);
@@ -62,7 +63,7 @@
 		
 		$nav["check"] = $check;
 		
-		//var_dump( $nav );
+//		var_dump( $nav );
 		
 		return $nav;
 	}
@@ -84,53 +85,13 @@
 		else if ( $bl == 2) 
 			$code_split = substr($code, 0, 3) . "  " . "<span class=\"blink_text\">" . substr($code, 3, 5) . "</span>" . "  " . substr($code, 8, 2);
 
-		$nav = check_next_prev_code( $code );
-		if ( $nav["check"] ) {
-			$ncode_link = "";
-			if ( $nav["xnc"] )
-				$ncode_link = "<li><a href=\"code.php?code=" . $nav["nc"] . "&nav=1\" >Next ID</a></li>\n";
-
-			$pcode_link = "";
-			if ( $nav["xpc"] )
-				$pcode_link = "<li><a href=\"code.php?code=" . $nav["pc"] . "&nav=1\" >Previous ID</a></li>\n";
-
-			$nrev_link = "";
-			if ( $nav["xnr"] ) {
-				if ( ( $nav["nr"] == $nav["lr"] ) ) {
-					$nrev_link = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next/Last REVISION</a></li>\n";
-				}
-				else {
-					$nrev_link  = "<li><a href=\"code.php?code=" . $nav["nr"] . "&nav=1\" >Next REVISION</a></li>\n";
-					$nrev_link .= "<li><a href=\"code.php?code=" . $nav["lr"] . "&nav=1\" >LAST REVISION</a></li>\n";
-				}
-			}
-			
-			
-			$prev_link = "";
-			if ( $nav["xpr"] )
-				$prev_link = "<li><a href=\"code.php?code=$code&code=" . $nav["pr"] . "&nav=1\" >Previous REVISION</a></li>";
-		}
-
-		
 		$synop_link  = "code.php?code=$code" ;
-		if ( query_get_num_rows( "SELECT * FROM `codattributes` WHERE `code` like '$code'" ) ) {
-			$attrib_create_link = "";
-			$attrib_show_link   = "<li><a href=\"attributes.php?code=$code&action=Show\">Show</a></li>" ;
-			$attrib_edit_link   = "<li><a href=\attributes.php?code=$code&action=Edit\">Edit</a></li>" ;
-		}
-		else {
-			$attrib_show_link   = "" ;
-			$attrib_edit_link   = "" ;
-			$attrib_create_link = "<li><a href=\"attributes.php?code=$code&action=Create\">Create</a></li>" ;
-		}
-		
 
 		if ( ! $bl ) 
-			echo "<blockquote class=\"code\">";
+			echo generic_tag_open( "blockquote" , "code" );
 		else
-			echo "<blockquote class=\"code_update\">";
-		
-		
+			echo generic_tag_open( "blockquote" , "code_update" );
+
 		$uname = $gk_Auth->get_current_user_name();
 		if ( $uname != "guest" ) {
 			if ( $bl == 0 ) {
@@ -138,7 +99,7 @@
 				$urole = query_get_a_field( $query , "user_role" );
 				$sql = "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$urole'";
 				$ulevel = query_get_a_field( $query , "user_role" );
-				$cstate = query_get_a_field( "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+				$cstate = query_get_a_field( "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
 				if ( $updstate != "" ) {
 					if ( $updstate == "prev" ) {
 						if ( $cstate == 3 ) {
@@ -158,8 +119,8 @@
 						else
 							$newstate = $cstate;
 					}
-					query_sql_run( "UPDATE `elenco_codici` SET `state` = '$newstate' WHERE `elenco_codici`.`codice` LIKE '$code'" );
-					$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+					query_sql_run( "UPDATE `elenco_codici` SET `status` = '$newstate' WHERE `elenco_codici`.`codice` LIKE '$code'" );
+					$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
 				}
 				$cstatestr = $codestate[ $cstate ];
 				if ( $cstate == 1 ) {
@@ -171,10 +132,8 @@
 					$nstate = 3;
 				}
 				else if ( $cstate == 3 ) {
-					if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) {
 						$pstate = 1;
 						$nstate = 4;
-					}
 				}
 				else {
 					$pstate = $cstate - 1;
@@ -183,13 +142,13 @@
 		?>
 				
 				<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
-					<?php echo title_h2( "Current state -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
+					<?php echo title_h2( "Current status -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
 					<br/>
 					<table style="margin:9px;" width="97%">
 						<tr >
-							<th width="25%"><small>Previous state</small></th>
-							<th width="50%">Current state</th>
-							<th width="25%"><small>Next state</small></th>
+							<th width="25%"><small>Previous status</small></th>
+							<th width="50%">Current status</th>
+							<th width="25%"><small>Next status</small></th>
 						</tr>
 						<tr align="center" valign="center" height="40px" >
 							<td style="border:1px solid #999; background-color: #ada;">
@@ -200,13 +159,18 @@
 								</small>
 							<?php } 
 										else {
-											echo "&nbsp;";
+											echo $codestate[ $pstate ];
 										}
 							?>
 							</td>
 							<td style="border:1px solid #999; background-color: #dda;">
 								<b>
-									<big><?php echo $codestate[ $cstate ]; ?></big>
+								<?php
+										if ( $cstate == 3 ) 
+											echo link_generator( "check.php?code=$code" , "<span class=\"blink_text\"><big>".$codestate[ $cstate ]."</big></span>\n" );
+										else
+											echo "<big>".$codestate[ $cstate ]."</big>\n";
+									?>
 								</b>
 							</td>
 							<td style="border:1px solid #999; background-color: #bbb;">
@@ -215,9 +179,15 @@
 								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
 								<?php echo $codestate[ $nstate ]; ?></a>
 								</small>
-							<?php } 
+							<?php }
+										else if ( ( $gk_Auth->check_user_level( "Review" , "Code" ) ) && ( $cstate == 1 ) ) { ?>
+								<a href="code.php?code=<?php echo $code; ?>&updstate=next" >
+								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/>
+								<span class="blink_text"><big> <?php echo $codestate[ $nstate ]; ?></a> </big></span>
+								<?php
+										}
 										else {
-											echo "&nbsp;";
+											echo $codestate[ $nstate ];
 										}
 							?>
 							</td>
@@ -227,97 +197,102 @@
 	<?php
 			}
 		}
-?>		
-		<h1>
-			<?php 
-					echo $code_split;
-			?>
-		</h1>
-<?php
+
+		echo tag_enclosed( "h1" , $code_split );
 
 		if ( ! $bl ) {
-//			echo $codemenu->get_level();
-			echo $codemenu->open( "navmenu" , "margin-left: 10px; margin-right: 10px; margin-bottom: 10px; " );
+			$nav = check_next_prev_code( $code );
+			$codemenu->set_output(1);
+			$codemenu->open( "navmenu" , "margin-left: 10px; margin-right: 10px; margin-bottom: 10px; " );
 			if ( $nav["check"] ) {
-				echo $codemenu->submenu_open( "Navigator +" );
-				echo $ncode_link;
-				echo $pcode_link;
-				echo $nrev_link;
-				echo $prev_link;
-				echo $codemenu->submenu_close();
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Navigator +" );
+							if ( $nav["xnc"] ) {
+								$ncode_link = "code.php?code=" . $nav["nc"];
+								$codemenu->voice( "Next ID"							, $ncode_link );
+							}
+							if ( $nav["xpc"] ) {
+								$pcode_link = "code.php?code=" . $nav["pc"];
+								$codemenu->voice( "Previous ID"					, $pcode_link );
+							}
+							if ( $nav["xnr"] ) {
+								if ( $nav["nr"] == $nav["lr"] ) {
+									$nrev_link = "code.php?code=" . $nav["nr"];
+									$codemenu->voice( "Next/Last REVISION"	, $nrev_link );
+								}
+								else {
+									$nrev_link = "code.php?code=" . $nav["nr"];
+									$lrev_link = "code.php?code=" . $nav["lr"];
+									$codemenu->voice( "Next REVISION"				, $nrev_link );
+									$codemenu->voice( "Last REVISION"				, $lrev_link );
+								}
+							}
+							if ( $nav["xpr"] ) {
+								$prev_link = "code.php?code=" . $nav["pr"];
+								$codemenu->voice( "Previous REVISION"		, $prev_link );
+							}
+					$codemenu->submenu_close();
 			}
-			echo $codemenu->submenu_open( "Details +" );
-				echo $codemenu->submenu_open( "Attributes +" );
-					echo $attrib_show_link . "\n";
-					echo $attrib_create_link . "\n";
-					echo $attrib_edit_link . "\n";
-				echo $codemenu->submenu_close();
-				echo $codemenu->submenu_open( "Price +" );
-					echo $codemenu->voice( "Last" );
-					echo $codemenu->voice( "Average" );
-				echo $codemenu->submenu_close();
-				echo $codemenu->voice( "Synopsis" , $synop_link );
-				echo $codemenu->voice( "State" , $synop_link );
-				echo $codemenu->voice( "Provider" , $synop_link );
-			echo $codemenu->submenu_close();
-			echo $codemenu->submenu_open( "Structure +" );
-				echo $codemenu->voice( "B.O.M." , $synop_link );
-				echo $codemenu->voice( "Where used" , "where_used.php?code=".$code );
-				echo $codemenu->voice( "Documentation" );
-			echo $codemenu->submenu_close();
-			if ( check_in_bom_presence( $code ) )
-				echo $codemenu->voice( "Where used" , "where_used.php?code=".$code  );
-			echo $codemenu->submenu_open( "Related +" );
-				echo $codemenu->voice( "Attachment" );
-				echo $codemenu->voice( "Link" );
-			echo $codemenu->submenu_close();
-			
-			
-			echo $codemenu->close();
-			echo BR(8,0);
-?>
-		<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;" >
-			<ul id="navmenu">
-
-				<li><a href="code.php?code=0">Changes +</a>
-					<ul>
-						<li><a href="">Request</a></li>
-						<li><a href="">Issues</a></li>
-						<li><a href="">Affected by</a></li>
-						<li><a href="">Variances</a></li>
-						<li><a href="">History</a></li>
-						<li><a href="">Close</a></li>
-					</ul>
-				</li>
-				<li><a href="code.php?code=0">Report +</a>
-					<ul>
-						<li><a href="">Code</a></li>
-						<li><a href="">B.O.M.</a></li>
-						<li><a href="">Provider</a></li>
-						<li><a href="">Charts</a></li>
-						<li><a href="">Statistics</a></li>
-					</ul>
-				</li>
-				<li><a href="code.php?code=0">traceability +</a>
-					<ul>
-						<li><a href="">Serial number</a></li>
-					</ul>
-				</li>
-				<li><a href="">New +</a>
-					<ul>
-						<li><a href="code.php?code=0&new=1">Code</a></li>
-						<li><a href="code.php?code=<?php echo $code; ?>&new=2">Revision</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	<?php		
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Details +" );
+							$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Attributes +" );
+									if ( query_get_num_rows( "SELECT * FROM `codattributes` WHERE `code` like '$code'" ) ) {
+										$codemenu->voice( "Show" , "attributes.php?code=$code&action=Show"  );
+										$codemenu->voice( "Edit" , "attributes.php?code=$code&action=Edit" );
+									}
+									else {
+										$codemenu->voice( "Create" , "attributes.php?code=$code&action=Create" );
+									}
+							$codemenu->submenu_close();
+							$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Price +" );
+									$codemenu->voice( "Last" );
+									$codemenu->voice( "Average" );
+							$codemenu->submenu_close();
+							$codemenu->voice( "Synopsis" , $synop_link );
+							$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Approver" ) , "Status +" );
+									if ( $cstate > 1 )
+										$codemenu->voice( "Set ".$codestate[ $pstate ] , "code.php?code=$code&updstate=prev" );
+									if ( $cstate < 8 )
+										$codemenu->voice( "Set ".$codestate[ $nstate ] , "code.php?code=$code&updstate=next" );
+							$codemenu->submenu_close();
+							$codemenu->voice( "Supplier" , $synop_link );
+					$codemenu->submenu_close();
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Structure +" );
+							$codemenu->voice( "B.O.M." , "bom.php?code=$code" );
+							$codemenu->voice( "Where used" , "where_used.php?code=$code" );
+							$codemenu->voice( "Documentation" );
+					$codemenu->submenu_close();
+					if ( check_in_bom_presence( $code ) ) {
+						$codemenu->voice( "Where used" , "where_used.php?code=$code"  );
+						$codemenu->separator(1);
+					}
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Related +" );
+							$codemenu->voice( "Attachment" );
+							$codemenu->voice( "Link" );
+					$codemenu->submenu_close();
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Changes +" );
+							$codemenu->voice( "Request" );
+							$codemenu->voice( "Issues" );
+							$codemenu->voice( "Affected by" );
+							$codemenu->voice( "Variances" );
+							$codemenu->voice( "History" );
+							$codemenu->voice( "Close" );
+					$codemenu->submenu_close();
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Report +" );
+							$codemenu->voice( "Code" );
+							$codemenu->voice( "B.O.M." );
+							$codemenu->voice( "Supplier" );
+							$codemenu->voice( "Charts" );
+							$codemenu->voice( "Statistics" );
+					$codemenu->submenu_close();
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "Traceability +" );
+								$codemenu->voice( "Serial number" );
+					$codemenu->submenu_close();
+					$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Editor" ) , "New +" );
+								$codemenu->voice( "Code" , "code.php?code=0&new=1" );
+								$codemenu->voice( "Revision" , "code.php?code=$code&new=2" );
+					$codemenu->submenu_close();
+			$codemenu->close();
 		}
-	
-	?>
-		</blockquote>
-<?php
+		echo generic_tag_close( "blockquote" );
 	}
-
 
 ?>

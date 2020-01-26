@@ -67,6 +67,9 @@
 			$border = "border:1px solid #be0000; background-color:#eee;";
 			$im = "message";
 		}
+		
+		if ( $type == "Are you sure?" )
+			$type = "sure";
 
 		if ( $type != "Blockquote" ) {
 			echo generic_tag_open( "blockquote" , "" , $border );
@@ -77,12 +80,16 @@
 			echo 	generic_tag_open( "p" );
 //			$type = "Please wait";
 			
+		if ( $type == "sure" )
+			$type = "Are you sure?";
+
 			println( $text );
-			$tx  = "&nbsp;&nbsp;&nbsp;&nbsp;";
-			$tx .= generic_tag_open( "span" , "blink_text" );
+			echo 	BR(2);
+//			$tx  = "&nbsp;&nbsp;&nbsp;&nbsp;";
+			$tx = generic_tag_open( "span" , "blink_text" );
 			$tx .= $type;
 			$tx .= generic_tag_close( "span" );
-			echo 	tag_enclosed( "h3" , $tx );
+			echo 	tag_enclosed( "h2" , $tx );
 			echo 	BR();
 			echo  generic_tag_close( "p" );
 		}
@@ -90,13 +97,14 @@
 			echo generic_tag_open( "blockquote" , "" , $border  );
 			echo 	tag_enclosed( "p" , $text );
 		}
+		if ( $type == "Notice" )
+			echo BR(2);
 		if ( $die ) {
 			if ( ! $mysqli->connect_error ) {
 				$mysqli->close();
 			}
 			die();
 		}
-		echo BR(2,0);
 		echo  generic_tag_close( "blockquote" );
 	}
 	

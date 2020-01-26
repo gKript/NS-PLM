@@ -49,32 +49,32 @@
 		return false;
 	}
 	
-	function check_search_in_history( $search ) {
-		return query_get_num_rows( "SELECT * FROM `search` LIMIT 0,1;" );
+	function check_search_in_history( $search , $user ) {
+		return query_get_num_rows( "SELECT * FROM `search` WHERE `user` LIKE '$user' LIMIT 0,1;" );
 	}
 
-	function add_search_in_history( $search ) {
+	function add_search_in_history( $search , $user ) {
 		if ( $search != "" ) {
-			if ( $result = query_get_result( "SELECT *  FROM `search` WHERE `search` LIKE '$search'" ) ) {
+			if ( $result = query_get_result( "SELECT *  FROM `search` WHERE `search` LIKE '$search' AND `user` LIKE '$user' " ) ) {
 				$row = $result->fetch_array();
 				$id = $row["id"];
 				query_sql_run( "DELETE FROM `search` WHERE `search`.`id` = $id" );
 				$ret = 1;
 			}
 			else {
-				if ( query_get_num_rows( "SELECT * FROM `search`" ) >= ITEMS_IN_HISTORY ) {
-					$id = query_get_a_field( "SELECT * FROM `search` ORDER BY `search`.`createTS` ASC LIMIT 0,1" , "id" , 1 );
-					query_sql_run( "DELETE FROM `search` WHERE `search`.`id` = $id" );				
+				if ( query_get_num_rows( "SELECT * FROM `search` WHERE `user` LIKE '$user' " ) >= ITEMS_IN_HISTORY ) {
+					$id = query_get_a_field( "SELECT * FROM `search`  WHERE `user` LIKE '$user' ORDER BY `search`.`createTS` ASC LIMIT 0,1" , "id" , 1 );
+					query_sql_run( "DELETE FROM `search` WHERE `search`.`id` = $id" );
 					$ret = 1;
 				}
-				if ( ! query_get_num_rows( "SELECT * FROM `search`" ) )
+				if ( ! query_get_num_rows( "SELECT * FROM `search` WHERE `user` LIKE '$user' " ) )
 					$ret = 0;
 			} 
-			query_sql_run( "INSERT INTO `search` (`id`, `search`, `createTS`) VALUES (NULL, '$search', current_timestamp())" );
+			query_sql_run( "INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES (NULL, '$search', '$user', current_timestamp())" );
 			$ret = 1;
 		}
 		else
-			$ret = check_search_in_history( $search );
+			$ret = check_search_in_history( $search , $user );
 		return $ret;
 	}
 

@@ -36,6 +36,27 @@
 	$hl	= get_check( 'hl'	, ""		);
 	$confirm	= get_check( 'confirm'	, ""		);
 	
+	if ( $action == "Remove" )  {
+		if ( ! $gk_Auth->check_user_level( "Delete" , "Bom" ) ) {
+			$back = "";
+			if ( isset( $_SERVER["HTTP_REFERER"] ) ) {
+				$back = $_SERVER["HTTP_REFERER"];
+			}
+			$redirect = true;
+			if ( $back != "" )
+				$redirect_addy = $back;
+			else
+				$redirect_addy = "index.php";
+			$pagetime = 10;
+		}
+	}
+	if ( ( $gk_Auth->get_current_user_name() == "guest" ) && ( ! $nscfg->param->user->guest_allowed ) ) {
+		$redirect = true;
+		$redirect_addy = "index.php";
+		$pagetime = 10;
+		insert_blockquote( "Sorry but Guest user is not allowed here!<br/>Please, go to <a href=\"index.php\">home page</a> to log in." , "Error" , 1 );
+	}
+
 	require_once NSID_PLM_SRC_TEMPLATE . 'code_functions.php';
 	require_once NSID_PLM_SRC_TEMPLATE . 'bom_funtions.php';
 	require_once NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
@@ -55,15 +76,24 @@
 		
 		
 		if ( $action == "Remove" ) {
-			if ( $confirm == "YES" ) {
-				$sql = "DELETE FROM `lista_composizione` WHERE `son` LIKE '$delete' and `father` LIKE '$code'";
-				query_sql_run( $sql );
-				insert_blockquote( "Code <b>$delete</b> succesfully removed from the BOM [$code]" , "Success" );
+			if ( $gk_Auth->check_user_level( "Delete" , "Bom" ) ) {
+				if ( $confirm == "YES" ) {
+					$sql = "DELETE FROM `lista_composizione` WHERE `son` LIKE '$delete' and `father` LIKE '$code'";
+					query_sql_run( $sql );
+					insert_blockquote( "Code <b>$delete</b> succesfully removed from the BOM [$code]" , "Success" );
+				}
+				else {
+					$syes = "<span style=\"padding: .8em; background-color: #eee; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 5px;\"> <a href=\"bom.php?code=$code&delete=$delete&action=Remove&confirm=YES\"><b>YES</b></a> </span>";
+					$sno  = "<span style=\"padding: .8em; background-color: #eee; border:1px solid #999; box-shadow: 1px 2px 3px #999; border-radius: 5px;\"> <a href=\"bom.php?code=$code\"><b>NO</b></a> </span>";
+					insert_blockquote( "Are you sure to <b>REMOVE</b> code <b>$delete</b> from the BOM [ $code ] ?<br/><br/><br/>$syes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sno" , "Are you sure?" );
+				}
 			}
 			else {
-				$syes = "<a class=\"codelite\" href=\"bom.php?code=$code&delete=$delete&action=Remove&confirm=YES\"><b>YES</b></a>";
-				$sno = "<a class=\"codelite\" href=\"bom.php?code=$code\"><b>NO</b></a>";
-				insert_blockquote( "Are you sure to <b>REMOVE</b> code <b>$delete</b> from the BOM [$code] ?<br/><br/><br/>$syes&nbsp;&nbsp;&nbsp;&nbsp;$sno" , "Are you sure?" );
+				insert_blockquote( "You haven't the necessary privileges to perform this action.<br/><br/>If you are thinking there's something wrong please, contact the system administrator!<br/>For security policy, this event is logged.<br/>Please wait! You will be redirected to the previous page in  <b><span id=\"time\">$pagetime</span></b> seconds." , "Caution" );
+//				echo div_block_close();
+				include NSID_PLM_SRC_TEMPLATE . 'footer.php';
+				$mysqli->close();
+				die();
 			}
 		}
 		

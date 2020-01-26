@@ -11,13 +11,10 @@
 	define( 'NSID_ONLINE'			, false );
 	
 	$using_gkphp = true;
-	
 
 //	--- gkphp
 	require_once( "gk.php" );
-
-
-	echo "&nbsp;";
+	//echo "&nbsp;";
 	
 //	--- template
 
@@ -31,10 +28,9 @@
 
 	require_once( NSID_PLM_SRC_TEMPLATE . "statistics.php" );
 	require_once( NSID_PLM_SRC_TEMPLATE . "html_template.php" );
-
 	
 //	--- CLASSES
-	
+
 //	require_once( NSID_PLM_SRC_PHP."class/upload/class.upload.php" );
 
 

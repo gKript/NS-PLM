@@ -5,19 +5,19 @@ Create Code 					10
 Create Revision				10
 Create Atribute				10	
 Create Bom						10
-Create Provider				10
+Create Supplier				10
 Create Report					10
 Modify Code 					10
 Modify Revision				10
 Modify Atribute				10
 Modify Bom						10
-Modify Provider				10
+Modify Supplier				10
 Modify Report					10
 Delete Code 					10
 Delete Revision				10
 Delete Atribute				10
 Delete Bom						10
-Delete Provider				10
+Delete Supplier				10
 Delete Report					10
 Approve Code					20
 Approve Revision			20
@@ -30,3 +30,4 @@ Delete User						40
 Create Unit						30
 Modify Unit						30
 Delete Unit						30
+

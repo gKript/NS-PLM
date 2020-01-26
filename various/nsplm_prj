@@ -11,6 +11,7 @@
         <File name="C:\wamp64\www\trunk\index.php" />
         <File name="C:\wamp64\www\trunk\index_p.php" />
         <File name="C:\wamp64\www\trunk\info.php" />
+        <File name="C:\wamp64\www\trunk\password.php" />
         <File name="C:\wamp64\www\trunk\phpinfo.php" />
         <File name="C:\wamp64\www\trunk\rules.php" />
         <File name="C:\wamp64\www\trunk\search.php" />
@@ -56,6 +57,12 @@
             <File name="sql vari" />
             <File name="struttura e flosofa magazzni.txt" />
             <File name="User Permission Table" />
+        </Folder>
+        <Folder name="CSS">
+            <File name="C:\wamp64\www\trunk\src\css\body.css" />
+            <File name="C:\wamp64\www\trunk\src\css\h.css" />
+            <File name="C:\wamp64\www\trunk\src\css\menu.css" />
+            <File name="C:\wamp64\www\trunk\src\css\view.css" />
         </Folder>
     </Project>
 </NotepadPlus>

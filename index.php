@@ -54,7 +54,7 @@
 		echo 		div_block_close();
 	}
 
-	echo 		open_block_no_top( "Login information" );
+	echo 		open_block_no_top( "Welcome back!" );
 	echo 		BR( 1, 0);
 
 	if ( $gk_Auth->role == "guest" ) {
@@ -124,13 +124,6 @@
 		echo tag_enclosed( "p" , "The tasks you are involved in are the following:" ) ;
 		echo 	BR(1,0);
 		echo div_block_close();
-		
-		
-		
-		
-		
-		
-		
 	}
 	echo div_block_close();
 	

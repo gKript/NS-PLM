@@ -8,17 +8,13 @@
 |	Code: 53B0000200
 |
 -->
-
-
 <?php
 
-
 	// Where am I installed ?
-		define( 'GKPHP_PATH' , 'src/php/gkphp/');
-		$gkconfpath = GKPHP_PATH . "config/";
-		define( 'GKPHP_CFG_PATH' , $gkconfpath );
-		unset( $gkconfpath );
-
+	define( 'GKPHP_PATH' , 'src/php/gkphp/');
+	$gkconfpath = GKPHP_PATH . "config/";
+	define( 'GKPHP_CFG_PATH' , $gkconfpath );
+	unset( $gkconfpath );
 
 	require_once( GKPHP_PATH . "Configuration_gk.php" );
 	require_once( GKPHP_PATH . "Date_gk.php" );

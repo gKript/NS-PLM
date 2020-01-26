@@ -39,14 +39,14 @@
 		println( "				<td style='border:1px solid #999;'>&nbsp;</td>" );
 		println( "			</tr>" );
 		println( "			<tr>" );
-		println( "				<td  style='border:1px solid #999;' width=\"40%\">Provider:</td>" );
+		println( "				<td  style='border:1px solid #999;' width=\"40%\">Supplier:</td>" );
 		println( "				<td style='border:1px solid #999;'>&nbsp;</td>" );
 		println( "			</tr>" );
 		println( "			<tr>" );
 		
 		$ori = return_where_used_text_link( $code );
 		
-		println( "				<td  style='border:1px solid #999;' width=\"40%\">Origin:</td>" );
+		println( "				<td  style='border:1px solid #999;' width=\"40%\">Included in:</td>" );
 		if ( check_in_bom_presence( $code ) )
 			println( "				<td style='border:1px solid #999;text-align:center; background-color:#e99;border-radius: 7px;'>$ori</td>" );
 		else
@@ -58,9 +58,9 @@
 		println( "			</tr>" );
 		println( "		</table>" );
 		
-		$cs = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "state" );
+		$cs = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
 		
-		$load = array("code"=>$code, "Short description"=>$sd, "Long description"=>$ld , "state"=>$cs );
+		$load = array("code"=>$code, "Short description"=>$sd, "Long description"=>$ld , "status"=>$cs );
 		$enc = json_encode($load);
 		$qr =  new QRCode();
 		$qrs = $qr->getQrCodeUrl( $enc , 150 , 150 , "UTF-8" );

@@ -9,21 +9,25 @@
 	];
 	
 	
-	function open_form( $method , $action , $class = "" , $id = ""	) {
-		if ( $class == "" )
-			println( "<form method=\"get\" action=\"$action\" id=\"$id\" >" );
-		else
-			println( "<form method=\"$method\" class=\"$class\" action=\"$action\" id=\"$id\" >" );
+	function open_form( $method , $action , $class = "" , $id = "" , $name = ""	) {
+		$ret  = "<form";
+		$ret .= $method == ""	?  "" : " method=\"$method\"";
+		$ret .= $action == ""	? "" : " action=\"$action\"";
+		$ret .= $class == ""	? "" : " class=\"$class\"";
+		$ret .= $name == ""	? "" : " name=\"$name\"";
+		$ret .= $id == ""	? "" : " id=\"$id\"";
+		$ret .= ">\n";	
+		println( $ret );
 	}
 	
 	function close_form() {
 		println( "</form>" );
 	}
 
-	function button( $type , $name , $value , $nl = 0 , $class = 0 ) {
+	function button( $type , $name , $value , $nl = 0 , $class = "" , $style = "" ) {
 		if ( $nl )
 			println( "<br/>" );
-		println( "<input class=\"$class\" type=\"$type\" name=\"$name\" value=\"$value\">" );
+		println( "<input class=\"$class\" type=\"$type\" name=\"$name\" value=\"$value\" style=\"$style\">" );
 	}
 	
 	
@@ -143,11 +147,11 @@
 	
 	
 	
-	function text_input_composer( $name , $value , $class , $type , $size , $maxlength , $label = 0 , $label_class = "" , $label_text = "" , $label_pos = "after" , $disable = 0 ) {	
+	function text_input_composer( $name , $value , $class , $type , $size , $maxlength , $label = 0 , $label_class = "" , $label_text = "" , $label_pos = "after" , $disable = 0 , $style = "" ) {	
 		if ( ( $label ) && ( $label_pos == "before" )	)
 			echo "<label class=\"" . $label_class . "\" for=\"" . $name . "\">$label_text</label>\n";
 		$dis = $disable ? "disabled" : "";
-		echo "<input id=\"" . $name . "\" name=\"" . $name . "\" class=\"" . $class . "\" type=\"" . $type . "\" size=\"" . $size . "\" maxlength=\"" . $maxlength . "\" value=\"" . $value . "\" " . $dis . " />\n";
+		echo "<input style =\"$style\" id=\"" . $name . "\" name=\"" . $name . "\" class=\"" . $class . "\" type=\"" . $type . "\" size=\"" . $size . "\" maxlength=\"" . $maxlength . "\" value=\"" . $value . "\" " . $dis . " />\n";
 		if ( ( $label ) && ( $label_pos == "after" )	)
 			echo "<label class=\"" . $label_class . "\" for=\"" . $name . "\">$label_text</label>\n";
 	}

@@ -38,8 +38,16 @@
 			$this->password_md5 = $md5_pass;
 			$this->gk_clean_online_table();
 			$this->set_current_user_name( $n_user );
-			$r = $this->role;
-			$this->level = query_get_a_field( "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$r'" , "role_id" );
+			$r = $this->user;
+			$cr = query_get_a_field( "SELECT *  FROM `gk_users` WHERE `user_login` LIKE '$r'" , "user_role" );
+			$this->level = query_get_a_field( "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$cr'" , "role_id" );
+			if ( $this->level == NULL ) 
+				$this->level = 0;
+		}
+
+
+		function get_level_by_role( $role ) {
+			return query_get_a_field( "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$role'" , "role_id" );
 		}
 
 	
