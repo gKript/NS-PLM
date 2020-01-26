@@ -79,6 +79,24 @@
 	}
 
 
+	function code_to_check() {
+		$sql = "SELECT *  FROM `elenco_codici` WHERE `status` = 3 ORDER BY `elenco_codici`.`createTS`  ASC LIMIT 0, 20";
+		$rtab = new classTabella;
+
+		$rtab->stdAttributiTabella(array("border"=>"1","width"=>"50%","align"=>"center"));
+		$rtab->addValoreRiga(array("Questo e' il titolo"));
+		$rtab->aggiungiRiga(array("bgcolor"=>"white"),1,array(array("colspan"=>"3")));
+
+		$rtab->addValoreRiga(array("R1C1","R1C2","R1C3"));
+		$rtab->aggiungiRiga(array("bgcolor"=>"red"),3,array(array("bgcolor"=>"black"),array("bgcolor"=>"yellow" ),array("bgcolor"=>"yellow")));
+
+		$rtab->addValoreRiga(array("R2C1","R2C2","R2C3"));
+		$rtab->aggiungiRiga(array("bgcolor"=>"green"),3,array(array("bgcolor"=>""),array("bgcolor"=>""),array(" bgcolor"=>"")));
+
+		$rtab->stampaTabella();
+		
+	}
+
 
 ?>
 

@@ -257,7 +257,6 @@
 					$row = $result->fetch_array();
 					extract( $row );
 					$this->gk_debug( "find $user_login and check with $user<br>" );
-//					if ( $user_login == $user ) {
 					if ( $this->password_md5 == true ) {
 						$this->gk_debug( "MD5 false : Check for password<br>" );
 						$this->gk_debug( $passw." : ".md5( $passw )."<br>" );
@@ -290,9 +289,6 @@
 						$this->gk_debug( $this->role."<br>" );
 						return GK_USER_GUEST;
 					}
-//					}
-//					else
-//						$this->gk_debug( "Are not equal<br>" );
 				}
 				else {
 					$this->gk_debug( "<font COLOR=\"#C7A700\">NOT OK. Authentication failed</font><br>" );
@@ -314,6 +310,7 @@
 			$this->role = $nrole;
 			$this->password = $pass;
 			$this->password_md5 = $md5pass;
+			$this->level = $this->get_level_by_role( $nrole );
 			$this->session = session_id();
 		}
 	

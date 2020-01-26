@@ -5,14 +5,14 @@
 	function	small_box_provider_info( $code ) {
 		println( "<h2>Creation, modification and attributes</h2><br/>" );
 		$Tab = new classTabella;
-		$Tab->setTabella();
+//		$Tab->setTabella();
 		
 		
 	}
 
 
 $myTabella = new classTabella;
-$myTabella->setTabella();
+//$myTabella->setTabella();
 $myTabella->stdAttributiTabella(array("border"=>"1","w idth"=>"50%","align"=>"center"));
 $myTabella->addValoreRiga(array("Questo e' il titolo"));
 $myTabella->aggiungiRiga(array("bgcolor"=>"white"),1,a rray(array("colspan"=>"3")));

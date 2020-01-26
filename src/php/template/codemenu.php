@@ -84,6 +84,8 @@
 			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . "<span class=\"blink_text\">" . substr($code, 8, 2) . "</span>";
 		else if ( $bl == 2) 
 			$code_split = substr($code, 0, 3) . "  " . "<span class=\"blink_text\">" . substr($code, 3, 5) . "</span>" . "  " . substr($code, 8, 2);
+		else if ( $bl == 3) 
+			$code_split = "<span class=\"blink_text\">" . substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . substr($code, 8, 2) . "</span>";
 
 		$synop_link  = "code.php?code=$code" ;
 
@@ -133,7 +135,7 @@
 				}
 				else if ( $cstate == 3 ) {
 						$pstate = 1;
-						$nstate = 4;
+						$nstate = 0;
 				}
 				else {
 					$pstate = $cstate - 1;
@@ -166,8 +168,8 @@
 							<td style="border:1px solid #999; background-color: #dda;">
 								<b>
 								<?php
-										if ( $cstate == 3 ) 
-											echo link_generator( "check.php?code=$code" , "<span class=\"blink_text\"><big>".$codestate[ $cstate ]."</big></span>\n" );
+										if ( ( $cstate == 3 ) && ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) ) 
+											echo link_generator( "check.php?code=$code" , "<span style=\"	font-size: 20pt;\" class=\"blink_text\">".$codestate[ $cstate ]."</span>\n" );
 										else
 											echo "<big>".$codestate[ $cstate ]."</big>\n";
 									?>
@@ -175,9 +177,17 @@
 							</td>
 							<td style="border:1px solid #999; background-color: #bbb;">
 							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
+								<?php if ( $nstate ) { ?>
+								<?php 	if ( $nstate < 5 ) { ?>
 								<a href="code.php?code=<?php echo $code; ?>&updstate=next" >
+									<?php }
+										}
+										?>
 								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
-								<?php echo $codestate[ $nstate ]; ?></a>
+								<?php echo $codestate[ $nstate ]; ?>
+								<?php 	if ( $nstate != 5 ) { ?>
+													</a>
+									<?php } ?>
 								</small>
 							<?php }
 										else if ( ( $gk_Auth->check_user_level( "Review" , "Code" ) ) && ( $cstate == 1 ) ) { ?>

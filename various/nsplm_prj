@@ -2,10 +2,12 @@
     <Project name="NS-plm">
         <File name="C:\wamp64\www\trunk\attributes.php" />
         <File name="C:\wamp64\www\trunk\bom.php" />
+        <File name="C:\wamp64\www\trunk\check.php" />
         <File name="C:\wamp64\www\trunk\code.php" />
         <File name="C:\wamp64\www\trunk\code_action.php" />
         <File name="C:\wamp64\www\trunk\code_concept.php" />
         <File name="C:\wamp64\www\trunk\code-insert.php" />
+        <File name="C:\wamp64\www\trunk\empty.php" />
         <File name="C:\wamp64\www\trunk\gk.php" />
         <File name="C:\wamp64\www\trunk\includes.php" />
         <File name="C:\wamp64\www\trunk\index.php" />
@@ -18,7 +20,7 @@
         <File name="C:\wamp64\www\trunk\template_test.php" />
         <File name="C:\wamp64\www\trunk\where_used.php" />
         <Folder name="Template script">
-            <File name="C:\wamp64\www\trunk\src\php\template\attributes_function.php" />
+            <File name="C:\wamp64\www\trunk\src\php\template\attributes_functions.php" />
             <File name="C:\wamp64\www\trunk\src\php\template\bom_funtions.php" />
             <File name="C:\wamp64\www\trunk\src\php\template\code_functions.php" />
             <File name="C:\wamp64\www\trunk\src\php\template\codemenu.php" />
@@ -50,6 +52,12 @@
             <File name="C:\wamp64\www\trunk\configuration\nsplm_config.php" />
             <File name="C:\wamp64\www\trunk\configuration\nsplm_config.xml" />
         </Folder>
+        <Folder name="CSS">
+            <File name="C:\wamp64\www\trunk\src\css\body.css" />
+            <File name="C:\wamp64\www\trunk\src\css\h.css" />
+            <File name="C:\wamp64\www\trunk\src\css\menu.css" />
+            <File name="C:\wamp64\www\trunk\src\css\view.css" />
+        </Folder>
         <Folder name="Various">
             <File name="890000100  -  regole_per la_codifica_gKript.txt" />
             <File name="Flusso Auth" />
@@ -57,12 +65,6 @@
             <File name="sql vari" />
             <File name="struttura e flosofa magazzni.txt" />
             <File name="User Permission Table" />
-        </Folder>
-        <Folder name="CSS">
-            <File name="C:\wamp64\www\trunk\src\css\body.css" />
-            <File name="C:\wamp64\www\trunk\src\css\h.css" />
-            <File name="C:\wamp64\www\trunk\src\css\menu.css" />
-            <File name="C:\wamp64\www\trunk\src\css\view.css" />
         </Folder>
     </Project>
 </NotepadPlus>

@@ -77,9 +77,11 @@
 		return $ret;
 	}
 	
-	function tag_enclosed( $tag , $enclose , $style = "" ) {
+	function tag_enclosed( $tag , $enclose , $style = ""  , $class = "" ) {
 		$ret  = "<$tag";
-		$ret .= $style == "" ? ">\n" : " style=\"$style\" >\n";
+		$ret .= $style == "" ? "" : " style=\"$style\"";
+		$ret .= $class == "" ? "" : " class=\"$class\"";
+		$ret .= ">\n";
 		$ret .= $enclose;
 		if( strpos( $enclose , '\n' ) !== false )
 			echo "\n";
@@ -138,7 +140,7 @@
 
 
 	function table_open( $border = 0 , $width = "" , $class = "" , $style = "" , $id = "" ) {
-		$style .= $border == 0 ? "" : "border: $norderpx solid black; ";
+		$style .= $border == 0 ? "" : "border: $border solid black; ";
 		$style .= $width == "" ? "" : "width: $width; ";
 		$ret  = "<table";
 		$ret .= $class == "" ? "" : " class=\"$class\"";
@@ -156,7 +158,7 @@
 	}	
 	
 	function col_open( $border = 0 , $width = "" , $style = "" ) {
-		$style .= $border == 0 ? "" : " border: $norderpx solid black;";
+		$style .= $border == 0 ? "" : " border: $border solid black;";
 		$style .= $width == "" ? "" : " width: $width;";
 		$ret  = "<td";
 		$ret .= $style == "" ? "" : " style=\"$style\"";

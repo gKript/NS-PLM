@@ -1,6 +1,6 @@
 <?php
 
-	require_once NSID_PLM_SRC_TEMPLATE . 'attributes_function.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'attributes_functions.php';
 
 	function create_bom_table( $code , $maxlevel , $hl = "" ) {
 		
@@ -31,7 +31,7 @@
 		echo "</span><br/><br/>";
 		
 		$myTabella = new classTabella;
-		$myTabella->setTabella();
+//		$myTabella->setTabella();
 		$myTabella->stdAttributiTabella(array("width"=>"100%" , "align"=>"center" , "style"=>"padding: 10px 10px 10px 10px ;" ));
 		
 		if ( get_father( $code , 1 ) ) {

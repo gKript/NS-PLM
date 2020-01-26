@@ -2,7 +2,7 @@
 
 	require_once NSID_PLM_SRC_TEMPLATE . 'bom_funtions.php';
 
-	function synopsis( $code , $sd , $ld , $image = "" ) {
+	function synopsis( $code , $sd , $ld , $image = "" , $title = 1 ) {
 		
 		global $nspage;
 		
@@ -10,7 +10,12 @@
 		if ( $nspage != "code" ) 
 			$lcode = return_code_link( $code );
 
-		echo open_block( "Code synopsis" , "syn.svg" );
+		if ( $title ) {
+			echo open_block( "Code synopsis" , "syn.svg" );
+		}
+		else
+			echo open_block_no_top();
+		
 		println( "	<div class=\"box50\" style=\"height:160px; background-color: #ccc; \">");
 		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
 		println( "			<tr>" );
@@ -69,7 +74,8 @@
 		println( "	<div class=\"box25\" style=\"height:160px; background-color: #fff; \">");
 		println( "		<img class=\"codelite_img\" src=\"$qrs\" />" );
 		println( "	</div>" );
-		println( "</div>" );
+		if ( $title )
+			println( "</div>" );
 	}
 
 
@@ -77,7 +83,7 @@
 		println( "<div class=\"codelite\">" );
 		println( "<h2>Top ten context advisor</h2><br/>" );
 		$myTabella = new classTabella;
-		$myTabella->setTabella();
+//		$myTabella->setTabella();
 		$myTabella->stdAttributiTabella(array( "width"=>"100%" , "align"=>"center" , "style"=>"padding: 10px 10px 10px 10px ;" ));
 		$myTabella->addValoreRiga(array("Contexts" , "Occurrences" , "Percentages" , "Charts" ));
 		$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ),4,array(array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"100px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px"),array("style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"50px") , array("style"=>"border:1px solid #999; ") ));

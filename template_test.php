@@ -33,18 +33,18 @@
 	// ---------------- PAGE GENERATION START
 	
 	echo open_block( "Title class codelite" , "create.svg" );
-	echo 		tag_enclosed( "span" , "An this is a text enclosed in a paragraph." , "margin-left: 16px;" );
+	echo 		tag_enclosed( "span" , "and this is a text enclosed in a paragraph." , "margin-left: 16px;" );
 	echo close_block();
 	echo BR( );
 
 	echo open_block( "Title  class insidecodelite" , "noimg.png" , "insidecodelite" );
-	echo 		tag_enclosed( "p" , "An this is a text enclosed in a paragraph." , "margin-left: 30px;" );
+	echo 		tag_enclosed( "p" , "and this is a text enclosed in a paragraph." , "margin-left: 30px;" );
 	echo close_block();
 	echo BR( );
 
 	echo open_block( "Title  class insidecodelite" , "noimg.png" , "insidecodelite" );
 	echo 		open_block( "codelite" , "noimg.png" , "codelite" );
-	echo 				tag_enclosed( "p" , "An this is a codelight box enclosed " , "margin-left: 30px;" );
+	echo 				tag_enclosed( "p" , "and this is a codelight box enclosed " , "margin-left: 30px;" );
 	echo 		close_block();
 	echo close_block();
 	echo BR( );
@@ -120,14 +120,14 @@
 	echo BR( );	
 	
 	echo open_block( "Notifications" , "create.svg" , "insidecodelite");
-					insert_blockquote( "This is an example of Blockquote type 'Generic'" , "Generic" );
-					insert_blockquote( "This is an example of Blockquote type 'Are you sure?'" , "Are you sure?" );
-					insert_blockquote( "This is an example of Blockquote type 'Success'" , "Success" );
-					insert_blockquote( "This is an example of Blockquote type 'Error'" , "Error" );
-					insert_blockquote( "This is an example of Blockquote type 'Warning'" , "Warning" );
-					insert_blockquote( "This is an example of Blockquote type 'Caution'" , "Caution" );
-					insert_blockquote( "This is an example of Blockquote type 'Notice'" , "Notice" );
-					insert_blockquote( "This is an example of Blockquote type 'Blockquote'" , "Blockquote" );
+					insert_blockquote( "This is and example of Blockquote type 'Generic'" , "Generic" );
+					insert_blockquote( "This is and example of Blockquote type 'Are you sure?'" , "Are you sure?" );
+					insert_blockquote( "This is and example of Blockquote type 'Success'" , "Success" );
+					insert_blockquote( "This is and example of Blockquote type 'Error'" , "Error" );
+					insert_blockquote( "This is and example of Blockquote type 'Warning'" , "Warning" );
+					insert_blockquote( "This is and example of Blockquote type 'Caution'" , "Caution" );
+					insert_blockquote( "This is and example of Blockquote type 'Notice'" , "Notice" );
+					insert_blockquote( "This is and example of Blockquote type 'Blockquote'" , "Blockquote" );
 	echo close_block();
 	echo BR( );	
 

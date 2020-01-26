@@ -153,6 +153,12 @@
 
 	else {
 		if ( $code != '0' ) {
+			
+			if ( $action == "approved" )
+				insert_blockquote( "Code $code succesfully APPROVED!" , "Success" );
+			else if ( $action == "rejected" )
+				insert_blockquote( "Code $code is REJECTED and the new status is now DRAFT" , "Warning" );
+			
 			$array = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" );
 			if ($array) {
 				get_codetype( $array );
@@ -271,7 +277,7 @@
 				if ( ! $new ) {
 					echo open_block( "Code details" , "details.svg" );
 					echo generic_tag_open( "div" , "clearfix" );
-					echo generic_tag_open( "div" , "box33" , "background-color:#ccc; height:160px;" );
+					echo generic_tag_open( "div" , "box33" , "padding: 0.5em; background-color:#ccc; height:160px;" );
 					echo title_h3( "Code identifier" , "identifier.svg" );
 //				echo tag_enclosed( "h2" , "Code identifier" );
 			?>
@@ -303,7 +309,7 @@
 					
 					echo generic_tag_close( "table" );
 					echo div_block_close();
-					echo div_block_open( "box66" , "background-color:#ddd; height:160px;" );
+					echo div_block_open( "box66" , "padding: 0.5em; background-color:#ddd; height:160px;" );
 					echo title_h3( "Creation, modification and attributes" , "create.svg" );
 				?>
 				
@@ -341,7 +347,6 @@
 						</table>
 					</div>
 				</div>
-				<br/>
 			</div>
 
 			<?php

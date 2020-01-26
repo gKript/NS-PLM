@@ -8,11 +8,11 @@ class classTabella {
    var $_numRiga;
    var $_valTabella;
    var $_valRiga;
+
    /*
    * Funzione che setta le varie variabili.
    */
-
-    public function setTabella (){
+    function __construct (){
        $this->_numRiga = 1; // la si imposta a 1 perchè il valore 0 corrisponde al tag table
        $this->_tabella = array ();
        $this->_valTabella = array ();

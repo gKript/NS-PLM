@@ -14,7 +14,7 @@
 
 	require_once 'includes.php';
 
-	require_once NSID_PLM_SRC_TEMPLATE . 'attributes_function.php';
+	require_once NSID_PLM_SRC_TEMPLATE . 'attributes_functions.php';
 	require_once NSID_PLM_SRC_TEMPLATE . 'code_functions.php';
 
 	$db = new config_database();

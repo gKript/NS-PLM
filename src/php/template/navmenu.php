@@ -218,7 +218,6 @@
 			echo generic_tag_close( "li" );
 		}
 		echo generic_tag_open( "li" , "" , "float:right;" );
-//		println( "Search " );
 		echo generic_tag_open( "a" );
 		text_input_composer( "text" , $text , "" , "Text"   , "" , "" , 1 , "" , "Search " , "before" , 0 , "border-radius: 5px;" );
 		button( "Submit" , "src" , "Go" , 0 , "" , "border-radius: 5px;" );
@@ -237,10 +236,9 @@
 	if ( $c )
 		insert_blockquote( "Daily statistics updated!" , "Blockquote");
 	
-/*	if ( $reload )
-		emphasis( "" , "Pay attention, this page is reloaded." );
-*/		
-
+//		emphasis( "" , "Page reloaded!" );
+	if ( $reload )
+		insert_blockquote( "Page reloaded!" );
 
 ?>
 		

@@ -1,11 +1,11 @@
 <?php
 
-	function open_block( $title , $icon = "" , $class ="codelite" ) {
+	function open_block( $title = "" , $icon = "" , $class ="codelite" ) {
 		$url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];	
-		//echo $url;		
-		$page  = div_block_open( $class , "padding-left: 16px; padding-right: 16px;" );
+		$page = "";
+		if ( $title != "" ) 
+			$page  = div_block_open( $class , "padding-left: 16px; padding-right: 16px;" );
 		$page .= link_generator( $url , img_generator( "top.svg" , "icona top" , "" , "float: right;" , "autoclose" , 0 , 24 , 24) );
-//		echo $page;
 		if ( ! $icon ) {
 			$text = $title;
 			$st =  "margin-left: 12px; vertical-align: middle; ";
@@ -15,17 +15,15 @@
 			$st = "vertical-align: middle;";
 		}
 		$page .= tag_enclosed( "h2" , $text , $st );
-//		$page .= title_h2( $title , $icon );
 		$page .= BR( 1 , 0 );
-//		var_dump( $page );
 		return $page;	
 	}
 	
-	function open_block_no_top( $title , $icon = "" , $class ="codelite" ) {
+	function open_block_no_top( $title = "" , $icon = "" , $class ="codelite" ) {
 		$url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];	
-		//echo $page;		
-		$page  = div_block_open( $class , "padding-left: 16px; padding-right: 16px;" );
-//		$page .= link_generator( $url , img_generator( "top.svg" , "icona top" , "" , "float: right;" , "autoclose" , 0 , 24 , 24) );
+		$page = "";
+		if ( $title != "" ) 
+			$page  = div_block_open( $class , "padding-left: 16px; padding-right: 16px;" );
 		if ( ! $icon ) {
 			$text  = $title;
 			$st =  "margin-left: 12px; vertical-align: middle; ";
@@ -35,7 +33,6 @@
 			$st = "vertical-align: middle;";
 		}
 		$page .= tag_enclosed( "h2" , $text , $st );
-//		$page .= title_h2( $title , $icon );
 		$page .= BR( 1 , 0 );
 		return $page;	
 	}
@@ -97,7 +94,7 @@
 			echo generic_tag_open( "blockquote" , "" , $border  );
 			echo 	tag_enclosed( "p" , $text );
 		}
-		if ( $type == "Notice" )
+		if ( ( $type == "Notice" ) || ( $type == "Success" )  || ( $type == "Warning" ) )
 			echo BR(2);
 		if ( $die ) {
 			if ( ! $mysqli->connect_error ) {

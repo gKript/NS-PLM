@@ -71,7 +71,7 @@
 
 	
 		$myTabella = new classTabella;
-		$myTabella->setTabella();	
+//		$myTabella->setTabella();	
 		$myTabella->stdAttributiTabella(array( "width"=>"100%" , "align"=>"center" , "style"=>"padding: 10px 10px 10px 10px ;" ));
 		$myTabella->addValoreRiga(array( "Code" , "Short description" , "Long description" , "Revision" , "Quantity" ));
 		$myTabella->aggiungiRiga(array( "style"=>"font-weight:bold;" ) , 5, array(array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"10%")  ,  array("style"=>"border:1px solid #999; " , "width"=>"25%", "align"=>"left")  ,  array("style"=>"border:1px solid #999; " , "width"=>"55%", "align"=>"left") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%") , array(  "style"=>"border:1px solid #999; " , "align"=>"center" , "width"=>"5%") ) );
