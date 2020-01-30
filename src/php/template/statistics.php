@@ -149,7 +149,27 @@
 		return $ret;
 	}
 		
-	
-			
+	function check_code_review() {
+		
+		global $gk_Auth;
+		
+		$sql = "SELECT *  FROM `elenco_codici` WHERE `status` = 3 ORDER BY `elenco_codici`.`createTS` DESC";
+		$result = query_get_result( $sql );
+		if ( $result ) {
+			$items = $result->num_rows;
+			for( $r = 0 ; $r < $items ; $r++ ) {
+				$row = $result->fetch_array();
+				$code = $row["codice"];
+				$sql = "SELECT *  FROM `code_action` WHERE `code` LIKE '$code' AND `action` LIKE 'review'";
+				$exist = query_get_num_rows( $sql );
+				if ( ! $exist ) {
+					$rl = $gk_Auth->get_user_level_by_action( "Review" , "Code" );
+					$sql = "INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `createTS`) VALUES (NULL, '$code', 'review', '$rl', current_timestamp())";
+					query_sql_run( $sql );
+				}
+			}
+		}
+	}
+
  ?>
  

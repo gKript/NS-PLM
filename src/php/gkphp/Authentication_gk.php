@@ -51,6 +51,15 @@
 		}
 
 	
+		function get_user_level_by_action( $uact , $uwhat ) {
+			$u = $this->user;
+			$r = $this->role;
+			
+			$reqlev	= query_get_a_field( "SELECT * FROM `gk_permissions`" , $uact.$uwhat );
+			return $reqlev;
+		}
+		
+
 		function check_user_level( $uact , $uwhat ) {
 			$u = $this->user;
 			$r = $this->role;

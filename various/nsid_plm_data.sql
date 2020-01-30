@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 26, 2020 alle 22:47
--- Versione del server: 10.3.14-MariaDB
--- Versione PHP: 7.3.5
+-- Creato il: Gen 30, 2020 alle 13:44
+-- Versione del server: 10.4.10-MariaDB
+-- Versione PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -224,6 +224,87 @@ INSERT INTO `codattributes` (`code`, `bom`, `Supplier`, `origin`, `critical`, `i
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `code_action`
+--
+
+DROP TABLE IF EXISTS `code_action`;
+CREATE TABLE IF NOT EXISTS `code_action` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(11) NOT NULL,
+  `action` varchar(32) NOT NULL,
+  `level_req` int(11) NOT NULL,
+  `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `code_action`
+--
+
+INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `createTS`) VALUES
+(1, '57C0000100', 'review', 20, '2020-01-29 08:48:55'),
+(2, '22C0001900', 'review', 20, '2020-01-29 09:38:47'),
+(3, '2DC0000100', 'review', 20, '2020-01-29 09:38:47'),
+(4, '22C0001800', 'review', 20, '2020-01-29 09:38:47'),
+(5, '22C0001700', 'review', 20, '2020-01-29 09:38:47'),
+(6, '22C0001600', 'review', 20, '2020-01-29 09:38:48'),
+(7, '22C0001500', 'review', 20, '2020-01-29 09:38:48'),
+(8, '2240001000', 'review', 20, '2020-01-29 09:38:48'),
+(9, '2240000900', 'review', 20, '2020-01-29 09:38:48'),
+(10, '2240000800', 'review', 20, '2020-01-29 09:38:48'),
+(11, '2240000700', 'review', 20, '2020-01-29 09:38:48'),
+(12, '2240000600', 'review', 20, '2020-01-29 09:38:48'),
+(13, '22C0001400', 'review', 20, '2020-01-29 09:38:48'),
+(14, '12C0000200', 'review', 20, '2020-01-29 09:38:48'),
+(15, '3540000100', 'review', 20, '2020-01-29 09:38:48'),
+(16, '12C0000100', 'review', 20, '2020-01-29 09:38:48'),
+(17, '2240000500', 'review', 20, '2020-01-29 09:38:48'),
+(18, '22C0001300', 'review', 20, '2020-01-29 09:38:48'),
+(19, '22C0001200', 'review', 20, '2020-01-29 09:38:48'),
+(20, '20E0000100', 'review', 20, '2020-01-29 09:38:48'),
+(21, '22C0001100', 'review', 20, '2020-01-29 09:38:48'),
+(22, '22C0001000', 'review', 20, '2020-01-29 09:38:48'),
+(23, '22C0000900', 'review', 20, '2020-01-29 09:38:48'),
+(24, '22C0000800', 'review', 20, '2020-01-29 09:38:48'),
+(25, '22C0000700', 'review', 20, '2020-01-29 09:38:48'),
+(26, '22C0000600', 'review', 20, '2020-01-29 09:38:48'),
+(27, '22C0000500', 'review', 20, '2020-01-29 09:38:48'),
+(28, '26C0000200', 'review', 20, '2020-01-29 09:38:48'),
+(29, '16C0000200', 'review', 20, '2020-01-29 09:38:48'),
+(30, '26C0000100', 'review', 20, '2020-01-29 09:38:48'),
+(31, '3440000200', 'review', 20, '2020-01-29 09:38:48'),
+(32, '3440000100', 'review', 20, '2020-01-29 09:38:48'),
+(33, '22C0000400', 'review', 20, '2020-01-29 09:38:48'),
+(34, '1120000200', 'review', 20, '2020-01-29 09:38:48'),
+(35, '1120000100', 'review', 20, '2020-01-29 09:38:48'),
+(36, '22C0000300', 'review', 20, '2020-01-29 09:38:48'),
+(37, '2240000400', 'review', 20, '2020-01-29 09:38:48'),
+(38, '22C0000200', 'review', 20, '2020-01-29 09:38:48'),
+(39, '2230000500', 'review', 20, '2020-01-29 09:38:48'),
+(40, '2230000400', 'review', 20, '2020-01-29 09:38:48'),
+(41, '22C0000100', 'review', 20, '2020-01-29 09:38:48'),
+(42, '2230000300', 'review', 20, '2020-01-29 09:38:48'),
+(43, '2240000300', 'review', 20, '2020-01-29 09:38:48'),
+(44, '53B0000102', 'review', 20, '2020-01-29 09:38:48'),
+(45, '43B0000100', 'review', 20, '2020-01-29 09:38:48'),
+(46, '53E0000100', 'review', 20, '2020-01-29 09:38:48'),
+(47, '16C0000100', 'review', 20, '2020-01-29 09:38:48'),
+(48, '2240000200', 'review', 20, '2020-01-29 09:38:48'),
+(49, '4670000100', 'review', 20, '2020-01-29 09:38:48'),
+(50, '8C00000100', 'review', 20, '2020-01-29 09:38:48'),
+(51, '2240000100', 'review', 20, '2020-01-29 09:38:48'),
+(52, '53B0000103', 'review', 20, '2020-01-29 09:38:48'),
+(53, '89B0000103', 'review', 20, '2020-01-29 09:38:48'),
+(54, '2230000200', 'review', 20, '2020-01-29 09:38:48'),
+(55, '2230000100', 'review', 20, '2020-01-29 09:38:48'),
+(56, '2110000200', 'review', 20, '2020-01-29 09:38:48'),
+(57, '2110000100', 'review', 20, '2020-01-29 09:38:48'),
+(58, '89D0000102', 'review', 20, '2020-01-29 09:38:48'),
+(59, '54B0000101', 'review', 20, '2020-01-29 09:38:48');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `elenco_codici`
 --
 
@@ -258,7 +339,7 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (22, '89B0000103', 8, '9', 'B', 'Gim Documentation', 'Generic Information Manager Documentation', 1, 3, '2013-07-16 19:03:40', '2020-01-20 01:10:02'),
 (23, '53B0000103', 5, '3', 'B', 'Gim3', 'Generic Information Manager 3', 0, 3, '2013-07-16 19:18:23', '2020-01-20 01:10:02'),
 (28, '2240000100', 2, '2', '4', 'PreReg-lm2596', 'Modulo preregolatore buck step down LM2596', 0, 3, '2013-08-24 22:26:52', '2020-01-20 01:10:02'),
-(30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 4, '2019-12-22 23:20:23', '2020-01-26 22:23:00'),
+(30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 3, '2019-12-22 23:20:23', '2020-01-29 08:46:03'),
 (31, '8C00000100', 8, 'C', '0', 'Onesto P.C.', 'Onesto Product Concept', 0, 3, '2019-12-22 23:20:23', '2020-01-20 01:10:02'),
 (32, '58A0000100', 5, '8', 'A', 'Onesto Modello', 'Onesto Modello Matematico del metodo', 0, 2, '2019-12-22 23:22:22', '2020-01-21 21:08:36'),
 (33, '4670000100', 4, '6', '7', 'TWD Master', 'Tag Walking Device Master', 1, 3, '2019-12-22 23:22:22', '2020-01-26 11:05:48'),
@@ -365,7 +446,7 @@ CREATE TABLE IF NOT EXISTS `gk_permissions` (
 --
 
 INSERT INTO `gk_permissions` (`id`, `View`, `Code`, `Revision`, `Sttributes`, `Bom`, `CreateCode`, `CreateRevision`, `CreateAtribute`, `CreateBom`, `CreateProvider`, `CreateReport`, `ModifyCode`, `ModifyRevision`, `ModifyAtribute`, `ModifyBom`, `ModifyProvider`, `ModifyReport`, `DeleteCode`, `DeleteRevision`, `DeleteAtribute`, `DeleteBom`, `DeleteProvider`, `DeleteReport`, `ReviewCode`, `ApproveCode`, `ApproveRevision`, `ApproveBom`, `CreateActivity`, `ManageAttachment`, `CreateUser`, `ModifyUser`, `DeleteUser`, `CreateUnit`, `ModifyUnit`, `DeleteUnit`) VALUES
-(NULL, 1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 20, 20, 20, 20, 20, 40, 40, 40, 30, 30, 30);
+(NULL, 1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 20, 20, 20, 20, 20, 20, 40, 40, 40, 30, 30, 30);
 
 -- --------------------------------------------------------
 
@@ -441,14 +522,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(25, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'uh10bpk5acoj8gfnlnt9v8jlm7', 1580078608);
+(15, 'rnd.approver', 'Approver', 'Approver', 'bqcqiop6m9e1um3tjl3t4gehna', 1580391798);
 
 -- --------------------------------------------------------
 
@@ -565,7 +646,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `user` varchar(32) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=187 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=194 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -585,7 +666,7 @@ INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (166, '467', 'wh.editor', '2020-01-26 12:48:03'),
 (140, 'onesto', 'wh.editor', '2020-01-25 21:13:21'),
 (143, 'onesto', 'rnd.approver', '2020-01-25 21:17:56'),
-(159, '57C0000100', 'wh.editor', '2020-01-25 23:44:28'),
+(189, '57C0000100', 'wh.editor', '2020-01-29 08:14:44'),
 (146, '22c', 'wh.editor', '2020-01-25 22:52:30'),
 (158, '22e', 'wh.user', '2020-01-25 23:29:21'),
 (160, '20E0000100', 'wh.user', '2020-01-25 23:49:05'),
@@ -593,9 +674,9 @@ INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (167, '467', 'guest', '2020-01-26 12:50:07'),
 (179, '22e', 'rnd.approver', '2020-01-26 19:40:10'),
 (178, '22c', 'rnd.approver', '2020-01-26 19:40:02'),
-(181, 'gim', 'rnd.approver', '2020-01-26 19:40:49'),
+(191, 'gim', 'rnd.approver', '2020-01-29 08:22:25'),
 (175, '57c', 'wh.editor', '2020-01-26 19:08:36'),
-(180, '57c', 'rnd.approver', '2020-01-26 19:40:14'),
+(193, '57c', 'rnd.approver', '2020-01-29 08:45:55'),
 (184, '57c', 'danilo.zannoni', '2020-01-26 20:44:56');
 
 -- --------------------------------------------------------
@@ -611,7 +692,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=123 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -698,7 +779,16 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (119, 'BomCountDaily', '13', '2020-01-24 23:02:32'),
 (120, 'CodeCountDaily', '63', '2020-01-25 23:01:53'),
 (121, 'AttribCountDaily', '47', '2020-01-25 23:01:53'),
-(122, 'BomCountDaily', '13', '2020-01-25 23:01:53');
+(122, 'BomCountDaily', '13', '2020-01-25 23:01:53'),
+(123, 'CodeCountDaily', '63', '2020-01-27 16:16:14'),
+(124, 'AttribCountDaily', '47', '2020-01-27 16:16:14'),
+(125, 'BomCountDaily', '13', '2020-01-27 16:16:14'),
+(126, 'CodeCountDaily', '63', '2020-01-29 08:13:52'),
+(127, 'AttribCountDaily', '47', '2020-01-29 08:13:52'),
+(128, 'BomCountDaily', '13', '2020-01-29 08:13:52'),
+(129, 'CodeCountDaily', '63', '2020-01-30 07:43:45'),
+(130, 'AttribCountDaily', '47', '2020-01-30 07:43:45'),
+(131, 'BomCountDaily', '13', '2020-01-30 07:43:45');
 
 -- --------------------------------------------------------
 

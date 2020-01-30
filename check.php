@@ -111,7 +111,10 @@
 			}
 		else {
 			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
-			echo					"NOT OK";
+			$tx  = 			generic_tag_open( "span" , "blink_text" );
+			$tx .= 				"Not OK!";
+			$tx .= 			generic_tag_close( "span" );
+			echo $tx;
 		}
 		echo 				col_close();
 		echo 			row_close();
@@ -130,7 +133,10 @@
 			}
 		else {
 			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
-			echo					"NOT OK";
+			$tx  = 			generic_tag_open( "span" , "blink_text" );
+			$tx .= 				"Not OK!";
+			$tx .= 			generic_tag_close( "span" );
+			echo $tx;
 		}
 		echo 				col_close();
 		echo 			row_close();
@@ -148,8 +154,11 @@
 			echo					"OK";
 			}
 		else {
-			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
-			echo					"NOT OK";
+			echo 				col_open( 0 , "10%" , "background-color:#ff8; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			$tx  = 			generic_tag_open( "span" , "blink_text" );
+			$tx .= 				"Not OK!";
+			$tx .= 			generic_tag_close( "span" );
+			echo $tx;
 		}
 		echo 				col_close();
 		echo 			row_close();
@@ -171,7 +180,10 @@
 			}
 		else {
 			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
-			echo					"NOT OK";
+			$tx  = 			generic_tag_open( "span" , "blink_text" );
+			$tx .= 				"Not OK!";
+			$tx .= 			generic_tag_close( "span" );
+			echo $tx;
 		}
 		echo 				col_close();
 		echo 			row_close();

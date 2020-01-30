@@ -146,14 +146,14 @@
 				<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
 					<?php echo title_h2( "Current status -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
 					<br/>
-					<table style="margin:9px;" width="97%">
-						<tr >
+					<table style="margin:9px; " width="97%">
+						<tr  >
 							<th width="25%"><small>Previous status</small></th>
 							<th width="50%">Current status</th>
 							<th width="25%"><small>Next status</small></th>
 						</tr>
 						<tr align="center" valign="center" height="40px" >
-							<td style="border:1px solid #999; background-color: #ada;">
+							<td style="background-color: #ada; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;">
 							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
 								<a href="code.php?code=<?php echo $code; ?>&updstate=prev" >
 								<img src="src/img/prev.svg" alt="ok" border=0 height=24 style="float: right;"/><small>
@@ -165,7 +165,7 @@
 										}
 							?>
 							</td>
-							<td style="border:1px solid #999; background-color: #dda;">
+							<td style="background-color: #dda; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;">
 								<b>
 								<?php
 										if ( ( $cstate == 3 ) && ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) ) 
@@ -175,7 +175,7 @@
 									?>
 								</b>
 							</td>
-							<td style="border:1px solid #999; background-color: #bbb;">
+							<td style="background-color: #bbb; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;">
 							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
 								<?php if ( $nstate ) { ?>
 								<?php 	if ( $nstate < 5 ) { ?>

@@ -122,11 +122,96 @@
 //		echo div_block_open( "codelite" , "padding-left: 16px; padding-right: 16px;" );
 		echo open_block_no_top( "Tasks to be performed" , "task.svg" );
 		echo tag_enclosed( "p" , "The tasks you are involved in are the following:" ) ;
-		echo 	BR(1,0);
+//		echo 	BR(1,0);
+	
+		if ( $gk_Auth->check_user_level( "Review" , "Code" ) ) {
+		
+			$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'review' ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
+			$rows = query_get_num_rows( $sql );
+				if ( $rows ) {
+			?>
+				<div class="insidecodelite">
+					<h2>Code to be reviewed</h2><br/>
+
+
+					<table style="margin:1em;" width="100%">
+						<tr>
+							<th style="text-align: center;" >Code</th>
+							<th style="text-align: left;" >Short desrciption</th>
+							<th style="text-align: left;" >Long description</th>
+						</tr>
+
+
+			<?php
+
+					if ($result = $mysqli->query($sql)) {
+						for( $r = 0 ; $r < $rows ; $r++ ) {
+								println( "<tr>" );
+								$array = $result->fetch_array();
+								$code = $array["code"];
+								$ar = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code' " );
+								print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
+								
+								echo link_generator( "check.php?code=$code" , $code );
+								println( "</td>" );
+								println( "<td style='border:1px solid #999;' width='25%'>" . $ar['abbreviazione'] . "</td>" );
+								println( "<td style='border:1px solid #999;' >" . $ar['descrizione'] . "</td>" );
+								println( "</tr>" );
+						}
+					}
+			?>		
+					</table>
+				</div>
+		<?php
+				}
+		}
+							
+		if ( $gk_Auth->check_user_level( "Create" , "Attribute" ) ) {
+		
+			$sql = "SELECT * FROM `elenco_codici`";
+			$rows = query_get_num_rows( $sql );
+				if ( $rows ) {
+			?>
+				<div class="insidecodelite">
+					<h2>Code to be reviewed</h2><br/>
+
+
+					<table style="margin:1em;" width="100%">
+						<tr>
+							<th style="text-align: center;" >Code</th>
+							<th style="text-align: left;" >Short desrciption</th>
+							<th style="text-align: left;" >Long description</th>
+						</tr>
+
+
+			<?php
+
+					if ($result = $mysqli->query($sql)) {
+						for( $r = 0 ; $r < $rows ; $r++ ) {
+								println( "<tr>" );
+								$array = $result->fetch_array();
+								$code = $array["code"];
+								$ar = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code' " );
+								print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
+								
+								echo link_generator( "check.php?code=$code" , $code );
+								println( "</td>" );
+								println( "<td style='border:1px solid #999;' width='25%'>" . $ar['abbreviazione'] . "</td>" );
+								println( "<td style='border:1px solid #999;' >" . $ar['descrizione'] . "</td>" );
+								println( "</tr>" );
+						}
+					}
+			?>		
+					</table>
+				</div>
+		<?php
+				}
+		}
+							
 		echo div_block_close();
 	}
 	echo div_block_close();
-	
+				
 	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 ?>
