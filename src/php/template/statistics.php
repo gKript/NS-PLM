@@ -1,5 +1,6 @@
 <?php
  
+ 	require_once NSID_PLM_SRC_TEMPLATE . 'attributes_functions.php';
  
 	function stat_CodeCountDaily() {
 		$ins = 0;
@@ -170,6 +171,30 @@
 			}
 		}
 	}
+
+
+	function check_code_without_attributes() {
+		
+		global $gk_Auth;
+		
+		$sql = "SELECT * FROM `elenco_codici`";
+		if ( $result = query_get_result( $sql ) ) {
+			for( $r = 0 ; ( $r < $result->num_rows ) ; $r++ ) {
+				$array = $result->fetch_array();
+				$code = $array["codice"];
+				if ( ! check_attributes_presence( $code ) ) {
+					$sql = "SELECT *  FROM `code_action` WHERE `code` LIKE '$code' AND `action` LIKE 'attribute'";
+					$exist = query_get_num_rows( $sql );
+					if ( ! $exist ) {
+						$rl = $gk_Auth->get_user_level_by_action( "Create" , "Attribute" );
+						$sql = "INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `priority`, `ignore_it`, `createTS`) VALUES (NULL, '$code', 'attribute', '$rl', false, false, current_timestamp())";
+						query_sql_run( $sql );
+					}
+				}
+			}
+		}
+	}
+
 
  ?>
  

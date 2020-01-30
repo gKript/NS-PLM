@@ -72,45 +72,45 @@
 		
 		echo BR( 1 , 1 , "clearfix" );
 		
-		echo		div_block_open( "box50" , "margin-top:2em; float: left; background-color:#ddd; height: 300px; " );
+		echo		div_block_open( "box50" , "margin-top:2em; float: left; background-color:#ddd; height: 300px; border:1px solid #999; " );
 		echo 		table_open( 1 , "100%" , "" , "padding: 1em;" );
 		echo 			row_open( "border: 1 solid black; " );
-		echo 				col_open( 0 , "25%" , "background-color:#bbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "25%" , "background-color:#bbb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "Component" );
 		echo 				col_close();
-		echo 				col_open( 0 , "65%" , "background-color:#bbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "65%" , "background-color:#bbb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "Value" );
 		echo 				col_close();
-		echo 				col_open( 0 , "10%" , "background-color:#bbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "10%" , "background-color:#bbb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "Result" );
 		echo 				col_close();
 		echo 			row_close();
 		
 		echo 			row_open( "border: 1 solid black; " );
-		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "Code" );
 		echo 				col_close();
-		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					$code;
 		echo 				col_close();
-		echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					"OK";
 		echo 				col_close();
 		echo 			row_close();
 
 		echo 			row_open( "border: 1 solid black; " );
-		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "Short description" );
 		echo 				col_close();
-		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					$array["abbreviazione"];
 		echo 				col_close();
 		if ( $array["abbreviazione"] != "" ) {
-			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			echo					"OK";
 			}
 		else {
-			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			$tx  = 			generic_tag_open( "span" , "blink_text" );
 			$tx .= 				"Not OK!";
 			$tx .= 			generic_tag_close( "span" );
@@ -120,19 +120,19 @@
 		echo 			row_close();
 
 		echo 			row_open( "border: 1 solid black; " );
-		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "Long description" );
 		echo 				col_close();
-		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					$array["descrizione"];
 		echo 				col_close();
-//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		if ( $array["descrizione"] != "" ) {
-			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			echo					"OK";
 			}
 		else {
-			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			$tx  = 			generic_tag_open( "span" , "blink_text" );
 			$tx .= 				"Not OK!";
 			$tx .= 			generic_tag_close( "span" );
@@ -142,19 +142,19 @@
 		echo 			row_close();
 
 		echo 			row_open( "border: 1 solid black; " );
-		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "It is the last revision?" );
 		echo 				col_close();
-		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					"Latest revision is: " . substr( get_latest_revision( $code ) , 8 , 2 );
 		echo 				col_close();
-//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 	if ( substr( get_latest_revision( $code ) , 8 , 2 ) == substr($code, 8, 2) ) {
-			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			echo					"OK";
 			}
 		else {
-			echo 				col_open( 0 , "10%" , "background-color:#ff8; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#ff8; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			$tx  = 			generic_tag_open( "span" , "blink_text" );
 			$tx .= 				"Not OK!";
 			$tx .= 			generic_tag_close( "span" );
@@ -164,22 +164,22 @@
 		echo 			row_close();
 
 		echo 			row_open( "border: 1 solid black; " );
-		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		echo					tag_enclosed( "b" , "Attributes" );
 		echo 				col_close();
-		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		if ( check_attributes_presence( $code ) )
 			echo					"Present";
 		else
 			echo					"NOT present";
 		echo 				col_close();
-//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 		if ( check_attributes_presence( $code ) ) {
-			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			echo					"OK";
 			}
 		else {
-			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			$tx  = 			generic_tag_open( "span" , "blink_text" );
 			$tx .= 				"Not OK!";
 			$tx .= 			generic_tag_close( "span" );
@@ -187,37 +187,40 @@
 		}
 		echo 				col_close();
 		echo 			row_close();
-/*
+
+
 		echo 			row_open( "border: 1 solid black; " );
-		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
-		echo					tag_enclosed( "b" , "Attributes" );
+		echo 				col_open( 0 , "25%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
+		echo					tag_enclosed( "b" , "Weight attributes" );
 		echo 				col_close();
-		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
-		if ( check_attributes_presence( $code ) )
+		echo 				col_open( 0 , "65%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
+		$wip = check_weight_attribute_presence( $code );
+		if ( $wip )
 			echo					"Present";
 		else
 			echo					"NOT present";
 		echo 				col_close();
-//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
-		if ( check_attributes_presence( $code ) ) {
-			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+//		echo 				col_open( 0 , "10%" , "border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
+		if ( $wip ) {
+			echo 				col_open( 0 , "10%" , "background-color:#bfb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			echo					"OK";
 			}
 		else {
-			echo 				col_open( 0 , "10%" , "background-color:#fbb; border:1px solid #999;  height:40px; text-align: center; text-justify: inter-word;" );
+			echo 				col_open( 0 , "10%" , "background-color:#ffb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			echo					"NOT OK";
 		}
 		echo 				col_close();
 		echo 			row_close();
-*/
+
+
 		echo 		table_close();
 		echo 		div_block_close();
 		$approve = "<a href=\"code.php?code=$code&updstate=next&action=approved\"><h1 style= \"text-align: center\" ><b>Approve</b></h1></a>\n";
 		$reject  = "<a href=\"code.php?code=$code&updstate=prev&action=rejected\"><h1 style= \"text-align: center\" ><b>Reject</b></h1></a>\n";
-		echo		div_block_open( "box25" , "vertical-align: middle;margin-top:2em; float: right; background-color:#faa; height: 300px; " );
+		echo		div_block_open( "box25" , "vertical-align: middle;margin-top:2em; float: right; background-color:#faa; height: 300px; border:1px solid #999; " );
 		echo 				tag_enclosed( "p" , $reject , "margin-top: 110px; vertical-align: middle;margin-left: auto;"  );
 		echo 		div_block_close();
-		echo		div_block_open( "box25" , "vertical-align: middle;margin-top:2em; float: right; background-color:#afa; height: 300px; " );
+		echo		div_block_open( "box25" , "vertical-align: middle;margin-top:2em; float: right; background-color:#afa; height: 300px; border:1px solid #999; " );
 		echo 				tag_enclosed( "p" , $approve  , "margin-top: 110px; vertical-align: middle;margin-left: auto;"  );
 		echo 		div_block_close();
 

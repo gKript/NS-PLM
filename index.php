@@ -31,9 +31,15 @@
 		$gk_Auth->get_authentication( $_POST["user_login"] , $_POST["user_password"] );
 	}
 
+	$code		= get_check( 'code' );
 	$action = get_check( 'action' );
+	$ignore = get_check( 'ignore' );
+	
+	
 	if ( $action == "logout" ) 
 		$gk_Auth->gk_logout( session_id() );
+	
+//	if ( ( $action == "" ) && ( $
 	
 	$redirect_addy = "index.php";
 
@@ -134,7 +140,7 @@
 					<h2>Code to be reviewed</h2><br/>
 
 
-					<table style="margin:1em;" width="100%">
+					<table style="margin:1em;" width="95%">
 						<tr>
 							<th style="text-align: center;" >Code</th>
 							<th style="text-align: left;" >Short desrciption</th>
@@ -146,17 +152,17 @@
 
 					if ($result = $mysqli->query($sql)) {
 						for( $r = 0 ; $r < $rows ; $r++ ) {
-								println( "<tr>" );
-								$array = $result->fetch_array();
-								$code = $array["code"];
-								$ar = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code' " );
-								print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
-								
-								echo link_generator( "check.php?code=$code" , $code );
-								println( "</td>" );
-								println( "<td style='border:1px solid #999;' width='25%'>" . $ar['abbreviazione'] . "</td>" );
-								println( "<td style='border:1px solid #999;' >" . $ar['descrizione'] . "</td>" );
-								println( "</tr>" );
+							println( "<tr>" );
+							$array = $result->fetch_array();
+							$code = $array["code"];
+							$ar = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code' " );
+							print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
+							
+							echo link_generator( "check.php?code=$code" , $code );
+							println( "</td>" );
+							println( "<td style='border:1px solid #999;' width='25%'>" . $ar['abbreviazione'] . "</td>" );
+							println( "<td style='border:1px solid #999;' >" . $ar['descrizione'] . "</td>" );
+							println( "</tr>" );
 						}
 					}
 			?>		
@@ -164,19 +170,19 @@
 				</div>
 		<?php
 				}
-		}
+			}
 							
-		if ( $gk_Auth->check_user_level( "Create" , "Attribute" ) ) {
-		
-			$sql = "SELECT * FROM `elenco_codici`";
-			$rows = query_get_num_rows( $sql );
+			if ( $gk_Auth->check_user_level( "Create" , "Attribute" ) ) {
+			
+				$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'attribute' ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
+				$rows = query_get_num_rows( $sql );
 				if ( $rows ) {
-			?>
+				?>
 				<div class="insidecodelite">
-					<h2>Code to be reviewed</h2><br/>
+					<h2>Code without ATTRIBUTES</h2><br/>
 
 
-					<table style="margin:1em;" width="100%">
+					<table style="margin:1em;" width="95%">
 						<tr>
 							<th style="text-align: center;" >Code</th>
 							<th style="text-align: left;" >Short desrciption</th>
@@ -184,7 +190,7 @@
 						</tr>
 
 
-			<?php
+				<?php
 
 					if ($result = $mysqli->query($sql)) {
 						for( $r = 0 ; $r < $rows ; $r++ ) {
@@ -193,23 +199,23 @@
 								$code = $array["code"];
 								$ar = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code' " );
 								print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
-								
 								echo link_generator( "check.php?code=$code" , $code );
 								println( "</td>" );
 								println( "<td style='border:1px solid #999;' width='25%'>" . $ar['abbreviazione'] . "</td>" );
 								println( "<td style='border:1px solid #999;' >" . $ar['descrizione'] . "</td>" );
+								$ln = link_generator( "index.php?code=$code&action=attribute&ignore=true" , "Ignore it" );
+								println( "<td style='background-color:#ffb; text-align: center; border:1px solid #999;' width='5%'>" . $ln . "</td>" );
 								println( "</tr>" );
 						}
 					}
-			?>		
+				}
+				?>		
 					</table>
 				</div>
-		<?php
-				}
+				<?php
+			}
+			echo div_block_close();
 		}
-							
-		echo div_block_close();
-	}
 	echo div_block_close();
 				
 	include NSID_PLM_SRC_TEMPLATE . 'footer.php';

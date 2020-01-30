@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 30, 2020 alle 13:44
--- Versione del server: 10.4.10-MariaDB
--- Versione PHP: 7.3.12
+-- Creato il: Gen 30, 2020 alle 18:11
+-- Versione del server: 10.3.14-MariaDB
+-- Versione PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `nsid_plm_data`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `activity`
+--
+
+DROP TABLE IF EXISTS `activity`;
+CREATE TABLE IF NOT EXISTS `activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(32) NOT NULL,
+  `action` varchar(32) NOT NULL,
+  `code` varchar(11) NOT NULL,
+  `sql_used` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -233,74 +249,92 @@ CREATE TABLE IF NOT EXISTS `code_action` (
   `code` varchar(11) NOT NULL,
   `action` varchar(32) NOT NULL,
   `level_req` int(11) NOT NULL,
+  `priority` tinyint(1) NOT NULL DEFAULT 0,
+  `ignore_it` tinyint(1) NOT NULL DEFAULT 0,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `code_action`
 --
 
-INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `createTS`) VALUES
-(1, '57C0000100', 'review', 20, '2020-01-29 08:48:55'),
-(2, '22C0001900', 'review', 20, '2020-01-29 09:38:47'),
-(3, '2DC0000100', 'review', 20, '2020-01-29 09:38:47'),
-(4, '22C0001800', 'review', 20, '2020-01-29 09:38:47'),
-(5, '22C0001700', 'review', 20, '2020-01-29 09:38:47'),
-(6, '22C0001600', 'review', 20, '2020-01-29 09:38:48'),
-(7, '22C0001500', 'review', 20, '2020-01-29 09:38:48'),
-(8, '2240001000', 'review', 20, '2020-01-29 09:38:48'),
-(9, '2240000900', 'review', 20, '2020-01-29 09:38:48'),
-(10, '2240000800', 'review', 20, '2020-01-29 09:38:48'),
-(11, '2240000700', 'review', 20, '2020-01-29 09:38:48'),
-(12, '2240000600', 'review', 20, '2020-01-29 09:38:48'),
-(13, '22C0001400', 'review', 20, '2020-01-29 09:38:48'),
-(14, '12C0000200', 'review', 20, '2020-01-29 09:38:48'),
-(15, '3540000100', 'review', 20, '2020-01-29 09:38:48'),
-(16, '12C0000100', 'review', 20, '2020-01-29 09:38:48'),
-(17, '2240000500', 'review', 20, '2020-01-29 09:38:48'),
-(18, '22C0001300', 'review', 20, '2020-01-29 09:38:48'),
-(19, '22C0001200', 'review', 20, '2020-01-29 09:38:48'),
-(20, '20E0000100', 'review', 20, '2020-01-29 09:38:48'),
-(21, '22C0001100', 'review', 20, '2020-01-29 09:38:48'),
-(22, '22C0001000', 'review', 20, '2020-01-29 09:38:48'),
-(23, '22C0000900', 'review', 20, '2020-01-29 09:38:48'),
-(24, '22C0000800', 'review', 20, '2020-01-29 09:38:48'),
-(25, '22C0000700', 'review', 20, '2020-01-29 09:38:48'),
-(26, '22C0000600', 'review', 20, '2020-01-29 09:38:48'),
-(27, '22C0000500', 'review', 20, '2020-01-29 09:38:48'),
-(28, '26C0000200', 'review', 20, '2020-01-29 09:38:48'),
-(29, '16C0000200', 'review', 20, '2020-01-29 09:38:48'),
-(30, '26C0000100', 'review', 20, '2020-01-29 09:38:48'),
-(31, '3440000200', 'review', 20, '2020-01-29 09:38:48'),
-(32, '3440000100', 'review', 20, '2020-01-29 09:38:48'),
-(33, '22C0000400', 'review', 20, '2020-01-29 09:38:48'),
-(34, '1120000200', 'review', 20, '2020-01-29 09:38:48'),
-(35, '1120000100', 'review', 20, '2020-01-29 09:38:48'),
-(36, '22C0000300', 'review', 20, '2020-01-29 09:38:48'),
-(37, '2240000400', 'review', 20, '2020-01-29 09:38:48'),
-(38, '22C0000200', 'review', 20, '2020-01-29 09:38:48'),
-(39, '2230000500', 'review', 20, '2020-01-29 09:38:48'),
-(40, '2230000400', 'review', 20, '2020-01-29 09:38:48'),
-(41, '22C0000100', 'review', 20, '2020-01-29 09:38:48'),
-(42, '2230000300', 'review', 20, '2020-01-29 09:38:48'),
-(43, '2240000300', 'review', 20, '2020-01-29 09:38:48'),
-(44, '53B0000102', 'review', 20, '2020-01-29 09:38:48'),
-(45, '43B0000100', 'review', 20, '2020-01-29 09:38:48'),
-(46, '53E0000100', 'review', 20, '2020-01-29 09:38:48'),
-(47, '16C0000100', 'review', 20, '2020-01-29 09:38:48'),
-(48, '2240000200', 'review', 20, '2020-01-29 09:38:48'),
-(49, '4670000100', 'review', 20, '2020-01-29 09:38:48'),
-(50, '8C00000100', 'review', 20, '2020-01-29 09:38:48'),
-(51, '2240000100', 'review', 20, '2020-01-29 09:38:48'),
-(52, '53B0000103', 'review', 20, '2020-01-29 09:38:48'),
-(53, '89B0000103', 'review', 20, '2020-01-29 09:38:48'),
-(54, '2230000200', 'review', 20, '2020-01-29 09:38:48'),
-(55, '2230000100', 'review', 20, '2020-01-29 09:38:48'),
-(56, '2110000200', 'review', 20, '2020-01-29 09:38:48'),
-(57, '2110000100', 'review', 20, '2020-01-29 09:38:48'),
-(58, '89D0000102', 'review', 20, '2020-01-29 09:38:48'),
-(59, '54B0000101', 'review', 20, '2020-01-29 09:38:48');
+INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `priority`, `ignore_it`, `createTS`) VALUES
+(1, '57C0000100', 'review', 20, 0, 0, '2020-01-29 08:48:55'),
+(2, '22C0001900', 'review', 20, 0, 0, '2020-01-29 09:38:47'),
+(3, '2DC0000100', 'review', 20, 0, 0, '2020-01-29 09:38:47'),
+(4, '22C0001800', 'review', 20, 0, 0, '2020-01-29 09:38:47'),
+(5, '22C0001700', 'review', 20, 0, 0, '2020-01-29 09:38:47'),
+(6, '22C0001600', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(7, '22C0001500', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(8, '2240001000', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(9, '2240000900', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(10, '2240000800', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(11, '2240000700', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(12, '2240000600', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(13, '22C0001400', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(14, '12C0000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(15, '3540000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(16, '12C0000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(17, '2240000500', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(18, '22C0001300', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(19, '22C0001200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(20, '20E0000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(21, '22C0001100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(22, '22C0001000', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(23, '22C0000900', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(24, '22C0000800', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(25, '22C0000700', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(26, '22C0000600', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(27, '22C0000500', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(28, '26C0000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(29, '16C0000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(30, '26C0000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(31, '3440000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(32, '3440000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(33, '22C0000400', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(34, '1120000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(35, '1120000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(36, '22C0000300', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(37, '2240000400', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(38, '22C0000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(39, '2230000500', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(40, '2230000400', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(41, '22C0000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(42, '2230000300', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(43, '2240000300', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(44, '53B0000102', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(45, '43B0000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(46, '53E0000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(47, '16C0000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(48, '2240000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(49, '4670000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(50, '8C00000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(51, '2240000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(52, '53B0000103', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(53, '89B0000103', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(54, '2230000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(55, '2230000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(56, '2110000200', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(57, '2110000100', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(58, '89D0000102', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(59, '54B0000101', 'review', 20, 0, 0, '2020-01-29 09:38:48'),
+(60, '2110000100', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(61, '89D0000102', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(62, '2110000200', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(63, '2230000100', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(64, '2230000200', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(65, '89B0000103', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(66, '2240000100', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(67, '43B0000100', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(68, '2240000300', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(69, '2230000400', 'attribute', 10, 0, 0, '2020-01-30 17:53:01'),
+(70, '2230000500', 'attribute', 10, 0, 0, '2020-01-30 17:54:04'),
+(71, '22C0000300', 'attribute', 10, 0, 0, '2020-01-30 17:54:04'),
+(72, '22C0000400', 'attribute', 10, 0, 0, '2020-01-30 17:54:04'),
+(73, '2DC0000100', 'attribute', 10, 0, 0, '2020-01-30 17:54:04'),
+(74, '83E0000100', 'attribute', 10, 0, 0, '2020-01-30 17:54:04'),
+(75, '22C0001900', 'attribute', 10, 0, 0, '2020-01-30 17:54:04');
 
 -- --------------------------------------------------------
 
@@ -383,12 +417,12 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (77, '22C0001400', 2, '2', 'C', 'Cavo convertitore', 'USB Type A maschio --> MicroUSB 2.0 maschio  30cm', 0, 3, '2020-01-04 14:17:49', '2020-01-20 01:12:31'),
 (78, '2240000600', 2, '2', '4', 'Laser Distance Sensor', 'VL53L1X Time-of-flight distance sensor carrier 400cm max', 0, 3, '2020-01-05 21:23:36', '2020-01-20 01:12:31'),
 (79, '2240000700', 2, '2', '4', 'Deffierential breakout', 'Spurkfun defferential I2C breakoutPCA9615 Qwiic', 0, 3, '2020-01-05 21:28:20', '2020-01-20 01:12:31'),
-(80, '2240000800', 2, '2', '4', 'Qwiic shield', 'Sparkfun Qwiic shield for arduino', 0, 3, '2020-01-05 21:30:20', '2020-01-20 01:12:31'),
+(80, '2240000800', 2, '2', '4', 'Qwiic shield', 'Sparkfun Qwiic shield for arduino', 0, 4, '2020-01-05 21:30:20', '2020-01-30 18:11:00'),
 (81, '2240000900', 2, '2', '4', 'FIR Camera', 'FIR array breakout 55 degrees F', 0, 3, '2020-01-05 21:32:27', '2020-01-20 01:12:31'),
 (82, '2240001000', 2, '2', '4', 'Accelerometer breakout', 'Sparkfun Accelerometer breakout MMA845', 0, 3, '2020-01-05 21:33:58', '2020-01-20 01:12:31'),
 (83, '22C0001500', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - Breadboard Jumper (4-pin) 10cm', 0, 3, '2020-01-05 21:35:31', '2020-01-20 01:08:31'),
 (84, '22C0001600', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 50mm', 0, 3, '2020-01-05 21:36:52', '2020-01-20 01:12:31'),
-(85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, 3, '2020-01-05 21:38:25', '2020-01-20 01:12:31'),
+(85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, 4, '2020-01-05 21:38:25', '2020-01-30 18:11:07'),
 (86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, 3, '2020-01-05 21:43:36', '2020-01-20 01:12:31'),
 (87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, 3, '2020-01-06 01:36:43', '2020-01-20 01:10:02'),
 (88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 1, '2020-01-20 01:20:23', '2020-01-20 01:20:23'),
@@ -410,19 +444,19 @@ CREATE TABLE IF NOT EXISTS `gk_permissions` (
   `Bom` int(3) NOT NULL,
   `CreateCode` int(3) NOT NULL,
   `CreateRevision` int(3) NOT NULL,
-  `CreateAtribute` int(3) NOT NULL,
+  `CreateAttribute` int(3) NOT NULL,
   `CreateBom` int(3) NOT NULL,
   `CreateProvider` int(3) NOT NULL,
   `CreateReport` int(3) NOT NULL,
   `ModifyCode` int(3) NOT NULL,
   `ModifyRevision` int(3) NOT NULL,
-  `ModifyAtribute` int(3) NOT NULL,
+  `ModifyAttribute` int(3) NOT NULL,
   `ModifyBom` int(3) NOT NULL,
   `ModifyProvider` int(3) NOT NULL,
   `ModifyReport` int(3) NOT NULL,
   `DeleteCode` int(3) NOT NULL,
   `DeleteRevision` int(3) NOT NULL,
-  `DeleteAtribute` int(3) NOT NULL,
+  `DeleteAttribute` int(3) NOT NULL,
   `DeleteBom` int(3) NOT NULL,
   `DeleteProvider` int(3) NOT NULL,
   `DeleteReport` int(3) NOT NULL,
@@ -445,7 +479,7 @@ CREATE TABLE IF NOT EXISTS `gk_permissions` (
 -- Dump dei dati per la tabella `gk_permissions`
 --
 
-INSERT INTO `gk_permissions` (`id`, `View`, `Code`, `Revision`, `Sttributes`, `Bom`, `CreateCode`, `CreateRevision`, `CreateAtribute`, `CreateBom`, `CreateProvider`, `CreateReport`, `ModifyCode`, `ModifyRevision`, `ModifyAtribute`, `ModifyBom`, `ModifyProvider`, `ModifyReport`, `DeleteCode`, `DeleteRevision`, `DeleteAtribute`, `DeleteBom`, `DeleteProvider`, `DeleteReport`, `ReviewCode`, `ApproveCode`, `ApproveRevision`, `ApproveBom`, `CreateActivity`, `ManageAttachment`, `CreateUser`, `ModifyUser`, `DeleteUser`, `CreateUnit`, `ModifyUnit`, `DeleteUnit`) VALUES
+INSERT INTO `gk_permissions` (`id`, `View`, `Code`, `Revision`, `Sttributes`, `Bom`, `CreateCode`, `CreateRevision`, `CreateAttribute`, `CreateBom`, `CreateProvider`, `CreateReport`, `ModifyCode`, `ModifyRevision`, `ModifyAttribute`, `ModifyBom`, `ModifyProvider`, `ModifyReport`, `DeleteCode`, `DeleteRevision`, `DeleteAttribute`, `DeleteBom`, `DeleteProvider`, `DeleteReport`, `ReviewCode`, `ApproveCode`, `ApproveRevision`, `ApproveBom`, `CreateActivity`, `ManageAttachment`, `CreateUser`, `ModifyUser`, `DeleteUser`, `CreateUnit`, `ModifyUnit`, `DeleteUnit`) VALUES
 (NULL, 1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 20, 20, 20, 20, 20, 20, 40, 40, 40, 30, 30, 30);
 
 -- --------------------------------------------------------
@@ -522,14 +556,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(15, 'rnd.approver', 'Approver', 'Approver', 'bqcqiop6m9e1um3tjl3t4gehna', 1580391798);
+(30, 'corrado.tumiati', 'Corrado Tumiati', 'Administrator', '88dinulo9d3r0mlatsphiq69bf', 1580407867);
 
 -- --------------------------------------------------------
 
@@ -646,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `user` varchar(32) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=194 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=195 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -669,7 +703,7 @@ INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (189, '57C0000100', 'wh.editor', '2020-01-29 08:14:44'),
 (146, '22c', 'wh.editor', '2020-01-25 22:52:30'),
 (158, '22e', 'wh.user', '2020-01-25 23:29:21'),
-(160, '20E0000100', 'wh.user', '2020-01-25 23:49:05'),
+(194, '20E0000100', 'wh.user', '2020-01-30 16:14:03'),
 (173, '467', 'rnd.approver', '2020-01-26 15:30:16'),
 (167, '467', 'guest', '2020-01-26 12:50:07'),
 (179, '22e', 'rnd.approver', '2020-01-26 19:40:10'),
