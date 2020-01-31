@@ -33,13 +33,17 @@
 
 	$code		= get_check( 'code' );
 	$action = get_check( 'action' );
-	$ignore = get_check( 'ignore' );
+	$ignore = get_check( 'ignore' , "false" );
+	$id = get_check( 'id' );
 	
 	
 	if ( $action == "logout" ) 
 		$gk_Auth->gk_logout( session_id() );
 	
-//	if ( ( $action == "" ) && ( $
+	if ( ( $action == "attribute" ) && ( $ignore == "true" ) ) {
+		$sql = "UPDATE `code_action` SET `ignore_it` = '1' WHERE `code_action`.`id` = $id";
+		query_sql_run( $sql );
+	}
 	
 	$redirect_addy = "index.php";
 
@@ -132,7 +136,7 @@
 	
 		if ( $gk_Auth->check_user_level( "Review" , "Code" ) ) {
 		
-			$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'review' ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
+			$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'review' AND `done` = 0 ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
 			$rows = query_get_num_rows( $sql );
 				if ( $rows ) {
 			?>
@@ -174,7 +178,7 @@
 							
 			if ( $gk_Auth->check_user_level( "Create" , "Attribute" ) ) {
 			
-				$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'attribute' ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
+				$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'attribute' AND `ignore_it` = 0 ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
 				$rows = query_get_num_rows( $sql );
 				if ( $rows ) {
 				?>
@@ -194,22 +198,25 @@
 
 					if ($result = $mysqli->query($sql)) {
 						for( $r = 0 ; $r < $rows ; $r++ ) {
-								println( "<tr>" );
-								$array = $result->fetch_array();
-								$code = $array["code"];
+							$array = $result->fetch_array();
+							$code = $array["code"];
+							if ( ! check_attributes_presence( $code ) ) {
 								$ar = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code' " );
+								println( "<tr>" );
 								print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
-								echo link_generator( "check.php?code=$code" , $code );
+								echo link_generator( "attributes.php?code=$code&action=Create" , $code );
 								println( "</td>" );
 								println( "<td style='border:1px solid #999;' width='25%'>" . $ar['abbreviazione'] . "</td>" );
 								println( "<td style='border:1px solid #999;' >" . $ar['descrizione'] . "</td>" );
-								$ln = link_generator( "index.php?code=$code&action=attribute&ignore=true" , "Ignore it" );
+								$ignore_id = $array["id"];
+								$ln = link_generator( "index.php?action=attribute&ignore=true&id=$ignore_id" , "Ignore it" );
 								println( "<td style='background-color:#ffb; text-align: center; border:1px solid #999;' width='5%'>" . $ln . "</td>" );
 								println( "</tr>" );
+							}
 						}
 					}
 				}
-				?>		
+				?>
 					</table>
 				</div>
 				<?php

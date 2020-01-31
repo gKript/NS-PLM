@@ -55,7 +55,7 @@
 	$weight				= get_check( 'weight'				, "" 	);
 	
 	if ( ( $action == "Edit" ) || ( $action == "Create" ) || ( $action == "Modify" ) ) {
-		if ( ! $gk_Auth->check_user_level( "Delete" , "Bom" ) ) {
+		if ( ! $gk_Auth->check_user_level( "Create" , "Attribute" ) ) {
 			$back = "";
 			if ( isset( $_SERVER["HTTP_REFERER"] ) ) {
 				$back = $_SERVER["HTTP_REFERER"];

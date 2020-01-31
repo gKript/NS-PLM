@@ -26,6 +26,7 @@
 	$updstate  = get_check( 'updstate' );
 	$action = get_check( 'action' );
 	$nav  = get_check( 'nav' );
+	$nl = (int)get_check( 'nl' , 0 );
 	$new = (int)get_check( 'new' );
 	$T = get_check( 'T' );
 	$G = get_check( 'G' );
@@ -154,6 +155,13 @@
 	else {
 		if ( $code != '0' ) {
 			
+			if ( ( $gk_Auth->check_user_level( "Modify" , "Code" ) ) && ( ( $nl > 0 ) && ( $nl < 4 ) ) ) {
+				query_sql_run( "UPDATE `elenco_codici` SET `status` = '$nl' WHERE `elenco_codici`.`codice` LIKE '$code'" );
+		}
+			
+			if ( ( $action == "approved" ) || ( $action == "rejected" ) ) 
+				query_sql_run( "UPDATE `code_action` SET `done` = '1' WHERE `code_action`.`action` = 'review' AND `code_action`.`code` = '$code';" );
+			
 			if ( $action == "approved" )
 				insert_blockquote( "Code $code succesfully APPROVED!" , "Success" );
 			else if ( $action == "rejected" )
@@ -188,69 +196,12 @@
 			<div class="insidecodelite">
 
 <?php
-			synopsis( $code , $array["abbreviazione"] , $array["descrizione"]  );
-?>
-
-		<?php 
-				}
-			$hr  = "search.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
-			$hrt = $codetype["T"] . $codetype["CG"] . $codetype["CS"];
-			$title  = "Code structure - ";
-			$title .= link_generator( $hr , $hrt );
-			echo open_block( $title , "struct.png" );
-	
+					synopsis( $code , $array["abbreviazione"] , $array["descrizione"]  );
+					
+					code_structure( $code , $new );
 				
-				?>
-					<table style="margin:1em;" width="90%">
+				}
 
-			<?php
-				println( "<tr>" );
-				println( "  <td style='text-align: right;' width='13%' >Typology</td>" );
-				$ln = $codetype["T"];
-				if ( ! $new ) 
-					$ln = TGS_link( $codetype["T"]  , "T" , "search.php?text" );
-				println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
-				println( "  <td style='border:1px solid #999;' width='20%'>"   . $codetype["Tname"]   . "</td>" );
-				println( "  <td></td>" );
-				println( "</tr>" );
-				println( "<tr>" );
-				println( "  <td style='text-align: right;' >Generic category</td>" );
-				$ln = $codetype["CG"];
-				if ( ! $new )
-					$ln = TGS_link( $codetype["CG"]  , "G" , "search.php?text" );
-				println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
-				println( "  <td style='border:1px solid #999;' >"  . $codetype["CGname"]  . "</td>" );
-				println( "  <td style='border:1px solid #999;' >"              . $codetype["CGdescr"] . "</td>" );
-				println( "</tr>" );
-				println( "<tr>" );
-				println( "  <td style='text-align: right;' >Specific category</td>" );
-				$ln = $codetype["CS"];
-				if ( ! $new )
-					$ln = TGS_link( $codetype["CS"]  , "S" , "search.php?text" );
-				println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
-				println( "  <td style='border:1px solid #999;' >"  . $codetype["CSname"]  . "</td>" );
-				println( "  <td style='border:1px solid #999;' >"              . $codetype["CSdescr"] . "</td>" );
-				println( "</tr>" );
-				println( "<tr>" );
-				println( "  <td style='text-align: right;' >B.O.M. Allowed</td>" );
-				$dbtip = query_get_a_field( "SELECT *  FROM `tipologia` WHERE `idTip` = " . $codetype["T"] , "dbTip" );
-				if( $dbtip == 1 ) {
-					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >YES</td>" );
-					if ( check_bom_presence( $code ) )
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Go to the B.O.M.</b></span></td>" );
-					else
-						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Create</b></span></td>" );
-				}
-				else {
-					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >NO</td>" );
-					println( "  <td></td>" );
-				}
-				println( "  <td></td>" );
-				println( "</tr>" );
-			?>
-			
-					</table>
-		<?php		
 				if ( $new == 2 ) {
 		?>
 					<form id="form_att" class="appnitro"  method="get" action="code-insert.php">

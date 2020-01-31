@@ -72,9 +72,10 @@
 	
 
 
-	function emphasis_code( $code , $bl = 0 , $updstate = "" ) {
+	function emphasis_code( $code , $bl = 0 , $nl = 0 ) {
 		
-		global $codestate;
+		global $cstatus_seq;
+		global $cstatus_seq;
 		global $codemenu;
 		global $gk_Auth;
 		
@@ -96,51 +97,23 @@
 
 		$uname = $gk_Auth->get_current_user_name();
 		if ( $uname != "guest" ) {
-			if ( $bl == 0 ) {
-				$query = 'SELECT * FROM `gk_users` where user_login = \''. $uname .'\' ';
+			if ( ( $bl == 0 ) || ( $bl == 3 ) ) {
+				$query = "SELECT * FROM `gk_users` where user_login = '$uname '";
 				$urole = query_get_a_field( $query , "user_role" );
 				$sql = "SELECT *  FROM `gk_role` WHERE `role_name` LIKE '$urole'";
 				$ulevel = query_get_a_field( $query , "user_role" );
-				$cstate = query_get_a_field( "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
-				if ( $updstate != "" ) {
-					if ( $updstate == "prev" ) {
-						if ( $cstate == 3 ) {
-							$newstate = 1;
-						}
-						else if ( $cstate > 3 ) 
-							$newstate = $cstate - 1;
-						else
-							$newstate = $cstate;
-					}
-					if ( $updstate == "next" ) {
-						if ( $cstate == 1 ) {
-							$newstate = 3;
-						}
-						else if ( ( $cstate < 8 ) && ( $cstate >= 3 ) )
-							$newstate = $cstate + 1;
-						else
-							$newstate = $cstate;
-					}
-					query_sql_run( "UPDATE `elenco_codici` SET `status` = '$newstate' WHERE `elenco_codici`.`codice` LIKE '$code'" );
-					$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
-				}
-				$cstatestr = $codestate[ $cstate ];
-				if ( $cstate == 1 ) {
-					$pstate = 0;
-					$nstate = 3;
-				}
-				else if ( $cstate == 2 ) {
-					$pstate = 0;
-					$nstate = 3;
-				}
-				else if ( $cstate == 3 ) {
-						$pstate = 1;
-						$nstate = 0;
-				}
-				else {
-					$pstate = $cstate - 1;
-					$nstate = $cstate + 1;
-				}
+//				if ( ( $nl != 0 ) && ( $nl != 9 ) )
+//					query_sql_run( "UPDATE `elenco_codici` SET `status` = '$nl' WHERE `elenco_codici`.`codice` LIKE '$code'" );
+			}
+			$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
+			$cstatestr = $cstatus_seq[ $cstate ]["t"];
+			$pstate = $cstatus_seq[ $cstate ]["p"];
+			$pststr = $cstatus_seq[ $pstate ]["t"];
+			$nstate = $cstatus_seq[ $cstate ]["n"];;
+			$nststr = $cstatus_seq[ $nstate ]["t"];;
+			
+			//echo $cstate . " " . $pstate . " " . $pststr . " " . $nstate . " " . $nststr; 
+			
 		?>
 				
 				<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
@@ -155,13 +128,13 @@
 						<tr align="center" valign="center" height="40px" >
 							<td style="background-color: #ada; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;">
 							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
-								<a href="code.php?code=<?php echo $code; ?>&updstate=prev" >
-								<img src="src/img/prev.svg" alt="ok" border=0 height=24 style="float: right;"/><small>
-								<?php echo $codestate[ $pstate ]; ?></a>
-								</small>
+								<a href="code.php?code=<?php echo $code; ?>&nl=<?php echo $pstate; ?>" >
+								<img src="src/img/prev.svg" alt="ok" border=0 height=24 style="float: right;"/>
+								<small><?php echo $pststr; ?></small>
+								</a>
 							<?php } 
 										else {
-											echo $codestate[ $pstate ];
+											echo $cstatus_seq[ $pstate ]["t"];
 										}
 							?>
 							</td>
@@ -169,9 +142,9 @@
 								<b>
 								<?php
 										if ( ( $cstate == 3 ) && ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) ) 
-											echo link_generator( "check.php?code=$code" , "<span style=\"	font-size: 20pt;\" class=\"blink_text\">".$codestate[ $cstate ]."</span>\n" );
+											echo link_generator( "check.php?code=$code" , "<span style=\"	font-size: 20pt;\" class=\"blink_text\">".$cstatus_seq[ $cstate ]["t"]."</span>\n" );
 										else
-											echo "<big>".$codestate[ $cstate ]."</big>\n";
+											echo "<big>".$cstatus_seq[ $cstate ]["t"]."</big>\n";
 									?>
 								</b>
 							</td>
@@ -179,35 +152,35 @@
 							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
 								<?php if ( $nstate ) { ?>
 								<?php 	if ( $nstate < 5 ) { ?>
-								<a href="code.php?code=<?php echo $code; ?>&updstate=next" >
+								<a href="code.php?code=<?php echo $code; ?>&nl=<?php echo $nstate; ?>" >
 									<?php }
 										}
 										?>
 								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/><small>
-								<?php echo $codestate[ $nstate ]; ?>
-								<?php 	if ( $nstate != 5 ) { ?>
-													</a>
-									<?php } ?>
+								<?php echo $cstatus_seq[ $nstate ]["t"];
+											if ( $nstate != 5 ) { ?>
 								</small>
+								</a>
+									<?php } ?>
 							<?php }
 										else if ( ( $gk_Auth->check_user_level( "Review" , "Code" ) ) && ( $cstate == 1 ) ) { ?>
-								<a href="code.php?code=<?php echo $code; ?>&updstate=next" >
+								<a href="code.php?code=<?php echo $code; ?>&nl=<?php echo $nstate; ?>" >
 								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/>
-								<span class="blink_text"><big> <?php echo $codestate[ $nstate ]; ?></a> </big></span>
+								<span class="blink_text"><big> <?php echo $cstatus_seq[ $nstate ]["t"]; ?> </big></span></a>
 								<?php
 										}
 										else {
-											echo $codestate[ $nstate ];
+											echo $cstatus_seq[ $nstate ]["t"];
 										}
 							?>
+								</a> </big></span>
 							</td>
 						</tr>
 					</table>
 				</div>
 	<?php
-			}
 		}
-
+	
 		echo tag_enclosed( "h1" , $code_split );
 
 		if ( ! $bl ) {
@@ -258,10 +231,14 @@
 							$codemenu->submenu_close();
 							$codemenu->voice( "Synopsis" , $synop_link );
 							$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Approver" ) , "Status +" );
-									if ( $cstate > 1 )
-										$codemenu->voice( "Set ".$codestate[ $pstate ] , "code.php?code=$code&updstate=prev" );
-									if ( $cstate < 8 )
-										$codemenu->voice( "Set ".$codestate[ $nstate ] , "code.php?code=$code&updstate=next" );
+									if ( $cstate > 1 ) {
+										$pst = $cstatus_seq[ $cstate ]["p"];
+										$codemenu->voice( "Set ".$cstatus_seq[ $pst ]["t"] , "code.php?code=$code&nl=".$pst );
+									}
+									if ( $cstate < 8 ) {
+										$nst = $cstatus_seq[ $cstate ]["n"];
+										$codemenu->voice( "Set ".$cstatus_seq[ $nst ]["t"] , "code.php?code=$code&nl=".$nst );
+									}
 							$codemenu->submenu_close();
 							$codemenu->voice( "Supplier" , $synop_link );
 					$codemenu->submenu_close();

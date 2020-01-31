@@ -46,18 +46,17 @@
 	 'bom' => 0
 	);
 	
-	$codestate = array(
-	
-		0 => "",
-		1 => "Draft",
-		2 => "Modified",
-		3 => "Under review",
-		4 => "Approved",
-		5 => "Stable",
-		6 => "Released",
-		7 => "End of life",
-		8 => "Obsolete",
-		9 => ""
+	$cstatus_seq = array(
+		
+		0 => array( "p"=>0 , "n"=>0 , "t"=>"" ) ,
+		1 => array( "p"=>0 , "n"=>3 , "t"=>"Draft" ) ,
+		2 => array( "p"=>0 , "n"=>3 , "t"=>"Modified" ) ,
+		3 => array( "p"=>1 , "n"=>4 , "t"=>"Under review" ) ,
+		4 => array( "p"=>0 , "n"=>5 , "t"=>"Approved" ) ,
+		5 => array( "p"=>4 , "n"=>0 , "t"=>"Stable" ) ,
+		6 => array( "p"=>0 , "n"=>0 , "t"=>"Released" ) ,
+		7 => array( "p"=>0 , "n"=>8 , "t"=>"End of life" ) ,
+		8 => array( "p"=>0 , "n"=>0 , "t"=>"Obsolete" )
 	);
 	
 

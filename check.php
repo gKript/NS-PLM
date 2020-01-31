@@ -69,6 +69,9 @@
 		
 		$array = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" );
 		synopsis( $code , $array["abbreviazione"] , $array["descrizione"] , "" , 0 );
+		echo close_block();
+		code_structure( $code , 3 );
+//		echo close_block();
 		
 		echo BR( 1 , 1 , "clearfix" );
 		
@@ -215,8 +218,8 @@
 
 		echo 		table_close();
 		echo 		div_block_close();
-		$approve = "<a href=\"code.php?code=$code&updstate=next&action=approved\"><h1 style= \"text-align: center\" ><b>Approve</b></h1></a>\n";
-		$reject  = "<a href=\"code.php?code=$code&updstate=prev&action=rejected\"><h1 style= \"text-align: center\" ><b>Reject</b></h1></a>\n";
+		$approve = "<a href=\"code.php?code=$code&action=approved\"><h1 style= \"text-align: center\" ><b>Approve</b></h1></a>\n";
+		$reject  = "<a href=\"code.php?code=$code&action=rejected\"><h1 style= \"text-align: center\" ><b>Reject</b></h1></a>\n";
 		echo		div_block_open( "box25" , "vertical-align: middle;margin-top:2em; float: right; background-color:#faa; height: 300px; border:1px solid #999; " );
 		echo 				tag_enclosed( "p" , $reject , "margin-top: 110px; vertical-align: middle;margin-left: auto;"  );
 		echo 		div_block_close();

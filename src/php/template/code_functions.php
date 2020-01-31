@@ -32,9 +32,13 @@
 		println( "			</tr>" );
 		println( "		</table>" );
 		println( "	</div>" );
-		
+		$status = get_status_str( $code );
 		println( "	<div class=\"box25\" style=\"height:160px; background-color: #ddd; \">");
 		println( "		<table width=\"100%\" style=\"padding: 10px 10px 10px 10px ;\">" );
+		println( "			<tr>" );
+		println( "				<td  style='border:1px solid #999;'width=\"40%\">Status:</td>" );
+		println( "				<td style='border:1px solid #999;text-align:center;'>$status</td>" );
+		println( "			</tr>" );
 		println( "			<tr>" );
 		println( "				<td  style='border:1px solid #999;'width=\"40%\">Attachment:</td>" );
 		println( "				<td style='border:1px solid #999;'>&nbsp;</td>" );
@@ -77,6 +81,74 @@
 		if ( $title )
 			println( "</div>" );
 	}
+
+
+	function code_structure( $code , $new ) {
+		
+		global $codetype;
+		
+		$codetype = get_codetype_from_code( $code );
+
+		$hr  = "search.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
+		$hrt = $codetype["T"] . $codetype["CG"] . $codetype["CS"];
+		$title  = "Code structure - ";
+		$title .= link_generator( $hr , $hrt );
+		echo open_block( $title , "struct.png" );
+		?>
+				<table style="margin:1em;" width="90%">
+
+		<?php
+			println( "<tr>" );
+			println( "  <td style='text-align: right;' width='13%' >Typology</td>" );
+			$ln = $codetype["T"];
+			if ( ! $new ) 
+				$ln = TGS_link( $codetype["T"]  , "T" , "search.php?text" );
+			println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
+			println( "  <td style='border:1px solid #999;' width='20%'>"   . $codetype["Tname"]   . "</td>" );
+			println( "  <td></td>" );
+			println( "</tr>" );
+			println( "<tr>" );
+			println( "  <td style='text-align: right;' >Generic category</td>" );
+			$ln = $codetype["CG"];
+			if ( ! $new )
+				$ln = TGS_link( $codetype["CG"]  , "G" , "search.php?text" );
+			println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
+			println( "  <td style='border:1px solid #999;' >"  . $codetype["CGname"]  . "</td>" );
+			println( "  <td style='border:1px solid #999;' >"              . $codetype["CGdescr"] . "</td>" );
+			println( "</tr>" );
+			println( "<tr>" );
+			println( "  <td style='text-align: right;' >Specific category</td>" );
+			$ln = $codetype["CS"];
+			if ( ! $new )
+				$ln = TGS_link( $codetype["CS"]  , "S" , "search.php?text" );
+			println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >$ln</td>" );
+			println( "  <td style='border:1px solid #999;' >"  . $codetype["CSname"]  . "</td>" );
+			println( "  <td style='border:1px solid #999;' >"              . $codetype["CSdescr"] . "</td>" );
+			println( "</tr>" );
+			if ( $new != 3 ) {
+				println( "<tr>" );
+				println( "  <td style='text-align: right;' >B.O.M. Allowed</td>" );
+				$dbtip = query_get_a_field( "SELECT *  FROM `tipologia` WHERE `idTip` = " . $codetype["T"] , "dbTip" );
+				if( $dbtip == 1 ) {
+					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >YES</td>" );
+					if ( check_bom_presence( $code ) )
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Go to the B.O.M.</b></span></td>" );
+					else
+						println( "  <td style='text-align: center; border:1px solid #999; background-color:#faa;border-radius: 7px;' width=\"20%\" ><a href=\"bom.php?code=$code\"><span class=\"blink_text\"><b>Create</b></span></td>" );
+				}
+				else {
+					println( "  <td style='text-align: center; border:1px solid #999;' width='5%' >NO</td>" );
+					println( "  <td></td>" );
+				}
+				println( "  <td></td>" );
+				println( "</tr>" );
+			}
+		?>
+		
+				</table>
+	<?php	
+	}
+
 
 
 	function create_top_n_table( $top ) {
@@ -243,9 +315,38 @@
 	}
 
 	
-
-	function get_state( $code ) {
+	function get_codetype_from_code( $code ) {
 		
+		$codetype["T"]  = substr( $code , 0 , 1);
+		$codetype["CG"] = substr( $code , 1 , 1);
+		$codetype["CS"] = substr( $code , 2 , 1);
+//		echo $codetype["T"] . " " . $codetype["CG"] . " " . $codetype["CS"];
+		$res = query_code_category( 'T' , $codetype["T"] );
+		$codetype["Tname"] = $res["Tip"];
+		$res = query_code_category( 'CG' , $codetype["CG"] );
+		$codetype["CGname"] = $res["CatGen"];
+		$codetype["CGdescr"] = $res["CatGenDescr"];
+		$res = query_code_category( 'CS' , $codetype["CS"] );
+		$codetype["CSname"] = $res["CatSpec"];
+		$codetype["CSdescr"] = $res["CatSpecDesc"];
+		
+		return $codetype;
+	}
+
+	
+	function get_status( $code ) {
+		$sql = "SELECT * FROM `elenco_codici` WHERE `codice` LIKE '$code'";
+		$status = query_get_a_field( $sql , "status" );
+		return $status;
+	}
+
+
+	function get_status_str( $code ) {
+		
+		global $cstatus_seq;
+		
+		$st = get_status( $code );
+		return $cstatus_seq[ $st ]["t"];
 	}
 
 
