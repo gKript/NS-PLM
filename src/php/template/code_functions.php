@@ -143,8 +143,7 @@
 				println( "  <td></td>" );
 				println( "</tr>" );
 			}
-		?>
-		
+		?>		
 				</table>
 	<?php	
 	}

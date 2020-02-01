@@ -54,17 +54,20 @@
 	
 	
 	if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) {
+		
 	
 		echo open_block( "Checking code" , "check.svg" , "insidecodelite" );
 		echo 		tag_enclosed( "span" , "This page is intended to check if all the code componets were duly filled." , "margin-left: 16px;" );
 		echo BR();
 		echo 		tag_enclosed( "span" , "It is up to you checking whether the meaning of the inserted data is correct." , "margin-left: 16px;" );
 		
-		echo 		generic_tag_open( "blockquote" , "code" );
+		emphasis_code( $code , 3 );
+/*		echo 		generic_tag_open( "blockquote" , "code" );
 		echo 			tag_enclosed( "h1" , tag_enclosed( "span" , substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . substr($code, 8, 2) , "" , "blink_text" ) );
 		echo 		generic_tag_close( "blockquote" );	
+*/	
 	
-	
+		
 		echo 	open_block( "Mandatory components by policies" , "components.svg" );
 		
 		$array = query_single_line( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" );
@@ -73,7 +76,7 @@
 		code_structure( $code , 3 );
 //		echo close_block();
 		
-		echo BR( 1 , 1 , "clearfix" );
+//		echo BR( 1 , 1 , "clearfix" );
 		
 		echo		div_block_open( "box50" , "margin-top:2em; float: left; background-color:#ddd; height: 300px; border:1px solid #999; " );
 		echo 		table_open( 1 , "100%" , "" , "padding: 1em;" );
@@ -159,7 +162,7 @@
 		else {
 			echo 				col_open( 0 , "10%" , "background-color:#ff8; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
 			$tx  = 			generic_tag_open( "span" , "blink_text" );
-			$tx .= 				"Not OK!";
+			$tx .= 				"Warning";
 			$tx .= 			generic_tag_close( "span" );
 			echo $tx;
 		}
@@ -209,8 +212,11 @@
 			echo					"OK";
 			}
 		else {
-			echo 				col_open( 0 , "10%" , "background-color:#ffb; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
-			echo					"NOT OK";
+			echo 				col_open( 0 , "10%" , "background-color:#ff8; border:1px solid #999;  height:38px; text-align: center; text-justify: inter-word;" );
+			$tx  = 			generic_tag_open( "span" , "blink_text" );
+			$tx .= 				"Warning";
+			$tx .= 			generic_tag_close( "span" );
+			echo $tx;
 		}
 		echo 				col_close();
 		echo 			row_close();
@@ -218,8 +224,8 @@
 
 		echo 		table_close();
 		echo 		div_block_close();
-		$approve = "<a href=\"code.php?code=$code&action=approved\"><h1 style= \"text-align: center\" ><b>Approve</b></h1></a>\n";
-		$reject  = "<a href=\"code.php?code=$code&action=rejected\"><h1 style= \"text-align: center\" ><b>Reject</b></h1></a>\n";
+		$approve = "<a href=\"code.php?code=$code&action=approved&nl=4\"><h1 style= \"text-align: center\" ><b>Approve</b></h1></a>\n";
+		$reject  = "<a href=\"code.php?code=$code&action=rejected&nl=1\"><h1 style= \"text-align: center\" ><b>Reject</b></h1></a>\n";
 		echo		div_block_open( "box25" , "vertical-align: middle;margin-top:2em; float: right; background-color:#faa; height: 300px; border:1px solid #999; " );
 		echo 				tag_enclosed( "p" , $reject , "margin-top: 110px; vertical-align: middle;margin-left: auto;"  );
 		echo 		div_block_close();

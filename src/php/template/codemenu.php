@@ -90,7 +90,7 @@
 
 		$synop_link  = "code.php?code=$code" ;
 
-		if ( ! $bl ) 
+		if ( ( $bl == 0 ) || ( $bl == 3 ) )
 			echo generic_tag_open( "blockquote" , "code" );
 		else
 			echo generic_tag_open( "blockquote" , "code_update" );
@@ -114,7 +114,9 @@
 			
 			//echo $cstate . " " . $pstate . " " . $pststr . " " . $nstate . " " . $nststr; 
 			
+			if ( $bl != 3 ) {
 		?>
+			
 				
 				<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
 					<?php echo title_h2( "Current status -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
@@ -179,11 +181,12 @@
 					</table>
 				</div>
 	<?php
+			}
 		}
 	
 		echo tag_enclosed( "h1" , $code_split );
 
-		if ( ! $bl ) {
+		if ( ( $bl == 0 ) || ( $bl == 3 ) ) {
 			$nav = check_next_prev_code( $code );
 			$codemenu->set_output(1);
 			$codemenu->open( "navmenu" , "margin-left: 10px; margin-right: 10px; margin-bottom: 10px; " );
@@ -233,11 +236,11 @@
 							$codemenu->submenu_open( $gk_Auth->get_level_by_role( "Approver" ) , "Status +" );
 									if ( $cstate > 1 ) {
 										$pst = $cstatus_seq[ $cstate ]["p"];
-										$codemenu->voice( "Set ".$cstatus_seq[ $pst ]["t"] , "code.php?code=$code&nl=".$pst );
+										$codemenu->voice( "Set ".$cstatus_seq[ $pst ]["t"] , "code.php?code=$code&nl=$pst&promoter=".$gk_Auth->get_current_user_name() );
 									}
 									if ( $cstate < 8 ) {
 										$nst = $cstatus_seq[ $cstate ]["n"];
-										$codemenu->voice( "Set ".$cstatus_seq[ $nst ]["t"] , "code.php?code=$code&nl=".$nst );
+										$codemenu->voice( "Set ".$cstatus_seq[ $nst ]["t"] , "code.php?code=$code&nl=$nst&promoter=".$gk_Auth->get_current_user_name() );
 									}
 							$codemenu->submenu_close();
 							$codemenu->voice( "Supplier" , $synop_link );
