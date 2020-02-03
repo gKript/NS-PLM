@@ -159,8 +159,12 @@
 						println( "<tr>" );
 						$array = $result->fetch_array();
 						print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
-						if ( $array["type"] == "message" )
-							echo link_generator( "message.php?action=show&id=".$array["id"] , "Message" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+						if ( $array["type"] == "message" ) {
+							$tx  = generic_tag_open( "span" , "blink_text" );
+							$tx .= link_generator( "message.php?action=show&id=".$array["id"] , "Message" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+							$tx .= generic_tag_close( "span" );
+							echo $tx;
+						}
 						else if ( $array["type"] == "Action required" )
 							echo link_generator( $array["link"] , "Action required" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
 						println( "</td>" );

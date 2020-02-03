@@ -103,6 +103,8 @@
 		echo open_block( "Messages" , "message.svg" , "codelite" );
 		
 		echo close_block();
+	}	else if ( $action == "list" ) {
+
 	}
 	else {
 		///			FORM

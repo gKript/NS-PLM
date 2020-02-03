@@ -79,6 +79,23 @@
 		}
 		
 		
+		
+		function voice_icon( $icon , $alt , $w , $h , $blink = 0 ) {
+			$ret = "";
+			if ( $this->pinned_level[ $this->indent ] <= $this->level ) {
+				$tx = "";
+				if ( $blink ) $tx .= generic_tag_open( "span" , "blink_text" );
+				$tx .= link_generator( "message.php?action=list" , "" , "" , "" , "" , "" );
+				$tx .= img_generator( $icon , $alt , "" , "" , "autoclose" , 0 , $w , $h );
+				$tx .= generic_tag_close( "a" );
+				if ( $blink ) $tx .= generic_tag_close( "span" );
+				$ret = tag_enclosed( "li" , $tx );
+			}
+			if ( $this->output ) echo $ret;				
+			return $ret;
+		}
+		
+		
 		function separator( $sp = 2 ) {
 			$sep = "";
 			for( $l = 0 ; $l < $sp ; $l++ )
