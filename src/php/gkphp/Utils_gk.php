@@ -85,6 +85,16 @@
 	}
 
 
+	function gk_text_trunc( $text , $trunc ) {
+		if ( strlen( $text ) <= $trunc ) 
+			return $text;
+		$nuovo = wordwrap( $text , $trunc , "|" ); 
+		$nuovotesto = explode( "|" , $nuovo );
+		return $nuovotesto[0]."...";
+	}
+
+
+
 ?>
 
 

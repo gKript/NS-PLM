@@ -186,6 +186,7 @@
 
 
 	function new_code_insert( $code , $sdescr , $ldescr , $bom = 0 ) {
+		
 		global $mysqli;
 		
 		$t = substr($code, 0, 1);
@@ -201,7 +202,9 @@
 
 
 	function get_new_code( $t, $g, $s ) {
+		
 		global $mysqli;
+		
 		$srch = "$t$g$s";
 		$sql = "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$srch%' ORDER BY `codice`  DESC Limit 0,1";
 		$result = $mysqli->query( $sql ) or 
@@ -347,6 +350,33 @@
 		$st = get_status( $code );
 		return $cstatus_seq[ $st ]["t"];
 	}
+
+
+	function set_notice_by_action_review( $code ) {
+		
+		global $gk_Auth;
+
+		$promoter = $gk_Auth->get_current_user_name();
+		$level = $gk_Auth->get_user_level_by_action( "Review" , "Code" );
+		$head = "Code review";
+		$body = "It is necessary reviewing the code $code. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.";
+		$link = "check.php?code=$code";
+	
+		$sql  = "INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `receiver`, `type`, `head`, `body`, `link`, `active`, `createTS`, `modifyTS`)";
+		$sql .= " VALUES (NULL, '$promoter', '$level', 'system', 'System', '', 'Action required', '$head', '$body', '$link', '1', current_timestamp(), current_timestamp());";
+		
+		query_sql_run( $sql );
+		
+	}
+
+
+
+
+
+
+
+
+
 
 
 ?>

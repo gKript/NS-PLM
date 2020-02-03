@@ -157,6 +157,8 @@
 			
 			if ( ( $gk_Auth->check_user_level( "Modify" , "Code" ) ) && ( ( $nl > 0 ) && ( $nl < 5 ) ) ) {
 				query_sql_run( "UPDATE `elenco_codici` SET `status` = '$nl' WHERE `elenco_codici`.`codice` LIKE '$code'" );
+				if ( $nl == 3 )
+					set_notice_by_action_review( $code );
 				if ( ( $action == "approved" ) || ( $action == "rejected" ) ) 
 					query_sql_run( "UPDATE `code_action` SET `done` = '1' WHERE `code_action`.`action` = 'review' AND `code_action`.`code` = '$code';" );
 			}

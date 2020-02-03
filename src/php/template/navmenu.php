@@ -194,6 +194,7 @@
 				$navmenu->voice( "PHP info"	, "phpinfo.php" );
 		$navmenu->submenu_close();
 		$navmenu->voice( "Quick Filter"	, "code.php?code=0&action=filter" );
+		$navmenu->voice( "Message"	, "message.php" );
 		$navmenu->separator(1);
 		$navmenu->voice( "Back"	, $back );
 		$navmenu->separator(1);

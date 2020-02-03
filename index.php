@@ -134,6 +134,50 @@
 		echo tag_enclosed( "p" , "The tasks you are involved in are the following:" ) ;
 //		echo 	BR(1,0);
 	
+	if ( $gk_Auth->check_user_level( "Review" , "Code" ) ) {
+		$I = $gk_Auth->get_current_user_name();
+		$lev = $gk_Auth->get_current_user_level();
+		$sql = "SELECT * FROM `notice` WHERE ( `receiver` LIKE '$I' OR `level` <= $lev ) AND `active` = 1 ORDER BY `createTS` ASC Limit 0,10;";
+		$rows = query_get_num_rows( $sql );
+			if ( $rows ) {
+				echo open_block( "Notices" , "message.svg" , "insidecodelite" );
+			?>
+
+				<table style="margin:1em;" width="95%">
+					<tr>
+						<th style="text-align: center;" >Type</th>
+						<th style="text-align: left;" >Sender</th>
+						<th style="text-align: left;" >Title</th>
+						<th style="text-align: left;" >Preview</th>
+					</tr>
+
+
+		<?php
+
+				if ($result = $mysqli->query($sql)) {
+					for( $r = 0 ; $r < $rows ; $r++ ) {
+						println( "<tr>" );
+						$array = $result->fetch_array();
+						print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
+						if ( $array["type"] == "message" )
+							echo link_generator( "message.php?action=show&id=".$array["id"] , "Message" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+						else if ( $array["type"] == "Action required" )
+							echo link_generator( $array["link"] , "Action required" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+						println( "</td>" );
+						println( "<td style='border:1px solid #999;' width='10%'>" . $array['sender_clean'] . "</td>" );
+						println( "<td style='border:1px solid #999;' width='15%'>" . $array['head'] . "</td>" );
+						println( "<td style='border:1px solid #999;' >" . gk_text_trunc( $array['body'] , 100 ) . "</td>" );
+						println( "</tr>" );
+					}
+				}
+		?>		
+				</table>
+			</div>
+	<?php
+			}
+		}
+	
+	
 		if ( $gk_Auth->check_user_level( "Review" , "Code" ) ) {
 		
 			$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'review' AND `done` = 0 ORDER BY `code_action`.`createTS` ASC Limit 0,10;";

@@ -9,18 +9,23 @@
 	];
 	
 	
-	function open_form( $method , $action , $class = "" , $id = "" , $name = ""	) {
+	function open_form( $method , $action , $class = "" , $id = "" , $name = ""	, $fieldset = 0 , $legend = "" ) {
 		$ret  = "<form";
 		$ret .= $method == ""	?  "" : " method=\"$method\"";
 		$ret .= $action == ""	? "" : " action=\"$action\"";
 		$ret .= $class == ""	? "" : " class=\"$class\"";
 		$ret .= $name == ""	? "" : " name=\"$name\"";
 		$ret .= $id == ""	? "" : " id=\"$id\"";
-		$ret .= ">\n";	
+		$ret .= ">\n";
+		if ( $fieldset ) {
+			$ret .= "<fieldset>\n";
+			$ret .= $legend == ""	? "" : tag_enclosed( "legend" , $legend );
+		}
 		println( $ret );
 	}
 	
-	function close_form() {
+	function close_form( $fieldset = 0 ) {
+		if ( $fieldset ) println( "</fieldset>\n" );
 		println( "</form>" );
 	}
 
@@ -98,7 +103,7 @@
 	}
 	
 	
-	function select_composer_from_sql( $id , $name , $style , $sql , $undefined = 0 , $class = "" , $onchange = "" , $select = "" , $nl = 0 , $label = "" , $position = "" ) {
+	function select_composer_from_sql( $id , $name , $style , $sql , $undefined = 0 , $class = "" , $onchange = "" , $select = "" , $nl = 0 , $label = "" , $position = "" , $opt0 = "" , $opt1 = "" ) {
 		//	Style 0: solo array 0, Style 1 anche array 1, Style 2 anche array 2
 		global $mysqli;
 		
@@ -123,6 +128,8 @@
 						println( "	<option value='" . $array[1] . "' $ssel >" . $array[1] . "   -   " . $array[2] . "</option>" );
 					else if ( $style == 2 ) 
 						println( "	<option value='" . $array[1] . "' $ssel >" . $array[1] . "   -   " . $array[2] . "   -   " . $array[3] . "</option>" );
+					else if ( $style == 3 ) 
+						println( "	<option value='" . $array[$opt0] . "' $ssel >" . $array[$opt1] . "</option>" );
 			}
 		}
 		?>
@@ -161,6 +168,20 @@
 	function add_hidden( $name , $value , $null = null ) {
 		if ( $value != $null )
 			println( "<input type=\"hidden\" name=\"$name\" value=\"$value\" />" );
+	}
+
+
+	function textarea( $rows , $cols, $name , $text = "" , $form = "" , $disable = 0 ) {
+		$ret  = "<textarea ";
+		$ret .= "rows=$rows ";
+		$ret .= "cols=$cols ";
+		$ret .= "name=$name ";
+		$ret .= $form == "" ? "" : "form=\"$form\" ";
+		$ret .= $disable ? " disabled" : "";
+		$ret .= ">\n";
+		$ret .= $text;
+		$ret .= "</textarea>\n";
+		return $ret;
 	}
 
 

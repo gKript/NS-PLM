@@ -117,11 +117,12 @@
 	}
 	
 	
-	function link_generator( $href , $text = "" , $target = "" , $style = "" , $tag = "autoclose" ) {
+	function link_generator( $href , $text = "" , $target = "" , $style = "" , $tag = "autoclose" , $title = "" ) {
 		$ret  = "<a";
 		$ret .= $href == ""	?  "" : " href=\"$href\"";
 		$ret .= $target == ""	? "" : " target=\"$target\"";
 		$ret .= $style == ""	? "" : " style=\"$style\"";
+		$ret .= $title == "" ? "" : " title=\"$title\"";
 		$ret .= ">";	
 		$ret .= $text;
 		$ret .= $tag == "autoclose"	? "</a>\n" : "\n";

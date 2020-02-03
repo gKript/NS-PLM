@@ -45,3 +45,10 @@ Elimina da una bom
 $sql = "DELETE FROM `lista_composizione` WHERE `lista_composizione`.`id` = 33";
 
 
+
+	Message
+	
+INSERT INTO `notice` (`id`, `sender`, `receiver`, `type`, `head`, `body`, `link`, `active`, `createTS`, `modifyTS`) VALUES (NULL, 'danilo.zannoni', 'rnd.approver', 'message', 'Code 22c', 'Ciao, ho visto che i codici 22c non hanno la numerazione in esadecimale. E\' corretto o secondo te è meglio aprire un ticket?\r\n\r\nGrazie ciao\r\nza', NULL, '1', current_timestamp(), current_timestamp());
+
+
+
