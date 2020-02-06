@@ -106,17 +106,13 @@
 		$iscnt = 0;
 		if ( $activity ) {
 			$cnt = $T . $G . $S;
-			if ( is_context( $cnt ) )   {
+			if ( ( is_context( $cnt ) ) && ( $gk_Auth->check_user_level( "Create" , "Code" ) ) ) {
 				$iscnt = 1;
-				
-?>
-		<div class="codelite">
-			<h3>Context compete</h3>
-			<h2>Further actions:</h2><br/>
-<?php 
-				$ncode = get_new_code( $T ,$G , $S );
-				echo "<table style=\"padding-left: 50px;\" width=\"40%\" ><tr><td style='text-align: left; border:1px solid #999;' width='40%' >Create code: <b>$ncode</b></td>";
-				echo "<td style='text-align: center; border:1px solid #999; background-color:#fdd;' width='5%' ><a href=\"code.php?T=$T&G=$G&S=$S&action=Create\"><span class=\"blink_text\"><b>Create</b></span>	</a></td></tr></table>";
+				echo open_block_no_top( "Suggestions" , "idea" );
+					echo tag_enclosed( "h4" , "Context compete: Create a new code" );
+					$ncode = get_new_code( $T ,$G , $S );
+					echo "<table style=\"padding-left: 50px;\" width=\"40%\" ><tr><td style='text-align: left; border:1px solid #999;' width='40%' >Create code: <b>$ncode</b></td>";
+					echo "<td style='text-align: center; border:1px solid #999; background-color:#fdd;' width='5%' ><a href=\"code.php?T=$T&G=$G&S=$S&action=Create\"><span class=\"blink_text\"><b>Create</b></span>	</a></td></tr></table>";
 ?>
 		</div>
 <?php
@@ -124,10 +120,9 @@
 			else if ( ! ( ( ! $text ) && ( ( $T == "_" ) && ( $G == "_" ) && ( $S == "_" ) ) ) )
 				emphasis( "Serching for..." , $str );
 		}
-?>
-		<div class="codelite">
-			<h2>Ordering box</h2><br/>
-<?php
+
+		echo open_block_no_top( "Sorting options box" , "sort" );
+		echo BR();
 
 		select_option( "reset" );
 		select_option( "insert" , "cod_desc"	, "Code Desc" 		);
@@ -162,21 +157,17 @@
 //		echo $sql . "<br/>";
 		$rows = query_get_num_rows( $sql );
 		if ( $rows ) {
+
+			echo open_block_no_top( "Code as key" , "code" );
+
 ?>
-		<div class="codelite">
-			<h2>Code as key</h2><br/>
-
-
 			<table style="margin:1em;" width="90%">
 				<tr>
 					<th style="text-align: center;" >Code</th>
 					<th style="text-align: left;" >Short desrciption</th>
 					<th style="text-align: left;" >Long description</th>
 				</tr>
-
-
 	<?php
-
 			if ($result = $mysqli->query($sql)) {
 				for( $r = 0 ; $r < $rows ; $r++ ) {
 						println( "<tr>" );
@@ -219,11 +210,9 @@
 	//		echo $sql . "<br/>";
 			$rows = query_get_num_rows( $sql );
 			if ( $rows ) {
+				echo open_block_no_top( "B.O.M. Father as key" , "father" );
+
 	?>
-			<div class="codelite">
-				<h2>Father in a B.O.M. as key</h2><br/>
-
-
 				<table style="margin:1em;" width="90%">
 					<tr>
 						<th style="text-align: center;" >Code</th>
@@ -259,11 +248,8 @@
 	//		echo $sql . "<br/>";
 			$rows = query_get_num_rows( $sql );
 			if ( $rows ) {
+				echo open_block_no_top( "Son [$cnt] inside a B.O.M. as key" , "son" );
 	?>
-			<div class="codelite">
-				<h2>Son [<?php echo $cnt ?>] inside a B.O.M. as key</h2><br/>
-
-
 				<table style="margin:1em;" width="90%">
 					<tr>
 						<th style="text-align: center;" >Father Code</th>
@@ -313,9 +299,9 @@
 //		echo $sql . "<br/>";
 		$rows = query_get_num_rows( $sql );
 		if ( $rows ) {
+			echo open_block_no_top( "Short description as key" , "description" );
+
 ?>
-		<div class="codelite">
-			<h2>Short description as key</h2><br/>
 
 			<table style="margin:1em;" width="90%">
 				<tr>
@@ -353,11 +339,8 @@
 //		echo $sql . "<br/>";
 		$rows = query_get_num_rows( $sql );
 		if ( $rows ) {
+			echo open_block_no_top( "Long description as key" , "description" );
 ?>
-		<div class="codelite">
-			<h2>Long description as key</h2><br/>
-
-
 			<table style="margin:1em;" width="90%">
 				<tr>
 					<th style="text-align: center;" >Code</th>

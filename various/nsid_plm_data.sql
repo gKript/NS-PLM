@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Feb 03, 2020 alle 00:22
+-- Creato il: Feb 06, 2020 alle 18:13
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.3.5
 
@@ -259,30 +259,28 @@ CREATE TABLE IF NOT EXISTS `code_action` (
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=95 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `code_action`
 --
 
 INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `priority`, `ignore_it`, `done`, `createTS`, `modifyTS`) VALUES
-(94, '22C0001700', 'review', 20, 0, 0, 0, '2020-02-02 22:13:34', '2020-02-02 22:13:34'),
-(93, '53B0000102', 'review', 20, 0, 0, 0, '2020-02-01 12:21:29', '2020-02-01 12:21:29'),
-(92, '22C0001900', 'review', 20, 0, 0, 0, '2020-02-01 09:46:52', '2020-02-01 09:46:52'),
-(89, '22C0001800', 'review', 20, 0, 0, 1, '2020-01-31 22:37:12', '2020-01-31 22:37:12'),
-(88, '89B0000103', 'review', 20, 0, 0, 0, '2020-01-31 22:12:00', '2020-01-31 22:12:00'),
-(87, '83E0000100', 'attribute', 10, 0, 1, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(86, '2DC0000100', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(85, '22C0000400', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(84, '22C0000300', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(83, '2230000500', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(82, '43B0000100', 'attribute', 10, 0, 1, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(81, '2240000100', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(80, '89B0000103', 'attribute', 10, 0, 1, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(79, '2230000100', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(78, '2110000200', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(77, '89D0000102', 'attribute', 10, 0, 1, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11'),
-(76, '2110000100', 'attribute', 10, 0, 0, 0, '2020-01-31 17:44:11', '2020-01-31 17:44:11');
+(1, '2110000100', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(2, '89D0000102', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(3, '2110000200', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(4, '2230000100', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(5, '89B0000103', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(6, '2240000100', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(7, '43B0000100', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(8, '2230000500', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(9, '22C0000300', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(10, '22C0000400', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(11, '2DC0000100', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(12, '83E0000100', 'attribute', 10, 0, 0, 0, '2020-02-06 10:30:58', '2020-02-06 10:30:58'),
+(13, '22C0001900', 'review', 20, 0, 0, 1, '2020-02-06 10:32:22', '2020-02-06 10:32:22'),
+(14, '9990000100', 'attribute', 10, 0, 0, 0, '2020-02-06 13:21:23', '2020-02-06 13:21:23'),
+(15, '9990000100', 'review', 20, 0, 0, 1, '2020-02-06 13:21:44', '2020-02-06 13:21:44');
 
 -- --------------------------------------------------------
 
@@ -305,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
@@ -318,7 +316,7 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (19, '2110000200', 2, '1', '1', 'Vite', 'Vite M2x3 Testa piana a taglio', 0, 1, '2013-07-13 09:51:53', '2020-01-31 17:40:34'),
 (20, '2230000100', 2, '2', '3', 'Piezo', 'Sensore piezoceramico bimorfo vibrazione Cod RS 285784', 1, 1, '2013-07-15 23:36:42', '2020-01-31 17:40:36'),
 (21, '2230000200', 2, '2', '3', '74lv138', 'Decoder/Demultiplexer Single 3-to-8 74lv138 Cod RS 663-2688', 0, 1, '2013-07-15 23:47:47', '2020-01-31 17:40:39'),
-(22, '89B0000103', 8, '9', 'B', 'Gim Documentation', 'Generic Information Manager Documentation', 1, 3, '2013-07-16 19:03:40', '2020-01-31 22:11:56'),
+(22, '89B0000103', 8, '9', 'B', 'Gim Documentation', 'Generic Information Manager Documentation', 1, 1, '2013-07-16 19:03:40', '2020-02-06 10:30:19'),
 (23, '53B0000103', 5, '3', 'B', 'Gim3', 'Generic Information Manager 3', 0, 1, '2013-07-16 19:18:23', '2020-01-31 17:40:46'),
 (28, '2240000100', 2, '2', '4', 'PreReg-lm2596', 'Modulo preregolatore buck step down LM2596', 0, 1, '2013-08-24 22:26:52', '2020-01-31 17:40:49'),
 (30, '57C0000100', 5, '7', 'C', 'Onesto', 'Varco a passaggio libero con rilevazione di passaggio e del titolo di viaggio. Prodotto specifico per il Trasporto pubblico.', 0, 1, '2019-12-22 23:20:23', '2020-01-31 17:40:52'),
@@ -330,7 +328,7 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (36, '53E0000100', 5, '3', 'E', 'NS-PLM', 'Next Step PLM by NSID', 0, 1, '2019-12-26 21:17:14', '2020-01-31 17:41:10'),
 (37, '43B0000100', 4, '3', 'B', 'Gim', 'Generic Information manager PROTO', 0, 1, '2019-12-27 22:07:02', '2020-01-31 17:41:13'),
 (38, '53B0000101', 5, '3', 'B', 'Gim 1', 'Generic information manager 1', 0, 1, '2019-12-27 22:23:54', '2020-01-31 17:41:16'),
-(39, '53B0000102', 5, '3', 'B', 'Gim 2', 'Generic information manager 2', 0, 3, '2019-12-27 22:24:48', '2020-02-01 12:21:27'),
+(39, '53B0000102', 5, '3', 'B', 'Gim 2', 'Generic information manager 2', 0, 1, '2019-12-27 22:24:48', '2020-02-06 10:30:25'),
 (40, '2240000300', 2, '2', '4', 'Raspberry PI 1', 'Model B+ 512MB RAM ', 0, 1, '2019-12-27 22:46:18', '2020-01-31 17:41:21'),
 (41, '2230000300', 2, '2', '3', 'MicroSD 64GB', 'MicroSCXC UHS-I Card Pro Plus Class 10 U3 I ', 0, 1, '2019-12-27 22:51:17', '2020-01-31 17:41:24'),
 (42, '22C0000100', 2, '2', 'C', 'Switch eth 8 ports PoE', 'UBIQUITI Networks UniFi Switch 8 Gigabit Ethernet (10/100/1000) PoE', 0, 1, '2019-12-29 21:52:50', '2020-01-31 17:41:28'),
@@ -370,11 +368,11 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (82, '2240001000', 2, '2', '4', 'Accelerometer breakout', 'Sparkfun Accelerometer breakout MMA845', 0, 1, '2020-01-05 21:33:58', '2020-01-31 17:43:18'),
 (83, '22C0001500', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - Breadboard Jumper (4-pin) 10cm', 0, 1, '2020-01-05 21:35:31', '2020-01-31 17:43:20'),
 (84, '22C0001600', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 50mm', 0, 1, '2020-01-05 21:36:52', '2020-01-31 17:43:23'),
-(85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, 3, '2020-01-05 21:38:25', '2020-02-02 22:13:32'),
-(86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, 4, '2020-01-05 21:43:36', '2020-02-01 12:25:24'),
+(85, '22C0001700', 2, '2', 'C', 'Qwiic cable', 'Qwiic Cable - 100mm', 0, 1, '2020-01-05 21:38:25', '2020-02-06 08:05:43'),
+(86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, 1, '2020-01-05 21:43:36', '2020-02-06 10:30:23'),
 (87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, 1, '2020-01-06 01:36:43', '2020-01-31 17:43:31'),
 (88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 0, '2020-01-20 01:20:23', '2020-01-31 20:37:40'),
-(94, '22C0001900', 2, '2', 'C', 'test nuovo codice', 'prova di stato del nuovo codice ', 0, 3, '2020-01-24 23:45:30', '2020-02-02 22:11:39');
+(95, '9990000100', 9, '9', '9', 'Codice di test', 'Codice di test per provare il giro stato di approvazione e reject', 0, 1, '2020-02-06 13:20:45', '2020-02-06 17:34:41');
 
 -- --------------------------------------------------------
 
@@ -450,7 +448,7 @@ CREATE TABLE IF NOT EXISTS `gk_role` (
 INSERT INTO `gk_role` (`role_id`, `role_name`) VALUES
 (40, 'Administrator'),
 (30, 'Superuser'),
-(2, 'User'),
+(5, 'User'),
 (1, 'guest'),
 (10, 'Editor'),
 (20, 'Approver');
@@ -485,8 +483,8 @@ CREATE TABLE IF NOT EXISTS `gk_users` (
 INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `dept`, `user_password`, `user_status`, `user_role`, `image`, `user_ip`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
 (6, 'danilo.zannoni', 'Danilo Zannoni', '', 'japotek1972', 0, 'Administrator', 1, NULL, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0),
 (7, 'corrado.tumiati', 'Corrado Tumiati', '', 'vecchiobaule', 0, 'Administrator', 0, NULL, '2020-01-19 02:37:12', '0000-00-00 00:00:00', 0),
-(8, 'wh.user', 'Pippo Franchiggia', 'Warehouse', 'test', 0, 'User', 0, NULL, '2020-01-21 20:45:23', '0000-00-00 00:00:00', 0),
-(9, 'wh.editor', 'Francesco pipperi', 'Warehouse', 'test', 0, 'Editor', 0, NULL, '2020-01-24 08:47:26', '0000-00-00 00:00:00', 0),
+(8, 'wh.user', 'Giuseppe Franchiggia', 'Warehouse', 'test', 0, 'User', 0, NULL, '2020-01-21 20:45:23', '0000-00-00 00:00:00', 0),
+(9, 'wh.editor', 'Francesco Pipperi', 'Warehouse', 'test', 0, 'Editor', 0, NULL, '2020-01-24 08:47:26', '0000-00-00 00:00:00', 0),
 (10, 'rnd.approver', 'Artemio Olivieri', 'R&D', 'test', 0, 'Approver', 0, NULL, '2020-01-24 15:20:14', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
@@ -504,14 +502,15 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(26, 'rnd.approver', 'Artemio Olivieri', 'Approver', '4ef5dtq44et7i0sqf8ctqadu13', 1580689221);
+(39, 'wh.user', 'Giuseppe Franchiggia', 'User', 'er27gtlmjirbuhqi0cqrat05sf', 1581012675),
+(36, 'rnd.approver', 'Artemio Olivieri', 'Approver', '2bn86n4h8g0mgoisqqshrrp9t5', 1581012651);
 
 -- --------------------------------------------------------
 
@@ -617,16 +616,25 @@ CREATE TABLE IF NOT EXISTS `notice` (
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `notice`
 --
 
 INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `receiver`, `type`, `head`, `body`, `link`, `active`, `createTS`, `modifyTS`) VALUES
-(1, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'rnd.approver', 'message', 'Codici 22c', 'Ciao, ho visto che i codici 22C non hanno la numerazione in esadecimale. Secondo te e\' corretto o e\' meglio aprire un ticket?\r\nGrazie ciao\r\nza', NULL, 1, '2020-02-02 18:49:29', '2020-02-02 21:51:14'),
-(5, 'rnd.approver', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code 22C0001700. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001700', 1, '2020-02-02 22:13:32', '2020-02-02 22:13:32'),
-(4, 'rnd.approver', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code 22C0001900. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001900', 1, '2020-02-02 22:11:39', '2020-02-02 22:11:39');
+(1, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'rnd.approver', 'message', 'Codici 22c', 'Ciao, ho visto che i codici 22C non hanno la numerazione in esadecimale. Secondo te e\' corretto o e\' meglio aprire un ticket?\r\nGrazie ciao\r\nza', NULL, 1, '2020-02-02 18:49:29', '2020-02-03 00:55:25'),
+(15, 'rnd.approver', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>22C0001900</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001900', 0, '2020-02-06 11:52:46', '2020-02-06 12:50:45'),
+(17, 'wh.editor', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>22C0001900</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001900', 0, '2020-02-06 12:58:32', '2020-02-06 12:59:19'),
+(16, 'danilo.zannoni', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>22C0001900</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001900', 0, '2020-02-06 12:55:50', '2020-02-06 12:56:12'),
+(18, 'wh.editor', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>22C0001900</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001900', 0, '2020-02-06 13:03:21', '2020-02-06 13:04:36'),
+(19, 'wh.editor', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>22C0001900</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001900', 0, '2020-02-06 13:04:24', '2020-02-06 13:04:36'),
+(20, 'wh.editor', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>22C0001900</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=22C0001900', 0, '2020-02-06 13:04:26', '2020-02-06 13:04:36'),
+(21, 'wh.editor', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>9990000100</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=9990000100', 0, '2020-02-06 13:21:39', '2020-02-06 13:24:44'),
+(22, 'wh.editor', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>9990000100</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=9990000100', 0, '2020-02-06 13:57:13', '2020-02-06 13:57:49'),
+(23, 'wh.editor', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>9990000100</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=9990000100', 0, '2020-02-06 16:46:41', '2020-02-06 17:34:41'),
+(25, '', 99, 'rnd.approver', 'Artemio Olivieri', 'wh.editor', 'message', 'Promotion for code 9990000100 rejected', 'Ho respinto in quanto manca la scheda attributi.\r\nCiao\r\ndz', NULL, 1, '2020-02-06 17:56:29', '2020-02-06 17:56:29'),
+(27, '', 99, 'rnd.approver', 'Artemio Olivieri', 'wh.editor', 'message', 'New york', 'Per favore, mi prepareresti i documenti di viaggio per New York del 26 Marzo??? \r\nGrazie mille\r\ndz', NULL, 1, '2020-02-06 18:10:27', '2020-02-06 18:10:27');
 
 -- --------------------------------------------------------
 
@@ -661,7 +669,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `user` varchar(32) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=216 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=248 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -669,32 +677,34 @@ CREATE TABLE IF NOT EXISTS `search` (
 
 INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (163, '467', 'danilo.zannoni', '2020-01-26 11:22:11'),
-(112, 'varco', 'danilo.zannoni', '2020-01-22 20:15:48'),
+(222, '22C0001700', 'danilo.zannoni', '2020-02-06 08:05:39'),
 (185, '22c', 'danilo.zannoni', '2020-01-26 20:45:06'),
 (196, '220001900', 'danilo.zannoni', '2020-01-31 11:31:49'),
 (211, 'test', 'danilo.zannoni', '2020-02-01 09:46:33'),
 (186, 'onesto', 'danilo.zannoni', '2020-01-26 22:12:27'),
 (212, 'gim', 'danilo.zannoni', '2020-02-01 12:21:18'),
 (138, 'eth', 'wh.editor', '2020-01-24 23:45:07'),
-(166, '467', 'wh.editor', '2020-01-26 12:48:03'),
-(140, 'onesto', 'wh.editor', '2020-01-25 21:13:21'),
+(246, '467', 'wh.editor', '2020-02-06 17:13:41'),
+(244, 'onesto', 'wh.editor', '2020-02-06 17:03:06'),
 (143, 'onesto', 'rnd.approver', '2020-01-25 21:17:56'),
 (189, '57C0000100', 'wh.editor', '2020-01-29 08:14:44'),
-(201, '22c', 'wh.editor', '2020-01-31 20:17:16'),
+(230, '22c', 'wh.editor', '2020-02-06 12:57:19'),
 (158, '22e', 'wh.user', '2020-01-25 23:29:21'),
 (195, '20E0000100', 'wh.user', '2020-01-31 07:31:44'),
 (173, '467', 'rnd.approver', '2020-01-26 15:30:16'),
 (167, '467', 'guest', '2020-01-26 12:50:07'),
 (179, '22e', 'rnd.approver', '2020-01-26 19:40:10'),
-(214, '22c', 'rnd.approver', '2020-02-02 22:09:12'),
-(203, 'gim', 'rnd.approver', '2020-01-31 21:54:16'),
+(216, '22c', 'rnd.approver', '2020-02-03 00:46:08'),
+(217, 'gim', 'rnd.approver', '2020-02-03 00:55:32'),
 (175, '57c', 'wh.editor', '2020-01-26 19:08:36'),
 (193, '57c', 'rnd.approver', '2020-01-29 08:45:55'),
 (200, '57c', 'danilo.zannoni', '2020-01-31 17:48:06'),
 (207, '2200001900', 'danilo.zannoni', '2020-02-01 09:43:37'),
-(210, '22c0001900', 'danilo.zannoni', '2020-02-01 09:46:23'),
+(229, '22c0001900', 'danilo.zannoni', '2020-02-06 12:55:45'),
 (202, 'rasp', 'wh.editor', '2020-01-31 20:20:41'),
-(215, '22c0001900', 'rnd.approver', '2020-02-02 22:11:26');
+(228, '22c0001900', 'rnd.approver', '2020-02-06 11:52:42'),
+(247, '999', 'wh.editor', '2020-02-06 17:34:10'),
+(238, '999', 'wh.user', '2020-02-06 14:05:06');
 
 -- --------------------------------------------------------
 
@@ -709,7 +719,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=147 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -817,7 +827,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (140, 'BomCountDaily', '13', '2020-02-02 12:36:03'),
 (141, 'CodeCountDaily', '63', '2020-02-02 23:02:48'),
 (142, 'AttribCountDaily', '51', '2020-02-02 23:02:48'),
-(143, 'BomCountDaily', '13', '2020-02-02 23:02:48');
+(143, 'BomCountDaily', '13', '2020-02-02 23:02:48'),
+(144, 'CodeCountDaily', '63', '2020-02-06 07:22:25'),
+(145, 'AttribCountDaily', '51', '2020-02-06 07:22:25'),
+(146, 'BomCountDaily', '13', '2020-02-06 07:22:25');
 
 -- --------------------------------------------------------
 

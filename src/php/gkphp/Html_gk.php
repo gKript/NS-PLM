@@ -81,11 +81,12 @@
 		$ret  = "<$tag";
 		$ret .= $style == "" ? "" : " style=\"$style\"";
 		$ret .= $class == "" ? "" : " class=\"$class\"";
-		$ret .= ">\n";
+		$ret .= ">";
 		$ret .= $enclose;
-		if( strpos( $enclose , '\n' ) !== false )
+/*		if( strpos( $enclose , '\n' ) !== false )
 			echo "\n";
-		$ret .= "</$tag>\n";
+*/
+		$ret .= "</$tag>";
 		return $ret;
 	}
 
@@ -159,14 +160,27 @@
 	}	
 	
 	function col_open( $border = 0 , $width = "" , $style = "" ) {
-		$style .= $border == 0 ? "" : " border: $border solid black;";
+		$style .= $border == 0 ? "" : " border: ".$border."px solid #999;";
 		$style .= $width == "" ? "" : " width: $width;";
 		$ret  = "<td";
 		$ret .= $style == "" ? "" : " style=\"$style\"";
 		$ret .= ">\n";
 		return $ret;
 	}
+
+	function header_open( $border = 0 , $width = "" , $style = "" ) {
+		$style .= $border == 0 ? "" : " border: ".$border."px solid #999;";
+		$style .= $width == "" ? "" : " width: $width;";
+		$ret  = "<th";
+		$ret .= $style == "" ? "" : " style=\"$style\"";
+		$ret .= ">\n";
+		return $ret;
+	}
 	
+	function header_close() {
+		return generic_tag_close( "th" );
+	}
+
 	function col_close() {
 		return generic_tag_close( "td" );
 	}
@@ -177,6 +191,20 @@
 
 	function table_close() {
 		return generic_tag_close( "table" );
+	}
+
+	function set_header_table( $text , $border = 0 , $width = "" , $style = "" ) {
+		$tx  = header_open( $border , $width , $style );
+		$tx .= $text;
+		$tx .= header_close();
+		return $tx;
+	}
+
+	function set_col_table( $text , $border = 0 , $width = "" , $style = "" ) {
+		$tx  = col_open( $border , $width , $style );
+		$tx .= $text;
+		$tx .= col_close();
+		return $tx;
 	}
 
 

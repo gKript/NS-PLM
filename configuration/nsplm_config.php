@@ -95,7 +95,7 @@ public $redirect_time;
 public $timezone;
 function __construct()
 {
-$this->redirect_time = (int) 0.2;
+$this->redirect_time = (int) 0.1;
 $this->timezone = (string) "Europe/Rome";
 $this->search = new ns_param_search();
 $this->user = new ns_param_user();

@@ -224,8 +224,9 @@
 
 		echo 		table_close();
 		echo 		div_block_close();
+		$promoter = query_get_a_field( "SELECT * FROM `notice` WHERE `type` LIKE 'Action required' AND `active` = 1 AND `body` LIKE '%$code%'" , "promoter" );
 		$approve = "<a href=\"code.php?code=$code&action=approved&nl=4\"><h1 style= \"text-align: center\" ><b>Approve</b></h1></a>\n";
-		$reject  = "<a href=\"code.php?code=$code&action=rejected&nl=1\"><h1 style= \"text-align: center\" ><b>Reject</b></h1></a>\n";
+		$reject  = "<a href=\"message.php?code=$code&promoter=$promoter&action=rejected&nl=1\"><h1 style= \"text-align: center\" ><b>Reject</b></h1></a>\n";
 		echo		div_block_open( "box25" , "vertical-align: middle;margin-top:2em; float: right; background-color:#faa; height: 300px; border:1px solid #999; " );
 		echo 				tag_enclosed( "p" , $reject , "margin-top: 110px; vertical-align: middle;margin-left: auto;"  );
 		echo 		div_block_close();

@@ -82,7 +82,7 @@
 			?>
 
 				
-				<?php	emphasis_code( $ncode , 2 );	?>
+				<?php	emphasis_code( $ncode , 4 );	?>
 				
 				<?php	stat_presence_of_context();		?>
 				
@@ -159,10 +159,12 @@
 				query_sql_run( "UPDATE `elenco_codici` SET `status` = '$nl' WHERE `elenco_codici`.`codice` LIKE '$code'" );
 				if ( $nl == 3 )
 					set_notice_by_action_review( $code );
-				if ( ( $action == "approved" ) || ( $action == "rejected" ) ) 
+				if ( ( $action == "approved" ) || ( $action == "rejected" ) ) {
 					query_sql_run( "UPDATE `code_action` SET `done` = '1' WHERE `code_action`.`action` = 'review' AND `code_action`.`code` = '$code';" );
+					query_sql_run( "UPDATE `notice` SET `active` = '0' WHERE `type` LIKE 'Action required' AND `body` LIKE '%$code%'" );
+				}
 			}
-			
+
 			if ( $action == "approved" )
 				insert_blockquote( "Code $code succesfully APPROVED!" , "Success" );
 			else if ( $action == "rejected" )

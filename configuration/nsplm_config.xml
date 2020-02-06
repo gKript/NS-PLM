@@ -29,7 +29,7 @@
 		</modules>
 	</plm>
 	<param>
-		<redirect_time type="int">0.2</redirect_time>
+		<redirect_time type="int">0.1</redirect_time>
 		<timezone>Europe/Rome</timezone>
 		<search>
 			<history type="int">10</history>

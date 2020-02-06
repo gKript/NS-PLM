@@ -359,7 +359,8 @@
 		$promoter = $gk_Auth->get_current_user_name();
 		$level = $gk_Auth->get_user_level_by_action( "Review" , "Code" );
 		$head = "Code review";
-		$body = "It is necessary reviewing the code $code. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.";
+		$code_tx = tag_enclosed( "b" , $code );
+		$body = "It is necessary reviewing the code $code_tx. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.";
 		$link = "check.php?code=$code";
 	
 		$sql  = "INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `receiver`, `type`, `head`, `body`, `link`, `active`, `createTS`, `modifyTS`)";

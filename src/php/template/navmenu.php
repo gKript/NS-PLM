@@ -154,7 +154,7 @@
 	echo div_block_close();
 
 	if ( ( ( $gk_Auth->get_current_clean_user_name() != "guest" ) || ( $nscfg->param->user->guest_allowed ) ) || ( $ck ) ) {
-		$mess = query_get_num_rows( "SELECT * FROM `notice` WHERE `receiver` LIKE 'rnd.approver' AND `type` LIKE 'message' AND `active` = 1" );
+		$mess = query_get_num_rows( "SELECT * FROM `notice` WHERE `receiver` LIKE '". $gk_Auth->get_current_user_name() ."' AND `type` LIKE 'message' AND `active` = 1" );
 		echo div_block_open( "" , "margin-left: 16px; margin-right: 16px; margin-bottom: 24px; margin-top: 24px;" );
 		open_form( "GET" , "search.php" , "" , "" , "menu_srch" );
 		$navmenu = new gkMenu( $nspage , $gk_Auth->get_current_user_level() );

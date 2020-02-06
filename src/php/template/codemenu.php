@@ -85,7 +85,7 @@
 			$code_split = substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . "<span class=\"blink_text\">" . substr($code, 8, 2) . "</span>";
 		else if ( $bl == 2) 
 			$code_split = substr($code, 0, 3) . "  " . "<span class=\"blink_text\">" . substr($code, 3, 5) . "</span>" . "  " . substr($code, 8, 2);
-		else if ( $bl == 3) 
+		else if ( ( $bl == 3) || ( $bl == 4 ) )
 			$code_split = "<span class=\"blink_text\">" . substr($code, 0, 3) . "  " . substr($code, 3, 5) . "  " . substr($code, 8, 2) . "</span>";
 
 		$synop_link  = "code.php?code=$code" ;
@@ -105,19 +105,19 @@
 //				if ( ( $nl != 0 ) && ( $nl != 9 ) )
 //					query_sql_run( "UPDATE `elenco_codici` SET `status` = '$nl' WHERE `elenco_codici`.`codice` LIKE '$code'" );
 			}
-			$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
-			$cstatestr = $cstatus_seq[ $cstate ]["t"];
-			$pstate = $cstatus_seq[ $cstate ]["p"];
-			$pststr = $cstatus_seq[ $pstate ]["t"];
-			$nstate = $cstatus_seq[ $cstate ]["n"];;
-			$nststr = $cstatus_seq[ $nstate ]["t"];;
+			if ( ( $bl != 4 ) && ( $bl != 1 ) ) {
+				$cstate = query_get_a_field( "SELECT *  FROM `elenco_codici` WHERE `codice` LIKE '$code'" , "status" );
+				$cstatestr	= $cstatus_seq[ $cstate ]["t"];
+				$pstate			= $cstatus_seq[ $cstate ]["p"];
+				$pststr			= $cstatus_seq[ $pstate ]["t"];
+				$nstate			= $cstatus_seq[ $cstate ]["n"];
+				$nststr			= $cstatus_seq[ $nstate ]["t"];
+			}
 			
 			//echo $cstate . " " . $pstate . " " . $pststr . " " . $nstate . " " . $nststr; 
 			
-			if ( $bl != 3 ) {
+			if ( $bl == 0 ) {
 		?>
-			
-				
 				<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
 					<?php echo title_h2( "Current status -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
 					<br/>
@@ -165,7 +165,7 @@
 								</a>
 									<?php } ?>
 							<?php }
-										else if ( ( $gk_Auth->check_user_level( "Review" , "Code" ) ) && ( $cstate == 1 ) ) { ?>
+										else if ( ( $gk_Auth->check_user_level( "Create" , "Code" ) ) && ( $cstate == 1 ) ) { ?>
 								<a href="code.php?code=<?php echo $code; ?>&nl=<?php echo $nstate; ?>" >
 								<img src="src/img/next.svg" alt="ok" border=0 height=24 style="float: left;"/>
 								<span class="blink_text"><big> <?php echo $cstatus_seq[ $nstate ]["t"]; ?> </big></span></a>

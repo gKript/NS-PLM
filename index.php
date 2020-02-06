@@ -134,13 +134,13 @@
 		echo tag_enclosed( "p" , "The tasks you are involved in are the following:" ) ;
 //		echo 	BR(1,0);
 	
-	if ( $gk_Auth->check_user_level( "Review" , "Code" ) ) {
+	if ( $gk_Auth->get_current_user_name() != "guest" ) {
 		$I = $gk_Auth->get_current_user_name();
 		$lev = $gk_Auth->get_current_user_level();
 		$sql = "SELECT * FROM `notice` WHERE ( `receiver` LIKE '$I' OR `level` <= $lev ) AND `active` = 1 ORDER BY `createTS` ASC Limit 0,10;";
 		$rows = query_get_num_rows( $sql );
 			if ( $rows ) {
-				echo open_block( "Notices" , "message.svg" , "insidecodelite" );
+				echo open_block( "Announcements" , "message.svg" , "insidecodelite" );
 			?>
 
 				<table style="margin:1em;" width="95%">
@@ -179,17 +179,16 @@
 			</div>
 	<?php
 			}
-		}
+	}
 	
 	
 		if ( $gk_Auth->check_user_level( "Review" , "Code" ) ) {
 		
 			$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'review' AND `done` = 0 ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
 			$rows = query_get_num_rows( $sql );
-				if ( $rows ) {
+			if ( $rows ) {
+				echo open_block( "Code to be reviewed" , "review.svg" , "insidecodelite" );
 			?>
-				<div class="insidecodelite">
-					<h2>Code to be reviewed</h2><br/>
 
 
 					<table style="margin:1em;" width="95%">
@@ -225,15 +224,11 @@
 			}
 							
 			if ( $gk_Auth->check_user_level( "Create" , "Attribute" ) ) {
-			
 				$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'attribute' AND `ignore_it` = 0 ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
 				$rows = query_get_num_rows( $sql );
 				if ( $rows ) {
+					echo open_block( "Code without attributes" , "attributes.svg" , "insidecodelite" );
 				?>
-				<div class="insidecodelite">
-					<h2>Code without ATTRIBUTES</h2><br/>
-
-
 					<table style="margin:1em;" width="95%">
 						<tr>
 							<th style="text-align: center;" >Code</th>
