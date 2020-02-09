@@ -368,6 +368,8 @@
 		
 		query_sql_run( $sql );
 		
+		if ( query_get_num_rows( "SELECT * FROM `notice` WHERE `promoter` LIKE '$code' AND `type` LIKE 'Rejection'" ) )
+			query_sql_run( "DELETE FROM `notice` WHERE `promoter` LIKE '$code' AND `type` LIKE 'Rejection'" );
 	}
 
 

@@ -34,8 +34,11 @@
 	$code		= get_check( 'code' );
 	$action = get_check( 'action' );
 	$ignore = get_check( 'ignore' , "false" );
-	$id = get_check( 'id' );
+	$id			= get_check( 'id' );
 	
+	
+	if ( $action == "read" )
+		query_sql_run( "UPDATE `notice` SET `active` = '0' WHERE `id` = $id;" );
 	
 	if ( $action == "logout" ) 
 		$gk_Auth->gk_logout( session_id() );
@@ -128,58 +131,138 @@
 		echo div_block_close();
 		echo div_block_close();
 
-		echo open_block( "Dashboard" , "dashboard.svg" , "insidecodelite" );
+		echo open_block_no_top( "Dashboard" , "dashboard.svg" , "insidecodelite" );
 //		echo div_block_open( "codelite" , "padding-left: 16px; padding-right: 16px;" );
-		echo open_block_no_top( "Tasks to be performed" , "task.svg" );
+//		echo open_block_no_top( "Tasks to be performed" , "task.svg" );
 		echo tag_enclosed( "p" , "The tasks you are involved in are the following:" ) ;
 //		echo 	BR(1,0);
 	
-	if ( $gk_Auth->get_current_user_name() != "guest" ) {
-		$I = $gk_Auth->get_current_user_name();
-		$lev = $gk_Auth->get_current_user_level();
-		$sql = "SELECT * FROM `notice` WHERE ( `receiver` LIKE '$I' OR `level` <= $lev ) AND `active` = 1 ORDER BY `createTS` ASC Limit 0,10;";
-		$rows = query_get_num_rows( $sql );
-			if ( $rows ) {
-				echo open_block( "Announcements" , "message.svg" , "insidecodelite" );
-			?>
+		if ( $gk_Auth->get_current_user_name() != "guest" ) {
+			$I = $gk_Auth->get_current_user_name();
+			$lev = $gk_Auth->get_current_user_level();
 
-				<table style="margin:1em;" width="95%">
-					<tr>
-						<th style="text-align: center;" >Type</th>
-						<th style="text-align: left;" >Sender</th>
-						<th style="text-align: left;" >Title</th>
-						<th style="text-align: left;" >Preview</th>
-					</tr>
+			echo open_block( "Announcements" , "message.svg" , "codelite" );
+			
+				$sql = "SELECT *  FROM `notice` WHERE `receiver` LIKE '$I' AND `type` LIKE 'Approved' AND `active` = 1 ORDER BY `id` ASC ";
+				$rows = query_get_num_rows( $sql );
+				if ( $rows ) {
+					echo open_block_no_top( "Promotions approved" , "ok" , "acodelite" );
+						echo table_open( 0 , "95%" , "" , "margin:1em;" );
+							echo row_open();
+								echo set_header_table( "Approver"	, 0 , "" , "text-align: left;" );
+								echo set_header_table( "Code"			, 0 , "" , "text-align: left;" );
+								echo set_header_table( "Text"			, 0 , "" , "text-align: left;" );
+							echo row_close();
 
-
-		<?php
-
-				if ($result = $mysqli->query($sql)) {
-					for( $r = 0 ; $r < $rows ; $r++ ) {
-						println( "<tr>" );
-						$array = $result->fetch_array();
-						print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
-						if ( $array["type"] == "message" ) {
-							$tx  = generic_tag_open( "span" , "blink_text" );
-							$tx .= link_generator( "message.php?action=show&id=".$array["id"] , "Message" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
-							$tx .= generic_tag_close( "span" );
-							echo $tx;
-						}
-						else if ( $array["type"] == "Action required" )
-							echo link_generator( $array["link"] , "Action required" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
-						println( "</td>" );
-						println( "<td style='border:1px solid #999;' width='10%'>" . $array['sender_clean'] . "</td>" );
-						println( "<td style='border:1px solid #999;' width='15%'>" . $array['head'] . "</td>" );
-						println( "<td style='border:1px solid #999;' >" . gk_text_trunc( $array['body'] , 100 ) . "</td>" );
-						println( "</tr>" );
-					}
+							if ($result = $mysqli->query($sql)) {
+								for( $r = 0 ; $r < $rows ; $r++ ) {
+									echo row_open();
+										$array = $result->fetch_array();
+										println( "<td style='border:1px solid #999;' width='10%'>" . $array['sender_clean'] . "</td>" );
+										println( "<td style='border:1px solid #999;' width='15%'>" . $array['promoter'] . "</td>" );
+										println( "<td style='border:1px solid #999;' >" . gk_text_trunc( $array['body'] , 100 ) . "</td>" );
+									echo row_close();
+									
+									$id = $array['id'];
+									query_sql_run( "UPDATE `notice` SET `active` = '0' WHERE `id` = $id;" );
+									
+								}
+							}
+						echo table_close();
+					echo close_block();
 				}
-		?>		
-				</table>
-			</div>
-	<?php
-			}
-	}
+			
+			
+				$sql = "SELECT * FROM `notice` WHERE `receiver` LIKE '$I' AND `active` = 1 AND `type` = 'Rejection' ORDER BY `createTS` ASC Limit 0,10";
+				$rows = query_get_num_rows( $sql );
+				if ( $rows ) {
+					echo open_block_no_top( "Rejection" , "rejection" , "rcodelite" );
+						echo table_open( 0 , "95%" , "" , "margin:1em;" );
+							echo row_open();
+								echo set_header_table( "Reply"		, 0 , "2%" , "text-align: center;" );
+								echo set_header_table( "Read"			, 0 , "2%" , "text-align: center;" );
+								echo set_header_table( "Type"			, 0 , "" , "text-align: center;" );
+								echo set_header_table( "Sender"		, 0 , "" , "text-align: left;" );
+								echo set_header_table( "Title"		, 0 , "" , "text-align: left;" );
+								echo set_header_table( "Preview"	, 0 , "" , "text-align: left;" );
+							echo row_close();
+
+							if ($result = $mysqli->query($sql)) {
+								for( $r = 0 ; $r < $rows ; $r++ ) {
+									println( "<tr>" );
+										$array = $result->fetch_array();
+										
+										echo set_col_table( link_generator( "message.php?action=reply&id=".$array["id"] , img_generator( "reply.svg" , "Reply to this message"  , "" , "height:16px;" ) )	, 0 , "2%" , "text-align: center;" );
+										echo set_col_table( link_generator( "index.php?action=read&id=".$array["id"] , img_generator( "read.svg" , "Mark as read"  , "" , "height:16px;" ) )	, 0 , "2%" , "text-align: center;" );
+										
+										print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
+										$tx  = generic_tag_open( "span" , "blink_text" );
+										$tx .= link_generator( "code.php?code=".$array["promoter"] , "Rejection" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+										$tx .= generic_tag_close( "span" );
+										echo $tx;
+										println( "</td>" );
+										println( "<td style='border:1px solid #999;' width='10%'>" . $array['sender_clean'] . "</td>" );
+										println( "<td style='border:1px solid #999;' width='15%'>" . $array['head'] . "</td>" );
+										println( "<td style='border:1px solid #999;' >" . gk_text_trunc( $array['body'] , 100 ) . "</td>" );
+									println( "</tr>" );
+								}
+							}
+						echo table_close();
+					echo close_block();
+				}
+			
+				$sql = "SELECT * FROM `notice` WHERE ( `receiver` LIKE '$I' OR `level` <= $lev ) AND `active` = 1 AND `type` NOT LIKE 'Rejection' ORDER BY `createTS` ASC Limit 0,10;";
+				$rows = query_get_num_rows( $sql );
+				if ( $rows ) {
+					echo open_block_no_top( "Unreaded messages" , "chat" , "mcodelite" );
+						echo table_open( 0 , "95%" , "" , "margin:1em;" );
+							echo row_open();
+								echo set_header_table( "Answ"			, 0 , "2%" , "text-align: center;" );
+								echo set_header_table( "Read"			, 0 , "2%" , "text-align: center;" );
+								echo set_header_table( "Type"			, 0 , "" , "text-align: center;" );
+								echo set_header_table( "Sender"		, 0 , "" , "text-align: left;" );
+								echo set_header_table( "Title"		, 0 , "" , "text-align: left;" );
+								echo set_header_table( "Preview"	, 0 , "" , "text-align: left;" );
+							echo row_close();
+
+							if ($result = $mysqli->query($sql)) {
+								for( $r = 0 ; $r < $rows ; $r++ ) {
+									println( "<tr>" );
+									
+									$array = $result->fetch_array();
+									
+									if ( $array["type"] == "Message" ) {
+										echo set_col_table( link_generator( "message.php?action=reply&id=".$array["id"] , img_generator( "reply.svg" , "Reply" , "" , "height:16px;" ) )			, 0 , "2%" , "text-align: center;" );
+										echo set_col_table( link_generator( "index.php?action=read&id=".$array["id"] , img_generator( "read.svg" , "Mark as read"  , "" , "height:16px;" ) )	, 0 , "2%" , "text-align: center;" );
+									}
+									else {
+										echo set_col_table( "" );
+										echo set_col_table( "" );
+									}
+									
+									print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
+									if ( $array["type"] == "Message" ) {
+										$tx  = generic_tag_open( "span" , "blink_text" );
+										$tx .= link_generator( "message.php?action=show&id=".$array["id"] , "Message" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+										$tx .= generic_tag_close( "span" );
+										echo $tx;
+									}
+									else if ( $array["type"] == "Action required" )
+										echo link_generator( $array["link"] , "Action required" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+									println( "</td>" );
+									println( "<td style='border:1px solid #999;' width='10%'>" . $array['sender_clean'] . "</td>" );
+									println( "<td style='border:1px solid #999;' width='15%'>" . $array['head'] . "</td>" );
+									println( "<td style='border:1px solid #999;' >" . gk_text_trunc( $array['body'] , 100 ) . "</td>" );
+									println( "</tr>" );
+								}
+							}
+							
+							echo table_close();
+						echo close_block();
+				}
+			echo close_block();
+		}
+	
 	
 	
 		if ( $gk_Auth->check_user_level( "Review" , "Code" ) ) {
@@ -227,7 +310,7 @@
 				$sql = "SELECT *  FROM `code_action` WHERE `action` LIKE 'attribute' AND `ignore_it` = 0 ORDER BY `code_action`.`createTS` ASC Limit 0,10;";
 				$rows = query_get_num_rows( $sql );
 				if ( $rows ) {
-					echo open_block( "Code without attributes" , "attributes.svg" , "insidecodelite" );
+					echo open_block( "Code without attributes" , "attributes.svg" , "codelite" );
 				?>
 					<table style="margin:1em;" width="95%">
 						<tr>
@@ -264,11 +347,10 @@
 				</div>
 				<?php
 			}
-			echo div_block_close();
+//			echo div_block_close();
 		}
 	echo div_block_close();
 				
 	include NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	$mysqli->close();
 ?>
-

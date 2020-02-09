@@ -117,29 +117,36 @@
 			//echo $cstate . " " . $pstate . " " . $pststr . " " . $nstate . " " . $nststr; 
 			
 			if ( $bl == 0 ) {
+				
+				echo div_block_open( "" , "width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;" );
+				echo title_h2( "Current status -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" );
+				echo BR();
+				echo table_open( "" , "97%" , "" , "margin:9px;" );
+					echo row_open( "text-align:center; vertical-align:middle;" );
+						echo set_header_table( tag_enclosed( "small" , "Previous status" ) , "" , "25%" , "" );
+						echo set_header_table( "Current status" , "" , "50%" , "" );
+						echo set_header_table( tag_enclosed( "small" , "Next status" ) , "" , "25%" , "" );
+					echo row_close();
+					
+					echo row_open( "text-align:center; vertical-align:middle; height: 40px;" );
+						if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { 
+							$tmp  = img_generator( "prev.svg" , "ok" , "" , "float:right;" , "autoclose" , 0 , 0 , 24 );
+							$tmp .= tag_enclosed( "small" , $pststr );
+							$tx   = link_generator( "code.php?code=$code&nl=$pstate" , $tmp );
+							echo set_col_table( $tx , "" , "" , "background-color: #bbb; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" );
+						}
+						else {
+							echo set_col_table( $cstatus_seq[ $pstate ]["t"] , "" , "" , "background-color: #bbb; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;" );
+						}
+						
+						
+						
+	//				echo row_close();
+					
+					
+					
+				
 		?>
-				<div style="width: 40%; background-color: #eee; float: right; border:1px solid #999; box-shadow: 1px 2px 3px #999; 	border-radius: 5px;">
-					<?php echo title_h2( "Current status -  $cstatestr <small>[$cstate]</small>" , "procedure.png" , "padding-left: 16px; padding-right: 16px;" ); ?>
-					<br/>
-					<table style="margin:9px; " width="97%">
-						<tr  >
-							<th width="25%"><small>Previous status</small></th>
-							<th width="50%">Current status</th>
-							<th width="25%"><small>Next status</small></th>
-						</tr>
-						<tr align="center" valign="center" height="40px" >
-							<td style="background-color: #ada; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;">
-							<?php if ( $gk_Auth->check_user_level( "Approve" , "Code" ) ) { ?>
-								<a href="code.php?code=<?php echo $code; ?>&nl=<?php echo $pstate; ?>" >
-								<img src="src/img/prev.svg" alt="ok" border=0 height=24 style="float: right;"/>
-								<small><?php echo $pststr; ?></small>
-								</a>
-							<?php } 
-										else {
-											echo $cstatus_seq[ $pstate ]["t"];
-										}
-							?>
-							</td>
 							<td style="background-color: #dda; box-shadow: 1px 2px 3px #999; border-radius: 10px 10px 10px 10px;">
 								<b>
 								<?php
@@ -286,3 +293,4 @@
 	}
 
 ?>
+

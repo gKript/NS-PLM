@@ -47,6 +47,42 @@ body {
 	box-shadow: 1px 2px 3px #999;
 	border-radius: 5px;
 }
+.rcodelite {
+	margin:1em;
+	padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-top: 0px;
+	background-color: #fdd;
+	overflow: auto; 
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+	border:1px solid #aaa;
+}
+.acodelite {
+	margin:1em;
+	padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-top: 0px;
+	background-color: #dfd;
+	overflow: auto; 
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+	border:1px solid #aaa;
+}
+.mcodelite {
+	margin:1em;
+	padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-top: 0px;
+	background-color: #eef;
+	overflow: auto; 
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+	border:1px solid #aaa;
+}
 .codelite_img {
 	padding:.5em;
 	height: 100%;

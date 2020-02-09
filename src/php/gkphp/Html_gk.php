@@ -91,6 +91,8 @@
 	}
 
 	function	img_generator( $img , $alt , $path = "" , $style = "" , $tag = "autoclose" , $border = 0 , $width = 0 , $heigth = 0 ) {
+//		$ret  = "<img src=\"$path$img\" alt=\"$alt\" " ;
+//		$ret .= $class == "" ? "" : " class=\"$class\"";
 		$b = $border != 0	? $border	: "";
 		$w = $width != 0	? $width	: "";
 		$h = $heigth != 0	? $heigth	: "";
@@ -101,7 +103,7 @@
 			$path = "src/img/";
 		if ( $tag != "autoclose" )
 			$c = "";
-		return "<img src=\"$path$img\" $s alt=\"$alt\" width=\"$w\" heigth=\"$h\" border=\"$b\" $c>\n";
+		return "<img src=\"$path$img\" $s title=\"$alt\" width=\"$w\" heigth=\"$h\" border=\"$b\" $c>\n";
 	}
 
 	function div_block_open( $class = "" , $style = "" , $id = "" ) {

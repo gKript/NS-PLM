@@ -159,14 +159,27 @@
 				query_sql_run( "UPDATE `elenco_codici` SET `status` = '$nl' WHERE `elenco_codici`.`codice` LIKE '$code'" );
 				if ( $nl == 3 )
 					set_notice_by_action_review( $code );
-				if ( ( $action == "approved" ) || ( $action == "rejected" ) ) {
-					query_sql_run( "UPDATE `code_action` SET `done` = '1' WHERE `code_action`.`action` = 'review' AND `code_action`.`code` = '$code';" );
-					query_sql_run( "UPDATE `notice` SET `active` = '0' WHERE `type` LIKE 'Action required' AND `body` LIKE '%$code%'" );
-				}
+//				if ( ( $action == "approved" ) || ( $action == "rejected" ) ) {
+//					query_sql_run( "UPDATE `code_action` SET `done` = '1' WHERE `code_action`.`action` = 'review' AND `code_action`.`code` = '$code';" );
+//				}
 			}
 
-			if ( $action == "approved" )
+			if ( $action == "approved" ) {
+				$sql = "SELECT * FROM `notice` WHERE `type` LIKE 'Action required' AND `body` LIKE '%$code%' ORDER BY `notice`.`createTS` DESC LIMIT 0,1;";
+				$array = query_single_line( $sql );
+				$promoter = $array["promoter"];
+				$sender = $array["sender"];
+				$csender = $gk_Auth->get_current_clean_user_name();
+				$promoter = $array["promoter"];
+				$head = "Promotion approved: $code";
+				$body = "Your promotion for $code was succesfully APPROVED by ".$gk_Auth->get_current_clean_user_name();
+
+				$sql  = "INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `receiver`, `type`, `head`, `body`, `link`, `active`, `createTS`, `modifyTS`) ";
+				$sql .= "VALUES (NULL, '$code', '99', 'system', '$csender', '$promoter', 'Approved', '$head', '$body', NULL, '1', current_timestamp(), current_timestamp());";
+				query_sql_run( $sql );
+				query_sql_run( "DELETE FROM `notice` WHERE `type` LIKE 'Action required' AND `body` LIKE '%$code%'" );
 				insert_blockquote( "Code $code succesfully APPROVED!" , "Success" );
+			}
 			else if ( $action == "rejected" )
 				insert_blockquote( "Code $code is REJECTED and the new status is now DRAFT" , "Warning" );
 			

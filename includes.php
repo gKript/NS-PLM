@@ -128,7 +128,7 @@
 		$redirect = true;
 	}
 	
-	check_code_review();
+//	check_code_review();
 	check_code_without_attributes();
 	
 	require_once( NSID_PLM_SRC_TEMPLATE . "codemenu.php" );
