@@ -56,8 +56,9 @@
 
 
 	//CSS locali	
-	link_js ( "view.js"      , NSID_PLM_SRC_JS  );
-	link_js ( "calendar.js"  , NSID_PLM_SRC_JS  );
+	link_js ( "view.js"				, NSID_PLM_SRC_JS  );
+	link_js ( "calendar.js" 	, NSID_PLM_SRC_JS  );
+	link_js ( "encryption.js"	, NSID_PLM_SRC_JS  );
 
 	if ( $redirect ) {
 		echo open_script( "text/javascript" );

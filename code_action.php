@@ -20,6 +20,11 @@
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
+	
+	$code = get_check( 'code' );
+	$action = get_check( 'action' );
+	$code = get_check( 'code' );
+	
 
 	require_once NSID_PLM_SRC_TEMPLATE . 'code_functions.php';
 	require_once NSID_PLM_SRC_TEMPLATE . "codemenu.php";
@@ -27,6 +32,14 @@
 	require_once NSID_PLM_SRC_TEMPLATE . 'navmenu.php';
 	
 	// ---------------- PAGE GENERATION START
+	
+	
+	
+	
+	
+	
+	
+	// ---------------- PAGE GENERATION END
 	
 	require_once NSID_PLM_SRC_TEMPLATE . 'footer.php';
 	

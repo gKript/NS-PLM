@@ -40,7 +40,11 @@
 
 	if ( $gk_Auth->get_current_user_name() == "guest" ) {
 		echo open_block_no_top( "Guest not allowed! IP: " . $gk_Auth->gk_get_real_ip() , "security.svg" , "insidecodelite" );
-			insert_blockquote( "This page is for acknowledged users only.<br/><br/>Please, contact the system administrator if you are thinking there's something wrong!<br/>For security policy, this event is logged.<br/>Please wait! You are leaving this page and are redirected to the login one in  <b><span id=\"time\">$pagetime</span></b> seconds." , "Error" );
+			$mess  = "This page is for acknowledged users only.<br/><br/>";
+			$mess .= "Please, contact the system administrator if you are thinking there's something wrong!<br/>";
+			$mess .= "For security policy, this event is logged.<br/>Please wait! You are leaving this page and are redirected to the login one in  ";
+			$mess .= "<b><span id=\"time\">$pagetime</span></b> seconds.";
+			insert_blockquote( $mess , "Error" );
 		echo close_block();
 	}
 	else {
