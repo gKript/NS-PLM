@@ -171,7 +171,7 @@
 						echo table_close();
 					echo close_block();
 				}
-			
+
 			
 				$sql = "SELECT * FROM `notice` WHERE `receiver` LIKE '$I' AND `active` = 1 AND `type` = 'Rejection' ORDER BY `createTS` ASC Limit 0,10";
 				$rows = query_get_num_rows( $sql );
@@ -210,11 +210,12 @@
 						echo table_close();
 					echo close_block();
 				}
-			
-				$sql = "SELECT * FROM `notice` WHERE ( `receiver` LIKE '$I' OR `level` <= $lev ) AND `active` = 1 AND `type` NOT LIKE 'Rejection' ORDER BY `createTS` ASC Limit 0,10;";
+		
+
+				$sql = "SELECT * FROM `notice` WHERE `receiver` LIKE '$I' AND `active` = 1 AND `type` LIKE 'Message' ORDER BY `createTS` ASC Limit 0,10;";
 				$rows = query_get_num_rows( $sql );
 				if ( $rows ) {
-					echo open_block_no_top( "Unreaded messages" , "chat" , "mcodelite" );
+					echo open_block_no_top( "Unread messages" , "chat" , "mcodelite" );
 						echo table_open( 0 , "95%" , "" , "margin:1em;" );
 							echo row_open();
 								echo set_header_table( "Answ"			, 0 , "2%" , "text-align: center;" );
@@ -248,7 +249,7 @@
 										echo $tx;
 									}
 									else if ( $array["type"] == "Action required" )
-										echo link_generator( $array["link"] , "Action required" , "" , "" , "autoclose" , $array["head"]. "\n\n" . $array["body"] );
+										echo link_generator( $array["link"] , "Action required" , "" , "" , "autoclose" , strip_tags( $array["head"]. "\n\n" . $array["body"] ) );
 									println( "</td>" );
 									println( "<td style='border:1px solid #999;' width='10%'>" . $array['sender_clean'] . "</td>" );
 									println( "<td style='border:1px solid #999;' width='15%'>" . $array['head'] . "</td>" );
@@ -260,6 +261,46 @@
 							echo table_close();
 						echo close_block();
 				}
+				
+				
+				$sql = "SELECT * FROM `notice` WHERE `level` <= $lev AND `active` = 1 AND `type` LIKE 'Action required' ORDER BY `createTS` ASC Limit 0,10;";
+				$rows = query_get_num_rows( $sql );
+				if ( $rows ) {
+					echo open_block_no_top( "Action required" , "action" , "wcodelite" );
+						echo table_open( 0 , "95%" , "" , "margin:1em;" );
+							echo row_open();
+								echo set_header_table( "Type"			, 0 , "" , "text-align: center;" );
+								echo set_header_table( "Title"		, 0 , "" , "text-align: left;" );
+								echo set_header_table( "Preview"	, 0 , "" , "text-align: left;" );
+							echo row_close();
+
+							if ($result = $mysqli->query($sql)) {
+								for( $r = 0 ; $r < $rows ; $r++ ) {
+									println( "<tr>" );
+									
+									$array = $result->fetch_array();
+									
+									print( "<td style='text-align: center; border:1px solid #999;' width='10%'>" );
+									if ( $array["type"] == "Message" ) {
+										$tx  = generic_tag_open( "span" , "blink_text" );
+										$tx .= link_generator( "message.php?action=show&id=".$array["id"] , "Message" , "" , "" , "autoclose" , strip_tags( $array["head"]. "\n\n" . $array["body"] ) );
+										$tx .= generic_tag_close( "span" );
+										echo $tx;
+									}
+									else if ( $array["type"] == "Action required" )
+										echo link_generator( $array["link"] , "Action required" , "" , "" , "autoclose" , strip_tags( $array["head"]. "\n\n" . $array["body"] ) );
+									println( "</td>" );
+									println( "<td style='border:1px solid #999;' width='15%'>" . $array['head'] . "</td>" );
+									println( "<td style='border:1px solid #999;' >" . gk_text_trunc( $array['body'] , 100 ) . "</td>" );
+									println( "</tr>" );
+								}
+							}
+							
+							echo table_close();
+						echo close_block();
+				}
+
+				
 			echo close_block();
 		}
 	

@@ -44,13 +44,16 @@
 	if ( $action == "show" )
 		query_sql_run( "UPDATE `notice` SET `active` = '0' WHERE `id` = $id;" );
 
-	else if ( $action == "munread" ) {
+	else if ( $action == "unread" ) {
 		query_sql_run( "UPDATE `notice` SET `active` = '1' WHERE `id` = $id;" );
 		$action = "show";
 	}
-	else if ( $action == "mread" ) {
+	else if ( $action == "read" ) {
 		query_sql_run( "UPDATE `notice` SET `active` = '0' WHERE `id` = $id;" );
 		$action = "show";
+	}
+	else if ( $action == "reply" ) {
+		query_sql_run( "UPDATE `notice` SET `active` = '0' WHERE `id` = $id;" );
 	}
 
 	if ( ( $gk_Auth->check_user_level( "Modify" , "Code" ) ) && ( ( $nl > 0 ) && ( $nl < 5 ) ) ) {
@@ -89,10 +92,10 @@
 							echo row_open();
 							$array = $result->fetch_array();
 							
-							echo set_col_table( link_generator( "message.php?action=mreply&id=".$array["id"] , img_generator( "reply.svg"	, "Reply" , "" , "height:16px;" ) )			, 0 , "2%" , "text-align: center;" );
-							echo set_col_table( link_generator( "message.php?action=mread&id=".$array["id"]		, img_generator( "read.svg"		, "Mark as read"  , "" , "height:16px;" ) )	, 0 , "2%" , "text-align: center;" );
-							echo set_col_table( link_generator( "message.php?action=munread&id=".$array["id"] , img_generator( "unread.svg"	, "Mark as unread" , "" , "height:16px;" ) )			, 0 , "2%" , "text-align: center;" );
-							echo set_col_table( link_generator( "index.php?action=mdelete&id=".$array["id"]		, img_generator( "delete.svg"	, "Delete"  , "" , "height:16px;" ) )	, 0 , "2%" , "text-align: center;" );
+							echo set_col_table( link_generator( "message.php?action=reply&id=".$array["id"] , img_generator( "reply.svg"	, "Reply" , "" , "height:16px;" ) )			, 0 , "2%" , "text-align: center;" );
+							echo set_col_table( link_generator( "message.php?action=read&id=".$array["id"]		, img_generator( "read.svg"		, "Mark as read"  , "" , "height:16px;" ) )	, 0 , "2%" , "text-align: center;" );
+							echo set_col_table( link_generator( "message.php?action=unread&id=".$array["id"] , img_generator( "unread.svg"	, "Mark as unread" , "" , "height:16px;" ) )			, 0 , "2%" , "text-align: center;" );
+							echo set_col_table( link_generator( "index.php?action=delete&id=".$array["id"]		, img_generator( "delete.svg"	, "Delete"  , "" , "height:16px;" ) )	, 0 , "2%" , "text-align: center;" );
 							
 							echo set_col_table( link_generator( "message.php?action=show&id=".$array["id"] , "Message" ) , 1 , "" , "text-align: center;" );
 							if ( $array["active"] ) {
@@ -174,7 +177,7 @@
 			echo BR(2);
 			if ( $action == "rejected" )
 				echo "Receiver:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . query_get_a_field( "SELECT * FROM `gk_users` WHERE `user_login` LIKE '$receiver';" , "user_name" );
-			else if ( $action == "reply" ) 
+			else if ( $action == "reply" )
 				echo "Receiver:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $array["sender_clean"];
 			else {
 				$sql = "SELECT `user_login`, `user_name` FROM `gk_users` WHERE `user_login` NOT LIKE '".$gk_Auth->get_current_user_name()."' ORDER BY `user_role`";
@@ -185,7 +188,7 @@
 			echo BR();
 			if ( $action == "rejected" ) 
 				echo text_input_composer( "head" , "$promoter: Promotion rejected" , "" , "text" , 80 , 256 , 1 , "" );
-			else if ( $action == "reply" ) 
+			else if ( $action == "reply" )
 				echo text_input_composer( "head" , $newhead , "" , "text" , 80 , 256 , 1 , "" );
 			else
 				echo text_input_composer( "head" , "" , "" , "text" , 80 , 256 , 1 , "" );

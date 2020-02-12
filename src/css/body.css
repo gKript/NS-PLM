@@ -83,6 +83,18 @@ body {
 	border-radius: 5px;
 	border:1px solid #aaa;
 }
+.wcodelite {
+	margin:1em;
+	padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-top: 0px;
+	background-color: #ffd;
+	overflow: auto; 
+	box-shadow: 1px 2px 3px #999;
+	border-radius: 5px;
+	border:1px solid #aaa;
+}
 .codelite_img {
 	padding:.5em;
 	height: 100%;
