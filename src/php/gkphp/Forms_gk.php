@@ -1,6 +1,16 @@
 <?php
 
-	
+/*
+
+		File: gk.php
+
+		gK.php  -  gKript php library
+		[asy][skymatrix]
+		R 00.1.xx
+
+*/
+
+
 	$A_options = [	
 		'option0' => [
 			'value' => '' ,

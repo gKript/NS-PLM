@@ -1,4 +1,17 @@
 <?php
+
+/*
+
+		File: gk.php
+
+		gK.php  -  gKript php library
+		[asy][skymatrix]
+		R 00.1.xx
+
+*/
+
+//	Thanks to David Wainwright for this class
+
 /*
     Copyright 2008 David Wainwright
 

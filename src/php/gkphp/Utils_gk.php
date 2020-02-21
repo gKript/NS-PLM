@@ -1,5 +1,15 @@
 <?php
-	
+
+/*
+
+		File: gk.php
+
+		gK.php  -  gKript php library
+		[asy][skymatrix]
+		R 00.1.xx
+
+*/
+
 		
 	function println( $text ) {
 		echo $text . "\n";

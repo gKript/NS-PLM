@@ -47,6 +47,7 @@
                 <File name="C:\wamp64\www\trunk\src\php\gkphp\config\gk_cfg.php" />
                 <File name="C:\wamp64\www\trunk\src\php\gkphp\config\gk_cfg.xml" />
             </Folder>
+            <File name="C:\wamp64\www\trunk\src\php\gkphp\gkphp_core.php" />
         </Folder>
         <Folder name="PLM config">
             <File name="C:\wamp64\www\trunk\configuration\nsplm_config.php" />

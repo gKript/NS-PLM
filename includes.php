@@ -10,13 +10,13 @@
 	define( 'NSID_PLM_TITLE'	,	'NS-PLM' );	
 	define( 'NSID_ONLINE'			, false );
 	
-	$using_gkphp = true;
 
 //	--- gkphp
-	require_once( "gk.php" );
-	//echo "&nbsp;";
+	$using_gkphp = true;
+	require_once( "gk.php" );					//	gK.php inclusion
 	
 //	--- template
+	//echo "&nbsp;";
 
 	define( 'NSID_PLM_SRC_TEMPLATE'	, 'src/php/template/');
 	define( 'NSID_PLM_SRC_HTML'			, 'src/html/');
@@ -32,7 +32,6 @@
 //	--- CLASSES
 
 //	require_once( NSID_PLM_SRC_PHP."class/upload/class.upload.php" );
-
 
 	$codetype = array(
    'T' => 0,

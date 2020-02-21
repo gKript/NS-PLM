@@ -94,6 +94,9 @@
 		$title  = "Code structure - ";
 		$title .= link_generator( $hr , $hrt );
 		echo open_block( $title , "struct.png" );
+		
+		echo div_block_open( "box66" , "padding-left: 12px;" );
+			echo title_h3( "Meaning" );
 		?>
 				<table style="margin:1em;" width="90%">
 
@@ -146,6 +149,13 @@
 		?>		
 				</table>
 	<?php	
+		echo div_block_close();
+		
+		echo div_block_open( "box33" , "padding-left: 12px;" );
+			echo title_h3( "Provider" );
+		
+		echo div_block_close();
+	
 	}
 
 

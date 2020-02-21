@@ -225,6 +225,7 @@
 			echo generic_tag_close( "a" );
 			echo generic_tag_close( "li" );
 		}
+		$navmenu->separator(10);
 		echo generic_tag_open( "li" , "" , "float:right;" );
 		echo generic_tag_open( "a" );
 		text_input_composer( "text" , $text , "" , "Text"   , "" , "" , 1 , "" , "Search " , "before" , 0 , "border-radius: 5px;" );

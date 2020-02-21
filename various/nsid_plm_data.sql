@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Feb 09, 2020 alle 23:42
+-- Creato il: Feb 21, 2020 alle 15:56
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.3.5
 
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `code_action` (
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `code_action`
@@ -278,7 +278,8 @@ INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `priority`, `ign
 (22, '2230000100', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20'),
 (21, '2110000200', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20'),
 (20, '89D0000102', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20'),
-(19, '2110000100', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20');
+(19, '2110000100', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20'),
+(32, '9990000101', 'attribute', 10, 0, 0, 0, '2020-02-14 11:04:16', '2020-02-14 11:04:16');
 
 -- --------------------------------------------------------
 
@@ -301,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
@@ -370,7 +371,8 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (86, '22C0001800', 2, '2', 'C', 'Switch eth 5 ports PoE', 'TENDA 5 port Switch 8 Gigabit - 4 ports 63watt PoE - model TEG1105P-4-63W', 0, 1, '2020-01-05 21:43:36', '2020-02-06 10:30:23'),
 (87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, 1, '2020-01-06 01:36:43', '2020-01-31 17:43:31'),
 (88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 0, '2020-01-20 01:20:23', '2020-01-31 20:37:40'),
-(95, '9990000100', 9, '9', '9', 'Codice di test', 'Codice di test per provare il giro stato di approvazione e reject', 0, 4, '2020-02-06 13:20:45', '2020-02-09 23:39:42');
+(95, '9990000100', 9, '9', '9', 'Codice di test', 'Codice di test per provare il giro stato di approvazione e reject', 0, 3, '2020-02-06 13:20:45', '2020-02-14 11:02:29'),
+(96, '9990000101', 9, '9', '9', 'Codice di test modificato', 'Codice di test per provare il giro stato di approvazione e reject', 0, 3, '2020-02-14 11:03:57', '2020-02-14 11:04:49');
 
 -- --------------------------------------------------------
 
@@ -436,20 +438,24 @@ DROP TABLE IF EXISTS `gk_role`;
 CREATE TABLE IF NOT EXISTS `gk_role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(32) NOT NULL,
+  `action_required` tinyint(1) NOT NULL,
+  `code_editing` tinyint(1) NOT NULL,
+  `attributes` tinyint(1) NOT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_role`
 --
 
-INSERT INTO `gk_role` (`role_id`, `role_name`) VALUES
-(40, 'Administrator'),
-(30, 'Superuser'),
-(5, 'User'),
-(1, 'guest'),
-(10, 'Editor'),
-(20, 'Approver');
+INSERT INTO `gk_role` (`role_id`, `role_name`, `action_required`, `code_editing`, `attributes`) VALUES
+(40, 'Administrator', 0, 0, 0),
+(30, 'Superuser', 0, 0, 0),
+(5, 'User', 0, 0, 0),
+(1, 'guest', 0, 0, 0),
+(10, 'Editor', 0, 0, 0),
+(20, 'Approver', 0, 0, 0),
+(25, 'Purchasing Agent', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -467,23 +473,24 @@ CREATE TABLE IF NOT EXISTS `gk_users` (
   `user_status` int(11) NOT NULL,
   `user_role` varchar(32) NOT NULL DEFAULT 'user',
   `image` tinyint(1) NOT NULL DEFAULT 0,
-  `user_ip` varchar(16) DEFAULT NULL,
+  `crypt` tinyint(1) DEFAULT 1,
   `user_registration` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_last_visit` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_visit_counter` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users`
 --
 
-INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `dept`, `user_password`, `user_status`, `user_role`, `image`, `user_ip`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
-(6, 'danilo.zannoni', 'Danilo Zannoni', '', 'japotek1972', 0, 'Administrator', 1, NULL, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0),
-(7, 'corrado.tumiati', 'Corrado Tumiati', '', 'vecchiobaule', 0, 'Administrator', 0, NULL, '2020-01-19 02:37:12', '0000-00-00 00:00:00', 0),
-(8, 'wh.user', 'Giuseppe Franchiggia', 'Warehouse', 'test', 0, 'User', 0, NULL, '2020-01-21 20:45:23', '0000-00-00 00:00:00', 0),
-(9, 'wh.editor', 'Francesco Pipperi', 'Warehouse', 'test', 0, 'Editor', 0, NULL, '2020-01-24 08:47:26', '0000-00-00 00:00:00', 0),
-(10, 'rnd.approver', 'Artemio Olivieri', 'R&D', 'test', 0, 'Approver', 0, NULL, '2020-01-24 15:20:14', '0000-00-00 00:00:00', 0);
+INSERT INTO `gk_users` (`user_id`, `user_login`, `user_name`, `dept`, `user_password`, `user_status`, `user_role`, `image`, `crypt`, `user_registration`, `user_last_visit`, `user_visit_counter`) VALUES
+(6, 'danilo.zannoni', 'Danilo Zannoni', '', 'test', 0, 'Administrator', 1, 0, '2020-01-17 10:36:13', '0000-00-00 00:00:00', 0),
+(7, 'corrado.tumiati', 'Corrado Tumiati', '', 'test', 0, 'Administrator', 0, 0, '2020-01-19 02:37:12', '0000-00-00 00:00:00', 0),
+(8, 'wh.user', 'Giuseppe Franchiggia', 'Warehouse', 'test', 0, 'User', 0, 0, '2020-01-21 20:45:23', '0000-00-00 00:00:00', 0),
+(9, 'wh.editor', 'Francesco Pipperi', 'Warehouse', 'test', 0, 'Editor', 0, 0, '2020-01-24 08:47:26', '0000-00-00 00:00:00', 0),
+(10, 'rnd.approver', 'Artemio Olivieri', 'R&D', 'test', 0, 'Approver', 0, 0, '2020-01-24 15:20:14', '0000-00-00 00:00:00', 0),
+(11, 'po.buyer', 'Claudio Miscaglia', 'Purchasing Office', 'test', 0, 'Purchasing Agent', 0, 0, '2020-02-15 10:59:24', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -500,15 +507,14 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
   `online_session_id` varchar(64) NOT NULL,
   `online_last_access` int(11) NOT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `gk_users_online`
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(19, 'wh.editor', 'Francesco Pipperi', 'Editor', '28r0b4nfqg2ieugb0f3mbeutf1', 1581291637),
-(21, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', '63kra4m8cmn0khmsh3pfrm7t30', 1581291585);
+(3, 'wh.editor', 'Francesco Pipperi', 'Editor', '25ksa7mqnj61lee553rus8btu7', 1582300341);
 
 -- --------------------------------------------------------
 
@@ -614,7 +620,7 @@ CREATE TABLE IF NOT EXISTS `notice` (
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=104 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `notice`
@@ -622,16 +628,37 @@ CREATE TABLE IF NOT EXISTS `notice` (
 
 INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `receiver`, `type`, `head`, `body`, `link`, `active`, `createTS`, `modifyTS`) VALUES
 (1, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'rnd.approver', 'Message', 'Codici 22c', 'Ciao, ho visto che i codici 22C non hanno la numerazione in esadecimale. Secondo te e\' corretto o e\' meglio aprire un ticket?\r\nGrazie ciao\r\nza', NULL, 1, '2020-02-02 18:49:29', '2020-02-09 12:33:19'),
+(101, '', 99, 'wh.editor', 'Francesco Pipperi', 'danilo.zannoni', 'Message', 'ciao', 'questo Ã¨ un test di funzionamento', NULL, 1, '2020-02-12 17:37:08', '2020-02-14 14:45:52'),
+(102, 'danilo.zannoni', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>9990000100</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=9990000100', 1, '2020-02-14 11:02:30', '2020-02-14 11:02:30'),
 (98, '9990000100', 99, 'system', 'Danilo Zannoni', 'wh.editor', 'Approved', 'Promotion approved: 9990000100', 'Your promotion for 9990000100 was succesfully APPROVED by Danilo Zannoni', NULL, 0, '2020-02-09 23:18:51', '2020-02-09 23:37:59'),
 (100, '9990000100', 99, 'system', 'Danilo Zannoni', 'wh.editor', 'Approved', 'Promotion approved: 9990000100', 'Your promotion for 9990000100 was succesfully APPROVED by Danilo Zannoni', NULL, 0, '2020-02-09 23:39:42', '2020-02-09 23:39:59'),
-(27, '', 99, 'rnd.approver', 'Artemio Olivieri', 'wh.editor', 'Message', 'New york', 'Per favore, mi prepareresti i documenti di viaggio per New York del 26 Marzo??? \r\nGrazie mille\r\ndz', NULL, 1, '2020-02-06 18:10:27', '2020-02-09 21:41:03'),
+(27, '', 99, 'rnd.approver', 'Artemio Olivieri', 'wh.editor', 'Message', 'New york', 'Per favore, mi prepareresti i documenti di viaggio per New York del 26 Marzo??? \r\nGrazie mille\r\ndz', NULL, 0, '2020-02-06 18:10:27', '2020-02-12 17:37:19'),
 (84, '', 99, 'rnd.approver', 'Artemio Olivieri', 'corrado.tumiati', 'Message', 'RE: RE: 9990000100: Promotion rejected', 'Si lo so ma c\'era un problema ulteriore\r\n\r\n\r\n\r\n------------------------\r\nCiao Artemio,\r\nper questo codice la scheda Ã¨ opzionale.\r\npassalo pure.\r\n\r\nCorrado\r\n\r\n\r\n------------------------\r\nmanca la scheda attributi\r\nciao', NULL, 1, '2020-02-09 22:08:28', '2020-02-09 22:53:03'),
-(77, '', 99, 'wh.editor', 'Francesco Pipperi', 'rnd.approver', 'Message', 'New york', 'Ciao, certo.\r\n\r\nTi andrebbe bene soggiornare al Grand Hyatt ??? \r\nÃ¨ una figata!\r\n\r\nCiao', NULL, 0, '2020-02-09 20:48:43', '2020-02-09 20:49:41'),
-(60, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'wh.editor', 'Message', 'Rejection', 'Ciao Francesco, ho notato che spesso ti devo respingere le promotions dei codici.\r\nPer favore facci piÃ¹ attenzione, ti ringrazio.\r\n\r\nCiao\r\n', NULL, 1, '2020-02-09 15:01:29', '2020-02-09 21:41:42'),
-(71, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'wh.editor', 'Message', 'ou!!!', 'Thoddetto', NULL, 1, '2020-02-09 15:51:08', '2020-02-09 21:41:01'),
+(103, 'danilo.zannoni', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>9990000101</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=9990000101', 1, '2020-02-14 11:04:49', '2020-02-14 11:04:49'),
+(77, '', 99, 'wh.editor', 'Francesco Pipperi', 'rnd.approver', 'Message', 'New york', 'Ciao, certo.\r\n\r\nTi andrebbe bene soggiornare al Grand Hyatt ??? \r\nÃ¨ una figata!\r\n\r\nCiao', NULL, 1, '2020-02-09 20:48:43', '2020-02-11 19:36:17'),
+(60, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'wh.editor', 'Message', 'Rejection', 'Ciao Francesco, ho notato che spesso ti devo respingere le promotions dei codici.\r\nPer favore facci piÃ¹ attenzione, ti ringrazio.\r\n\r\nCiao\r\n', NULL, 0, '2020-02-09 15:01:29', '2020-02-12 17:37:16'),
+(71, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'wh.editor', 'Message', 'ou!!!', 'Thoddetto', NULL, 0, '2020-02-09 15:51:08', '2020-02-12 17:37:16'),
 (83, '', 99, 'corrado.tumiati', 'Corrado Tumiati', 'rnd.approver', 'Message', 'RE: 9990000100: Promotion rejected', 'Ciao Artemio,\r\nper questo codice la scheda Ã¨ opzionale.\r\npassalo pure.\r\n\r\nCorrado\r\n\r\n\r\n------------------------\r\nmanca la scheda attributi\r\nciao', NULL, 0, '2020-02-09 22:05:47', '2020-02-09 22:11:43'),
 (75, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'corrado.tumiati', 'Message', 'saluto', 'a Kappaaaaaaaaaaaaaaa\r\nciao', NULL, 1, '2020-02-09 20:21:33', '2020-02-09 22:53:02'),
-(67, '', 99, 'wh.editor', 'Francesco Pipperi', 'danilo.zannoni', 'Message', 'rejection', 'ok grazie.', NULL, 1, '2020-02-09 15:44:52', '2020-02-09 20:46:38');
+(67, '', 99, 'wh.editor', 'Francesco Pipperi', 'danilo.zannoni', 'Message', 'rejection', 'ok grazie.', NULL, 1, '2020-02-09 15:44:52', '2020-02-14 14:45:51');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(11) NOT NULL,
+  `price_no_vat` int(11) NOT NULL,
+  `vat` int(3) NOT NULL,
+  `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -641,16 +668,17 @@ INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `rece
 
 DROP TABLE IF EXISTS `provider`;
 CREATE TABLE IF NOT EXISTS `provider` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(11) NOT NULL,
   `provider` varchar(32) NOT NULL,
+  `provider_link` text NOT NULL,
   `provider code` varchar(32) NOT NULL,
   `availability` tinyint(1) NOT NULL,
   `state` varchar(16) NOT NULL,
-  `average price` decimal(16,0) NOT NULL,
-  `linkweb` text NOT NULL,
+  `weblink` text NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  UNIQUE KEY `code` (`code`)
+  UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -666,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `user` varchar(32) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=280 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=287 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
@@ -676,6 +704,7 @@ INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (265, '467', 'danilo.zannoni', '2020-02-09 14:24:56'),
 (222, '22C0001700', 'danilo.zannoni', '2020-02-06 08:05:39'),
 (266, '4670000100', 'danilo.zannoni', '2020-02-09 14:25:33'),
+(286, '999', 'danilo.zannoni', '2020-02-14 14:19:02'),
 (211, 'test', 'danilo.zannoni', '2020-02-01 09:46:33'),
 (254, 'onesto', 'danilo.zannoni', '2020-02-07 22:35:59'),
 (212, 'gim', 'danilo.zannoni', '2020-02-01 12:21:18'),
@@ -695,14 +724,13 @@ INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (175, '57c', 'wh.editor', '2020-01-26 19:08:36'),
 (193, '57c', 'rnd.approver', '2020-01-29 08:45:55'),
 (200, '57c', 'danilo.zannoni', '2020-01-31 17:48:06'),
-(277, '999', 'danilo.zannoni', '2020-02-09 23:17:23'),
 (207, '2200001900', 'danilo.zannoni', '2020-02-01 09:43:37'),
 (229, '22c0001900', 'danilo.zannoni', '2020-02-06 12:55:45'),
 (202, 'rasp', 'wh.editor', '2020-01-31 20:20:41'),
 (228, '22c0001900', 'rnd.approver', '2020-02-06 11:52:42'),
 (279, '999', 'wh.editor', '2020-02-09 23:39:27'),
 (256, '999', 'wh.user', '2020-02-08 18:44:46'),
-(253, '999', 'rnd.approver', '2020-02-07 22:28:22'),
+(280, '999', 'rnd.approver', '2020-02-11 19:51:52'),
 (271, '4670000100', 'wh.editor', '2020-02-09 15:43:34'),
 (274, '999', 'corrado.tumiati', '2020-02-09 22:56:36');
 
@@ -719,7 +747,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=159 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=174 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -842,7 +870,22 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (155, 'BomCountDaily', '13', '2020-02-09 11:32:23'),
 (156, 'CodeCountDaily', '63', '2020-02-09 23:06:32'),
 (157, 'AttribCountDaily', '51', '2020-02-09 23:06:32'),
-(158, 'BomCountDaily', '13', '2020-02-09 23:06:32');
+(158, 'BomCountDaily', '13', '2020-02-09 23:06:32'),
+(159, 'CodeCountDaily', '63', '2020-02-11 19:35:53'),
+(160, 'AttribCountDaily', '51', '2020-02-11 19:35:53'),
+(161, 'BomCountDaily', '13', '2020-02-11 19:35:53'),
+(162, 'CodeCountDaily', '63', '2020-02-12 17:33:35'),
+(163, 'AttribCountDaily', '51', '2020-02-12 17:33:36'),
+(164, 'BomCountDaily', '13', '2020-02-12 17:33:36'),
+(165, 'CodeCountDaily', '63', '2020-02-14 10:48:46'),
+(166, 'AttribCountDaily', '51', '2020-02-14 10:48:46'),
+(167, 'BomCountDaily', '13', '2020-02-14 10:48:46'),
+(168, 'CodeCountDaily', '64', '2020-02-15 11:01:09'),
+(169, 'AttribCountDaily', '51', '2020-02-15 11:01:09'),
+(170, 'BomCountDaily', '13', '2020-02-15 11:01:09'),
+(171, 'CodeCountDaily', '64', '2020-02-21 15:48:21'),
+(172, 'AttribCountDaily', '51', '2020-02-21 15:48:21'),
+(173, 'BomCountDaily', '13', '2020-02-21 15:48:21');
 
 -- --------------------------------------------------------
 
