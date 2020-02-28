@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Feb 21, 2020 alle 15:56
+-- Creato il: Feb 28, 2020 alle 13:13
 -- Versione del server: 10.3.14-MariaDB
 -- Versione PHP: 7.3.5
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `bom` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   UNIQUE KEY `idDistinta` (`idDistinta`),
   UNIQUE KEY `hashid` (`hashid`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `bom`
@@ -73,7 +73,8 @@ INSERT INTO `bom` (`idDistinta`, `code`, `hashid`, `Revisione`, `createTS`, `mod
 (25, '3440000200', 'dddcaa6a3e1a19787b73954735b248f2', 1, '2020-01-04 01:28:56', '2020-01-04 01:28:56'),
 (26, '12C0000100', 'fc9543867a049fec8da044c42696cb7a', 1, '2020-01-04 10:54:05', '2020-01-04 10:54:05'),
 (27, '12C0000200', 'e2c994c8c3ef1523b8621dfaeaa612ab', 1, '2020-01-04 14:13:08', '2020-01-04 14:13:08'),
-(28, '3540000100', 'deafa72cd9fdd6b9c30385354eaa3130', 1, '2020-01-05 22:04:02', '2020-01-05 22:04:02');
+(28, '3540000100', 'deafa72cd9fdd6b9c30385354eaa3130', 1, '2020-01-05 22:04:02', '2020-01-05 22:04:02'),
+(29, '1120000100', 'd04185f0e2083e6ecc0eaae864f7eeb4', 1, '2020-02-28 13:11:55', '2020-02-28 13:11:55');
 
 -- --------------------------------------------------------
 
@@ -259,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `code_action` (
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `code_action`
@@ -279,7 +280,38 @@ INSERT INTO `code_action` (`id`, `code`, `action`, `level_req`, `priority`, `ign
 (21, '2110000200', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20'),
 (20, '89D0000102', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20'),
 (19, '2110000100', 'attribute', 10, 0, 0, 0, '2020-02-09 13:27:20', '2020-02-09 13:27:20'),
-(32, '9990000101', 'attribute', 10, 0, 0, 0, '2020-02-14 11:04:16', '2020-02-14 11:04:16');
+(32, '9990000101', 'attribute', 10, 0, 0, 0, '2020-02-14 11:04:16', '2020-02-14 11:04:16'),
+(33, '0120000100', 'attribute', 10, 0, 0, 0, '2020-02-28 11:58:29', '2020-02-28 11:58:29'),
+(34, '0120000200', 'attribute', 10, 0, 0, 0, '2020-02-28 12:01:31', '2020-02-28 12:01:31'),
+(35, '0120000300', 'attribute', 10, 0, 0, 0, '2020-02-28 12:33:39', '2020-02-28 12:33:39'),
+(36, '0120000400', 'attribute', 10, 0, 0, 0, '2020-02-28 12:35:32', '2020-02-28 12:35:32'),
+(37, '0120000500', 'attribute', 10, 0, 0, 0, '2020-02-28 12:36:14', '2020-02-28 12:36:14'),
+(38, '0120000600', 'attribute', 10, 0, 0, 0, '2020-02-28 12:38:06', '2020-02-28 12:38:06'),
+(39, '0120000700', 'attribute', 10, 0, 0, 0, '2020-02-28 12:38:25', '2020-02-28 12:38:25'),
+(40, '0120000800', 'attribute', 10, 0, 0, 0, '2020-02-28 12:39:08', '2020-02-28 12:39:08'),
+(41, '0120000900', 'attribute', 10, 0, 0, 0, '2020-02-28 12:39:39', '2020-02-28 12:39:39'),
+(42, '0120001000', 'attribute', 10, 0, 0, 0, '2020-02-28 12:40:17', '2020-02-28 12:40:17'),
+(43, '2110000300', 'attribute', 10, 0, 0, 0, '2020-02-28 12:41:27', '2020-02-28 12:41:27'),
+(44, '0120001100', 'attribute', 10, 0, 0, 0, '2020-02-28 12:42:12', '2020-02-28 12:42:12'),
+(45, '2110000400', 'attribute', 10, 0, 0, 0, '2020-02-28 12:43:18', '2020-02-28 12:43:18'),
+(46, '2110000500', 'attribute', 10, 0, 0, 0, '2020-02-28 12:43:40', '2020-02-28 12:43:40'),
+(47, '2110000600', 'attribute', 10, 0, 0, 0, '2020-02-28 12:44:02', '2020-02-28 12:44:02'),
+(48, '2110000700', 'attribute', 10, 0, 0, 0, '2020-02-28 12:44:29', '2020-02-28 12:44:29'),
+(49, '0120001200', 'attribute', 10, 0, 0, 0, '2020-02-28 12:45:02', '2020-02-28 12:45:02'),
+(50, '2110000800', 'attribute', 10, 0, 0, 0, '2020-02-28 12:45:28', '2020-02-28 12:45:28'),
+(51, '2110000900', 'attribute', 10, 0, 0, 0, '2020-02-28 12:46:32', '2020-02-28 12:46:32'),
+(52, '2110001000', 'attribute', 10, 0, 0, 0, '2020-02-28 12:48:36', '2020-02-28 12:48:36'),
+(53, '2110001100', 'attribute', 10, 0, 0, 0, '2020-02-28 12:50:21', '2020-02-28 12:50:21'),
+(54, '0120001300', 'attribute', 10, 0, 0, 0, '2020-02-28 12:52:35', '2020-02-28 12:52:35'),
+(55, '2110001200', 'attribute', 10, 0, 0, 0, '2020-02-28 12:59:29', '2020-02-28 12:59:29'),
+(56, '0120001400', 'attribute', 10, 0, 0, 0, '2020-02-28 13:00:14', '2020-02-28 13:00:14'),
+(57, '0120001500', 'attribute', 10, 0, 0, 0, '2020-02-28 13:00:34', '2020-02-28 13:00:34'),
+(58, '0120001600', 'attribute', 10, 0, 0, 0, '2020-02-28 13:00:55', '2020-02-28 13:00:55'),
+(59, '0120001700', 'attribute', 10, 0, 0, 0, '2020-02-28 13:02:23', '2020-02-28 13:02:23'),
+(60, '0120001800', 'attribute', 10, 0, 0, 0, '2020-02-28 13:02:35', '2020-02-28 13:02:35'),
+(61, '0120001900', 'attribute', 10, 0, 0, 0, '2020-02-28 13:03:27', '2020-02-28 13:03:27'),
+(62, '0120002000', 'attribute', 10, 0, 0, 0, '2020-02-28 13:03:53', '2020-02-28 13:03:53'),
+(63, '0120002100', 'attribute', 10, 0, 0, 0, '2020-02-28 13:07:20', '2020-02-28 13:07:20');
 
 -- --------------------------------------------------------
 
@@ -302,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `elenco_codici` (
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idCodice`),
   UNIQUE KEY `codice` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `elenco_codici`
@@ -372,7 +404,38 @@ INSERT INTO `elenco_codici` (`idCodice`, `codice`, `T`, `CG`, `CS`, `abbreviazio
 (87, '2DC0000100', 2, 'D', 'C', 'Ventola di raffreddamento', 'Ventola di raffreddamento Raspberry Pi 30x30x7mm DC 5V - Dissipatore per Raspberry Pi 4B,3B', 0, 1, '2020-01-06 01:36:43', '2020-01-31 17:43:31'),
 (88, '83E0000100', 8, '3', 'E', 'NS-PLM Sitemap', 'Menu Sitemap - All the possible menu option ordered by context', 0, 0, '2020-01-20 01:20:23', '2020-01-31 20:37:40'),
 (95, '9990000100', 9, '9', '9', 'Codice di test', 'Codice di test per provare il giro stato di approvazione e reject', 0, 3, '2020-02-06 13:20:45', '2020-02-14 11:02:29'),
-(96, '9990000101', 9, '9', '9', 'Codice di test modificato', 'Codice di test per provare il giro stato di approvazione e reject', 0, 3, '2020-02-14 11:03:57', '2020-02-14 11:04:49');
+(96, '9990000101', 9, '9', '9', 'Codice di test modificato', 'Codice di test per provare il giro stato di approvazione e reject', 0, 3, '2020-02-14 11:03:57', '2020-02-14 11:04:49'),
+(97, '0120000100', 0, '1', '2', 'Piastra inferiore', 'Piastra inferiore PVC', 0, 1, '2020-02-28 11:58:03', '2020-02-28 11:58:03'),
+(98, '0120000200', 0, '1', '2', 'Piastra Superiore', 'Piastra Superiore Alluminio', 0, 1, '2020-02-28 11:59:44', '2020-02-28 11:59:44'),
+(99, '0120000300', 0, '1', '2', 'Sponda', 'Sponda sagomata', 0, 1, '2020-02-28 12:33:28', '2020-02-28 12:33:28'),
+(100, '0120000400', 0, '1', '2', 'Fibula', 'Fibula Fissaggio Sponda (Interna)', 0, 1, '2020-02-28 12:34:15', '2020-02-28 12:34:15'),
+(101, '0120000500', 0, '1', '2', 'Perno', 'Perno Fissaggio Sponde (Interno)', 0, 1, '2020-02-28 12:36:09', '2020-02-28 12:36:09'),
+(102, '0120000600', 0, '1', '2', 'Perno', 'Perno sponda', 0, 1, '2020-02-28 12:37:54', '2020-02-28 12:37:54'),
+(103, '0120000700', 0, '1', '2', 'Sponda', 'Sponda PVC scanalata Frontale', 0, 1, '2020-02-28 12:38:18', '2020-02-28 12:38:18'),
+(104, '0120000800', 0, '1', '2', 'Sponda', 'Sponda PVC Scanalata Posteriore', 0, 1, '2020-02-28 12:38:43', '2020-02-28 12:38:43'),
+(105, '0120000900', 0, '1', '2', 'Piastra', 'Piastra Connettori', 0, 1, '2020-02-28 12:39:33', '2020-02-28 12:39:33'),
+(106, '0120001000', 0, '1', '2', 'Elemento fissaggio', 'Elemento Fissaggio piastra connettori', 0, 1, '2020-02-28 12:40:06', '2020-02-28 12:40:06'),
+(107, '2110000300', 2, '1', '1', 'Vite', 'Vite TBIC M4x10', 0, 1, '2020-02-28 12:40:26', '2020-02-28 12:40:26'),
+(108, '0120001100', 0, '1', '2', 'Ammortizzatore', 'Ammortizzatore Camere 3D', 0, 1, '2020-02-28 12:41:51', '2020-02-28 12:41:51'),
+(109, '2110000400', 2, '1', '1', 'Grano', 'Grano M4x6', 0, 1, '2020-02-28 12:42:28', '2020-02-28 12:42:28'),
+(110, '2110000500', 2, '1', '1', 'Vite', 'Vite TCEI M4x15', 0, 1, '2020-02-28 12:43:37', '2020-02-28 12:43:37'),
+(111, '2110000600', 2, '1', '1', 'Rondella', 'Rondella M4', 0, 1, '2020-02-28 12:43:54', '2020-02-28 12:43:54'),
+(112, '2110000700', 2, '1', '1', 'Rosetta', 'Rosetta M4', 0, 1, '2020-02-28 12:44:11', '2020-02-28 12:44:11'),
+(113, '0120001200', 0, '1', '2', 'Ammmoritizzatore', 'Ammortizzatore Antenna', 0, 1, '2020-02-28 12:44:44', '2020-02-28 12:44:44'),
+(115, '2110000800', 2, '1', '1', 'Vite', 'Vite TCEI M5x20', 0, 1, '2020-02-28 12:45:18', '2020-02-28 12:45:18'),
+(116, '2110000900', 2, '1', '1', 'Rondella', 'Rondella M5', 0, 1, '2020-02-28 12:45:40', '2020-02-28 12:45:40'),
+(117, '2110001000', 2, '1', '1', 'Rosetta', 'Rosetta M5', 0, 1, '2020-02-28 12:47:53', '2020-02-28 12:48:29'),
+(118, '2110001100', 2, '1', '1', 'Vite', 'Vite TSIC M3x6', 0, 1, '2020-02-28 12:49:05', '2020-02-28 12:49:05'),
+(119, '0120001300', 0, '1', '2', 'Plancia', 'Plancia Arduino MEGA/DUE', 0, 1, '2020-02-28 12:52:20', '2020-02-28 12:52:20'),
+(120, '2110001200', 2, '1', '1', 'Vite', 'Vite autofilettante M2,5', 0, 1, '2020-02-28 12:53:01', '2020-02-28 12:53:01'),
+(121, '0120001400', 0, '1', '2', 'Plancia', 'Plancia Raspberry PI 4', 0, 1, '2020-02-28 13:00:03', '2020-02-28 13:00:03'),
+(122, '0120001500', 0, '1', '2', 'Piastra', 'Piastra fissaggio LoRA', 0, 1, '2020-02-28 13:00:24', '2020-02-28 13:00:24'),
+(123, '0120001600', 0, '1', '2', 'Boccola', 'Boccola Fissaggio LiDAR', 0, 1, '2020-02-28 13:00:47', '2020-02-28 13:00:47'),
+(124, '0120001700', 0, '1', '2', 'Plancia', 'Plancia Fissaggio Camera', 0, 1, '2020-02-28 13:01:03', '2020-02-28 13:01:03'),
+(125, '0120001800', 0, '1', '2', 'Plancia', 'Plancia Fissaggio Sens Ambiente', 0, 1, '2020-02-28 13:02:33', '2020-02-28 13:02:33'),
+(126, '0120001900', 0, '1', '2', 'Staffa', 'Staffa Fissaggio Alimentatore', 0, 1, '2020-02-28 13:03:08', '2020-02-28 13:03:08'),
+(127, '0120002000', 0, '1', '2', 'Blocco', 'Blocco serra-cavo (mezzo)', 0, 1, '2020-02-28 13:03:46', '2020-02-28 13:03:46'),
+(128, '0120002100', 0, '1', '2', 'Tappo', 'Tappo foro cieco plancia', 0, 1, '2020-02-28 13:04:14', '2020-02-28 13:04:14');
 
 -- --------------------------------------------------------
 
@@ -514,7 +577,7 @@ CREATE TABLE IF NOT EXISTS `gk_users_online` (
 --
 
 INSERT INTO `gk_users_online` (`online_id`, `online_user_name`, `online_clean_name`, `online_user_role`, `online_session_id`, `online_last_access`) VALUES
-(3, 'wh.editor', 'Francesco Pipperi', 'Editor', '25ksa7mqnj61lee553rus8btu7', 1582300341);
+(3, 'danilo.zannoni', 'Danilo Zannoni', 'Administrator', 'ug3umoqu7ffpq13bor4e3kqf3i', 1582895531);
 
 -- --------------------------------------------------------
 
@@ -533,7 +596,7 @@ CREATE TABLE IF NOT EXISTS `lista_composizione` (
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   `modifyTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `lista_composizione`
@@ -596,7 +659,9 @@ INSERT INTO `lista_composizione` (`id`, `hashid`, `father`, `son`, `quantity`, `
 (59, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000800', 1, 1, '2020-01-05 22:13:36', '2020-01-05 22:13:36'),
 (60, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000700', 2, 1, '2020-01-05 22:13:52', '2020-01-05 22:13:52'),
 (61, '1f19bd7af7df2a1ab8e1416bd7b70e92', '16C0000200', '2240000600', 2, 1, '2020-01-05 22:14:07', '2020-01-05 22:14:07'),
-(62, 'fc9543867a049fec8da044c42696cb7a', '12C0000100', '2DC0000100', 1, 1, '2020-01-06 01:38:15', '2020-01-06 01:38:15');
+(62, 'fc9543867a049fec8da044c42696cb7a', '12C0000100', '2DC0000100', 1, 1, '2020-01-06 01:38:15', '2020-01-06 01:38:15'),
+(65, 'd04185f0e2083e6ecc0eaae864f7eeb4', '1120000100', '0120000100', 1, 1, '2020-02-28 13:11:55', '2020-02-28 13:11:55'),
+(66, 'd04185f0e2083e6ecc0eaae864f7eeb4', '1120000100', '0120000200', 1, 1, '2020-02-28 13:12:11', '2020-02-28 13:12:11');
 
 -- --------------------------------------------------------
 
@@ -628,7 +693,7 @@ CREATE TABLE IF NOT EXISTS `notice` (
 
 INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `receiver`, `type`, `head`, `body`, `link`, `active`, `createTS`, `modifyTS`) VALUES
 (1, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'rnd.approver', 'Message', 'Codici 22c', 'Ciao, ho visto che i codici 22C non hanno la numerazione in esadecimale. Secondo te e\' corretto o e\' meglio aprire un ticket?\r\nGrazie ciao\r\nza', NULL, 1, '2020-02-02 18:49:29', '2020-02-09 12:33:19'),
-(101, '', 99, 'wh.editor', 'Francesco Pipperi', 'danilo.zannoni', 'Message', 'ciao', 'questo Ã¨ un test di funzionamento', NULL, 1, '2020-02-12 17:37:08', '2020-02-14 14:45:52'),
+(101, '', 99, 'wh.editor', 'Francesco Pipperi', 'danilo.zannoni', 'Message', 'ciao', 'questo Ã¨ un test di funzionamento', NULL, 0, '2020-02-12 17:37:08', '2020-02-28 13:07:50'),
 (102, 'danilo.zannoni', 20, 'system', 'System', '', 'Action required', 'Code review', 'It is necessary reviewing the code <b>9990000100</b>. If everything is good the next status will be APPROVED. Instead, if you reject the proposal the code will comeback to the Draft status.', 'check.php?code=9990000100', 1, '2020-02-14 11:02:30', '2020-02-14 11:02:30'),
 (98, '9990000100', 99, 'system', 'Danilo Zannoni', 'wh.editor', 'Approved', 'Promotion approved: 9990000100', 'Your promotion for 9990000100 was succesfully APPROVED by Danilo Zannoni', NULL, 0, '2020-02-09 23:18:51', '2020-02-09 23:37:59'),
 (100, '9990000100', 99, 'system', 'Danilo Zannoni', 'wh.editor', 'Approved', 'Promotion approved: 9990000100', 'Your promotion for 9990000100 was succesfully APPROVED by Danilo Zannoni', NULL, 0, '2020-02-09 23:39:42', '2020-02-09 23:39:59'),
@@ -640,7 +705,7 @@ INSERT INTO `notice` (`id`, `promoter`, `level`, `sender`, `sender_clean`, `rece
 (71, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'wh.editor', 'Message', 'ou!!!', 'Thoddetto', NULL, 0, '2020-02-09 15:51:08', '2020-02-12 17:37:16'),
 (83, '', 99, 'corrado.tumiati', 'Corrado Tumiati', 'rnd.approver', 'Message', 'RE: 9990000100: Promotion rejected', 'Ciao Artemio,\r\nper questo codice la scheda Ã¨ opzionale.\r\npassalo pure.\r\n\r\nCorrado\r\n\r\n\r\n------------------------\r\nmanca la scheda attributi\r\nciao', NULL, 0, '2020-02-09 22:05:47', '2020-02-09 22:11:43'),
 (75, '', 99, 'danilo.zannoni', 'Danilo Zannoni', 'corrado.tumiati', 'Message', 'saluto', 'a Kappaaaaaaaaaaaaaaa\r\nciao', NULL, 1, '2020-02-09 20:21:33', '2020-02-09 22:53:02'),
-(67, '', 99, 'wh.editor', 'Francesco Pipperi', 'danilo.zannoni', 'Message', 'rejection', 'ok grazie.', NULL, 1, '2020-02-09 15:44:52', '2020-02-14 14:45:51');
+(67, '', 99, 'wh.editor', 'Francesco Pipperi', 'danilo.zannoni', 'Message', 'rejection', 'ok grazie.', NULL, 0, '2020-02-09 15:44:52', '2020-02-28 13:07:50');
 
 -- --------------------------------------------------------
 
@@ -694,18 +759,18 @@ CREATE TABLE IF NOT EXISTS `search` (
   `user` varchar(32) NOT NULL,
   `createTS` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=287 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=302 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `search`
 --
 
 INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
+(296, '211', 'danilo.zannoni', '2020-02-28 12:52:35'),
 (265, '467', 'danilo.zannoni', '2020-02-09 14:24:56'),
 (222, '22C0001700', 'danilo.zannoni', '2020-02-06 08:05:39'),
 (266, '4670000100', 'danilo.zannoni', '2020-02-09 14:25:33'),
 (286, '999', 'danilo.zannoni', '2020-02-14 14:19:02'),
-(211, 'test', 'danilo.zannoni', '2020-02-01 09:46:33'),
 (254, 'onesto', 'danilo.zannoni', '2020-02-07 22:35:59'),
 (212, 'gim', 'danilo.zannoni', '2020-02-01 12:21:18'),
 (138, 'eth', 'wh.editor', '2020-01-24 23:45:07'),
@@ -723,8 +788,7 @@ INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (217, 'gim', 'rnd.approver', '2020-02-03 00:55:32'),
 (175, '57c', 'wh.editor', '2020-01-26 19:08:36'),
 (193, '57c', 'rnd.approver', '2020-01-29 08:45:55'),
-(200, '57c', 'danilo.zannoni', '2020-01-31 17:48:06'),
-(207, '2200001900', 'danilo.zannoni', '2020-02-01 09:43:37'),
+(299, '012', 'danilo.zannoni', '2020-02-28 13:02:57'),
 (229, '22c0001900', 'danilo.zannoni', '2020-02-06 12:55:45'),
 (202, 'rasp', 'wh.editor', '2020-01-31 20:20:41'),
 (228, '22c0001900', 'rnd.approver', '2020-02-06 11:52:42'),
@@ -732,7 +796,8 @@ INSERT INTO `search` (`id`, `search`, `user`, `createTS`) VALUES
 (256, '999', 'wh.user', '2020-02-08 18:44:46'),
 (280, '999', 'rnd.approver', '2020-02-11 19:51:52'),
 (271, '4670000100', 'wh.editor', '2020-02-09 15:43:34'),
-(274, '999', 'corrado.tumiati', '2020-02-09 22:56:36');
+(274, '999', 'corrado.tumiati', '2020-02-09 22:56:36'),
+(301, 'scatola', 'danilo.zannoni', '2020-02-28 13:11:27');
 
 -- --------------------------------------------------------
 
@@ -747,7 +812,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `value` varchar(32) NOT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `statid` (`statid`)
-) ENGINE=MyISAM AUTO_INCREMENT=174 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=177 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `statistics`
@@ -885,7 +950,10 @@ INSERT INTO `statistics` (`statid`, `name`, `value`, `timest`) VALUES
 (170, 'BomCountDaily', '13', '2020-02-15 11:01:09'),
 (171, 'CodeCountDaily', '64', '2020-02-21 15:48:21'),
 (172, 'AttribCountDaily', '51', '2020-02-21 15:48:21'),
-(173, 'BomCountDaily', '13', '2020-02-21 15:48:21');
+(173, 'BomCountDaily', '13', '2020-02-21 15:48:21'),
+(174, 'CodeCountDaily', '64', '2020-02-28 11:49:01'),
+(175, 'AttribCountDaily', '51', '2020-02-28 11:49:01'),
+(176, 'BomCountDaily', '13', '2020-02-28 11:49:01');
 
 -- --------------------------------------------------------
 

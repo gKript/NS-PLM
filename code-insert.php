@@ -67,7 +67,7 @@
 				?>
 				</div>
 				<?php
-				$hr  = "index.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
+				$hr  = "search.php?T=" . $codetype["T"] . "&G=" . $codetype["CG"] . "&S=" . $codetype["CS"];
 				$hrt = $codetype["T"] . $codetype["CG"] . $codetype["CS"];
 				$title  = "Code structure - ";
 				$title .= link_generator( $hr , $hrt );
