@@ -67,7 +67,11 @@
 		echo 		div_block_close();
 	}
 
-	echo 		open_block_no_top( "Welcome back!" );
+	if ( $gk_Auth->role == "guest" )
+		echo 		open_block_no_top( "Login" );
+	else
+		echo 		open_block_no_top( "Welcome back!" );
+	
 	echo 		BR( 1, 0);
 
 	if ( $gk_Auth->role == "guest" ) {

@@ -117,7 +117,7 @@
 	echo col_close();
 	echo col_open( 0 , "" , "vertical-align:middle; " );
 	echo tag_enclosed( "h1" , "Next Step PLM" );
-	echo tag_enclosed( "h2" , tag_enclosed( "b" , "Product Lifecycle Management" ) . " by gKript.org" );
+	echo tag_enclosed( "h2" , tag_enclosed( "b" , "Product Lifecycle Management" ) . " by NS Core" );
 	echo col_close();
 	echo col_open( 0 , "396px" , "vertical-align:middle; " );
 	if ( $gk_Auth->get_current_user_name() == "guest" ) 
@@ -201,6 +201,7 @@
 				$navmenu->voice( "PHP info"	, "phpinfo.php" );
 		$navmenu->submenu_close();
 		$navmenu->voice( "Quick Filter"	, "code.php?code=0&action=filter" );
+		$navmenu->separator(1);
 		$navmenu->voice( "Message"	, "message.php" );
 		$navmenu->separator(1);
 		$navmenu->voice( "Back"	, $back );

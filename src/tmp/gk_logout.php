@@ -31,7 +31,7 @@
 		else {
 				$_SESSION["user"] = $_POST["user_login"];
 				$_SESSION["pass"] = md5( $_POST["user_password"] );
-				$out = "<br>Thanks to have visited <h8>gKript.org</h8><br><h8>Goodbye</h8><br><br>Wait. In a few seconds you will be redirected.<br><br>";
+				$out = "<br>Thanks to have visited <h8>NS Core</h8><br><h8>Goodbye</h8><br><br>Wait. In a few seconds you will be redirected.<br><br>";
 				gk_news_out_open( "Succesfully logout" , "" , $out );
 				gk_news_out_close();
 		}

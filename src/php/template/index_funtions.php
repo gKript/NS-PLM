@@ -63,7 +63,7 @@
 			}
 			else {
 				if ( query_get_num_rows( "SELECT * FROM `search` WHERE `user` LIKE '$user' " ) >= ITEMS_IN_HISTORY ) {
-					$id = query_get_a_field( "SELECT * FROM `search`  WHERE `user` LIKE '$user' ORDER BY `search`.`createTS` ASC LIMIT 0,1" , "id" , 1 );
+					$id = query_get_a_field( "SELECT * FROM `search`  WHERE `user` LIKE '$user' ORDER BY `search`.`createTS` ASC LIMIT 0,1" , "id" );
 					query_sql_run( "DELETE FROM `search` WHERE `search`.`id` = $id" );
 					$ret = 1;
 				}

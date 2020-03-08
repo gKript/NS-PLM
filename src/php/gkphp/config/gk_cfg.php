@@ -23,8 +23,8 @@ public $status;
 public $subminor;
 function __construct()
 {
-$this->by = (string) "gKript.org";
-$this->author = (string) "asyntote";
+$this->by = (string) "NS Core";
+$this->author = (string) "Danilo Zannoni";
 $this->name = (string) "gK.php";
 $this->debug = (int) 0;
 $this->version = (string) "00.1";

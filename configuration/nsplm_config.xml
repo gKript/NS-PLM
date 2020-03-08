@@ -40,7 +40,7 @@
 			<guest_allowed type="int">0</guest_allowed>
 		</user>
 		<company>
-			<logo type="int">1</logo>
+			<logo type="int">0</logo>
 			<image>coelme.png</image>
 			<heigth>380px</heigth>
 <!--	<link>https://www.coelmesrl.it/</link> -->

@@ -134,7 +134,7 @@ public $link;
 public $target;
 function __construct()
 {
-$this->logo = (int) 1;
+$this->logo = (int) 0;
 $this->image = (string) "coelme.png";
 $this->heigth = (string) "380px";
 $this->link = (string) "index.php";

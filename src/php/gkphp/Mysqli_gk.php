@@ -27,8 +27,7 @@
 			$this->dbname = (string) "nsid_plm_data";
 			$this->port = (int) 3306;
 		}
-	}
-	
+	}	
 	
 	
 	function query_single_line( $query , $echo = 0 ) {
